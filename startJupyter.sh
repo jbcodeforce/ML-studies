@@ -2,4 +2,4 @@
 echo "##########################################################"
 echo " docker image includes spark, keras, jupyter, tensorflow "
 echo "##########################################################"
-docker run --name pysparktf -v $(pwd):/home/jovyan/work -it --rm -p 8888:8888 pysparktf start-notebook.sh
+docker run --name pysparktf -v $(pwd):/home/jovyan/work -it --rm -p 8888:8888 ibmcase/mlpython start-notebook.sh
