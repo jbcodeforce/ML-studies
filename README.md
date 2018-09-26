@@ -31,6 +31,9 @@ $ python3 deep-net-keras.py
 
 ### Classifiers
 #### perceptron
+```
+python3 TestPerceptron.py
+```
 
 #### Adaline
 
