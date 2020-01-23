@@ -2,6 +2,8 @@ site_name: Machine Learning Studies
 repo_url: https://github.com/jbcodeforce/ml-basics
 nav:
   - Introduction: index.md
+  - Machine Learning:
+    - Anomaly detection: anomaly.md
   - Compendium: compendium.md
 
 theme: 
