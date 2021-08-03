@@ -1,4 +1,4 @@
-# Machine learning in Python studies
+# Machine learning studies
 
 This repository includes different code to help me learn how to do machine learning with Python and jupyter notebook, and summary of
 the different books and web site I studied over time.
@@ -82,7 +82,7 @@ Two types of machine learning algorithm:
 **classification** problem is when we are trying to predict one of a small number of discrete-valued outputs,
  such as whether it is Sunny (which we might designate as class 0), Cloudy (say class 1) or Rainy (class 2). 
 Another example is when a human assigns a topic label to each document in a corpus, and the algorithm learns how 
-to predict the label.
+to predict the label. The output is always a set of sets of items. Items could be points in a space or vertices in a graph
 
 * **Unsupervised learning:** Giving a dataset we are able to explore the structure of our data to extract meaningful 
 information without the guidance of a known outcome variable or reward function. **Clustering** is an exploratory
@@ -98,6 +98,11 @@ We may compute the coverage of a rule: `# of data points` that satisfy the condi
 the `accuracy = # of correct predictions / coverage`
 * **optimization**: how to search among all the alternatives, greedy search or gradient descent? 
 One idea is to build a set of rules by finding the conditions that maximize accuracy.
+
+When you have a dataset try to humanly inspect the data, and do some plotting diagram with some attribute over other.
+Then to select a naive class, look at attribute where you can derive some basic rules. This will build a first hypothesis.
+To assess an hypothesis build a **confusion matrix**: a square matrix where column and rows are the different class label of an outcome.
+The cells count the number of time the rules classified the dataset. And assess the **accuracy** number: sum good results/ total results.
 
 With **reinforcement learning**: the goal is to develop a system (agent) that improves its performance 
 based on interactions with the environment. The agent can then use reinforcement learning to learn a series 
@@ -126,7 +131,31 @@ In **regression analysis**, we are given a number of predictor (explanatory) var
 
 Hypothesis function h can be represented as a linear function of x;  
 
-![](https://latex.codecogs.com/svg.latex?h(x)=T0+T1x)
+![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x)
+
+Xo = 1 so a feature is a vector and T is also a row vector of dimension n+1 so H is a matrix multiplication. 
+It is called *multivariate linear regression*.
+
+To find the good coefficients ![](https://latex.codecogs.com/svg.latex?\Theta_{i}), the algorithm needs to compare the results H(x) using a cost function:
+
+ ![](https://latex.codecogs.com/svg.latex?J( \theta_0,\theta_1,...,\theta_n) = \frac{1}{2m} \sum_{1}^{m}(h_{\theta} (x_{i}) - y_{i})^2)
+
+The algorithm to minimize the cost function is called the **gradient descent**, and uses the property of the cost function 
+being continuous convex linear, so differentiable:
+
+ ![](./images/gradient.png)
+
+The principle is to climb down a hill until a local or global cost minimum is reached. In each algorithm iteration, 
+we take a step away from the gradient where the step size is determined by the value of the **learning rate** (alpha) as well as 
+the slope of the gradient.
+
+When J(Ti) is already at the local minimum the slope of the tangent is 0 so Tj will not change.
+When going closer to the local minimum the slope of the tangent will go slower so the algo will automatically take smaller step.
+If alpha is too big, gradient  descent can overshoot the minimum and fail to converge or worse it could diverge.
+The derivative is the slope of the tangent at the curve on point Tj. When derivative is close to zero, it means we reach a minima.
+
+When the unit of each feature are very different the gradient descent will take a lot of time to find the minima. 
+So it is important to transform each feature so they are in the same scale. (close to: from -1 to 1 range)
 
 ### Building a machine learning system
 

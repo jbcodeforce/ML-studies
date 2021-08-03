@@ -5,6 +5,7 @@ nav:
   - Math foundations: math.md
   - Machine Learning:
     - Anomaly detection: anomaly.md
+  - Kaggle: kaggle.md
   - Compendium: compendium.md
 
 theme: 

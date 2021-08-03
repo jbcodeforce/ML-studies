@@ -20,3 +20,14 @@ Bayes theorem: 
 * opposite is frequentist approach using data and find decision
 
  ![](./images/bayen.png)
+
+## Normalization
+
+Normalization of ratings means adjusting values measured on different scales to a notionally common scale, often prior to averaging. 
+In statistics, normalization refers to the creation of shifted and scaled versions of statistics,
+where the intention is that these normalized values allow the comparison of corresponding normalized values for different
+ datasets in a way that eliminates the effects of certain gross influences, as in an anomaly time series.
+
+Feature scaling used to bring all values into the range [0,1]. This is also called unity-based normalization.
+
+ ![](https://latex.codecogs.com/svg.latex?X'=(X-Xmin)/(Xmax-Xmin))
