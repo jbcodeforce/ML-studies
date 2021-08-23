@@ -1,4 +1,4 @@
-# Kaggle
+# Kaggle and ML tutorial
 
 ## Getting started with Titanic
 
@@ -153,6 +153,22 @@ models = [model_1, model_2, model_3, model_4, model_5]
 
 ## Feature engineering
 
+The goal of feature engineering is simply to make our data better suited to the problem at hand.
+
+We might perform feature engineering to:
+
+* improve a model's predictive performance
+* reduce computational or data needs
+* improve interpretability of the results
+
+For a feature to be useful, it must have a relationship to the target that your model is able to learn.
+Linear models, for instance, are only able to learn linear relationships. 
+So, when using a linear model, your goal is to transform the features to make their 
+relationship to the target linear.
+
+See [concrete example](https://www.kaggle.com/sinamhd9/concrete-comprehensive-strength).
+
+
 ### Missing values
 
 Remove rows with missing target
@@ -165,7 +181,7 @@ X = X_full.select_dtypes(exclude=['object'])
 
 Assess number of missing values in each column
 
-```
+```python
 missing_val_count_by_column = (X_train.isnull().sum())
 print(missing_val_count_by_column[missing_val_count_by_column > 0])
 ```
@@ -183,7 +199,7 @@ reduced_X_train = X_train.drop(cols_with_missing, axis=1)
 reduced_X_valid = X_valid.drop(cols_with_missing, axis=1)
 ```
 
-Use 'imputation' by assigning the mean value of the column values into the unset cells.
+Use **'imputation'** by assigning the mean value of the column values into the unset cells.
  
 ```python
 from sklearn.impute import SimpleImputer
@@ -218,7 +234,7 @@ imputed_X_train_plus = pd.DataFrame(my_imputer.fit_transform(X_train_plus))
 imputed_X_valid_plus = pd.DataFrame(my_imputer.transform(X_valid_plus))
 ```
 
-## Categorical variables
+### Categorical variables
 
 A categorical variable takes only a limited number of values. We need to preprocess them to numerical values.
 
@@ -288,6 +304,115 @@ Then, high cardinality columns can either be dropped from the dataset, or we can
 low_cardinality_cols = [col for col in object_cols if X_train[col].nunique() < 10]
 ```
 
+Remarks that Pandas offers built-in features to do encoding
+
+```python
+# One-hot encode the data (to shorten the code, we use pandas)
+X_train = pd.get_dummies(X_train)
+X_valid = pd.get_dummies(X_valid)
+X_test = pd.get_dummies(X_test)
+X_train, X_valid = X_train.align(X_valid, join='left', axis=1)
+X_train, X_test = X_train.align(X_test, join='left', axis=1)
+```
+### Mutual information
+
+The first step is to construct a ranking with a feature utility metric, a function measuring associations between a feature and the target. Then you can choose a smaller set of the most useful features to develop initially.
+Mutual information is a lot like correlation in that it measures a relationship between two quantities. 
+The advantage of mutual information is that it can detect any kind of relationship, while correlation only detects linear relationships
+
+The least possible mutual information between quantities is 0.0. When MI is zero, the quantities are 
+independent: neither can tell you anything about the other.
+
+It's possible for a feature to be very informative when interacting with other features, but not so 
+informative all alone. MI can't detect interactions between features. It is a univariate metric.
+
+You may need to transform the feature first to expose the association.
+
+The scikit-learn algorithm for MI treats discrete features differently from continuous features. 
+Consequently, we need to tell it which are which. Anything that must have a float dtype is not discrete.
+Categoricals (object or categorial dtype) can be treated as discrete by giving them a label encoding.
+
+See example of mutual information in [ml-python/kaggle-training/car-price/PredictCarPrice.py]().
+
+### Discovering new features
+
+* Understand the features. Refer to your dataset's data documentation
+* Research the problem domain to acquire domain knowledge: Research yields a variety of formulas for creating potentially useful new features. 
+* Study [winning solutions](https://www.kaggle.com/sudalairajkumar/winning-solutions-of-kaggle-competitions)
+* Use data visualization. Visualization can reveal pathologies in the distribution of a feature or complicated relationships that could be simplified
+
+The more complicated a combination is, the more difficult it will be for a model to learn
+
+Data visualization can suggest transformations, often a "reshaping" of a feature through powers or logarithms
+
+Features describing the presence or absence of something often come in sets. We can aggregate such features by creating a count. 
+
+```python
+# creating a feature that describes how many kinds of outdoor areas a dwelling has
+X_3 = pd.DataFrame()
+X_3["PorchTypes"] = df[[
+    "WoodDeckSF",
+    "OpenPorchSF",
+    "EnclosedPorch",
+    "Threeseasonporch",
+    "ScreenPorch",
+]].gt(0.0).sum(axis=1)
+```
+
+Here is an example on how to extract roadway features from the car accidents and compute the number
+of such roadway in each accident. 
+
+```python
+roadway_features = ["Amenity", "Bump", "Crossing", "GiveWay",
+    "Junction", "NoExit", "Railway", "Roundabout", "Station", "Stop",
+    "TrafficCalming", "TrafficSignal"]
+accidents["RoadwayFeatures"] = accidents[roadway_features].sum(axis=1)
+```
+
+Extract Category from a column with string like: `One_Story_1946_and_Newer_All_Styles`
+
+```python
+X_4['MSClass'] = df.MSSubClass.str.split('_',n=1,expand=True)[0]
+```
+
+**Group transforms** aggregate information across multiple rows grouped by some category. 
+With a group transform we can create features like: 
+
+* "the average income of a person's state of residence,"
+* "the proportion of movies released on a weekday, by genre."
+
+Using an aggregation function, a group transform combines two features: a categorical feature 
+that provides the grouping and another feature whose values we wish to aggregate.
+Handy methods include `mean, max, min, median, var, std, count`.
+
+```python
+customer["AverageIncome"] = (
+    customer.groupby("State")  # for each state
+    ["Income"]                 # select the income
+    .transform("mean")         # and compute its mean
+)
+```
+
+If you're using training and validation splits, to preserve their independence, 
+it's best to create a grouped feature using only the training set and then join it 
+to the validation set. 
+
+```python
+# Create splits
+df_train = customer.sample(frac=0.5)
+df_valid = customer.drop(df_train.index)
+
+# Create the average claim amount by coverage type, on the training set
+df_train["AverageClaim"] = df_train.groupby("Coverage")["ClaimAmount"].transform("mean")
+
+# Merge the values into the validation set
+df_valid = df_valid.merge(
+    df_train[["Coverage", "AverageClaim"]].drop_duplicates(),
+    on="Coverage",
+    how="left",
+)
+```
+
 ## Pipelines
 
 To organize pre-processing and model fitting and prediction.
@@ -348,7 +473,7 @@ scores = -1 * cross_val_score(my_pipeline, X, y,
 Gradient boosting is a method that goes through cycles to iteratively add models into an ensemble.
 An **ensemble** combines the predictions of several models.
 
-**XGBoost*,  (extreme gradient boosting) is an implementation of gradient boosting with several additional features focused on performance and speed.
+**XGBoost**,  (extreme gradient boosting) is an implementation of gradient boosting with several additional features focused on performance and speed.
 
 ```python
 from xgboost import XGBRegressor
@@ -365,3 +490,45 @@ XGBoost has a few parameters that can dramatically affect accuracy and training 
 * early_stopping_rounds: stop iterating when the validation score stops improving
 * learning_rate: multiply the predictions from each model by a small number (known as the learning rate) before adding them in.
 * n_jobs: equal to the number of cores on your machine, to run in parallel.
+
+## Data Leakage
+
+**Data leakage** (or leakage) happens when your training data contains information 
+about the target, but similar data will not be available when the model is used for 
+prediction. 
+This leads to high performance on the training set (and possibly even the validation data),
+ but the model will perform poorly in production.
+
+There are two main types of leakage: target leakage and train-test contamination:
+
+* **Target leakage** occurs when your predictors include data that will not be available 
+at the time you make predictions. It is important to think about target leakage in terms 
+of the timing or chronological order that data becomes available, not merely whether a 
+feature helps make good predictions.
+* **train-test contamination**, when we aren't careful to distinguish training data from validation data.
+Like running a preprocessing (like fitting an imputer for missing values) before calling `train_test_split()`.
+
+Examples of data leakage:
+
+* to forecast the number of shoelace, every month, the leather used may be a good feature, but
+it depends if the value is provided at the beginning of the month as a prediction, or
+close to the end of the month as real consumption of the leather used to build the shoes.
+* Now if leather represents what the company order to make shoes in the month, then the number
+of showlace may be accurate, except if we order them before the leather.
+* To predict which patients from a rare surgery are at risk of infection. 
+If we take all surgeries by each surgeon and calculate the infection rate among those surgeons.
+And then, for each patient in the data, find out who the surgeon was and plug in that surgeon's 
+average infection rate as a feature, we will create target leakage if a given patient's outcome 
+contributes to the infection rate for his surgeon, which is then plugged back into the 
+prediction model for whether that patient becomes infected. We can avoid target leakage 
+if we calculate the surgeon's infection rate by using only the surgeries before 
+the patient we are predicting for. Calculating this for each surgery in our training 
+data may be a little tricky. We also have a train-test contamination problem if we 
+calculate this using all surgeries a surgeon performed, including those from the test-set.
+
+
+## Other Studies
+
+* [Parsing Dates](https://www.kaggle.com/alexisbcook/parsing-dates) from our Data Cleaning course.
+* [Geospatial Analysis course](https://www.kaggle.com/learn/geospatial-analysis).
+* [Natural Language Processing](https://www.kaggle.com/learn/natural-language-processing)
