@@ -82,14 +82,14 @@ val_predictions=melbourne_model.predict(val_X)
 
 * Validate prediction accuracy
 
-One metric to use is the **Mean Absolute Error**.
+One metric to use is the **Mean Absolute Error** (MAE).
 
 ```python
 from sklearn.metrics import mean_absolute_error
 print(mean_absolute_error(val_y, val_predictions))
 ```
 
-A function to get MAE for a decision tree by changing the depth of the tree:
+Below is a function to get MAE for a decision tree by changing the depth of the tree:
 
 ```python
 def get_mae(max_leaf_nodes, train_X, val_X, train_y, val_y):
@@ -129,14 +129,14 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error
 from sklearn.model_selection import train_test_split
 
-# create y and X and then,...
+# create y and X from input file and then,...
 
 train_X, val_X, train_y, val_y = train_test_split(X, y, random_state=1)
 
 forest_model = RandomForestRegressor(random_state=1)
 forest_model.fit(train_X, train_y)
-melb_preds = forest_model.predict(val_X)
-print(mean_absolute_error(val_y, melb_preds))
+predictions = forest_model.predict(val_X)
+print(mean_absolute_error(val_y, predictions))
 ```
 
 Here is an example of running different random forest models:
@@ -168,6 +168,13 @@ relationship to the target linear.
 
 See [concrete example](https://www.kaggle.com/sinamhd9/concrete-comprehensive-strength).
 
+Feature engineering  includes tasks like:
+
+* locating features with the most potential
+* creating new features
+* assessing potential clusters to discover complex spatial relationship
+* analyzing variations to discover new features
+* defining encoding
 
 ### Missing values
 
@@ -187,7 +194,7 @@ print(missing_val_count_by_column[missing_val_count_by_column > 0])
 ```
 
 Avoid dropping a column when there are some missing values, except if the column has a lot of them
-and it does not seem to bring much more value.
+and it does not seem to bring much more impact to the result.
 
 ```python
 # Get names of columns with missing values
@@ -223,7 +230,7 @@ cols_with_missing = [col for col in X_train.columns
 X_train_plus = X_train.copy()
 X_valid_plus = X_valid.copy()
 
-# Make new columns indicating what will be imputed
+# Make new boolean columns indicating what will be imputed
 for col in cols_with_missing:
     X_train_plus[col + '_was_missing'] = X_train_plus[col].isnull()
     X_valid_plus[col + '_was_missing'] = X_valid_plus[col].isnull()
@@ -256,6 +263,7 @@ ordinal_encoder = OrdinalEncoder()
 label_X_train[object_cols] = ordinal_encoder.fit_transform(X_train[object_cols])
 label_X_valid[object_cols] = ordinal_encoder.transform(X_valid[object_cols])
 ```
+
 When there are some categorical value in test set that are not in the training set, then 
 a solution is to write a custom ordinal encoder to deal with new categories, or drop the column
 
@@ -314,19 +322,25 @@ X_test = pd.get_dummies(X_test)
 X_train, X_valid = X_train.align(X_valid, join='left', axis=1)
 X_train, X_test = X_train.align(X_test, join='left', axis=1)
 ```
+
 ### Mutual information
 
-The first step is to construct a ranking with a feature utility metric, a function measuring associations between a feature and the target. Then you can choose a smaller set of the most useful features to develop initially.
-Mutual information is a lot like correlation in that it measures a relationship between two quantities. 
-The advantage of mutual information is that it can detect any kind of relationship, while correlation only detects linear relationships
+The first step is to construct a ranking with a feature utility metric, a function 
+measuring associations between a feature and the target. Then you can choose a smaller 
+set of the most useful features to develop initially.
+Mutual information is a lot like correlation in that it measures a relationship between 
+two quantities. 
+The advantage of mutual information is that it can detect any kind of relationship, 
+while correlation only detects linear relationships
 
-The least possible mutual information between quantities is 0.0. When MI is zero, the quantities are 
-independent: neither can tell you anything about the other.
+The least possible mutual information between quantities is 0.0. When MI is zero, 
+the quantities are independent: neither can tell you anything about the other.
 
-It's possible for a feature to be very informative when interacting with other features, but not so 
-informative all alone. MI can't detect interactions between features. It is a univariate metric.
+It's possible for a feature to be very informative when interacting with other features, 
+but not so informative all alone. MI can't detect interactions between features. 
+It is a univariate metric.
 
-You may need to transform the feature first to expose the association.
+We may need to transform the feature first to expose the association.
 
 The scikit-learn algorithm for MI treats discrete features differently from continuous features. 
 Consequently, we need to tell it which are which. Anything that must have a float dtype is not discrete.
@@ -339,13 +353,16 @@ See example of mutual information in [ml-python/kaggle-training/car-price/Predic
 * Understand the features. Refer to your dataset's data documentation
 * Research the problem domain to acquire domain knowledge: Research yields a variety of formulas for creating potentially useful new features. 
 * Study [winning solutions](https://www.kaggle.com/sudalairajkumar/winning-solutions-of-kaggle-competitions)
-* Use data visualization. Visualization can reveal pathologies in the distribution of a feature or complicated relationships that could be simplified
+* Use data visualization. Visualization can reveal pathologies in the distribution of a feature or 
+complicated relationships that could be simplified
 
-The more complicated a combination is, the more difficult it will be for a model to learn
+The more complicated a combination is, the more difficult it will be for a model to learn.
 
-Data visualization can suggest transformations, often a "reshaping" of a feature through powers or logarithms
+Data visualization can suggest transformations, often a "reshaping" of a feature through powers or 
+logarithms.
 
-Features describing the presence or absence of something often come in sets. We can aggregate such features by creating a count. 
+Features describing the presence or absence of something often come in sets. We can aggregate 
+such features by creating a count. 
 
 ```python
 # creating a feature that describes how many kinds of outdoor areas a dwelling has
