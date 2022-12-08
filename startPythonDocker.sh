@@ -1,11 +1,11 @@
 #!/bin/bash
 
 echo "##########################################################"
-echo "Python 3.7 docker image includes spark, keras, jupyter, tensorflow "
+echo "Python 3.9+ docker image includes spark, keras, jupyter, tensorflow "
 echo
 source ./setDisplay.sh
 NAME=pythonenv
-IMAGE=jbcodeforce/mlpython
+IMAGE=jbcodeforce/python
 
 docker run -e DISPLAY=$DISPLAY \
    --name $NAME -v $(pwd):/home/ -it \

@@ -6,7 +6,9 @@ nav:
   - Machine Learning:
     - Kaggle: kaggle.md
     - Anomaly detection: anomaly.md
-    - Unsupervided: unsupervised.md
+    - Unsupervised: unsupervised.md
+  - Coding:
+    - Environments: coding/index.md
   - Kaggle: kaggle.md
   - Compendium: compendium.md
 

@@ -1,13 +1,12 @@
 
-FROM python:3.7.4-stretch
+FROM python:3.9.16
 ENV PATH=/root/.local/bin:$PATH
 
 ENV PYTHONPATH=/app
 
-ENV TF_BINARY_URL=https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.1.0-cp36-cp36m-linux_x86_64.whl
 RUN pip install --upgrade pip \
   && pip install wget requests  numpy pandas xlrd sklearn keras matplotlib seaborn
 USER $USER
 
 # install NLP packages: 
-RUN pip install -U PySide2 nltk  gensim  pixiedust
+RUN pip install -U  nltk  gensim  pixiedust
