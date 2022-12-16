@@ -4,7 +4,6 @@ nav:
   - Introduction: index.md
   - Math foundations: math.md
   - Machine Learning:
-    - Kaggle: kaggle.md
     - Anomaly detection: anomaly.md
     - Unsupervised: unsupervised.md
   - Coding:
