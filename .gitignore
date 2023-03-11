@@ -4,3 +4,4 @@ data/17flowers/
 DataScience-Python3/.ipynb_checkpoints/
 site/
 env/
+airflow/logs/
