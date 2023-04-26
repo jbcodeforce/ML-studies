@@ -1,7 +1,8 @@
-# Machine learning studies
+# AI and Machine Learning studies
 
-This repository includes different code to help me learn how to do machine learning with Python and jupyter notebook, and summary of
-the different books and web site I studied over time.
+This repository includes notes, codes to learn how to do machine learning with Python and other technology. This come from studying labs, Udemy, different books and web sites.
+
+## Source for this content
 
 Content is based of the following different sources:
 
@@ -9,9 +10,19 @@ Content is based of the following different sources:
 * [Collective intelligence - Toby Segaran's book](https://www.amazon.com/Programming-Collective-Intelligence-Building-Applications/dp/0596529325/ref=sr_1_2?crid=1UBVCJKMM17Q6&keywords=collective+intelligence&qid=1553021611&s=books&sprefix=collective+inte%2Cstripbooks%2C236&sr=1-2).
 * [Stanford Machine learning training - Andrew Ng](https://www.coursera.org/learn/machine-learning).
 * Intel ML 101 tutorial.
-* Kaggle.
+* [Kaggle](http://kaggle.com)
 * Introduction to Data Sciences - University of Washington.
-* AWS SageMaker.
+* [AWS SageMaker](https://aws.amazon.com/sagemaker/getting-started/).
+
+## AI/ML Market
+
+AI/ML by 2030 will be a $B300 market. Every company is using AI/Ml already or consider using it in very short term. Some on the main business drivers include:
+
+* Make faster decisions by extracting and analyzing data from documents, records, transcripts...
+* Generate and operationalize predictive and prescriptive insights to make decision at the right time.
+* Generative AI: create new content, ideas, conversations, stories, images, videos or music from question or suggestions.
+
+The stakeholders interested by AI/ML are CTO, CPO, Data Scientists, business analysts who wants to derive decision from data.
 
 ## Data Science major concepts
 
@@ -50,7 +61,7 @@ Statistics does not apply well to large-scale inference problem that big data br
 The curse of big data is the fact that when you search for patterns in very, very large data sets with billions or trillions 
 of data points and thousands of metrics, you are bound to identify coincidences that have no predictive power.
 
-### Map - reduce
+### Map - Reduce
 
 One of the classical approach to run analytics on big data is to use the map-reduce algorithm, which can be summarized as:
 
@@ -70,10 +81,9 @@ One of the classical approach to run analytics on big data is to use the map-red
 
 Hadoop used to be the map-reduce platform, now [Apache Spark](https://spark.apache.org/) is used for that or [Apache Flink](https://flink.apache.org/).
 
-## Machine learning
+## Machine Learning
 
-Machine learning is a system that automatically learns programs/ functions from data. There is not programming step. The goal is to find a function to predict **y** from **Xs**,
- and continuously measures the prediction performance.
+Machine learning is a system that automatically learns programs/ functions from data. There is not programming step. The goal is to find a function to predict **y** from features **Xs**, and continuously measures the prediction performance.
 
 Statistics work on data by applying a model of the world or stochastic models of nature, using linear regression, logistic regression, cox model,... 
 
@@ -122,9 +132,11 @@ The cells count the number of time the rules classified the dataset. And assess 
 ### Unsupervised learning
 
 Giving a dataset we are able to explore the structure of the data to extract meaningful 
-information without the guidance of a known outcome variable or reward function. **Clustering** is an exploratory
- data analysis technique that allows to organize a pile of information into meaningful subgroups (clusters) 
- without having any prior knowledge of their group memberships.
+information without the guidance of a known outcome variable or reward function. 
+
+**Clustering** is an exploratory data analysis technique that allows to organize a pile of information into meaningful subgroups (clusters) without having any prior knowledge of their group memberships.
+
+[See deeper dive.](./unsupervised.md)
 
 ### Reinforcement learning
 
@@ -267,69 +279,3 @@ So putting all together we have:
 the weight update is calculated based on all samples in the training set (instead of updating the weights incrementally after each sample), which is why this approach is also referred to as "batch" gradient descent.
 So basically to minimize the cost function we took steps into the opposite direction of a gradient calculated from the entire training set.
 
-### scikit-learn
-
-Choosing an appropriate classification algorithm for a particular problem task requires practice: each algorithm has its own quirks and is based on certain assumptions.The performance of a classifier, computational power as well as predictive power, depends heavily on the underlying data that are available for learning. 
-
-The five main steps that are involved in training a machine learning algorithm can be summarized as follows:
-
-* Selection of features.
-* Choosing a performance metric.
-* Choosing a classifier and optimization algorithm.
-* Evaluating the performance The sklearn api offers a lot of classifier algorithms and utilities. 
-
-For example the code below loads the predefined IRIS flower dataset, and select the feature 2 and 3, the petals length and width. 
-
-```python
-from sklearn import datasets
-iris=datasets.load_iris()X=iris.data[:,[2,3]]y=iris.target
-```
-
-using numpy unique function to assess the potential classes we got 3 integers representing each class.
-
-```python
-print(np.unique(y))
->>[0,1,2]
-```
-
-To evaluate how well a trained model performs on unseen data, we will further split the dataset into separate training and test datasets.
-
-```python
-from sklearn import cross_validation
-# Randomly split X and y arrays into 30% test data and 70% training set 
-X_train, X_test, y_train, y_test = cross_validation.train_test_split( X, y, test_size = 0.3, random_state = 0)
-```
-
-Many machine learning and optimization algorithms also require feature scaling for optimal performance. `StandardScaler` estimated the parameters mu (sample mean) and delta (standard deviation) for each feature dimension from the training data. The `transform` method helps to standardize the training data using those estimated parameters: mu and delta.  
-
-```python
-from sklearn.preprocessing import StandardScaler
-# standardize the features for optimal performance of gradient descent
-sc=StandardScaler()
-# compute mean and std deviation for each feature using fit
-sc.fit(X_train)
-X_train_std=sc.transform(X_train)
-# Note that we used the same scaling parameters to standardize the test set so 
-# that both the values in the training and test dataset are comparable to each other.
-X_test_std=sc.transform(X_test)
-```
-
-
-Using the training data set, create a Perceptron with 40 iterations and eta = 0.1
-
-```python
-from sklearn.linear_model import Perceptron
-ppn=Perceptron(n_iter=40,eta0=0.1,random_state=0)
-ppn.fit(X_train_std,y_train)
-```
-
-Having trained the model now we can run predictions.
-
-```python
-from sklearn.metrics import accuracy_score
-y_pred=ppn.predict(X_test_std)
-print('Misclassified samples: %d' % (y_test != y_pred).sum())
-print(' Accuracy: %.2f' % accuracy_score( y_test, y_pred))
-```
-
-Scikit-learn also implements a large variety of different performance metrics that are available via the metrics module. For example, we can calculate the classification accuracy of the perceptron on the test set. The Perceptron biggest disadvantage is that it never converges if the classes are not perfectly linearly separable.
