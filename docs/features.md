@@ -1,6 +1,6 @@
 # Feature Engineering
 
-The goal of feature engineering is simply to make our data better suited to the problem at hand.
+The goal of feature engineering is to make the data better suited to the problem at hand.
 
 We might perform feature engineering to:
 
@@ -10,10 +10,9 @@ We might perform feature engineering to:
 
 For a feature to be useful, it must have a relationship to the target that our model is able to learn.
 Linear models, for instance, are only able to learn linear relationships. 
-So, when using a linear model, our goal is to transform the features to make their 
-relationship to the target linear.
+So, when using a linear model, our goal is to transform the features to make their relationship to the target linear.
 
-See [the concrete compressive strength example](https://www.kaggle.com/sinamhd9/concrete-comprehensive-strength) with some related notebook on feature engineering.
+See [the Kaggle's concrete compressive strength example](https://www.kaggle.com/sinamhd9/concrete-comprehensive-strength) with some related notebooks on feature engineering.
 
 Feature engineering includes tasks like:
 
@@ -112,7 +111,7 @@ label_X_valid[object_cols] = ordinal_encoder.transform(X_valid[object_cols])
 ```
 
 When there are some categorical value in test set that are not in the training set, then 
-a solution is to write a custom ordinal encoder to deal with new categories, or drop the column
+a solution is to write a custom ordinal encoder to deal with new categories, or drop the column.
 
 ```python
 # first get all categorical columns
@@ -127,7 +126,7 @@ bad_label_cols = list(set(object_cols)-set(good_label_cols))
 ```
 
 **One-hot encoding** creates new columns indicating the presence (or absence) of each possible value in the original data.
-One-hot encoding does not assume an ordering of the categories
+One-hot encoding does not assume an ordering of the categories:
 
 ```python
 from sklearn.preprocessing import OneHotEncoder
@@ -173,15 +172,15 @@ X_train, X_test = X_train.align(X_test, join='left', axis=1)
 ### Mutual information
 
 The first step is to construct a ranking with a feature utility metric, a function 
-measuring associations between a feature and the target. Then you can choose a smaller 
+measuring associations between a feature and the target. Then we can select a smaller 
 set of the most useful features to develop initially.
 Mutual information is a lot like correlation in that it measures a relationship between 
 two quantities. 
 The advantage of mutual information is that it can detect any kind of relationship, 
-while correlation only detects linear relationships
+while correlation only detects linear relationships.
 
 The least possible mutual information between quantities is 0.0. When MI is zero, 
-the quantities are independent: neither can tell you anything about the other.
+the quantities are independent: neither can tell us anything about the other.
 
 It's possible for a feature to be very informative when interacting with other features, 
 but not so informative all alone. MI can't detect interactions between features. 
@@ -197,9 +196,9 @@ See example of mutual information in [ml-python/kaggle-training/car-price/Predic
 
 ### Discovering new features
 
-* Understand the features. Refer to your dataset's data documentation
-* Research the problem domain to acquire domain knowledge: Research yields a variety of formulas for creating potentially useful new features. 
-* Study [winning solutions](https://www.kaggle.com/sudalairajkumar/winning-solutions-of-kaggle-competitions)
+* Understand the features. Refer to the dataset's data documentation.
+* Research the problem domain to acquire domain knowledge: Research fields a variety of formulas for creating potentially useful new features. 
+* Study [Kaggle's winning solutions](https://www.kaggle.com/sudalairajkumar/winning-solutions-of-kaggle-competitions)
 * Use data visualization. Visualization can reveal pathologies in the distribution of a feature or 
 complicated relationships that could be simplified
 
@@ -239,7 +238,7 @@ Extract Category from a column with string like: `One_Story_1946_and_Newer_All_S
 X_4['MSClass'] = df.MSSubClass.str.split('_',n=1,expand=True)[0]
 ```
 
-**Group transforms** aggregate information across multiple rows grouped by some category. 
+**Group transforms** aggregates information across multiple rows grouped by some category. 
 With a group transform we can create features like: 
 
 * "the average income of a person's state of residence,"
@@ -257,7 +256,7 @@ customer["AverageIncome"] = (
 )
 ```
 
-If you're using training and validation splits, to preserve their independence, 
+If we're using training and validation splits, to preserve their independence, 
 it's best to create a grouped feature using only the training set and then join it 
 to the validation set. 
 
