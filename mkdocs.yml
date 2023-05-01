@@ -12,7 +12,7 @@ nav:
     - Environments: coding/index.md
     - Scikit-learn: coding/sklearn.md
     - Classifier: coding/classifier.md
-    # - Classifiers: coding/classifiers.ipynb
+    - Classifiers: coding/classifiers.ipynb
     - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker
   - Return to main: https://jbcodeforce.github.io
 
@@ -31,9 +31,10 @@ theme:
       # - navigation.expand
       - navigation.tabs.sticky
 extra_css: ["extra.css"]
-#plugins:
-#  - mkdocs-jupyter:
-#      kernel_name: python3
+plugins:
+  - mkdocs-jupyter:
+      kernel_name: python3
+      execute: false
 markdown_extensions:
   - abbr
   - attr_list
