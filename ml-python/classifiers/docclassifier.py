@@ -3,13 +3,13 @@ Created on May 24, 2016
 
 Build a document Classifier to assess if a document is a spam or not
 
-@author: jeromeboyer
+@author: jerome boyer
 '''
 
 import math
 from nis import cat
 import re
-from sqlite3 import dbapi2 as sqlite
+
 
 
 def getwords(doc):

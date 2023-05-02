@@ -8,10 +8,14 @@ import unittest
 from matplotlib.colors import ListedColormap
 
 from Perceptron import Perceptron
-import Tool as tool
+
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
+import Tool as tool
 import numpy as np
 import pandas as pd
+plt.switch_backend('agg')
 
 
 class TestPerceptron(unittest.TestCase):
@@ -88,6 +92,7 @@ if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testLoadIrisData']
     print(" #######################################################")
     print(" Perceptron CLASSIFIER Testing")
+    
     # unittest.main()
     runner = unittest.TextTestRunner(failfast=True)
     runner.run(suite())

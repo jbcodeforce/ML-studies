@@ -14,8 +14,8 @@ nav:
   - Coding:
     - Environments: coding/index.md
     - Scikit-learn: coding/sklearn.md
-    - Classifier: coding/classifier.md
-    - Classifiers: notebooks/classifiers.ipynb
+    - Classifiers nb: notebooks/classifiers.ipynb
+    - Python studies:  https://jbcodeforce.github.io/python-code/
   - Techno:
     - Introduction: techno/index.md
     - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker

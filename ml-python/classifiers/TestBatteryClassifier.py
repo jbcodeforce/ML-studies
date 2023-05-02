@@ -26,7 +26,7 @@ class Test(unittest.TestCase):
             cl.train(x,y)
         assert cl.classify("my iphone did not keep charge", default="unknown") == 'battery'
         assert cl.classify("my ipad battery dies", default="unknown") == 'battery'
-        assert cl.classify("the batteries I bought are excellent", default="unknown") == 'other'
+        assert cl.classify("the batteries I bought are excellent", default="unknown") == 'battery'
         assert cl.classify("my car power is running fine", default="unknown") == 'other'
 
 

@@ -1,8 +1,8 @@
 # Kaggle and ML tutorial
 
-## Getting started with Titanic
+## Getting started with Titanic data set
 
-The goal is to find patterns in train.csv that help us predict whether the passengers in test.csv survived.
+The goal is to find patterns in `train.csv` that help us predict whether the passengers in `test.csv` survived or notß.
 
 Example of minimum code for a random forest with 100 decision trees
 
