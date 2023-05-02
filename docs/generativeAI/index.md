@@ -1,4 +1,8 @@
-# Dolly
+# Generative AI
+
+## ChatGPT
+
+## Dolly
 
 [Dolly 2.0](https://huggingface.co/databricks/dolly-v2-12b) is built the first open source, instruction-following Large Language Model by Databricks in partnership with Huggingface. It comes with 3b or 12b parameters trained models. 
 

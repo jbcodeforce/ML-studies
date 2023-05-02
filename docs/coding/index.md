@@ -1,18 +1,11 @@
 # Coding
 
-## Environment
+## Environments
 
-To avoid impacting my laptop (Mac) python installation, I use docker image with python and all the minimum needed library. 
+To avoid impacting my laptop (Mac) python installation, I use docker image with python and the minimum set of needed libraries. 
 The dockerfile is in this folder is used to build a development image.
 
-As an alternate Kaggle has a more complete [docker image](https://github.com/Kaggle/docker-python) to start with. 
-
-```sh
-# CPU based
-docker run --rm -v $(pwd):/home -it gcr.io/kaggle-images/python /bin/bash
-# GPU based
-docker run -v $(pwd):/home --runtime nvidia --rm -it gcr.io/kaggle-gpu-images/python /bin/bash
-```
+### Run my python development shell
 
 As some of the python codes are using matplotlib and graphics, it is possible to use the MAC display 
 with docker and X11 display (see [this blog](https://cntnr.io/running-guis-with-docker-on-mac-os-x-a14df6a76efc)) for details.
@@ -20,7 +13,7 @@ with docker and X11 display (see [this blog](https://cntnr.io/running-guis-with-
 * Install XQuartz with `brew install xquartz`. Then start Xquartz from the application or using: `open -a Xquartz`. A white terminal window will pop up. The first time Xquartz is started, open up the preferences menu and go to the security tab. Then select “allow connections from network clients” to check it on.
 * Build environment images: `docker build -t jbcodeforce/python37 .`
 
-### Run my python development shell
+
 
 When using graphic: start **Xquartz** from (applications/utilities), be sure the security settings allow connections from network clients.
 
@@ -45,3 +38,35 @@ Then navigate to the python code from the current `/home` folder, and call pytho
 ```
 $ python deep-net-keras.py
 ```
+
+### Run Kaggle image
+
+As an alternate Kaggle has a more complete [docker image](https://github.com/Kaggle/docker-python) to start with. 
+
+```sh
+# CPU based
+docker run --rm -v $(pwd):/home -it gcr.io/kaggle-images/python /bin/bash
+# GPU based
+docker run -v $(pwd):/home --runtime nvidia --rm -it gcr.io/kaggle-gpu-images/python /bin/bash
+```
+
+## Run Jupyter notebooks
+
+Need to use jupyter lab. See [installation options](https://jupyter.org/install.html). The ones which works as o April 2023:
+
+```sh
+pip3 install jupyterlab
+# build the assets
+jupyter-lab build
+# The path is something like
+# /opt/homebrew/Cellar/python@3.10/3.10.9/Frameworks/Python.framework/Versions/3.10/share/jupyter/lab
+# Start the server
+jupyter-lab
+```
+
+Once started, in VScode select a remote Python kernel and Jupiter extension to run the notebook inside it. 
+
+The mkdocs in this project has a `jupyter-notebook` plugin so notebooks can be html page in the published site. 
+
+## Code samples
+

@@ -1,6 +1,6 @@
 # Classifiers
 
-All the examples execute from the python environment in docker
+All the Classifiers python app execute well from the python environment in docker.
 
 ## Perceptron
 
@@ -9,16 +9,22 @@ automatically learn the optimal weight coefficients that are then multiplied wi
  features in order to make the decision of whether a neuron fires or not. 
  In the context of supervised learning and classification, such an algorithm could then be
  used to predict if a sample belonged to one class or the other.
+
 The problem is reduced to a binary classification (-1,1), and an activation function 
 that takes a linear combination of input X, with corresponding weights vector W, 
-to compute the net input z = sum(w(i) * x(i)) i from 1 to n
-If the value is greater than a threshold the output is 1, -1 otherwise.
-The function is called unit step function. 
+to compute the net input as:
+
+```python
+z = sum(w(i) * x(i)) i from 1 to n
+```
+
+If the value is greater than a threshold the output is 1, -1 otherwise. The function is called `unit step` function. 
+
 If w0 is set to be -threshold and x0=1 then the equation becomes:
 
 ![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x)
 
-The following python code uses numpy as np to compute the matrix dot product wT*x:
+The following python code uses numpy library to compute the matrix dot product wT*x:
 
 ```python
 def netInput(self,X):
@@ -28,14 +34,15 @@ def predict(self,X):
    return np.where(self.netInput(X)>=0.0,1,-1)
 ```
 
-The weights are computed using the training set. The value of weight delta, which is used to update the weight , is calculated by the perceptron learning rule:
+The weights are computed using the training set. The value of  delta, which is used to update the weight , is calculated by the perceptron learning rule:
 
 ![](https://latex.codecogs.com/svg.latex?\Delta(\theta_{j})= \eta*(y_{i} - mean(y_{i}))* x_{i}^j)
 
 eta is the learning rate, Y(i) is the known answer or target for i th sample. The weight update is proportional to the value of X(i)
  
 It is important to note that the convergence of the perceptron is only guaranteed if the two classes are linearly separable and the learning rate is sufficiently small.
-![](./images/perceptron.png)
+
+![](./images/perceptron.png){ width=800 }
 
 The fit function implements the update to the weight.
 
@@ -48,13 +55,13 @@ python TestPerceptron.py
 
 ## Adaline
 
-In ADALINE the weights are updated based on a linear activation function
-(the identity function) rather than a unit step function like in the perceptron.
+In ADALINE the weights are updated based on a linear activation function (the `Identity` function) rather than a unit step function like in the perceptron.
 
-![](./images/adaline.png)
+![](./images/adaline.png){ width=800 }
 
 ```sh
-#under ml-python/classifiers folder
+# Start python docker
+# under ml-python/classifiers folder
 python TestAdaline.py
 ```
 
