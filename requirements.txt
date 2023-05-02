@@ -1,3 +1,3 @@
 mkdocs-jupyter
-matplotlib
-nbconvert==7.2.10
+#matplotlib
+#nbconvert==7.2.10
