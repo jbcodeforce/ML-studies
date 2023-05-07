@@ -21,6 +21,10 @@ Bayes theorem: 
 
  ![](./images/bayen.png)
 
+## Data distributions
+
+[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) python code on different data distributions like Uniform, Gaussian, Poisson.
+
 ## Normalization
 
 Normalization of ratings means adjusting values measured on different scales to a notionally common scale, often prior to averaging. 
