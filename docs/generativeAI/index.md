@@ -11,7 +11,7 @@ Some ways to use Gen AI:
 
 ## Use case
 
-* Documentation summarization: Start for example for AI21 Jurassic-2 Jumbo.
+* Documentation summarization: See model like Jurassic-2 Jumbo  from [AI21 studio](https://www.ai21.com/studio).
 * Question/answer solution based on internal documents.
 * Model fine tuning to downsize the LLM to limit inference cost.
 * Transcription insights, by extracting action items from the videos.

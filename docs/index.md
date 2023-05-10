@@ -61,7 +61,7 @@ One of the classical approach to run analytics on big data is to use the map-red
 - The combine operation identifies <key, value> with the same key and applies a combine function which should have the associative and commutative properties.
 - The output of map function are saved to local storage, then `reduce` task pulls the record per key from the local storage to sort the value and then call the last custom function: reduce
 
- ![](./images/map-reduce-1.png)
+ ![](./images/map-reduce-1.png){ width=900 }
 
 - System architecture is based on shared nothing, in opposite of sharing file system or sharing memory approach.
 - Massive parallelism on thousand of computers where jobs run for many hours. The % of failure of such job is high, so the algorithm should tolerate failure.
@@ -99,7 +99,7 @@ target': array([0, 0, 0, 0,…1,1,1,… 2,2,2])
 
 Another subcategory of supervised learning is **regression** classification, where the outcome signal is **continuous value** output. In the table below the Price is the outcome (y), the square feet, # of bedrooms… are features
  
-![](./images/house-price.png)
+![](./images/house-price.png){ width=900 }
 
 In regression analysis, we are given a number of predictor (explanatory) variables and a continuous response variable (outcome), and we try to find a relationship between those variables that allows us to predict future outcome. 
 
@@ -125,7 +125,7 @@ information without the guidance of a known outcome variable or reward function.
 
 **Clustering** is an exploratory data analysis technique that allows to organize a pile of information into meaningful subgroups (clusters) without having any prior knowledge of their group memberships.
 
-[See this deeper dive note.](./unsupervised.md)
+[See this deeper dive note.](./ml/unsupervised.md)
 
 ### Reinforcement learning
 
@@ -139,10 +139,17 @@ This is a commonly used approach in feature preprocessing to remove noise from d
 
 Building machine learning system includes 4 components as outlined in figure below:
 
-![](./diagrams/ml-steps.drawio.png)
+![](./diagrams/ml-steps.drawio.png){ width=1100 }
 
 Raw data rarely comes in the form and shape that is necessary for the optimal performance of a learning algorithm. 
-Thus, the preprocessing of the data is one of the most crucial steps in any machine learning application. 
+Thus, the preprocessing of the data is one of the most crucial step in any machine learning application. 
+
+The model testing is based on one of the three cross-validation types:
+
+* validation: where we split the dataset into three pieces: train, test, and validation.
+* the Leave-one-out LOOCV): only one datapoint as test sample, and use other rows for training set.
+* K-fold validation: randomly split the dataset into kfold, and for each fold, we train and record the error.
+
 Many machine learning algorithms also require that the selected features are on the same scale for optimal performance,
  which is often achieved by transforming the features in the range [0, 1] or a standard normal distribution with zero mean
   and the unit variance.
@@ -186,7 +193,7 @@ In **regression analysis**, we are given a number of predictor (explanatory) var
 
 Hypothesis function `h` can be represented as a linear function of `x`:  
 
-![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x)
+![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x){ width=300 }
 
 Xo = 1.
 
@@ -195,12 +202,12 @@ It is called **multivariate linear regression**.
 
 To find the good coefficients ![](https://latex.codecogs.com/svg.latex?\Theta_{i}), the algorithm needs to compare the results h(x) using a cost function:
 
- ![](https://latex.codecogs.com/svg.latex?J( \theta_0,\theta_1,...,\theta_n) = \frac{1}{2m} \sum_{1}^{m}(h_{\theta} (x_{i}) - y_{i})^2)
+![](https://latex.codecogs.com/svg.latex?J( \theta_0,\theta_1,...,\theta_n) = \frac{1}{2m} \sum_{1}^{m}(h_{\theta} (x_{i}) - y_{i})^2){ width=300 }
 
 The algorithm to minimize the cost function is called the **gradient descent**, and uses the property of the cost function 
 being continuous convex linear, so differentiable:
 
- ![](./images/gradient.png)
+![](./images/gradient.png){ width=500 }
 
 The principle is to climb down a hill until a local or global cost minimum is reached. In each algorithm iteration, 
 we take a step away from the gradient where the step size is determined by the value of the **learning rate** (alpha) as well as 
@@ -218,7 +225,7 @@ So it is important to transform each feature so they are in the same scale. (e.g
 
 One of the key ingredients of supervised machine learning algorithms is to define an objective function that is to be optimized during the learning process. This objective function is often a cost function that we want to minimize. So the weights update will minimize the cost function. The cost function could be the sum squared errors between the outcomes and the target label:
 
-![](https://latex.codecogs.com/svg.latex?J(\theta)=\frac{1}{2} * \sum_{i} (y_{i} - \phi (z_{i}))^2)
+![](https://latex.codecogs.com/svg.latex?J(\theta)=\frac{1}{2} * \sum_{i} (y_{i} - \phi (z_{i}))^2){ width=300 }
 
 which translates in python as
 
@@ -229,7 +236,7 @@ cost = (errors** 2).sum() / 2.0
 
 and where 
 
-![](https://latex.codecogs.com/svg.latex?\phi_{i}=\theta^T*X)
+![](https://latex.codecogs.com/svg.latex?\phi_{i}=\theta^T*X){ width=200 }
 
 in python:
 
@@ -259,7 +266,7 @@ def fit(X,y):
 The weight difference is computed as the negative gradient * the learning rate `eta`. To compute the gradient of the cost function, we need to compute the partial derivative of the cost function with respect to each weight `w(j)`. 
 So putting all together we have:
 
-![](https://latex.codecogs.com/svg.image?\Delta&space;w_{j}=-n\frac{\delta&space;J}{\delta&space;w_{j}}&space;=&space;n&space;\sum_{i}&space;(y_{i}&space;-&space;\phi(z_{i}))x_{i,j}&space;)
+![](https://latex.codecogs.com/svg.image?\Delta&space;w_{j}=-n\frac{\delta&space;J}{\delta&space;w_{j}}&space;=&space;n&space;\sum_{i}&space;(y_{i}&space;-&space;\phi(z_{i}))x_{i,j}&space;){ width=300 }
 
 the weight update is calculated based on all samples in the training set (instead of updating the weights incrementally after each sample), which is why this approach is also referred to as "batch" gradient descent.
 So basically to minimize the cost function we took steps into the opposite direction of a gradient calculated from the entire training set.

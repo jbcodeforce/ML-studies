@@ -23,6 +23,8 @@ nav:
 
 theme: 
   name: material
+  logo: assets/logo.drawio.png
+  favicon: assets/logo.drawio.png
   palette:
     scheme: default
   language: en

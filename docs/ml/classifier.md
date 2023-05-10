@@ -22,7 +22,7 @@ If the value is greater than a threshold the output is 1, -1 otherwise. The func
 
 If w0 is set to be -threshold and x0=1 then the equation becomes:
 
-![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x)
+![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x){ width=300 }
 
 The following python code uses numpy library to compute the matrix dot product wT*x:
 
@@ -36,7 +36,7 @@ def predict(self,X):
 
 The weights are computed using the training set. The value of  delta, which is used to update the weight , is calculated by the perceptron learning rule:
 
-![](https://latex.codecogs.com/svg.latex?\Delta(\theta_{j})= \eta*(y_{i} - mean(y_{i}))* x_{i}^j)
+![](https://latex.codecogs.com/svg.latex?\Delta(\theta_{j})= \eta*(y_{i} - mean(y_{i}))* x_{i}^j){ width=300 }
 
 eta is the learning rate, Y(i) is the known answer or target for i th sample. The weight update is proportional to the value of X(i)
  
@@ -74,8 +74,10 @@ X_std[:,0]=(X[:,0]-np.mean(X[:,0]))/np.std(X[:,0])
 X_std[:,1]=(X[:,1]-np.mean(X[:,1]))/np.std(X[:,1])
 ```
  
-The previous approach can take a lot of time when the dataset includes millions of records. A more efficient approach is to take the stochastic gradient descent. It is used with online training, where the algorithm is trained on-the-fly, while new training set arrives.
+The previous approach can take a lot of time when the dataset includes millions of records. A more efficient approach is to take the **stochastic gradient descent** approach. It is used with online training, where the algorithm is trained on-the-fly, while new training set arrives.
 The weights are computed with: 
+
+![](https://latex.codecogs.com/svg.latex?w_{i}=\eta*(y_{i}%20-%20\phi%20(z_{i}))*%20x_{i}){ width=300 }
 
 ```python
 def updateWeights(self,xi,target):
@@ -88,4 +90,85 @@ def updateWeights(self,xi,target):
 ```
 To obtain accurate results via stochastic gradient descent, it is important to present it with data in a random order, which is why we want to shuffle the training set for every epoch to prevent cycles.
  
+## Logistic regression
 
+Another classification approach is to use ‘Logistic Regression’ which performs very well on linearly separable set:
+
+```python
+from sklearn.linear_model import LogisticRegression
+lr = LogisticRegression( C = 1000.0, random_state = 0)
+lr.fit( X_train_std, y_train)
+lr.predict_proba(X_test_std[0,:])
+```
+
+For C=1000 we have the following results:
+
+![](./images/iris-log-reg-1.png){ width=500 }
+
+Logistic regression uses the odds-ratio `P/(1-P)`, P being the probability to have event e: in our case P could be the probability that a set of values for the feature X leads that the sample is part of a class 1. 
+
+In fact the mathematical model uses the `log (P/(1-P))` as function in the model. It takes input values in the range 0 to 1 and transforms them to values over the entire real number range, which we can use to express a linear relationship between feature values and the log-odds: 
+
+![](https://latex.codecogs.com/svg.latex?logit(p(%20y%20=%201%20|%20x))=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x){ width=400 }
+
+In fact for logistic regression the hypothesis function is used to predict the probability of having a certain sample X being of class y=1. This is the sigmoid function: 
+
+![](https://latex.codecogs.com/svg.latex?\phi(z)=\frac{1}{(1+e^{-z})}){ width=300 }
+
+
+Here, z is the net input, that is, the linear combination of weights and sample features= W’.x 
+
+The sigmoid function is used as activation function in the classifier: 
+
+![](./images/sigmoid-fct-werror.png){ width=600 }
+
+The output of the sigmoid function is then interpreted as the probability of particular sample belonging to class 1 
+
+![](https://latex.codecogs.com/svg.latex?\phi(z)=P(y=1 | x;w)){ width=300 }
+
+given its features x parameterized by the weights w.
+
+Logistic regression can be used to predict the chance that a patient has a particular disease given certain symptoms. As seen before to find the weights w we need to minimize a cost function, which in the case of logistic regression is: 
+
+![](https://latex.codecogs.com/svg.latex?J(w)=C\left [ \sum_{i}^{n} (-y^{i} log(\phi(z^{i})) - (1 - y^{i}))log(1-\phi(z^{i})) \right ] + \frac{1}{2}\left\| w \right\|^2){ width=500 }
+
+The C=1/lambda parameter used in logistic regression api is the factor to control overfitting. 
+
+`1/2 * ||w||^2` is the regularization bias to penalize extreme parameter weights. 
+
+### Fitting
+
+**Overfitting** is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. If a model suffers from overfitting, we also say that the model has a **high variance**, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. 
+
+**Variance** measures the consistency (or variability) of the model prediction for a particular sample instance if we would retrain the model multiple times: if the training set is split in multiple subsets, the model can be trained with those subsets and each time the sample instance prediction is run, the variance is computed. If the variability is great then the model is sensitive to randomness. 
+
+**Bias** measures how far off the predictions are from the correct values in general. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via regularization. 
+
+**Regularization** is a very useful method to handle collinearity (high correlation among features), filter out noise from data, and eventually prevent overfitting. For regularization to work properly, we need to ensure that all our features are on comparable scales. 
+
+
+iris-boundariesThe decision boundary is the hypothesis that separate clearly the training set.
+
+Decreasing the factor of control of overfitting, C, means the weight coefficients are shrinking so leading to overfitting. Around C=100 the coefficient values stabilize leading to good decision boundaries. 
+
+![](./images/iris-boundaries.png){ width=600 }
+
+For C=100 we have now
+
+![](./images/iris-zone-2.png){ width=600 }
+
+## Maximum margin classification with support vector mancines (SVM)
+
+In SVM the goal is now to maximize the margin: the distance between the decision boundary and the training samples.
+
+![](./images/svn-1.png){ width=600 }
+
+The rationale behind having decision boundaries with large margins is that they tend to have a lower generalization error whereas models with small margins are more prone to overfitting.
+
+To train a SVM model
+
+```python
+from sklearn.svm import SVC
+svm = SVC(kernel='linear',C=1.0,random_state=0)
+svm.fit(X_train_std,y_train)
+```
