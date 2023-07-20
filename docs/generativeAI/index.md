@@ -1,21 +1,45 @@
 # Generative AI
 
+Create new content (text, image,..) from existing one and a requested query. It is based on Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. 
 
-Some ways to use Gen AI:
+Some ways to use Generative AI:
 
 * Build foundation model from scratch
-* Reuse existing foundation models available as open-source (Hugging Face) or proprietary.
+* Reuse existing foundation models available as open-source (Hugging Face) or proprietary, add your corpus on top of it.
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to  applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
 
-## Use case
+## Use cases
 
 * Documentation summarization: See model like Jurassic-2 Jumbo  from [AI21 studio](https://www.ai21.com/studio).
 * Question/answer solution based on internal documents.
 * Model fine tuning to downsize the LLM to limit inference cost.
 * Transcription insights, by extracting action items from the videos.
-* Chat functionality with context.
+* Chat functionality with context, with better user's experiences
+* Autogeneration of marketing material, translation, summary...
+* Self service tutor based on student progress, prompt activities, and respond  to questions
+* Synthetic data generation, to keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps. 
+* [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
+
+### Industries
+
+* Supply chain by improving the visibility to multi-tier supplier performance concerns, understand where risk can be found in the supply chain
+* Nonconformance/quality dispositioning, by identifying root cause of nonconformance, and prescribe resolutions
+* Engineering cost optimization by reusing common parts across plaforms.
+* Automation for proofreading, updating databases, managing ads campaigns, analyzing customer reviews, monitoring social media platforms
+* Sentiment analysis
+* Content moderation and development for education and universities. Helps students to find the most effective pathways to graduation.
+* From identifying potential safety risks with gaz leaks, Gen AI can generate recommendations for remedial work. 
+* Enhance trip planning with personalized recommendations, services and offers for travel industry.
+
+### Discovery
+
+* How familiar with Generative AI?
+* Experienced adapting an existing generative models?
+* What are the potential use cases?
+* What is current success by adopting AI in their business execution
+* Code privacy and IP related code control
 
 ## Concepts
 
@@ -65,8 +89,43 @@ Some ways to use Gen AI:
 
 ## ChatGPT
 
-Chat Generative Pretrained Transformer is a system of models designed to create human like conversations.
+Chat Generative Pretrained Transformer is a system of models designed to create human like conversations and generating text by using statistics. 
 
+For generative AI the input is very ambiguous, but also the output: there is no determinist output.  With ML output is well expected. 
+
+There will be different adoptions:
+
+* build your own foundation model from scratch.
+* use publicly available foundation models.
+* use generative AI services or APIs offered by foundation model vendors. Ther eis not control over the data, cost and customization.
+
+## [Amazon Bedrock](https://aws.amazon.com/bedrock/)
+
+[Summary.](./aws-bedrock.md)
+
+## SageMaker
+
+[SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pretrained, open-source models for a wide range of problem types to get started on ML.
+
+It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Mosaic Pretrained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
+
+The techniques to customize LLM applications from simplest to more complex. 
+
+* Zero-shot inference.
+* Prompt engineering with zero-shot inference.
+* Prompt engineering with few-shot inference.
+* Retrieval augmented generation (more complex).
+* Fine tune an existing foundation model.
+* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg one. 
+* Build a foundation model from scratch. 
+* Support human in the loop support to create high quality data sets.
+
+* [Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
+* [SageMaker own study](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
+
+## [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/)
+
+[Special studies.](https://jbcodeforce.github.io/aws-studies/coding/#codewhisperer)
 
 ## Dolly
 
@@ -76,3 +135,8 @@ The model is based on the [eleuther](https://www.eleuther.ai/) (a non-profit AI 
 
 [ChatGPT](https://openai.com/blog/chatgpt), a proprietary instruction-following model, was released in November 2022. The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](), but with different data collection setup. 
 
+## Some interesting readings
+
+* [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
+* [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)
+* [Artificial Intelligence and the Future of Teaching and Learning](https://www2.ed.gov/documents/ai-report/ai-report.pdf).
