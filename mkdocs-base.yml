@@ -14,6 +14,7 @@ nav:
   - Coding:
     - Environments: coding/index.md
     - Scikit-learn: coding/sklearn.md
+    - Classifiers nb: notebooks/classifiers.ipynb
     - Python studies:  https://jbcodeforce.github.io/python-code/
   - Techno:
     - Introduction: techno/index.md
