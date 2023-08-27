@@ -14,3 +14,8 @@ Bedrock is a managed platform for hosting and running different Foundation Model
 * Customize the existing FM with own documents and labelled data.
 * Integrate and deploy model into the customer applications.
 * Run workload on optimized price/performance ship like Trainium and Inferentia.
+* Foundation model providers will not have access to the customer data / requests.
+
+## Integration
+
+Deploy in a single or multi-tenant options. 

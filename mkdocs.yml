@@ -39,9 +39,10 @@ theme:
       - navigation.tabs.sticky
 extra_css: ["extra.css"]
 plugins:
-  - mkdocs-jupyter:
-      kernel_name: python3
-      execute: false
+  - search:
+      lang: en
+  - minify:
+      minify_html: true
 markdown_extensions:
   - abbr
   - attr_list
