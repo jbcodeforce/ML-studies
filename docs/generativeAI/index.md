@@ -43,6 +43,18 @@ Some ways to use Generative AI:
 
 ## Concepts
 
+A LLM is part of the evolation of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way that is like the function of the human brain. 
+From 2017, many NLP models are based on transformers. Which is a neural-network that take into account an entire sentence or paragraph at once instead of what word at a time. It better understands the context of a word. 
+
+To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Next, the encoder in the transformer transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
+This process is called **autoregressive generation**.
+
+Transformers do not need to code the grammar rules, they acquire them implicitly from big corpus.
+
+During the training process, the model learns the statistical relationships between words, phrases, and sentences, allowing it to generate coherent and contextually relevant responses when given a prompt or query.
+
+### Terms
+
 | Term | Definition |
 | --- | --- |
 | Transformer |	A ML model for transforming one sequence into another, using attention.|
@@ -121,7 +133,7 @@ The techniques to customize LLM applications from simplest to more complex.
 * Support human in the loop support to create high quality data sets.
 
 * [Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
-* [SageMaker own study](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
+* [SageMaker my own study](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
 
 ## [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/)
 
@@ -140,3 +152,4 @@ The model is based on the [eleuther](https://www.eleuther.ai/) (a non-profit AI 
 * [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
 * [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)
 * [Artificial Intelligence and the Future of Teaching and Learning](https://www2.ed.gov/documents/ai-report/ai-report.pdf).
+* [Fine-tune a pretrained model HuggingFace tutorial](https://huggingface.co/docs/transformers/training).
