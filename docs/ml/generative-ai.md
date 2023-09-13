@@ -2,10 +2,14 @@
 
 Create new content (text, image,..) from existing one and a requested query. It is based on Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. 
 
+For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML output is well expected. 
+
+
 Some ways to use Generative AI:
 
 * Build foundation model from scratch
 * Reuse existing foundation models available as open-source (Hugging Face) or proprietary, add your corpus on top of it.
+* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization.
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to  applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
@@ -32,8 +36,11 @@ Some ways to use Generative AI:
 * Content moderation and development for education and universities. Helps students to find the most effective pathways to graduation.
 * From identifying potential safety risks with gaz leaks, Gen AI can generate recommendations for remedial work. 
 * Enhance trip planning with personalized recommendations, services and offers for travel industry.
+* product review summarization: today done by human, can be offloaded by LLM by adding those unstructured reviews as new corpus for search. Separate these reviews based on user-provided ratings and task an LLM to extract different sets of information from each high-level category of reviews.
 
 ### Discovery
+
+When engaging with a customer it is important to assess where they are in their GenAi adoption:
 
 * How familiar with Generative AI?
 * Experienced adapting an existing generative models?
@@ -53,7 +60,50 @@ Transformers do not need to code the grammar rules, they acquire them implicitly
 
 During the training process, the model learns the statistical relationships between words, phrases, and sentences, allowing it to generate coherent and contextually relevant responses when given a prompt or query.
 
-### Terms
+The techniques to customize LLM applications from simplest to more complex. 
+
+* Zero-shot inference.
+* Prompt engineering with zero-shot inference.
+* Prompt engineering with few-shot inference.
+* Retrieval augmented generation (more complex).
+* Fine tune an existing foundation model.
+* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg one. 
+* Build a foundation model from scratch. 
+* Support human in the loop support to create high quality data sets.
+
+???- "Zero-shot inference"
+    Zero-shot learning in NLP allows a pre-trained LLM to generate responses to tasks that it hasn’t been specifically trained for. In this technique, the model is provided with an input text and a prompt that describes the expected output from the model in natural language.
+    **Few-shot** learning involves training a model to perform new tasks by providing only a few examples. This is useful where limited labeled data is available for training. 
+
+### Prompt engineering
+
+A prompt is an input that the model uses as the basis for generating a text. Prompts are a way to directly access the knowledge encoded in large language models. While all the information may be codes in the model, the knowledge extraction can be a hit or miss.
+
+Prompt involves instructions and context passed to a language model to acheive a desired task. 
+
+**Prompt Engineering** is a practice of developing and optimizing prompts to efficiently use LLMs for a varierty of applications. It is still a major research topic.
+
+Prompt engineering typically works by converting one or more tasks to a prompt-based dataset and training a language model with what has been called "prompt-based learning" or just "prompt learning". 
+
+We can provide a prompt with examples so the LLM will condition on the new context to generate better result. Examples in summarization.
+
+Prompts can also help incorporate domain knowledge on specific tasks and improve interpretability. Creating high-quality prompts requires careful consideration of the task at hand, as well as a deep understanding of the model’s strengths and limitations.
+
+LLMs are very sensitive to small perturbations of the prompt: a single typo or word change can alter the output.
+
+There is still need to evaluate models robustness to prompt. 
+
+Many recent LLMs are fine-tuned with a powerful technique called **instruction tuning**, which helps the model generate responses to prompts without prompt-specific fine-tuning. It does not involve updating model weights.
+
+???- "Instruction tuning"
+    Technique to train the model with a set of input and output instructions for each task (instead of specific datasets for each task), allowing the model to generalize to new tasks that it hasn’t been explicitly trained on as long as prompts are provided for the tasks. It helps improve the accuracy and effectiveness of models and is helpful in situations where large datasets aren’t available for specific tasks.
+
+### RAG
+
+
+![](./diagrams/rag.drawio.png)
+
+### Important Terms
 
 | Term | Definition |
 | --- | --- |
@@ -74,9 +124,7 @@ During the training process, the model learns the statistical relationships betw
 | Davinci	| OpenAI's GPT3 text-to-text based model. It is proprietary and only available by API. People can fine tune this model on OpenAI.|
 | Jurassic	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extermely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute.
 | HuggingFace |	Hugging face makes it easy to add state of the art ML models to  applications. An open-source provider of natural language processing (NLP) models known as Transformers, reducing the time it takes to set up and use these NLP models from weeks to minutes. |
-| Prompt engineering | Prompt involves instructions and context passed to a language model to acheive a desired task. Prompt Engineering is a practice of developing and optimizing prompts to efficiently use Lang models for a varierty of applications. Prompt engineering typically works by converting one or more tasks to a prompt-based dataset and training a language model with what has been called "prompt-based learning" or just "prompt learning". |
 | MultiModal Models	| Multimodal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
-| Instructor Models	 | Instructor models are trained specifically to handle instructions-only prompts ("zero-shot") without examples ("few-shot"). This reduces the requirement of curating multiple high quality text examples for single shot inference. |
 | Distributed Training | In distributed training the workload to train a model is split up and shared among multiple mini processors, called worker nodes. These worker nodes work in parallel to speed up model training. |
 | Retrieval augmented generation (RAG)| The act of supplementing generative text models with data outside of what it was trained on. For example if a model was trained on data up until 2021 and was asked "who is the prime minister of the UK" it might say "Theresa May", but if the model was asked "who is the prime minister of the UK <context of google search here>" it would be able to answer corrrectly with the most up to date information. This is extendable to businesses who want to include information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of this. |
 | Generative question and answering |	The new and improved retrieval augmented generation (RAG) |
@@ -99,53 +147,39 @@ During the training process, the model learns the statistical relationships betw
 | Generative adversarial network (GAN) |	A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradimn for generative models. |
 
 
-## ChatGPT
+## Current Technology Landscape
 
-Chat Generative Pretrained Transformer is a system of models designed to create human like conversations and generating text by using statistics. 
+### [ChatGPT](https://openai.com/blog/chatgpt)
 
-For generative AI the input is very ambiguous, but also the output: there is no determinist output.  With ML output is well expected. 
+Chat Generative Pretrained Transformer is a proprietary instruction-following model, was released in November 2022. It is a system of models designed to create human like conversations and generating text by using statistics. It is a Causal Language Model (CLM) trained to predict the next token.
 
-There will be different adoptions:
+The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](https://en.wikipedia.org/wiki/GPT-3), but with different data collection setup. 
 
-* build your own foundation model from scratch.
-* use publicly available foundation models.
-* use generative AI services or APIs offered by foundation model vendors. Ther eis not control over the data, cost and customization.
+### [Amazon Bedrock](https://aws.amazon.com/bedrock/)
 
-## [Amazon Bedrock](https://aws.amazon.com/bedrock/)
+[See techno summary in AWS studies.](https://jbcodeforce.github.io/aws-studies/ai-ml/bedrock/)
 
-[Summary.](./aws-bedrock.md)
-
-## SageMaker
+### Amazon SageMaker
 
 [SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pretrained, open-source models for a wide range of problem types to get started on ML.
 
 It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Mosaic Pretrained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
 
-The techniques to customize LLM applications from simplest to more complex. 
-
-* Zero-shot inference.
-* Prompt engineering with zero-shot inference.
-* Prompt engineering with few-shot inference.
-* Retrieval augmented generation (more complex).
-* Fine tune an existing foundation model.
-* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg one. 
-* Build a foundation model from scratch. 
-* Support human in the loop support to create high quality data sets.
 
 * [Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
 * [SageMaker my own study](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
 
-## [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/)
+### [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/)
 
 [Special studies.](https://jbcodeforce.github.io/aws-studies/coding/#codewhisperer)
 
-## Dolly
+### Databricks Dolly
 
 [Dolly 2.0](https://huggingface.co/databricks/dolly-v2-12b) is built the first open source, instruction-following Large Language Model by Databricks in partnership with Huggingface. It comes with 3b or 12b parameters trained models. 
 
 The model is based on the [eleuther](https://www.eleuther.ai/) (a non-profit AI research lab focusing on Large models) with 6b parameter model named Pythia. On top of this model, Databricks created human generated prompts (around $15k). 
 
-[ChatGPT](https://openai.com/blog/chatgpt), a proprietary instruction-following model, was released in November 2022. The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](), but with different data collection setup. 
+
 
 ## Some interesting readings
 
@@ -153,3 +187,7 @@ The model is based on the [eleuther](https://www.eleuther.ai/) (a non-profit AI 
 * [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)
 * [Artificial Intelligence and the Future of Teaching and Learning](https://www2.ed.gov/documents/ai-report/ai-report.pdf).
 * [Fine-tune a pretrained model HuggingFace tutorial](https://huggingface.co/docs/transformers/training).
+* [Prompt engineering is the new feature engineering.](https://www.amazon.science/blog/emnlp-prompt-engineering-is-the-new-feature-engineering)
+* [Amazon-sponsored workshop advances deep learning for code.](https://www.amazon.science/blog/amazon-sponsored-workshop-advances-deep-learning-for-code)
+
+@huggingfacecourse

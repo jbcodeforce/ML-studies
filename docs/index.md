@@ -1,10 +1,10 @@
 # AI and Machine Learning studies
 
-This repository includes notes, code samples to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM or AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites.
+This repository includes notes, code samples, Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites.
 
 ## AI/ML Market
 
-AI/ML by 2030 will be a $B300 market. Every company is using AI/Ml already or consider using it in very short term. Some on the main business drivers include:
+AI/ML by 2030 will be a $B300 market. Every company is using AI/Ml already or consider using it in very short term. 2023 illustrated AI being part of the world with the arrival of Generative AI. Some on the main business drivers include:
 
 * Make faster decisions by extracting and analyzing data from unstructured documents, voice or video records, transcripts...
 * Generate and operationalize predictive and prescriptive insights to make decision at the right time.
@@ -17,12 +17,11 @@ The stakeholders interested by AI/ML are CTOs, CPOs, Data Scientists, business a
 There are three types of tasks a data scientist does: 
 
 * Preparing data to run a model (gathering, cleaning, integrating, transforming, filtering, combining, extracting, shaping...).
-* Running the model, tuning it and assessing its quality.
+* Running the machine learning model, tuning it and assessing its quality.
 * Communicate the results.
-* With the new Feature Store technologies, he also prepares for features reuse and governance. 
+* With the new Feature Store technologies, data scientist also prepares the features for reusability and governance. 
 
-Enterprises are using data as the main asset to derive empirical decisions and for that, they are 
-adopting big data techniques which means high volume, high variation and high velocity.
+Enterprises are using data as the main asset to derive empirical decisions and for that, they are adopting big data techniques which means high volume, high variation and high velocity.
 
 In most enterprise data are about customers' behaviors and come from different sources like click stream, shopping cart content, transaction history, historical analytics, IoT sensors,...
 
@@ -49,6 +48,44 @@ We do not know if the difference in two treatments is not just due to chance. Bu
 Statistics does not apply well to large-scale inference problems that big data brings. Big data is giving more spurious results than small data set.
 The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions 
 of data points and thousands of metrics. We are bound to identify coincidences that have no predictive power.
+
+### Mathematical foundations
+
+#### Covariance 
+
+![\Large cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y})](https://latex.codecogs.com/svg.latex?cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y})) 
+
+#### Correlation 
+
+![\Large corr(x,y)](https://latex.codecogs.com/svg.latex?corr(x,y)=\frac{cov(x,y)}{\sqrt {\sum_{i}^{} (x_{i} - u_{x})^2} * \sqrt {\sum_{i}^{} (y_{i} - u_{y})^2 }) 
+
+#### Bayesian
+
+Used to compute the probability of a given outcome given a data set:
+
+Bayes theorem:  
+
+![](https://latex.codecogs.com/svg.latex?P(A|B) = P(B|A) P(A) / P(B))
+
+* incorporate prior knowledge.
+* opposite is frequentist approach using data and find decision
+
+ ![](./images/bayen.png){ width=500 }
+
+#### Data distributions
+
+[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) some python code on different data distributions like Uniform, Gaussian, Poisson.
+
+#### Normalization
+
+Normalization of ratings means adjusting values measured on different scales to a notionally common scale, often prior to averaging. 
+In statistics, normalization refers to the creation of shifted and scaled versions of statistics,
+where the intention is that these normalized values allow the comparison of corresponding normalized values for different
+ datasets in a way that eliminates the effects of certain gross influences, as in an anomaly time series.
+
+Feature scaling used to bring all values into the range [0,1]. This is also called unity-based normalization.
+
+ ![](https://latex.codecogs.com/svg.latex?X'=(X-Xmin)/(Xmax-Xmin))
 
 ### Map - Reduce
 
@@ -82,41 +119,15 @@ Two types of machine learning algorithm, supervised or unsupervised learning.
 
 The main goal in supervised learning is to learn a model from labeled training data that allows us to make predictions about unseen or future data. 
 
-**Classification** problem is when we are trying to predict one of a small number of discrete-valued outputs,
- such as whether it is Sunny (which we might designate as class 0), Cloudy (say class 1) or Rainy (class 2). The class labels are defined as multiple classes or binary classification task, where the machine learning algorithm learns a set of rules in order to distinguish between the possible classes. Classification can be defined when a human assigns a topic label to each document in a corpus, and the algorithm learns how to predict the label. The output is always a set of sets of items. Items could be points in a space or vertices in a graph.
+**Classification** problem is when we are trying to predict one of a small number of discrete-valued outputs, such as whether it is Sunny (which we might designate as class 0), Cloudy (say class 1) or Rainy (class 2). The class labels are defined as multiple classes or binary classification task, where the machine learning algorithm learns a set of rules in order to distinguish between the possible classes. Classification can be defined when a human assigns a topic label to each document in a corpus, and the algorithm learns how to predict the label. The output is always a set of sets of items. Items could be points in a space or vertices in a graph.
 
+[For more detail see this note](./ml/classifier.md)
  
-Here is an python example of data set and classes from the iris flower NIST dataset: 4 features, three potential classes:
-
-```python
-feature_names': ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)'], 
-'target_names': array(['setosa', 'versicolor', 'virginica']
-data: array([ 5.1,  3.5,  1.4,  0.2],
-            [ 4.9,  3. ,  1.4,  0.2],)
-
-target': array([0, 0, 0, 0,…1,1,1,… 2,2,2])
-```
-
 Another subcategory of supervised learning is **regression** classification, where the outcome signal is **continuous value** output. In the table below the Price is the outcome (y), the square feet, # of bedrooms… are features
  
-![](./images/house-price.png){ width=900 }
+![](./images/house-price.png){ width=600 }
 
 In regression analysis, we are given a number of predictor (explanatory) variables and a continuous response variable (outcome), and we try to find a relationship between those variables that allows us to predict future outcome. 
-
-Three majors components to have for each machine learning classifier:
-
-* **Representation**: define what is the classifier: a rule, a decision tree, a neural network...
-* **Evaluation**: how to know if a given classifier is giving good or bad results: how to asses result rule. 
-Could be the `# of errors` on some test set, `# of recalls`, squared error, likelihood?... 
-We may compute the coverage of a rule: `# of data points` that satisfy the conditions and 
-the `accuracy = # of correct predictions / coverage`
-* **Optimization**: how to search among all the alternatives, greedy search or gradient descent? 
-One idea is to build a set of rules by finding the conditions that maximize accuracy.
-
-For each dataset try to humanly inspect the data, and do some plotting diagram with some attribute over other.
-Then to select a naive class, look at attribute where we can derive some basic rules. This will build a first hypothesis.
-To assess an hypothesis build a **confusion matrix**: a square matrix where column and rows are the different class label of an outcome.
-The cells count the number of time the rules classified the dataset. Assess the **accuracy** number: sum good results/ total results.
 
 ### Unsupervised learning
 
@@ -142,36 +153,29 @@ Building machine learning system includes 4 components as outlined in figure bel
 ![](./diagrams/ml-steps.drawio.png){ width=1100 }
 
 Raw data rarely comes in the form and shape that is necessary for the optimal performance of a learning algorithm. 
-Thus, the preprocessing of the data is one of the most crucial step in any machine learning application. 
+Thus, the preprocessing of the data is one of the most crucial step in any machine learning application. Clean data are becoming a feature for the training.
 
 The model testing is based on one of the three cross-validation types:
 
-* validation: where we split the dataset into three pieces: train, test, and validation.
-* the Leave-one-out LOOCV): only one datapoint as test sample, and use other rows for training set.
-* K-fold validation: randomly split the dataset into kfold, and for each fold, we train and record the error.
+* **Validation**: where we split the dataset into three pieces: train, test, and validation.
+* the **Leave-one-out** (LOOCV): only one datapoint as test sample, and use other rows for training set.
+* **K-fold validation**: randomly split the dataset into kfold, and for each fold, we train and record the error.
 
-Many machine learning algorithms also require that the selected features are on the same scale for optimal performance,
- which is often achieved by transforming the features in the range [0, 1] or a standard normal distribution with zero mean
-  and the unit variance.
+Many machine learning algorithms also require that the selected features are on the same scale for optimal performance, which is often achieved by transforming the features in the range [0, 1] or a standard normal distribution with zero mean and the unit variance.
 
 Some of the selected features may be highly correlated and therefore redundant to a certain degree. 
-In those cases, **dimensionality reduction** techniques are useful for compressing the features onto a lower 
-dimensional subspace.
 
-Reducing the dimensionality of the feature space has the advantage that less storage space is required, 
-and the learning algorithm can run much faster.
+In those cases, **dimensionality reduction** techniques are useful for compressing the features onto a lower dimensional subspace.
 
-To determine whether a machine learning algorithm not only performs well on the training set but also generalizes 
-well to new data, we need to **randomly divide** the dataset into separate **training** and **test** sets.
+Reducing the dimensionality of the feature space has the advantage that less storage space is required, and the learning algorithm can run much faster.
 
-In practice, it is essential to compare at least a handful of different algorithms in order to train and select 
-the best performing model. 
+To determine whether a machine learning algorithm not only performs well on the training set but also generalizes well to new data, we need to **randomly divide** the dataset into separate **training** and **test** sets.
 
-First we have to decide upon a metric to measure performance. One commonly used metric is classification accuracy,
- which is defined as the proportion of correctly classified instances.
+In practice, it is essential to compare at least a handful of different algorithms in order to train and select the best performing model. 
 
-After selecting a model that has been fitted on the training dataset, we can use the test dataset to estimate how
- well it performs on this unseen data to estimate the generalization error.
+First we have to decide upon a metric to measure performance. One commonly used metric is classification accuracy, which is defined as the proportion of correctly classified instances.
+
+After selecting a model that has been fitted on the training dataset, we can use the test dataset to estimate how well it performs on this unseen data to estimate the generalization error.
 
 ### Model Representation
 
@@ -188,8 +192,7 @@ When the number of features is more than one the problem becomes a linear regres
 
 Training set is the input to learning algorithm, from which we generate an hypothesis that will be used to map from X to y.
 
-In **regression analysis**, we are given a number of predictor (explanatory) variables and a continuous response variable (outcome),
- and we try to find a relationship between those variables that allows us to predict an outcome. 
+In **regression analysis**, we are given a number of predictor (explanatory) variables and a continuous response variable (outcome), and we try to find a relationship between those variables that allows us to predict an outcome. 
 
 Hypothesis function `h` can be represented as a linear function of `x`:  
 
@@ -197,26 +200,20 @@ Hypothesis function `h` can be represented as a linear function of `x`: 
 
 Xo = 1.
 
-A feature is a vector and `T` is also a row vector of dimension n+1, therefore `h` is a matrix multiplication. 
-It is called **multivariate linear regression**.
+A feature is a vector and `T` is also a row vector of dimension n+1, therefore `h` is a matrix multiplication. It is called **multivariate linear regression**.
 
 To find the good coefficients ![](https://latex.codecogs.com/svg.latex?\Theta_{i}), the algorithm needs to compare the results h(x) using a cost function:
 
 ![](https://latex.codecogs.com/svg.latex?J( \theta_0,\theta_1,...,\theta_n) = \frac{1}{2m} \sum_{1}^{m}(h_{\theta} (x_{i}) - y_{i})^2){ width=300 }
 
-The algorithm to minimize the cost function is called the **gradient descent**, and uses the property of the cost function 
-being continuous convex linear, so differentiable:
+The algorithm to minimize the cost function is called the **gradient descent**, and uses the property of the cost function being continuous convex linear, so differentiable:
 
 ![](./images/gradient.png){ width=500 }
 
-The principle is to climb down a hill until a local or global cost minimum is reached. In each algorithm iteration, 
-we take a step away from the gradient where the step size is determined by the value of the **learning rate** (alpha) as well as 
-the slope of the gradient.
+The principle is to climb down a hill until a local or global cost minimum is reached. In each algorithm iteration, we take a step away from the gradient where the step size is determined by the value of the **learning rate** (alpha) as well as the slope of the gradient.
 
-When J(Ti) is already at the local minimum the slope of the tangent is 0 so Tj will not change.
-When going closer to the local minimum the slope of the tangent will go slower so the algo will automatically take smaller steps.
-If alpha is too big, gradient  descent can overshoot the minimum and fail to converge or worse it could diverge.
-(The derivative is the slope of the tangent at the curve on point Tj; when derivative is close to zero, it means we reach a minima).
+When J(Ti) is already at the local minimum the slope of the tangent is 0 so Tj will not change. When going closer to the local minimum the slope of the tangent will go slower so the algo will automatically take smaller steps.
+If alpha is too big, gradient  descent can overshoot the minimum and fail to converge or worse it could diverge. (The derivative is the slope of the tangent at the curve on point Tj; when derivative is close to zero, it means we reach a minima).
 
 When the unit of each feature are very different the gradient descent will take a lot of time to find the minima. 
 So it is important to transform each feature so they are in the same scale. (e.g. from -1 to 1 range)
@@ -281,4 +278,5 @@ Content is based of the following different sources:
 * Intel ML 101 tutorial.
 * [Kaggle](http://kaggle.com)
 * Introduction to Data Sciences - University of Washington.
+* [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)
 * [AWS SageMaker](https://aws.amazon.com/sagemaker/getting-started/).

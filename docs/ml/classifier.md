@@ -1,6 +1,34 @@
 # Classifiers
 
-All the Classifiers python app execute well from the python environment in docker.
+**Classification** problem is when we are trying to predict one of a small number of discrete-valued outputs. The class labels are defined as multiple classes or binary classification task, where the machine learning algorithm learns a set of rules in order to distinguish between the possible classes.
+
+Here is an python example of data set and classes from the iris flower NIST dataset: 4 features, three potential classes:
+
+```python
+feature_names': ['sepal length (cm)', 'sepal width (cm)', 'petal length (cm)', 'petal width (cm)'], 
+'target_names': array(['setosa', 'versicolor', 'virginica']
+data: array([ 5.1,  3.5,  1.4,  0.2],
+            [ 4.9,  3. ,  1.4,  0.2],)
+
+target': array([0, 0, 0, 0,…1,1,1,… 2,2,2])
+```
+
+Three majors components to have for each machine learning classifier:
+
+* **Representation**: define what is the classifier: a rule, a decision tree, a neural network...
+* **Evaluation**: how to know if a given classifier is giving good or bad results: how to asses result rule. 
+Could be the `# of errors` on some test set, `# of recalls`, squared error, likelihood?... 
+We may compute the coverage of a rule: `# of data points` that satisfy the conditions and the `accuracy = # of correct predictions / coverage`
+* **Optimization**: how to search among all the alternatives, greedy search or gradient descent? 
+One idea is to build a set of rules by finding the conditions that maximize accuracy.
+
+For each dataset try to humanly inspect the data, and do some plotting diagram with some attribute over other.
+Then to select a naive class, look at attribute where we can derive some basic rules. This will build a first hypothesis.
+To assess an hypothesis build a **confusion matrix**: a square matrix where column and rows are the different class label of an outcome.
+The cells count the number of time the rules classified the dataset. Assess the **accuracy** number: sum good results/ total results.
+
+??? Notes "Code execution"
+    All the Classifier Python apps execute well from the python environment in docker.
 
 ## Perceptron
 

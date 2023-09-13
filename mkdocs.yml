@@ -2,23 +2,26 @@ site_name: Machine Learning Studies
 repo_url: https://github.com/jbcodeforce/ML-studies
 nav:
   - Introduction: index.md
-  - Math foundations: math.md
   - Data management:
     - Introduction: data/index.md
     - Feature Engineering: data/features.md
   - Machine Learning:
     - Classifier: ml/classifier.md
     - Unsupervised Learning: ml/unsupervised.md
+    - Deep Learning: ml/deep-learning.md
+    - Generative AI: ml/generative-ai.md
     - Kaggle: kaggle.md
     - Anomaly detection: anomaly.md
   - Coding:
     - Environments: coding/index.md
     - Scikit-learn: coding/sklearn.md
+    - PyTorch: coding/pytorch.md
+    - LangChain: coding/langchain.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
   - Techno:
     - Introduction: techno/index.md
     - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker
-    - Generative AI: generativeAI/index.md
+   
   - Return to main: https://jbcodeforce.github.io
 
 theme: 
@@ -43,6 +46,8 @@ plugins:
       lang: en
   - minify:
       minify_html: true
+  #- bibtex:
+  #    bib_file: "docs/refs.bib"
 markdown_extensions:
   - abbr
   - attr_list
