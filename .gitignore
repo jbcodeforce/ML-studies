@@ -7,3 +7,4 @@ env/
 airflow/logs/
 **/.ipynb_checkpoints/
 deep-neural-net/data/
+/dependencies/**
