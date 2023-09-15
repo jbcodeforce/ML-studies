@@ -1,3 +1,5 @@
-mkdocs-jupyter
+mkdocs-material
+mkdocs-minify-plugin
+#mkdocs-jupyter
 #matplotlib
 #nbconvert==5.6.1
