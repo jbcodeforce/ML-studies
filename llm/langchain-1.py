@@ -95,6 +95,9 @@ ONLY return a comma separated list, and nothing more."""
 if __name__ == "__main__":
     client = buildBedrockClient()
     llm = buildLLM(client)
-    #simple_chat_chain(llm)
-    #useSimplePrompt(llm)
+    print("--- First prompt ---")
+    simple_chat_chain(llm)
+    print("--- Second prompt ---")
+    useSimplePrompt(llm)
+    print("--- Chat Chain ---")
     buildConversationChain(llm)

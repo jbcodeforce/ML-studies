@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "##########################################################"
-echo "Python 3.11.3+ docker image includes spark, keras, jupyter, tensorflow "
+echo "Python 3.11.3+ docker image includes spark, keras, boto3, aws cli"
 echo
 source ./setDisplay.sh
 NAME=pythonenv
