@@ -7,7 +7,8 @@ env/
 airflow/logs/
 **/.ipynb_checkpoints/
 deep-neural-net/data/
-llm/dependencies/**
-llm/my_feature_repo/**
-llm/data/**
-llm/.featureform/
+llm-langchain/dependencies/**
+llm-langchain/my_feature_repo/**
+llm-langchain/data/**
+llm-langchain/.featureform/
+llm-langchain/chroma_db/

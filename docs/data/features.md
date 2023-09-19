@@ -317,7 +317,7 @@ A data scientist working in a notebook can push transformation, feature, and tra
 
 Native embeddings support. It supports vector databases as both inference and training stores. Featureform on Kubernetes can be used to connect to your existing cloud infrastructure and can also be run locally on Minikube. 
 
-The figure below presents an integration with a LLM with prompt enrichment with Feature in online store
+The figure below presents the FeatureForm components:
 
 ![](./diagrams/featureform.drawio.png)
 
