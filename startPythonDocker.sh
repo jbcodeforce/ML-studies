@@ -8,9 +8,9 @@ NAME=pythonenv
 
 # give me a test argument
 if [ $# -eq 0 ]
-then:
+then
    TAG=latest
-else:
+else
     TAG=$1
 fi
 

@@ -67,9 +67,9 @@ The techniques to customize LLM applications from simplest to more complex.
 * Prompt engineering with few-shot inference.
 * Retrieval augmented generation (more complex).
 * Fine tune an existing foundation model.
-* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg one. 
+* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg's one. 
 * Build a foundation model from scratch. 
-* Support human in the loop support to create high quality data sets.
+* Support human in the loop to create high quality data sets.
 
 ???- "Zero-shot inference"
     Zero-shot learning in NLP allows a pre-trained LLM to generate responses to tasks that it hasn’t been specifically trained for. In this technique, the model is provided with an input text and a prompt that describes the expected output from the model in natural language.
@@ -98,10 +98,17 @@ Many recent LLMs are fine-tuned with a powerful technique called **instruction t
 ???- "Instruction tuning"
     Technique to train the model with a set of input and output instructions for each task (instead of specific datasets for each task), allowing the model to generalize to new tasks that it hasn’t been explicitly trained on as long as prompts are provided for the tasks. It helps improve the accuracy and effectiveness of models and is helpful in situations where large datasets aren’t available for specific tasks.
 
-### RAG
+### Retrieval augmented generation (RAG)
 
+The act of supplementing generative text models with data outside of what it was trained on. This is extendable to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of this.
+
+The following diagram illustrates a classical RAG process using AWS SageMaker and OpenSearch.
 
 ![](./diagrams/rag.drawio.png)
+
+And a classical RAG with LangChain
+
+![](../coding/diagrams/rag-process.drawio.png)
 
 ### Important Terms
 
@@ -126,7 +133,6 @@ Many recent LLMs are fine-tuned with a powerful technique called **instruction t
 | HuggingFace |	Hugging face makes it easy to add state of the art ML models to  applications. An open-source provider of natural language processing (NLP) models known as Transformers, reducing the time it takes to set up and use these NLP models from weeks to minutes. |
 | MultiModal Models	| Multimodal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
 | Distributed Training | In distributed training the workload to train a model is split up and shared among multiple mini processors, called worker nodes. These worker nodes work in parallel to speed up model training. |
-| Retrieval augmented generation (RAG)| The act of supplementing generative text models with data outside of what it was trained on. For example if a model was trained on data up until 2021 and was asked "who is the prime minister of the UK" it might say "Theresa May", but if the model was asked "who is the prime minister of the UK <context of google search here>" it would be able to answer corrrectly with the most up to date information. This is extendable to businesses who want to include information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of this. |
 | Generative question and answering |	The new and improved retrieval augmented generation (RAG) |
 | Pinecone | A sparse dense vector database which can be used to store sentence embeddings and then utilize approximate nearest neighbor search to fine similarity matches. This can be used for semantic search (search which matches the meaning) and then applied as 'context' to LLMs for question and answering. |
 | OpenAI| OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1)With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2)DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3) Whisper can transcribe speech into text and translate many languages into English. |
@@ -140,7 +146,7 @@ Many recent LLMs are fine-tuned with a powerful technique called **instruction t
 | Single shot learning | *Zero-shot learning* (ZSL) is a problem setup in ML where, at test time, a learner observes samples from classes which were not observed during training, and needs to predict the class that they belong to | 
 | Few shot Learning | *Few-shot learning* or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
 | DeepSpeed | DeepSpeed is an open source deep learning optimization library for PyTorch. The library is designed to reduce computing power and memory use and to train large distributed models with better parallelism on existing computer hardware. DeepSpeed is optimized for low latency, high throughput training. It can be used on SageMaker to help both inference and training of large models which don't fit on a singel GPU. |
-| LangChain | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. This is very popular with AWS customers today. |
+| [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. This is very popular with AWS customers today. |
 | LaMDA	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
 | Stable Diffusion | Stable diffusion is a popular open source text to image generation tool. It can be used for use cases like 1) marketing content geration 2) game design 3) fashion design and more. |
 | Llama | A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. The weights have been leaked and have been found on torrents around the web.  Note that many models have been released based on this, but they also inherit the licencing requrment for non-comertial use. |
@@ -179,7 +185,23 @@ It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com
 
 The model is based on the [eleuther](https://www.eleuther.ai/) (a non-profit AI research lab focusing on Large models) with 6b parameter model named Pythia. On top of this model, Databricks created human generated prompts (around $15k). 
 
+## Model Evaluation 
 
+There are web sites to evaluate existing LLMs, but they are based on public data, and may not perform well in the context of a specific use case with private data.
+
+The methodology looks like:
+
+* Downselect models based on specific use case and tasks
+* Human calibration of the models: understand behavior on certain tasks, fine tune prompts and assess against a ground truth using cosine-sim. Rouge scores can be used to compare summarizations, based on statistical word similarity scoring.
+* Automated evaluation of models: test scenario with deep data preparation, was is a good answer. LLM can be used as a judge: variables used are accuracy, coherence, factuality, completeness. Model card
+* ML Ops integration, self correctness
+
+Considerations
+
+* Licensing / copyright
+* Operational
+* Flexibility
+* Language support
 
 ## Some interesting readings
 
