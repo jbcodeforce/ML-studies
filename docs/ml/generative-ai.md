@@ -185,7 +185,7 @@ It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com
 
 The model is based on the [eleuther](https://www.eleuther.ai/) (a non-profit AI research lab focusing on Large models) with 6b parameter model named Pythia. On top of this model, Databricks created human generated prompts (around $15k). 
 
-## Model Evaluation 
+## Model Evaluation
 
 There are web sites to evaluate existing LLMs, but they are based on public data, and may not perform well in the context of a specific use case with private data.
 
@@ -203,6 +203,12 @@ Considerations
 * Flexibility
 * Language support
 
+## Interresting legal consideration
+
+* Think not created by a human could not be copyrighted.
+* Model deployed will not use data sent to improve itself.
+* Right to use an image/photo to train a model is a problem.
+
 ## Some interesting readings
 
 * [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
@@ -211,5 +217,4 @@ Considerations
 * [Fine-tune a pretrained model HuggingFace tutorial](https://huggingface.co/docs/transformers/training).
 * [Prompt engineering is the new feature engineering.](https://www.amazon.science/blog/emnlp-prompt-engineering-is-the-new-feature-engineering)
 * [Amazon-sponsored workshop advances deep learning for code.](https://www.amazon.science/blog/amazon-sponsored-workshop-advances-deep-learning-for-code)
-
-@huggingfacecourse
+* [RAG with OpenSearch Service](https://catalog.workshops.aws/semantic-search/en-US/module-7-retrieval-augmented-generation).

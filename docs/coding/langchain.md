@@ -8,7 +8,7 @@ The core building block of LangChain applications is the LLMChain:
 * Prompt templates
 * Output parsers
 
-Below is [an example](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/feast-prompt.py) of getting a LLM api, build a prompt, a chain and call it.
+Below is [an example](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/feast-prompt.py) of getting a LLM api using AWS Bedrock service, build a prompt using Feast feature stores, a chain using Langchain and call it with the value of one of the driver_id.
 
 ```python
 titan_llm = Bedrock(model_id="amazon.titan-tg1-large", client=bedrock_client)
@@ -42,9 +42,14 @@ Modules are extendable interfaces to Langchain.
 
     ![](./diagrams/chatbot.drawio.png)
 
+* **Code Understanding**
+* Extraction
+* Summarization
+* **[Web scraping](https://python.langchain.com/docs/use_cases/web_scraping)** for LLM based web research. It uses the same process: document/page loading, transformation with tool like BeautifulSoup, to HTML2Text.
+
 ## Model I/O
 
-* Model I/O are building blocks to interface with any language model.
+* Model I/O are building blocks to interface with any language model. It facilitates the interface of model input (prompts) with the LLM model to produce the model output.
 * A **prompt** for a language model is a set of instructions or input provided by a user to guide the model's response, helping it understand the context and generate relevant and coherent language-based output. See the[Prompt template](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/).
 * Two prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
 * We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt usine [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat). 
@@ -58,18 +63,24 @@ Modules are extendable interfaces to Langchain.
 
 ## Retrieval
 
-Get custom dataset not already part of a model training set. The goal is to retrieve the data and pass it to LLM in the generation step. This is the Retrieval Augmented Generation or RAG and illustrated in figure below:
+The goal is to add custom dataset not already part of a model training set and use it as input to the LLM. This is the Retrieval Augmented Generation or RAG and illustrated in figure below:
 
 ![](./diagrams/rag-process.drawio.png)
 
+The process is to get data from the different sources, load, cut into smaller pieces, extract what is necessary, transform the sentences into numerical vector. Creating chunks is necessary because language models generally have a limit to the amount of text they can deal with.
+During the interaction with the end-user, the system (a chain in LangChain) retrieves the data most relevant to the question asked, and passes it to LLM in the generation step.
+
 * Embeddings capture the semantic meaning of the text to help do similarity search
-* Persist the embeddings into a vector store. ChromaDB is common, but OpenSearch can also being used.
+* Persist the embeddings into a Vector store. ChromaDB is common, but OpenSearch can also being used.
 * Retriever includes semantic search and efficient algorithm to prepare the prompt. To improve on vector similarity search we can generate variants of the input question.
+
+Combine chat history with new question to ask follow up questions.
 
 ## Chains
 
-Chains allow us to combine multiple components together to create a single, coherent application. 
-[LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html)
+Chains allow us to combine multiple components together to create a single, coherent application, and also  combine chains.
+
+[LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) is the basic chain to integrate with a LLM.
 
 ConversationChain 
 

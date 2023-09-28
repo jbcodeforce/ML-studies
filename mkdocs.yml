@@ -20,6 +20,7 @@ nav:
     - Python studies:  https://jbcodeforce.github.io/python-code/
   - Techno:
     - Introduction: techno/index.md
+    - Key AI startups: techno/players_to_look.md
     - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker
    
   - Return to main: https://jbcodeforce.github.io
