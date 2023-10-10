@@ -7,8 +7,14 @@
 
 ## Environments
 
-To avoid impacting my laptop (Mac) python installation, we can use docker image with python and the minimum set of needed libraries. 
-The dockerfile is in this folder is used to build a development image.
+To avoid impacting my laptop (Mac) python installation, I use docker image with python and the minimum set of needed libraries. The dockerfile is in this folder is used to build a development image.
+
+There are a lot of other solution to use, like the Amazon [scikit-learn image](https://raw.githubusercontent.com/aws/sagemaker-scikit-learn-container/master/docker/1.2-1/base/Dockerfile.cpu). The SageMaker team uses this repository to build its official [Scikit-learn image](https://github.com/aws/sagemaker-scikit-learn-container).  we can build an image via:
+
+```sh
+docker build -t sklearn-base:1.2-1 -f https://raw.githubusercontent.com/aws/sagemaker-scikit-learn-container/master/docker/1.2-1/base/Dockerfile.cpu .
+```
+
 
 ### Run my python development shell
 

@@ -6,3 +6,4 @@ Neural networks input and output can be an image, a series of numbers that could
 
 The two most Python frameworks for deep learning are [TensorFlow/Keras](https://www.tensorflow.org/) (Google) or [PyTorch](../coding/pytorch.md) (Facebook).
 
+Big source of online book [Dive into Deep Learning from Amazoniens](https://d2l.ai).

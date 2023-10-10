@@ -1,6 +1,9 @@
 # AI and Machine Learning studies
 
-This repository includes notes, code samples, Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites.
+!!! info "Update"
+    Created 2017 - Update 2023
+
+This repository includes notes, code samples, and Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites on this exciting subjet.
 
 ## AI/ML Market
 
@@ -38,24 +41,23 @@ But the truth wears off: previous analysis done on statistical data are less tru
 
 The goal of hypothesis test is to compare an experimental group to a control group. There are two types of result:
 
-  * H0 for null hypothesis: this happens when there is no difference between the groups.
-  * Ha for alternative hypothesis: happens when there is statistically significant difference between the groups.
+* H0 for null hypothesis: this happens when there is no difference between the groups.
+* Ha for alternative hypothesis: happens when there is statistically significant difference between the groups.
 
 The bigger the number of cases (named study size) the more statistical power we have, and better we are to get better results.
 
 We do not know if the difference in two treatments is not just due to chance. But we can calculate the odds that it is. Which is named the **p-value**.
 
 Statistics does not apply well to large-scale inference problems that big data brings. Big data is giving more spurious results than small data set.
-The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions 
-of data points and thousands of metrics. We are bound to identify coincidences that have no predictive power.
+The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions of data points and thousands of metrics. We are bound to identify coincidences that have no predictive power.
 
 ### Mathematical foundations
 
-#### Covariance 
+#### Covariance
 
-![\Large cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y})](https://latex.codecogs.com/svg.latex?cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y})) 
+![\Large cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y})](https://latex.codecogs.com/svg.latex?cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y}))
 
-#### Correlation 
+#### Correlation
 
 ![\Large corr(x,y)](https://latex.codecogs.com/svg.latex?corr(x,y)=\frac{cov(x,y)}{\sqrt {\sum_{i}^{} (x_{i} - u_{x})^2} * \sqrt {\sum_{i}^{} (y_{i} - u_{y})^2 }) 
 
@@ -70,7 +72,7 @@ Bayes theorem: 
 * incorporate prior knowledge.
 * opposite is frequentist approach using data and find decision
 
- ![](./images/bayen.png){ width=500 }
+![](./images/bayen.png){ width=500 }
 
 #### Data distributions
 
@@ -85,25 +87,25 @@ where the intention is that these normalized values allow the comparison of corr
 
 Feature scaling used to bring all values into the range [0,1]. This is also called unity-based normalization.
 
- ![](https://latex.codecogs.com/svg.latex?X'=(X-Xmin)/(Xmax-Xmin))
+![](https://latex.codecogs.com/svg.latex?X'=(X-Xmin)/(Xmax-Xmin))
 
 ### Map - Reduce
 
 One of the classical approach to run analytics on big data is to use the map-reduce algorithm, which can be summarized as:
 
-- Split the dataset into chunks and process each chunk on a different computer: chunk is typically 64Mb.
-- Each chunk is replicated several times on different racks for fault tolerance.
-- When processing a huge dataset, the first processing step is to read from distributed file systems and to split data into chunk files.
-- Then a record reader reads records from files, then runs the `map` function which is customized for each different problem to solve.
-- The combine operation identifies <key, value> with the same key and applies a combine function which should have the associative and commutative properties.
-- The output of map function are saved to local storage, then `reduce` task pulls the record per key from the local storage to sort the value and then call the last custom function: reduce
+* Split the dataset into chunks and process each chunk on a different computer: chunk is typically 64Mb.
+* Each chunk is replicated several times on different racks for fault tolerance.
+* When processing a huge dataset, the first processing step is to read from distributed file systems and to split data into chunk files.
+* Then a record reader reads records from files, then runs the `map` function which is customized for each different problem to solve.
+* The combine operation identifies <key, value> with the same key and applies a combine function which should have the associative and commutative properties.
+* The output of map function are saved to local storage, then `reduce` task pulls the record per key from the local storage to sort the value and then call the last custom function: reduce
 
- ![](./images/map-reduce-1.png){ width=900 }
+![](./images/map-reduce-1.png){ width=900 }
 
-- System architecture is based on shared nothing, in opposite of sharing file system or sharing memory approach.
-- Massive parallelism on thousand of computers where jobs run for many hours. The % of failure of such job is high, so the algorithm should tolerate failure.
-- For a given server, a mean time between failure is 1 year then for 10000 servers, we have a likelihood of failure around one failure / hour.
-- Distributed FS: very large files TB and PB. Different implementations: Google FS or Hadoop DFS.
+* System architecture is based on shared nothing, in opposite of sharing file system or sharing memory approach.
+* Massive parallelism on thousand of computers where jobs run for many hours. The % of failure of such job is high, so the algorithm should tolerate failure.
+* For a given server, a mean time between failure is 1 year then for 10000 servers, we have a likelihood of failure around one failure / hour.
+* Distributed FS: very large files TB and PB. Different implementations: Google FS or Hadoop DFS.
 
 Hadoop used to be the map-reduce platform, now [Apache Spark](https://spark.apache.org/) is used for that or [Apache Flink](https://flink.apache.org/).
 
@@ -231,7 +233,7 @@ errors = (y - output)          
 cost = (errors** 2).sum() / 2.0
 ```
 
-and where 
+where: 
 
 ![](https://latex.codecogs.com/svg.latex?\phi_{i}=\theta^T*X){ width=200 }
 
@@ -268,14 +270,15 @@ So putting all together we have:
 the weight update is calculated based on all samples in the training set (instead of updating the weights incrementally after each sample), which is why this approach is also referred to as "batch" gradient descent.
 So basically to minimize the cost function we took steps into the opposite direction of a gradient calculated from the entire training set.
 
-## Sources
+## Books and other sources
 
 Content is based of the following different sources:
 
 * [Python Machine learning - Sebastian Raschka's book](https://www.amazon.com/Python-Machine-Learning-Sebastian-Raschka/dp/1783555130/ref=asc_df_1783555130/?tag=hyprod-20&linkCode=df0&hvadid=312140868236&hvpos=1o7&hvnetw=g&hvrand=12056535591325453294&hvpone=&hvptwo=&hvqmt=&hvdev=c&hvdvcmdl=&hvlocint=&hvlocphy=9032152&hvtargid=pla-406163981473&psc=1).
 * [Collective intelligence - Toby Segaran's book](https://www.amazon.com/Programming-Collective-Intelligence-Building-Applications/dp/0596529325/ref=sr_1_2?crid=1UBVCJKMM17Q6&keywords=collective+intelligence&qid=1553021611&s=books&sprefix=collective+inte%2Cstripbooks%2C236&sr=1-2).
 * [Stanford Machine learning training - Andrew Ng](https://www.coursera.org/learn/machine-learning).
-* Intel ML 101 tutorial.
+* [Dive into deep learning book](https://d2l.ai)
+* [Amazon Sagemaker Python SDK](https://sagemaker.readthedocs.io/en/stable/)
 * [Kaggle](http://kaggle.com)
 * Introduction to Data Sciences - University of Washington.
 * [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)

@@ -18,4 +18,4 @@ On Mac M1 we need ARM64 architecture.
 
 ## Playing with PyTorch
 
-Add some specifics libraries:  conda install torchvision
+Add some specifics libraries:  `conda install torchvision`
