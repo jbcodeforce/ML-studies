@@ -1,3 +1,6 @@
-langchain
+boto3>=1.28.57
+botocore>=1.31.57
+langchain==0.0.309
+transformers>=4.24,<5
 bs4
 unstructured

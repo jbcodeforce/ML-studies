@@ -44,7 +44,7 @@ Modules are extendable interfaces to Langchain.
 
 * **Code Understanding**
 * Extraction
-* Summarization
+* Summarization: summarize call transcripts, meetings transcripts, books, articles, blog posts, and other relevant content.
 * **[Web scraping](https://python.langchain.com/docs/use_cases/web_scraping)** for LLM based web research. It uses the same process: document/page loading, transformation with tool like BeautifulSoup, to HTML2Text.
 
 ## Model I/O
@@ -61,13 +61,13 @@ Modules are extendable interfaces to Langchain.
 ???- info "LLM and FeatureForm"
     See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ff-langchain-prompt.py)
 
-## Retrieval
+## Retrieval Augmented Generation
 
 The goal is to add custom dataset not already part of a model training set and use it as input to the LLM. This is the Retrieval Augmented Generation or RAG and illustrated in figure below:
 
 ![](./diagrams/rag-process.drawio.png)
 
-The process is to get data from the different sources, load, cut into smaller pieces, extract what is necessary, transform the sentences into numerical vector. Creating chunks is necessary because language models generally have a limit to the amount of text they can deal with.
+The process is to get data from the different sources, load, cut into smaller pieces, extract what is necessary, transform the sentences into numerical vectors. Creating chunks is necessary because language models generally have a limit to the amount of text they can deal with.
 During the interaction with the end-user, the system (a chain in LangChain) retrieves the data most relevant to the question asked, and passes it to LLM in the generation step.
 
 * Embeddings capture the semantic meaning of the text to help do similarity search
@@ -84,7 +84,40 @@ Chains allow us to combine multiple components together to create a single, cohe
 
 ConversationChain 
 
-##  Deeper dive
+### Summarization chain
+
+Always assess the size of the content to send, as the approach can be different: for big doc we need to split those doc.
+
+* Small text to summarize, with [bedrock client](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/utils/bedrock.py) and use the invoke_model on the clientm see the code in [https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/small-summarization.py](small-summarization.py)
+* For big document, langchain provides the load_summarize_chain to summarize by chunks and get the summary of the summaries:
+
+???- code "Using langchain summarize chain"
+    ```python
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+    from langchain.llms.bedrock import Bedrock
+    from langchain.chains.summarize import load_summarize_chain
+
+    llm = Bedrock(
+        model_id=modelId,
+        model_kwargs={
+            "max_tokens_to_sample": 1000,
+
+        },
+        client=boto3_bedrock,
+    ) 
+
+    text_splitter = RecursiveCharacterTextSplitter(
+        separators=["\n\n", "\n"], chunk_size=4000, chunk_overlap=100
+    )
+    docs = text_splitter.create_documents([letter])
+
+    summary_chain = load_summarize_chain(llm=llm, chain_type="map_reduce", verbose=True)
+    output = summary_chain.run(docs)
+    ```
+
+### Q&A chain
+
+## Deeper dive
 
 * [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)
 * [Retrieval and RAG blog.](https://blog.langchain.dev/retrieval/)
