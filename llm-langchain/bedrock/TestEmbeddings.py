@@ -12,32 +12,24 @@ bedrock_runtime = bedrock.get_bedrock_client(
     region=os.environ.get("AWS_DEFAULT_REGION", None),
 )
 
-prompt_data = """Human: Write me a blog about making strong business decisions as a leader.
+prompt_data = "Amazon Bedrock supports foundation models from industry-leading providers such as \
+AI21 Labs, Anthropic, Stability AI, and Amazon. Choose the model that is best suited to achieving \
+your unique goals."
 
-Assistant:
-"""
-
-body = json.dumps({"prompt": prompt_data, "max_tokens_to_sample": 500})
-modelId = "anthropic.claude-instant-v1"
+body = json.dumps({"inputText": prompt_data})
+modelId = "amazon.titan-embed-text-v1" 
 accept = "application/json"
 contentType = "application/json"
 
 try:
 
-    response = bedrock_runtime.invoke_model_with_response_stream(
+    response = bedrock_runtime.invoke_model(
         body=body, modelId=modelId, accept=accept, contentType=contentType
     )
-    stream = response.get('body')
-    output = []
+    response_body = json.loads(response.get("body").read())
 
-    if stream:
-        for event in stream:
-            chunk = event.get('chunk')
-            if chunk:
-                chunk_obj = json.loads(chunk.get('bytes').decode())
-                text = chunk_obj['completion']
-                output.append(text)
-                print(''.join(output))
+    embedding = response_body.get("embedding")
+    print(f"The embedding vector has {len(embedding)} values\n{embedding[0:3]+['...']+embedding[-3:]}")
 
 except botocore.exceptions.ClientError as error:
 
@@ -49,4 +41,3 @@ except botocore.exceptions.ClientError as error:
 
     else:
         raise error
-

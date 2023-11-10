@@ -1,18 +1,23 @@
-import json
-import os
+import os,json
 import sys
 
-import boto3
-
-module_path = "."
+module_path = ".."
 sys.path.append(os.path.abspath(module_path))
-from utils import bedrock, print_ww
+from bedrock.utils import bedrock, print_ww
 
-boto3_bedrock = bedrock.get_bedrock_client(
+
+bedrock_runtime = bedrock.get_bedrock_client(
     assumed_role=os.environ.get("BEDROCK_ASSUME_ROLE", None),
-    region=os.environ.get("AWS_DEFAULT_REGION", None)
+    region=os.environ.get("AWS_DEFAULT_REGION", None),
 )
 
+inference_modifier = {
+    "max_tokens_to_sample": 4096,
+    "temperature": 0.5,
+    "top_k": 250,
+    "top_p": 0.5,
+    "stop_sequences": ["\n\nHuman"],
+}
 
 prompt = """
 
@@ -44,8 +49,7 @@ modelId = 'anthropic.claude-v2' # change this to use a different version from th
 accept = 'application/json'
 contentType = 'application/json'
 
-response = boto3_bedrock.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
+response = bedrock_runtime.invoke_model(body=body, modelId=modelId, accept=accept, contentType=contentType)
 response_body = json.loads(response.get('body').read())
 
 print_ww(response_body.get('completion'))
-

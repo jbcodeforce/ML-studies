@@ -1,9 +1,8 @@
-import os
+import os, sys
 from langchain.llms import Bedrock
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
-import boto3
-from botocore.config import Config
+
 from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from langchain.schema import BaseOutputParser
@@ -13,34 +12,20 @@ from langchain.prompts.chat import (
     HumanMessagePromptTemplate,
 )
 
-# With AWS be sure to set env variable AWS_ACCESS_KEY, AWS_SECRET_ACCESS_KEY and AWS_SESSION_TOKEN
+module_path = "."
+sys.path.append(os.path.abspath(module_path))
+from bedrock.utils import bedrock, print_ww
 
 def buildBedrockClient():
-    target_region= os.environ.get("AWS_DEFAULT_REGION", "us-west-2")
-    profile_name = os.environ.get("AWS_PROFILE","bedrock-admin")
-    os.environ["BEDROCK_ENDPOINT_URL"] = "https://bedrock." + target_region + ".amazonaws.com/"
-    session_kwargs = {"region_name": target_region}
-    #session_kwargs["profile_name"] = profile_name
-    session = boto3.Session(**session_kwargs)
-    retry_config = Config(
-        region_name=target_region,
-        retries={
-            "max_attempts": 10,
-            "mode": "standard",
-        },
-    )
-    client_kwargs = {**session_kwargs}
-    bedrock_client=session.client(
-        service_name="bedrock",
-        config=retry_config,
-        **client_kwargs
-    )
-    return  bedrock_client
+    return bedrock.get_bedrock_client(
+            assumed_role=os.environ.get("BEDROCK_ASSUME_ROLE", None),
+            region=os.environ.get("AWS_DEFAULT_REGION", None)
+        )
 
-def buildLLM(client):
+def buildLLM():
     return  Bedrock(
                 client=buildBedrockClient(),
-                model_id="amazon.titan-tg1-large"
+                model_id="anthropic.claude-v2",
             )           
 
 def simple_chat_chain(llm):
@@ -93,8 +78,7 @@ ONLY return a comma separated list, and nothing more."""
 
 
 if __name__ == "__main__":
-    client = buildBedrockClient()
-    llm = buildLLM(client)
+    llm = buildLLM()
     print("--- First prompt ---")
     simple_chat_chain(llm)
     print("--- Second prompt ---")

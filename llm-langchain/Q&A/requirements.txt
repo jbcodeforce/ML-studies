@@ -1,0 +1,3 @@
+faiss-cpu>=1.7,<2
+pypdf>=3.8,<4
+sqlalchemy>1,<2

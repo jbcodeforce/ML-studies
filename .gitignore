@@ -9,7 +9,7 @@ airflow/logs/
 deep-neural-net/data/
 llm-langchain/dependencies/**
 llm-langchain/my_feature_repo/**
-llm-langchain/data/**
-llm-langchain/.featureform/
+llm-langchain/**/data/**
+llm-langchain/featureform/.featureform/
 llm-langchain/chroma_db/
 deep-neural-net/d2l-en/

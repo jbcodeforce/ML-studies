@@ -1,5 +1,5 @@
 
-FROM python:latest
+FROM python:3.11.6
 ENV PATH=/root/.local/bin:$PATH
 
 ENV PYTHONPATH=/app

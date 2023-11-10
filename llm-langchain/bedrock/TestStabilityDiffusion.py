@@ -13,7 +13,7 @@ bedrock_runtime = bedrock.get_bedrock_client(
     region=os.environ.get("AWS_DEFAULT_REGION", None),
 )
 
-prompt_data = "a landscape with trees"
+prompt_data = "a hound basset"
 body = json.dumps({
     "text_prompts": [{"text": prompt_data}],
     "cfg_scale": 10,

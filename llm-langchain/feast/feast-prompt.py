@@ -5,9 +5,13 @@ The basic idea is to call a feature store from inside a prompt template
 to retrieve values that are then formatted into the prompt.
 Run the feast-start.py script to populate the feature store.
 '''
+import sys
 from langchain.prompts import PromptTemplate, StringPromptTemplate
 from feast import FeatureStore
-from utils import bedrock, print_ww
+
+module_path = ".."
+sys.path.append(os.path.abspath(module_path))
+from bedrock.utils import bedrock, print_ww
 import os
 from langchain.chains import LLMChain
 from langchain.llms.bedrock import Bedrock
