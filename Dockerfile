@@ -10,6 +10,5 @@ USER $USER
 
 # install NLP packages: 
 RUN pip install -U  nltk  gensim  pixiedust
-# install llm package
-RUN pip install langchain openai boto3
+
 WORKDIR /app

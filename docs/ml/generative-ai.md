@@ -1,29 +1,47 @@
 # Generative AI
 
-Create new content (text, image,..) from existing one and a requested query. It is based on Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. 
+Create new content (text, image, music, videos..) from existing ones and a requested query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. Those models are commonly referred to as foundation models (FMs).
 
-For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML output is well expected. 
+A single large model is unlikely to solve every business problem. Custom data sets help companies to differentiate their generative AI applications.
 
+For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML output is well expected.
 
 Some ways to use Generative AI:
 
 * Build foundation model from scratch
-* Reuse existing foundation models available as open-source (Hugging Face) or proprietary, add your corpus on top of it.
-* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization.
+* Reuse existing foundation models available as open-source (Hugging Face) or proprietary, add the custom corpus on top of it, to fine tune tune the model for better accuracy.
+* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization. Use prompt engineering to get better answer.
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to  applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
 
 ## Use cases
 
-* Documentation summarization: See model like Jurassic-2 Jumbo from [AI21 studio](https://www.ai21.com/studio), claude-v2 works well too.
-* Question/answer solution based on internal documents.
-* Model fine tuning to downsize the LLM to limit inference cost.
-* Transcription insights, by extracting action items from the videos.
-* Chat functionality with context, with better user's experiences
-* Autogeneration of marketing material, translation, summary...
-* Self service tutor based on student progress, prompt activities, and respond  to questions
-* Synthetic data generation, to keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps. 
+We can group the use cases in catergories
+
+???+ info "Improve customer experiences"
+    * Chatbot functionality with context, with better user's experiences. Reduce operational costs using automated response.
+    * Documentation summarization: See model like Jurassic-2 Jumbo from [AI21 studio](https://www.ai21.com/studio), claude-v2 works well too.
+    * Personalization
+
+???+ info "Employee productivity"
+    * Code generation
+    * Translation, reports, summary...
+    * Q&A Agent for specific subject, based on internal documents.
+    * Self service tutor based on student progress, prompt activities, and respond  to questions
+
+???+ info "Creativity"
+    * Autogeneration of marketing material
+    * Personalized emails
+    * Sales scripts for customer's industry or segment
+    * Speeding the ideation phase of a product development
+
+???+ info "Business process optimization"
+    * Automatically extracting and summarizing data from documents
+    * Data augmentation to improve data set quality. Keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps.
+    * Propose some supply chain scenario
+
+
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
 ### Industries
@@ -38,51 +56,59 @@ Some ways to use Generative AI:
 * Enhance trip planning with personalized recommendations, services and offers for travel industry.
 * product review summarization: today done by human, can be offloaded by LLM by adding those unstructured reviews as new corpus for search. Separate these reviews based on user-provided ratings and task an LLM to extract different sets of information from each high-level category of reviews.
 
-### Discovery
+### Classical concerns and challenges
 
-When engaging with a customer it is important to assess where they are in their GenAi adoption:
+* Protect Intellectual Property: not pass  confidential information to Chatbots for training
+* Protect the brand, avoid bias, discrimination, aligned to company values
+* No move private data to public internet
+* Skillset
+
+### Discovery Assessment
+
+When engaging with a customer it is important to assess where they are in their GenAi adoption. Think big about the opportunities, but start small with problems that cause day-to-day irritations for the employees or customer.
+
+???- question "Use cases and business needs"
+    * What are the potential use cases? B2B, B2C, Employee
+    * Is the use case considered a strategic priority? Sponsor?
+    * What is the value associated with the use case?
+    * Are subject matter experts available to support the use case?
+    * Who is the end user?
+    * What are the current user's challenges and pains?
+    * What will be the "haha" moment for the user?
+    * Do you have data sets? Quality?
 
 ???- question "Experience in AI"
     * Are you using AI in your current business applications, or processes?
+    * What are current/past successes by adopting AI in the business execution?
+    * What is the current level of ML support needed for your technical staff?
     * How familiar with Generative AI? and its common use cases?
-    * What is current success by adopting AI in their business execution
 
-???- question "Use cases and business needs"
-    * What are the potential use cases?
-    * Who is the end user?
-    * what are the current user's challenges and pains?
-    * what will be the "haha" moment for the user?
 
 ???- question "Generative AI"
     * Do you have tried to tune an existing generative models?
+    * What GenAI technologies have you/are you evaluating?
+    * Have you started prototyping?
+    * Do you have AI-powered products or features on your roadmap?
+    * What are the current process to evaluate Gen AI models?
+    * What is your risk appetite for model hallucination and its potential consequences?
+    * How do you plan to do domain  adaptation? Do you plan to pre-train, fine-tune or do some in-context  prompting for domain adaptation?
+
+
+???- question "Integration needs"
+    * Is it a new solution or extending an existing one?
+    * Where data coming from?
+    * What type of systems to integrate the solution with? 
+    * Any expected performance requirements? 
 
 ???- question "Security and compliance needs"
     * Code privacy and IP related code control
 
-## Reference Architecture for LLM solution
-
-A generic reference architecture (defined by [A16Z](https://a16z.com/)) for a LLM solution looks like in the following diagram:
-
-![](./diagrams/llm-ra-1.drawio.png)
-
-1. **Data pipelines** are batch processing, which in the context of LLM may mix processing of unstructured documents with structured CSVs, Json, or SQL tables. data done in map-reduce platform to do Extract Transform Load job. Most of existing pipelines land their output to Data Lake. But modern pipeline may call directly a LLM to build embeddings to be saved into Vector Store. The flow will look like in the figure below, which is based on classical Retrieval augmented generation (RAG) process.
-
-    ![](./diagrams/rag.drawio.png)
-
-    RAG retrieves data from outside the language model (non-parametric) and augments the prompts by adding the relevant retrieved data in context.
-
-1. **Streaming** is where connection to event-driven architecture land: a lot of business services / microservices are generating important events to be part of the future context of the end user interaction with the application. Those events can be aggregated, and a similar pipeline can be done with streaming application, consuming events, and doing the embedding via LLM calls then push to Vector Store.
-1. **Embeddings** is the technique to create a numerical vector representation of each document chunks. There is open-source solution, like the [Sentence Transformers library from Hugging Face](https://huggingface.co/sentence-transformers), or can use proprietary, hosted LLM API.
-1. **Vector Store**, persits vectors, a numerical representation of NL sentence, with indexing capability and similarity search function. Multiple solutions exist as Vector Store: [Faiss](https://faiss.ai/index.html), [ChromaDB](https://www.trychroma.com/), [AWS OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html)
-1. **Hosted LLM** is a model serving service with LLM accessed via API. AWS Bedrock is used in all the code samples of this repository.
-1. **Orchestrator** is the solution code, which connect all those component together, may use session caching in distributed, cloud based service, use Vector Store to do silimarity semantic search, and expose API to be used by a ChatBot user interface.
-
 ## Concepts
 
-A LLM is part of the evolation of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way that is like the function of the human brain. 
-From 2017, many NLP models are based on transformers. Which is a neural-network that take into account an entire sentence or paragraph at once instead of what word at a time. It better understands the context of a word. 
+A LLM is part of the evolation of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way that is like the function of the human brain.
+From 2017, many NLP models are based on transformers. Which is a neural-network that takes into account an entire sentence or paragraph at once, instead of one word at a time. It better understands the context of a word.
 
-To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Next, the encoder in the transformer transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
+To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
 This process is called **autoregressive generation**.
 
 Transformers do not need to code the grammar rules, they acquire them implicitly from big corpus.
@@ -91,18 +117,56 @@ During the training process, the model learns the statistical relationships betw
 
 The techniques to customize LLM applications from simplest to more complex. 
 
-* Zero-shot inference.
+* **Zero-shot inference**: allows a pre-trained LLM to generate responses to tasks that it hasn’t been specifically trained for. In this technique, the model is provided with an input text and a prompt that describes the expected output from the model in natural language. 
 * Prompt engineering with zero-shot inference.
-* Prompt engineering with few-shot inference.
-* Retrieval augmented generation (more complex).
+* **Prompt engineering with few-shot inference**: **Few-shot** learning involves training a model to perform new tasks by providing only a few examples. This is useful where limited labeled data is available for training.
+* [Retrieval augmented generation (more complex)](#retrieval-augmented-generation-rag).
 * Fine tune an existing foundation model.
-* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg's one. 
-* Build a foundation model from scratch. 
+* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg's LLM. 
+* Build a foundation model from scratch.
 * Support human in the loop to create high quality data sets.
 
-???- "Zero-shot inference"
-    Zero-shot learning in NLP allows a pre-trained LLM to generate responses to tasks that it hasn’t been specifically trained for. In this technique, the model is provided with an input text and a prompt that describes the expected output from the model in natural language.
-    **Few-shot** learning involves training a model to perform new tasks by providing only a few examples. This is useful where limited labeled data is available for training. 
+### Important Terms
+
+| Term | Definition |
+| --- | --- |
+| **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
+| **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
+| **Attention** | A math filter for focusing on the important parts of data inputs. |
+| **BARD** | AI chat service from google - powered by the LaMDA model. Similar to ChatGPT. |
+| **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
+| **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an autoregressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
+| **co:here** |	[Co:here](https://cohere.com/) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
+| **Data Distributed Training**	| A distributed training algorithm which can speed up ML training by distributing batches of data between forward and backward passes in a model. This can be very helpful when we have large datasets but does not solve the problem of not being able to fit a model on one machine |
+| **Davinci**	| OpenAI's GPT3 text-to-text based model. It is proprietary and only available by API. People can fine tune this model on OpenAI.|
+| **DeepSpeed** | DeepSpeed is an open source deep learning optimization library for PyTorch. The library is designed to reduce computing power and memory usage and to train large distributed models with better parallelism on existing computer hardware. DeepSpeed is optimized for low latency, high throughput training. It can be used on AWS SageMaker to help both inference and training of large models which don't fit on a single GPU. |
+| **Distributed Training** | In distributed training the workload to train a model is split up and shared among multiple mini processors, called worker nodes. These worker nodes work in parallel to speed up model training. |
+| **Embeddings** | Vector representations of non-vector data including images, text, audio. Embeddings allow to perform mathematical operations on otherwise non-mathematical inputs. For example: what is the average of the previous two sentences? |
+| **Few shot Learning** | or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
+| **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
+| **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
+| **Foundation Model** | Original models, trained at large expense. |
+| **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
+| **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
+| **GPT** | OpenAI's generalized pretrained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are propietary. GPT1,2,3 are text-to-text while gpt4 is multimodal. |
+| **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extermely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
+| **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
+| [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
+| **Llama** | A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. The weights have been leaked and have been found on torrents around the web.  Note that many models have been released based on this, but they also inherit the licencing requirement for non-commercial use. |
+| **Large Language Model (LLM’s)** | Transformers trained on millions of documents |
+| **Model compilation** | Model compilation is the act of tracing a model computational graph in order to deploy to lower level hardware and code. This is a necessary step to run on specialized hardware like AWS Inferentia and Trainium. |
+| **Model Distribution** | When a model's size prohibits it from being stored on one GPU. This occurs when models start to be in the 10's of billions of parameter range. This has a few consequences 1) it costs a lot to train and host these models 2) specialized libraries are required to help. |
+| **MultiModal Models**	| Multimodal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
+| **OpenAI** | OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1)With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2)DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3) Whisper can transcribe speech into text and translate many languages into English. |
+| **Pinecone** | A sparse dense vector database which can be used to store sentence embeddings and then utilize approximate nearest neighbor search to fine similarity matches. This can be used for semantic search (search which matches the meaning) and then applied as 'context' to LLMs for question and answering. |
+| **Pretraining** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pretraining FLAN with Medical documents to understand medical context previously missing from the model. |
+| **Reinforcement learning with human feedback (RLHF)** | The secret sauce to making chat based foundation models. The process involves using human feedback with LLM chat interactions to inform a reinforcement learning procedure to help train an LLM to "talk to humans" instead of only prompts. There are two huge benefits 1) this substantially reduces the amount of prompt engineering required and 2) this allow the LLM to take into account chat context as well as the information it has available to it. |
+| **Single shot learning** | *Zero-shot learning* (ZSL) is a problem setup in ML where, at test time, a learner observes samples from classes which were not observed during training, and needs to predict the class that they belong to | 
+| **Stability.ai** | Stability AI is open source generative AI company currently developing breakthrough AI models applied to imaging, language, code, audio, video, 3D content, design, biotech. With AWS they provide the world’s fifth-largest supercomputer – the Ezra-1 UltraCluster – supplying the necessary power to generate these advancements. Stability AI’s premium imaging application DreamStudio, alongside externally built products like Lensa, Wonder and NightCafe, have amassed over 40 million users. |
+| **Stable Diffusion** | Stable diffusion is a popular open source text to image generation tool. It can be used for use cases like 1) marketing content generation 2) game design 3) fashion design and more. |
+| **Text to text** | Any model which takes in text inputs and produces text outputs. Ex: entity extraction, summarization, question answer. |
+| **Transfer learning**	| The act of transferring the power of a foundation model to your specific task. |
+| **Transformer** |	A ML model for transforming one sequence into another, using attention.|
 
 ### [Prompt engineering](https://www.promptingguide.ai)
 
@@ -147,46 +211,56 @@ And a classical RAG with LangChain
 
 ![](../coding/diagrams/rag-process.drawio.png)
 
-### Important Terms
+### Common LLM inference parameter definitions
 
-| Term | Definition |
-| --- | --- |
-| **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
-| **Attention** | A math filter for focusing on the important parts of data inputs. |
-| **BARD** | AI chat service from google - powered by the LaMDA model. Similar to ChatGPT. |
-| **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
-| **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an autoregressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
-| **co:here** |	[Co:here](https://cohere.com/) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
-| **Data Distributed Training**	| A distributed training algorithm which can speed up ML training by distributing batches of data between forward and backward passes in a model. This can be very helpful when we have large datasets but does not solve the problem of not being able to fit a model on one machine |
-| **Davinci**	| OpenAI's GPT3 text-to-text based model. It is proprietary and only available by API. People can fine tune this model on OpenAI.|
-| **DeepSpeed** | DeepSpeed is an open source deep learning optimization library for PyTorch. The library is designed to reduce computing power and memory usage and to train large distributed models with better parallelism on existing computer hardware. DeepSpeed is optimized for low latency, high throughput training. It can be used on AWS SageMaker to help both inference and training of large models which don't fit on a single GPU. |
-| **Distributed Training** | In distributed training the workload to train a model is split up and shared among multiple mini processors, called worker nodes. These worker nodes work in parallel to speed up model training. |
-| **Embeddings** | Vector representations of non-vector data including images, text, audio. Embeddings allow to perform mathematical operations on otherwise non-mathematical inputs. For example: what is the average of the previous two sentences? |
-| **Few shot Learning** | or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
-| **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
-| **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
-| **Foundation Model** | Original models, trained at large expense. |
-| **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
-| **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
-| **GPT** | OpenAI's generalized pretrained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are propietary. GPT1,2,3 are text-to-text while gpt4 is multimodal. |
-| **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extermely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
-| **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
-| [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
-| **Llama** | A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. The weights have been leaked and have been found on torrents around the web.  Note that many models have been released based on this, but they also inherit the licencing requirement for non-commercial use. |
-| **Large Language Model (LLM’s)** | Transformers trained on millions of documents |
-| **Model compilation** | Model compilation is the act of tracing a model computational graph in order to deploy to lower level hardware and code. This is a necessary step to run on specialized hardware like AWS Inferentia and Trainium. |
-| **Model Distribution** | When a model's size prohibits it from being stored on one GPU. This occurs when models start to be in the 10's of billions of parameter range. This has a few consequences 1) it costs a lot to train and host these models 2) specialized libraries are required to help. |
-| **MultiModal Models**	| Multimodal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
-| **OpenAI** | OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1)With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2)DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3) Whisper can transcribe speech into text and translate many languages into English. |
-| **Pinecone** | A sparse dense vector database which can be used to store sentence embeddings and then utilize approximate nearest neighbor search to fine similarity matches. This can be used for semantic search (search which matches the meaning) and then applied as 'context' to LLMs for question and answering. |
-| **Pretraining** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pretraining FLAN with Medical documents to understand medical context previously missing from the model. |
-| **Reinforcement learning with human feedback (RLHF)** | The secret sauce to making chat based foundation models. The process involves using human feedback with LLM chat interactions to inform a reinforcement learning procedure to help train an LLM to "talk to humans" instead of only prompts. There are two huge benefits 1) this substantially reduces the amount of prompt engineering required and 2) this allow the LLM to take into account chat context as well as the information it has available to it. |
-| **Single shot learning** | *Zero-shot learning* (ZSL) is a problem setup in ML where, at test time, a learner observes samples from classes which were not observed during training, and needs to predict the class that they belong to | 
-| **Stability.ai** | Stability AI is open source generative AI company currently developing breakthrough AI models applied to imaging, language, code, audio, video, 3D content, design, biotech. With AWS they provide the world’s fifth-largest supercomputer – the Ezra-1 UltraCluster – supplying the necessary power to generate these advancements. Stability AI’s premium imaging application DreamStudio, alongside externally built products like Lensa, Wonder and NightCafe, have amassed over 40 million users. |
-| **Stable Diffusion** | Stable diffusion is a popular open source text to image generation tool. It can be used for use cases like 1) marketing content generation 2) game design 3) fashion design and more. |
-| **Text to text** | Any model which takes in text inputs and produces text outputs. Ex: entity extraction, summarization, question answer. |
-| **Transfer learning**	| The act of transferring the power of a foundation model to your specific task. |
-| **Transformer** |	A ML model for transforming one sequence into another, using attention.|
+#### Randomness and Diversity
+
+Foundation models support the following parameters to control randomness and diversity in the response:
+
+**Temperature** – Large language models use probability to construct the words in a sequence. For any given next word, there is a probability distribution of options for the next word in the sequence. When we set the temperature closer to zero, the model tends to select the higher-probability words. When we set the temperature further away from zero, the model may select a lower-probability word.
+
+In technical terms, the temperature modulates the probability density function for the next tokens, implementing the temperature sampling technique. This parameter can deepen or flatten the density function curve. A lower value results in a steeper curve with more deterministic responses, and a higher value results in a flatter curve with more random responses.
+
+**Top K** – Top K defines the cut off where the model no longer selects the words. For example, if K=50, the model selects from 50 of the most probable words that could be next in a given sequence. This reduces the probability that an unusual word gets selected next in a sequence.
+In technical terms, Top K is the number of the highest-probability vocabulary tokens to keep for Top-K-filtering - This limits the distribution of probable tokens, so the model chooses one of the highest-probability tokens.
+
+**Top P** – Top P defines a cut off based on the sum of probabilities of the potential choices. If we set Top P below 1.0, the model considers the most probable options and ignores less probable ones. Top P is similar to Top K, but instead of capping the number of choices, it caps choices based on the sum of their probabilities.
+For the example prompt "I hear the hoof beats of ," we may want the model to provide "horses," "zebras" or "unicorns" as the next word. If we set the temperature to its maximum, without capping Top K or Top P, we increase the probability of getting unusual results such as "unicorns." If we set the temperature to 0, we increase the probability of "horses." If we set a high temperature and set Top K or Top P to the maximum, we increase the probability of "horses" or "zebras," and decrease the probability of "unicorns."
+
+#### Length
+
+The following parameters control the length of the generated response.
+
+**Response length** – Configures the minimum and maximum number of tokens to use in the generated response.
+
+**Length penalty** – Length penalty optimizes the model to be more concise in its output by penalizing longer responses. Length penalty differs from response length as the response length is a hard cut off for the minimum or maximum response length.
+
+In technical terms, the length penalty penalizes the model exponentially for lengthy responses. 0.0 means no penalty. Set a value less than 0.0 for the model to generate longer sequences, or set a value greater than 0.0 for the model to produce shorter sequences.
+
+#### Repetitions
+
+The following parameters help control repetition in the generated response.
+
+**Repetition penalty (presence penalty)** – Prevents repetitions of the same words (tokens) in responses. 
+1.0 means no penalty. Greater than 1.0 decreases repetition.
+
+## Reference Architecture for LLM solution
+
+A generic reference architecture (defined by [A16Z](https://a16z.com/emerging-architectures-for-llm-applications)) for a LLM solution looks like in the following diagram, which I extended with event streaming as a source:
+
+![](./diagrams/llm-ra-1.drawio.png)
+
+1. **Data pipelines** are batch processing, which in the context of LLM, may process unstructured documents with structured CSVs, Json, or SQL tables. This data processing may be done in a map-reduce platform to do Extract Transform Load job. Most of existing pipelines land their output to Data Lake. But modern data pipelines may call directly a LLM to build embeddings and to save them into a Vector Store. The flow will look like in the figure below, which is based on classical Retrieval Augmented Generation (RAG) process.
+
+    ![](./diagrams/rag.drawio.png)
+
+    RAG retrieves data from outside the language model (non-parametric) and augments the prompts by adding the relevant retrieved data in context.
+
+1. **Streaming** is where connection to event-driven architecture lands: a lot of business services / microservices are generating important events to be part of the future context of the end-user interaction with the application. Those events can be aggregated, and a similar pipeline can be done with streaming application, consuming events, and doing the embedding via LLM calls then push to Vector Store.
+1. **Embeddings** is the technique to create a numerical vector representation of each document chunks. To support embeddings creation, there are a set of open-source solutions, like the [Sentence Transformers library from Hugging Face](https://huggingface.co/sentence-transformers), or proprietary solutions using hosted APIs.
+1. **Vector Store**, persits vectors, a numerical representation of NL sentence, with indexing capability and similarity search function. Multiple solutions exist as Vector Store: [Faiss](https://faiss.ai/index.html), [ChromaDB](https://www.trychroma.com/), [AWS OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), Redis.
+1. **Hosted LLM** is a model serving service with LLM accessed via API. 
+1. **Orchestrator** is the solution code, which connects all those components together. It may use session caching in distributed, cloud based environment, uses Vector Store to do silimarity semantic search, and exposes API to be used by a ChatBot or a Q&A user interface.
 
 ## Methodology
 
@@ -214,15 +288,16 @@ The model was trained on trillions of words from the web, requiring massive numb
 
 [SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pretrained, open-source models for a wide range of problem types to get started on ML.
 
-It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Mosaic Pretrained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
+It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Pretrained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
 
+Some useful articles:
 
-* [Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
-* [SageMaker my own study](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
+* [AWS- Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
+* [SageMaker my own personal study.](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
 
 ### [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/)
 
-[Special studies.](https://jbcodeforce.github.io/aws-studies/coding/#codewhisperer)
+[Own study.](https://jbcodeforce.github.io/aws-studies/coding/#codewhisperer)
 
 ### Databricks Dolly
 
@@ -254,7 +329,7 @@ Considerations
 * Model deployed will not use data sent to improve itself.
 * Right to use an image/photo to train a model is a problem.
 
-## Some interesting readings
+## More interesting readings
 
 * [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
 * [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)
