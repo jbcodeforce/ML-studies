@@ -1,10 +1,31 @@
 # Generative AI
 
+## Introduction
+
 Create new content (text, image, music, videos..) from existing ones and a requested query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. Those models are commonly referred to as foundation models (FMs).
 
-A single large model is unlikely to solve every business problem. Custom data sets help companies to differentiate their generative AI applications.
+The main step of creating an FM involves training a model with terabytes of unlabeled text and/or multi-modal data (such as images, audio, video). This unlabeled data used for pre-training is usually obtained by crawling the Web and contains information from publicly crawled sources.
 
-For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML output is well expected.
+During the pre-training process, the model automatically takes context into account from all this
+training data, and tracks relationships in sequential data like the words in this sentence to develop some
+understanding of the real world.
+
+The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2022 is 540B parameters.
+
+A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
+
+Three types of transformer:
+
+1. *Encoded only*: generate no human readable content, used when applications need to efficiently query to find similar items.
+1. *Encoder-decoder* model is trained to treat every natural language processing (NLP) problem (e.g.,
+translate an input string in one language to another) as a text-to-text conversion problem.
+1. *Decoder-only* model is for text generation.
+
+Models with encoder-decoder and decoder-only architectures are **generative** models.
+
+A single large model is unlikely to solve every business problem. Custom data sets help companies to differentiate their generative AI applications. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples.
+
+For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
 
 Some ways to use Generative AI:
 
@@ -26,9 +47,10 @@ We can group the use cases in catergories
 
 ???+ info "Employee productivity"
     * Code generation
-    * Translation, reports, summary...
-    * Q&A Agent for specific subject, based on internal documents.
+    * Translation, reports, summarization...
+    * Search via Q&A Agent for specific subject, based on internal documents.
     * Self service tutor based on student progress, prompt activities, and respond  to questions
+    * Personalized learning path generation
 
 ???+ info "Creativity"
     * Autogeneration of marketing material
@@ -60,8 +82,11 @@ We can group the use cases in catergories
 
 * Protect Intellectual Property: not pass  confidential information to Chatbots for training
 * Protect the brand, avoid bias, discrimination, aligned to company values
+* Response accuracy, fairness, toxicity, and privacy
 * No move private data to public internet
-* Skillset
+* Skill set
+* Hallucination where the models make up inaccurate responses that are not consistent with the training data.
+* Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
 
 ### Discovery Assessment
 
@@ -108,8 +133,13 @@ When engaging with a customer it is important to assess where they are in their 
 A LLM is part of the evolation of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way that is like the function of the human brain.
 From 2017, many NLP models are based on transformers. Which is a neural-network that takes into account an entire sentence or paragraph at once, instead of one word at a time. It better understands the context of a word.
 
-To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
+To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
 This process is called **autoregressive generation**.
+
+When processing text, the AI looks at a few tokens around each word to help understand the context. This surrounding group of tokens is called the **context window**. It is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
+
+???- info "Context Window"
+    If the current word is "apple", the AI might look at a context window of the 5 tokens before and after it. So the context window could be: "I ate a sweet red [apple] this morning for breakfast". The tokens in the context window give the AI useful information about the current word. In this case, they indicate [apple] is probably a noun referring to the fruit.
 
 Transformers do not need to code the grammar rules, they acquire them implicitly from big corpus.
 
@@ -122,7 +152,7 @@ The techniques to customize LLM applications from simplest to more complex.
 * **Prompt engineering with few-shot inference**: **Few-shot** learning involves training a model to perform new tasks by providing only a few examples. This is useful where limited labeled data is available for training.
 * [Retrieval augmented generation (more complex)](#retrieval-augmented-generation-rag).
 * Fine tune an existing foundation model.
-* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg's LLM. 
+* Pre-train an existing foundation model: example is domain specific model, like the Bloomberg's LLM.
 * Build a foundation model from scratch.
 * Support human in the loop to create high quality data sets.
 
@@ -137,18 +167,20 @@ The techniques to customize LLM applications from simplest to more complex.
 | **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
 | **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an autoregressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
 | **co:here** |	[Co:here](https://cohere.com/) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
+| Model **compression** | Technique to reduce the size of the model in memory, it includes *quantization* (approximating a neural network by using smaller precision 8-bit integers instead of 32-bit floating
+point numbers) and *distillation* (transferring of knowledge from a larger teacher model to a smaller
+student model).|
 | **Data Distributed Training**	| A distributed training algorithm which can speed up ML training by distributing batches of data between forward and backward passes in a model. This can be very helpful when we have large datasets but does not solve the problem of not being able to fit a model on one machine |
-| **Davinci**	| OpenAI's GPT3 text-to-text based model. It is proprietary and only available by API. People can fine tune this model on OpenAI.|
+| **Davinci**| OpenAI's GPT3 text-to-text based model. It is proprietary and only available by API. People can fine tune this model on OpenAI.|
 | **DeepSpeed** | DeepSpeed is an open source deep learning optimization library for PyTorch. The library is designed to reduce computing power and memory usage and to train large distributed models with better parallelism on existing computer hardware. DeepSpeed is optimized for low latency, high throughput training. It can be used on AWS SageMaker to help both inference and training of large models which don't fit on a single GPU. |
 | **Distributed Training** | In distributed training the workload to train a model is split up and shared among multiple mini processors, called worker nodes. These worker nodes work in parallel to speed up model training. |
 | **Embeddings** | Vector representations of non-vector data including images, text, audio. Embeddings allow to perform mathematical operations on otherwise non-mathematical inputs. For example: what is the average of the previous two sentences? |
 | **Few shot Learning** | or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
 | **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
 | **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
-| **Foundation Model** | Original models, trained at large expense. |
 | **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
 | **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
-| **GPT** | OpenAI's generalized pretrained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are propietary. GPT1,2,3 are text-to-text while gpt4 is multimodal. |
+| **GPT** | OpenAI's generalized pretrained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multimodal. |
 | **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extermely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
 | **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
 | [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
@@ -178,7 +210,7 @@ Prompt involves instructions and context passed to a language model to acheive a
 
 Prompt engineering typically works by converting one or more tasks to a prompt-based dataset and training a language model with what has been called "prompt-based learning" or just "prompt learning".
 
-We can provide a prompt with examples so the LLM will condition on the new context to generate better result. Examples in summarization.
+We can provide a prompt with examples so the LLM will condition on the new context to generate better results. Examples in summarization.
 
 Prompts can also help incorporate domain knowledge on specific tasks and improve interpretability. Creating high-quality prompts requires careful consideration of the task at hand, as well as a deep understanding of the model’s strengths and limitations.
 
@@ -186,7 +218,7 @@ LLMs are very sensitive to small perturbations of the prompt: a single typo or w
 
 There is still need to evaluate models robustness to prompt. 
 
-Many recent LLMs are fine-tuned with a powerful technique called **instruction tuning**, which helps the model generate responses to prompts without prompt-specific fine-tuning. It does not involve updating model weights.
+Many recent LLMs are fine-tuned with a powerful technique called **instruction tuning**, which helps the models generate responses to prompts without prompt-specific fine-tuning. It does not involve updating model weights.
 
 The [Huggingface LLM leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good information about model quality for some use cases.
 
@@ -199,6 +231,8 @@ Text summarization is a Natural Language Processing (NLP) technique that involve
 
 Summarization works by sending a prompt instruction to the model, asking the model to summarize our text.
 
+[See hands-on with LangChain](../coding/langchain.md/#summarization-chain)
+
 ### Retrieval augmented generation (RAG)
 
 The act of supplementing generative text models with data outside of what it was trained on. This is extendable to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of this.
@@ -210,6 +244,8 @@ The following diagram illustrates a classical RAG process using AWS SageMaker an
 And a classical RAG with LangChain
 
 ![](../coding/diagrams/rag-process.drawio.png)
+
+[See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation)
 
 ### Common LLM inference parameter definitions
 
