@@ -10,6 +10,10 @@ During the pre-training process, the model automatically takes context into acco
 training data, and tracks relationships in sequential data like the words in this sentence to develop some
 understanding of the real world.
 
+???- info "Difference between ML and LLM"
+    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. And through their pre-training exposure to **i**nternet-scale** data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
+    * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
+
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2022 is 540B parameters.
 
 A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
@@ -38,7 +42,7 @@ Some ways to use Generative AI:
 
 ## Use cases
 
-We can group the use cases in catergories
+We can group the use cases in categories:
 
 ???+ info "Improve customer experiences"
     * Chatbot functionality with context, with better user's experiences. Reduce operational costs using automated response.
@@ -66,6 +70,8 @@ We can group the use cases in catergories
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
+It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training.
+
 ### Industries
 
 * Supply chain by improving the visibility to multi-tier supplier performance concerns, understand where risk can be found in the supply chain
@@ -80,6 +86,7 @@ We can group the use cases in catergories
 
 ### Classical concerns and challenges
 
+* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs.
 * Protect Intellectual Property: not pass  confidential information to Chatbots for training
 * Protect the brand, avoid bias, discrimination, aligned to company values
 * Response accuracy, fairness, toxicity, and privacy
@@ -87,13 +94,34 @@ We can group the use cases in catergories
 * Skill set
 * Hallucination where the models make up inaccurate responses that are not consistent with the training data.
 * Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
+* Sinmple to integrate with existing apps and data.
+
+???- definition "Accuracy"
+    Measure how accurate the response from LLM.
 
 ### Discovery Assessment
 
-When engaging with a customer it is important to assess where they are in their GenAi adoption. Think big about the opportunities, but start small with problems that cause day-to-day irritations for the employees or customer.
+When engaging with a customer it is important to assess where they are in their GenAi adoption. Think big about the opportunities, but start small with problems that cause day-to-day irritationsdps
+ for the employees or customer.
+
+???- question "Research for opportunities"
+    * What manual or repetitive processes could be automated with generative AI?
+    * Where do employees spend the most time today gathering information to do their jobs?
+    * What customer/user pain points could be addressed with more natural conversation?
+    * What content creation processes could be enhanced through AI generated drafts?
+    * What expert skills are scarce in your organization that AI models could supplement?
+    * What insights could be uncovered from large volumes of unstructured data using AI?
+    * What risks or inefficiencies exist from decisions made with incomplete information?
+    * Where does communication break down today between teams, customers or regions?
+    * What predictions would help you make smarter real-time decisions?
+    * What new products, services or business models could AI capabilities enable?
+    * What tasks or processes still rely heavily on tribal knowledge that could be systematized?
+    * What information gets trapped in siloed systems and could be unlocked with AI?
+    * What customer research efforts could be accelerated with interactive AI agents?
+    * What compliance processes result in slowdowns getting products/services to market?
 
 ???- question "Use cases and business needs"
-    * What are the potential use cases? B2B, B2C, Employee
+    * What are the potential use cases? B2B, B2C, Employees?
     * Is the use case considered a strategic priority? Sponsor?
     * What is the value associated with the use case?
     * Are subject matter experts available to support the use case?
@@ -106,17 +134,20 @@ When engaging with a customer it is important to assess where they are in their 
     * Are you using AI in your current business applications, or processes?
     * What are current/past successes by adopting AI in the business execution?
     * What is the current level of ML support needed for your technical staff?
+    * Do you need capabilities like summarization, text generation, speech recognition?
+    * How will you monitor model performance and detect model drift over time?
+
+
+???- question "Generative AI current adoption"
     * How familiar with Generative AI? and its common use cases?
-
-
-???- question "Generative AI"
-    * Do you have tried to tune an existing generative models?
     * What GenAI technologies have you/are you evaluating?
     * Have you started prototyping?
     * Do you have AI-powered products or features on your roadmap?
+    * Do you have tried to use an existing generative models? to tune it?
     * What are the current process to evaluate Gen AI models?
     * What is your risk appetite for model hallucination and its potential consequences?
     * How do you plan to do domain  adaptation? Do you plan to pre-train, fine-tune or do some in-context  prompting for domain adaptation?
+    * How frequently data changes? How frequently do you expect to need to retrain models with new data?
 
 
 ???- question "Integration needs"
@@ -139,7 +170,11 @@ This process is called **autoregressive generation**.
 When processing text, the AI looks at a few tokens around each word to help understand the context. This surrounding group of tokens is called the **context window**. It is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
 
 ???- info "Context Window"
-    If the current word is "apple", the AI might look at a context window of the 5 tokens before and after it. So the context window could be: "I ate a sweet red [apple] this morning for breakfast". The tokens in the context window give the AI useful information about the current word. In this case, they indicate [apple] is probably a noun referring to the fruit.
+    A context window is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
+    
+    If the current word is "apple", the AI might look at a context window of the 5 tokens before and after it. So the context window could be: "I ate a sweet red [apple] this morning for breakfast". The tokens in the context window give the AI useful information about the current word. In this case, they indicate [apple] is probably a noun referring to the fruit. 
+
+    With a narrow context window, the AI has less context to ensure the content flows logically and coherently over a long text. Restrictive context windows can result in more generic, impersonal text. The model has less perspective to generate nuanced or creative content.
 
 Transformers do not need to code the grammar rules, they acquire them implicitly from big corpus.
 
@@ -167,20 +202,19 @@ The techniques to customize LLM applications from simplest to more complex.
 | **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
 | **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an autoregressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
 | **co:here** |	[Co:here](https://cohere.com/) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
-| Model **compression** | Technique to reduce the size of the model in memory, it includes *quantization* (approximating a neural network by using smaller precision 8-bit integers instead of 32-bit floating
-point numbers) and *distillation* (transferring of knowledge from a larger teacher model to a smaller
-student model).|
+| Model **compression** | Technique to reduce the size of the model in memory, it includes *quantization* (approximating a neural network by using smaller precision 8-bit integers instead of 32-bit floating point numbers) and *distillation* (transferring of knowledge from a larger teacher model to a smaller student model).|
 | **Data Distributed Training**	| A distributed training algorithm which can speed up ML training by distributing batches of data between forward and backward passes in a model. This can be very helpful when we have large datasets but does not solve the problem of not being able to fit a model on one machine |
 | **Davinci**| OpenAI's GPT3 text-to-text based model. It is proprietary and only available by API. People can fine tune this model on OpenAI.|
 | **DeepSpeed** | DeepSpeed is an open source deep learning optimization library for PyTorch. The library is designed to reduce computing power and memory usage and to train large distributed models with better parallelism on existing computer hardware. DeepSpeed is optimized for low latency, high throughput training. It can be used on AWS SageMaker to help both inference and training of large models which don't fit on a single GPU. |
 | **Distributed Training** | In distributed training the workload to train a model is split up and shared among multiple mini processors, called worker nodes. These worker nodes work in parallel to speed up model training. |
-| **Embeddings** | Vector representations of non-vector data including images, text, audio. Embeddings allow to perform mathematical operations on otherwise non-mathematical inputs. For example: what is the average of the previous two sentences? |
+| **Embeddings** | Vector representations of non-vector data including images, text, audio. Embeddings allow to perform mathematical operations on otherwise non-mathematical inputs. Each word gets mapped to a points in embedding space. Similar words end up close together in the vector space. This allows the model to generalize based on semantic human-like meaning. For example: what is the average of the previous two sentences? |
 | **Few shot Learning** | or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
 | **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
 | **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
 | **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
 | **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
 | **GPT** | OpenAI's generalized pretrained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multimodal. |
+| **Hallucinations** | LLMs to sometimes give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be innacurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
 | **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extermely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
 | **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
 | [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
@@ -192,6 +226,7 @@ student model).|
 | **OpenAI** | OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1)With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2)DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3) Whisper can transcribe speech into text and translate many languages into English. |
 | **Pinecone** | A sparse dense vector database which can be used to store sentence embeddings and then utilize approximate nearest neighbor search to fine similarity matches. This can be used for semantic search (search which matches the meaning) and then applied as 'context' to LLMs for question and answering. |
 | **Pretraining** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pretraining FLAN with Medical documents to understand medical context previously missing from the model. |
+| **RAG** |  It is a technique for providing additional, targeted information to the model through the prompt. While using any search to find data for the prompt could be considered RAG, it often refers to the specific technique of creating embeddings from a corpus of documents, storing those embeddings in a vector database, searching that database with a user query, and then providing those results to the LLM for completion. This gives the LLM the ability to do a semantic search over a knowledge base and to use the results of that search in formulating the answer. This technique can be used to provide more up-to-date or more use-case-specific information to the model to enhance its accuracy for specific use cases. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results. |
 | **Reinforcement learning with human feedback (RLHF)** | The secret sauce to making chat based foundation models. The process involves using human feedback with LLM chat interactions to inform a reinforcement learning procedure to help train an LLM to "talk to humans" instead of only prompts. There are two huge benefits 1) this substantially reduces the amount of prompt engineering required and 2) this allow the LLM to take into account chat context as well as the information it has available to it. |
 | **Single shot learning** | *Zero-shot learning* (ZSL) is a problem setup in ML where, at test time, a learner observes samples from classes which were not observed during training, and needs to predict the class that they belong to | 
 | **Stability.ai** | Stability AI is open source generative AI company currently developing breakthrough AI models applied to imaging, language, code, audio, video, 3D content, design, biotech. With AWS they provide the world’s fifth-largest supercomputer – the Ezra-1 UltraCluster – supplying the necessary power to generate these advancements. Stability AI’s premium imaging application DreamStudio, alongside externally built products like Lensa, Wonder and NightCafe, have amassed over 40 million users. |
@@ -199,6 +234,7 @@ student model).|
 | **Text to text** | Any model which takes in text inputs and produces text outputs. Ex: entity extraction, summarization, question answer. |
 | **Transfer learning**	| The act of transferring the power of a foundation model to your specific task. |
 | **Transformer** |	A ML model for transforming one sequence into another, using attention.|
+| **Vector Database** | A vector database is optimized for storing and querying large vector arrays using machine learning techniques. It's highly scalable and fast at performing operations like similarity searches across vectors. Queries return results based on vector similarity scores, revealing hidden semantic connections in data. | 
 
 ### [Prompt engineering](https://www.promptingguide.ai)
 
@@ -241,11 +277,15 @@ The following diagram illustrates a classical RAG process using AWS SageMaker an
 
 ![](./diagrams/rag.drawio.png)
 
-And a classical RAG with LangChain
+And a classical RAG with LangChain:
 
 ![](../coding/diagrams/rag-process.drawio.png)
 
-[See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation)
+RAG produces great quality result, due to augmenting use-case specific context coming directly from vectorized information stores. It has the highest degree of flexibility when it comes to changes in the architecture. We can change the embedding model, vector store and LLM independently with minimal to moderate impact on other components.
+
+Training from scratch produces the highest quality result amongst Prompt, RAG, fine tuning, but cost far more and need deep data science skill set.
+
+[See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation).
 
 ### Common LLM inference parameter definitions
 
@@ -294,7 +334,7 @@ A generic reference architecture (defined by [A16Z](https://a16z.com/emerging-ar
 
 1. **Streaming** is where connection to event-driven architecture lands: a lot of business services / microservices are generating important events to be part of the future context of the end-user interaction with the application. Those events can be aggregated, and a similar pipeline can be done with streaming application, consuming events, and doing the embedding via LLM calls then push to Vector Store.
 1. **Embeddings** is the technique to create a numerical vector representation of each document chunks. To support embeddings creation, there are a set of open-source solutions, like the [Sentence Transformers library from Hugging Face](https://huggingface.co/sentence-transformers), or proprietary solutions using hosted APIs.
-1. **Vector Store**, persits vectors, a numerical representation of NL sentence, with indexing capability and similarity search function. Multiple solutions exist as Vector Store: [Faiss](https://faiss.ai/index.html), [ChromaDB](https://www.trychroma.com/), [AWS OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), Redis.
+1. **Vector Store**, persits vectors, a numerical representation of NL sentence, with indexing capability and similarity search function. Multiple solutions exist as Vector Store: [Faiss](https://faiss.ai/index.html), [ChromaDB](https://www.trychroma.com/), [AWS OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), Redis, Kendra, OpenSearch Serverless, RDS for PostgreSQL, Aurora PostgreSQL, Pinecone.
 1. **Hosted LLM** is a model serving service with LLM accessed via API. 
 1. **Orchestrator** is the solution code, which connects all those components together. It may use session caching in distributed, cloud based environment, uses Vector Store to do silimarity semantic search, and exposes API to be used by a ChatBot or a Q&A user interface.
 

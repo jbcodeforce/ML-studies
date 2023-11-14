@@ -6,6 +6,21 @@ note "invalid request":
 
     In any code connected to AWS, if there is this kind of message: ` when calling the InvokeModel operation: The security token included in the request is invalid`, be sure to get the AWS_SESSION_TOKEN environment variable set.
 
+## Pre-requisite
+
+* install lib for Bedrock and AWS: 
+
+    ```sh
+    cd bedrock
+    pip install -r requirements
+    ```
+
+* install langchain and other dependencies
+
+    ```sh
+    cd ..
+    pip install -r requirements
+    ```
 
 ## A RAG pipeline for Q&A
 
