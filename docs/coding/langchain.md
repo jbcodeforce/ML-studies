@@ -213,13 +213,6 @@ Combine chat history with new question to ask follow up questions.
 
 * [LLM Powered Autonomous Agents](https://lilianweng.github.io/posts/2023-06-23-agent/)
 * [Retrieval and RAG blog.](https://blog.langchain.dev/retrieval/)
-
-
-   
-
-
-
-    
     
     ???- code "Chatbot with LangChain"
         ```python

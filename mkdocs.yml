@@ -22,6 +22,7 @@ nav:
     - Introduction: techno/index.md
     - Key AI startups: techno/players_to_look.md
     - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker
+    - Streamlit: techno/streamlit.md
    
   - Return to main: https://jbcodeforce.github.io
 
