@@ -2,13 +2,18 @@
 
 ## Introduction
 
-Create new content (text, image, music, videos..) from existing ones and a requested query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. Those models are commonly referred to as foundation models (FMs).
+Create new content (text, image, music, videos..) from existing ones and a requested query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. 
 
-The main step of creating an FM involves training a model with terabytes of unlabeled text and/or multi-modal data (such as images, audio, video). This unlabeled data used for pre-training is usually obtained by crawling the Web and contains information from publicly crawled sources.
+Large Language Models have several key components. The underlying architecture is called a Transformer which uses self-attention mechanisms to weight the significance of different words to understand the context in sequences of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
+This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
 
-During the pre-training process, the model automatically takes context into account from all this
-training data, and tracks relationships in sequential data like the words in this sentence to develop some
-understanding of the real world.
+This training has 2 stages: Pre-training where the model attempts to predict the next word in a sentence, and fine tuning where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all this training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
+
+Those models are commonly referred to as foundation models (FMs).
+
+This unlabeled data used for pre-training is usually obtained by crawling the Web and contains information from publicly crawled sources.
+The text is then broken down into chunks called tokens which are fed into the model. After processing the model returns result tokens which are then turned back into readable text.
+
 
 ???- info "Difference between ML and LLM"
     * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. And through their pre-training exposure to **i**nternet-scale** data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
@@ -17,6 +22,10 @@ understanding of the real world.
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2022 is 540B parameters.
 
 A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
+
+The process is text -> tokens (may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Subword tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
+
+**Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and qith high quality data.
 
 Three types of transformer:
 
@@ -164,7 +173,16 @@ When engaging with a customer it is important to assess where they are in their 
 A LLM is part of the evolation of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way that is like the function of the human brain.
 From 2017, many NLP models are based on transformers. Which is a neural-network that takes into account an entire sentence or paragraph at once, instead of one word at a time. It better understands the context of a word.
 
-To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
+To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. 
+
+Below is a simple representation of the embeding in the 3 dimension space:
+
+![](./images/vector-embedding.png)
+
+*See the web site [projector.tensorflow.org/](https://projector.tensorflow.org/)*
+
+Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
+
 This process is called **autoregressive generation**.
 
 When processing text, the AI looks at a few tokens around each word to help understand the context. This surrounding group of tokens is called the **context window**. It is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
@@ -347,6 +365,16 @@ Data enrichement, prompt engineering, user interface, deployment, HA, multi tena
 [Deeplearning.ai](https://www.deeplearning.ai/) proposes the following LLM project life cycle:
 
 ![](./diagrams/llm-project.drawio.png)
+
+### Scoping
+
+1. Go over the [discovery assessment](#discovery-assessment)
+1. Define what the key metric is and how to evaluate the solution. If the use case falls into the Document Q&A and Document Summarization categories, the metric used will be **accuracy**. **Accuracy** will be determined based on the documents (data) provided and the respective questions users ask against the model.
+1. Define a list of questions that we expect the application to answer. Be sure to have a list of correct answers. In case of summarization use cases, we need sample summaries and sample questions to generate those summaries for document summarization use cases.
+
+### Consumers of LMs
+
+This is the category of application that consumes pre-trained models to generate text, image, videos, audio or code.
 
 ## Current Technology Landscape
 

@@ -25,3 +25,5 @@ streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/
 
 * [Getting Started](https://docs.streamlit.io/library/get-started/create-an-app) with [matching code]() to test it.
 * Run the app in Docker, see the Dockerfile [in this project / folder (llm-ref-arch-demo/sa-tools/user-interface)](https://github.com/jbcodeforce/llm-ref-arch-demo/blob/main/sa-tools/user-interface/Dockerfile)
+* Some [best practices here](https://pmbaumgartner.github.io/streamlitopedia/front/introduction.html).
+* [Streamlit Cheat Sheet app in Streamlit](https://cheat-sheet.streamlit.app/).
