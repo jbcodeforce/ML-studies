@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "##########################################################"
-echo "Python 3.11.3+ docker image includes spark, keras, boto3, aws cli"
+echo "Python 3.11.6+ docker image includes spark, keras, boto3, aws cli"
 echo
 NAME=pythonenv
 
@@ -16,6 +16,5 @@ fi
 IMAGE=jbcodeforce/python:$TAG
 
 docker run -e DISPLAY=host.docker.internal:0\
-   --name $NAME -v $(pwd):/app/ -v $HOME/.aws:/root/.aws -it \
-   --rm -p 5002:5000 -p 8888:8888 \
-   $IMAGE /bin/bash 
+   --name $NAME -v $(pwd):/app/ -v /tmp/.X11-unix:/tmp/.X11-unix -v $HOME/.aws:/root/.aws -it \
+   --rm -p 5002:5000 -p 8888:8888 $IMAGE /bin/bash 

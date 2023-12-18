@@ -58,8 +58,8 @@ class Perceptron(object):
 
 if __name__ == "__main__":
     '''
-        The way to use the perceptron: Create an instance by specifying the eta coefficient
-        and the number of epochs (passes over the training set) to perform
+    The way to use the perceptron: Create an instance by specifying the eta coefficient
+    and the number of epochs (passes over the training set) to perform
     '''
     p=Perceptron(0.01,10)
 

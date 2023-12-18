@@ -1,7 +1,7 @@
 # AI and Machine Learning studies
 
 !!! info "Update"
-    Created 2017 - Update 2023
+    Created 2017 - Update 12/2023
 
 This repository includes notes, code samples, and Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites on this exciting subjet.
 
@@ -17,12 +17,12 @@ The stakeholders interested by AI/ML are CTOs, CPOs, Data Scientists, business a
 
 ## Data Science major concepts
 
-There are three types of tasks a data scientist does: 
+There are three types of task data scientists do: 
 
 * Preparing data to run a model (gathering, cleaning, integrating, transforming, filtering, combining, extracting, shaping...).
 * Running the machine learning model, tuning it and assessing its quality.
 * Communicate the results.
-* With the new Feature Store technologies, data scientist also prepares the features for reusability and governance. 
+* With the new Feature Store technologies, data scientists also prepare the features for reusability and governance.
 
 Enterprises are using data as the main asset to derive empirical decisions and for that, they are adopting big data techniques which means high volume, high variation and high velocity.
 
@@ -41,15 +41,16 @@ But the truth wears off: previous analysis done on statistical data are less tru
 
 The goal of hypothesis test is to compare an experimental group to a control group. There are two types of result:
 
-* H0 for null hypothesis: this happens when there is no difference between the groups.
-* Ha for alternative hypothesis: happens when there is statistically significant difference between the groups.
+* **H0** for null hypothesis: this happens when there is no difference between the groups.
+* **Ha** for alternative hypothesis: happens when there is statistically significant difference between the groups.
 
 The bigger the number of cases (named study size) the more statistical power we have, and better we are to get better results.
 
 We do not know if the difference in two treatments is not just due to chance. But we can calculate the odds that it is. Which is named the **p-value**.
 
 Statistics does not apply well to large-scale inference problems that big data brings. Big data is giving more spurious results than small data set.
-The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions of data points and thousands of metrics. We are bound to identify coincidences that have no predictive power.
+
+The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions of data points and thousands of metrics,  we are bound to identify coincidences that have no predictive power.
 
 ### Mathematical foundations
 
@@ -63,24 +64,24 @@ The curse of big data is the fact that when we search for patterns in very, very
 
 #### Bayesian
 
-Used to compute the probability of a given outcome given a data set:
+In machine learning, there are two main approaches: the Bayesian approach and the frequentist approach. The Bayesian approach is based on probability theory and uses Bayes' theorem to update probabilities based on new data. The frequentist approach, on the other hand, is based on statistical inference and uses methods such as hypothesis testing and confidence intervals to make decisions.
 
-Bayes theorem:  
+**Bayes theorem**:
 
 ![](https://latex.codecogs.com/svg.latex?P(A|B) = P(B|A) P(A) / P(B))
 
-* incorporate prior knowledge.
-* opposite is frequentist approach using data and find decision
-
 ![](./images/bayen.png){ width=500 }
+
+The Bayesian approach is often used in situations where there is uncertainty and the data is complex, while the frequentist approach is often used in situations where there is a large amount of data and the relationships between the variables are well-defined.
 
 #### Data distributions
 
-[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) some python code on different data distributions like Uniform, Gaussian, Poisson.
+[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) some python code on different data distributions like Uniform, Gaussian, Poisson. It can be executed in VScode using the pytorch kernel.
 
 #### Normalization
 
-Normalization of ratings means adjusting values measured on different scales to a notionally common scale, often prior to averaging. 
+Normalization of ratings means adjusting values measured on different scales to a notionally common scale, often prior to averaging.
+
 In statistics, normalization refers to the creation of shifted and scaled versions of statistics,
 where the intention is that these normalized values allow the comparison of corresponding normalized values for different
  datasets in a way that eliminates the effects of certain gross influences, as in an anomaly time series.
@@ -123,7 +124,7 @@ The main goal in supervised learning is to learn a model from labeled training d
 
 **Classification** problem is when we are trying to predict one of a small number of discrete-valued outputs, such as whether it is Sunny (which we might designate as class 0), Cloudy (say class 1) or Rainy (class 2). The class labels are defined as multiple classes or binary classification task, where the machine learning algorithm learns a set of rules in order to distinguish between the possible classes. Classification can be defined when a human assigns a topic label to each document in a corpus, and the algorithm learns how to predict the label. The output is always a set of sets of items. Items could be points in a space or vertices in a graph.
 
-[For more detail see this note](./ml/classifier.md)
+[For more detail see this Classifier note](./ml/classifier.md)
  
 Another subcategory of supervised learning is **regression** classification, where the outcome signal is **continuous value** output. In the table below the Price is the outcome (y), the square feet, # of bedrooms… are features
  
@@ -138,13 +139,13 @@ information without the guidance of a known outcome variable or reward function.
 
 **Clustering** is an exploratory data analysis technique that allows to organize a pile of information into meaningful subgroups (clusters) without having any prior knowledge of their group memberships.
 
-[See this deeper dive note.](./ml/unsupervised.md)
+[See this note for more details.](./ml/unsupervised.md)
 
 ### Reinforcement learning
 
 The goal is to develop a system (agent) that improves its performance based on interactions with the environment. Through the interactions, an agent can then uses reinforcement learning to learn a series of actions that maximizes the reward via an exploratory trial-and-error approach or deliberative planning.  
 
-### Unsupervised dimensionality reduction 
+### Unsupervised dimensionality reduction
 
 This is a commonly used approach in feature preprocessing to remove noise from data, which can also degrade the predictive performance of certain algorithms, and compress the data onto a smaller dimensional subspace while retaining most of the relevant information.
 
@@ -154,7 +155,7 @@ Building machine learning system includes 4 components as outlined in figure bel
 
 ![](./diagrams/ml-steps.drawio.png){ width=1100 }
 
-Raw data rarely comes in the form and shape that is necessary for the optimal performance of a learning algorithm. 
+Raw data rarely comes in the form and shape that is necessary for the optimal performance of a learning algorithm.
 Thus, the preprocessing of the data is one of the most crucial step in any machine learning application. Clean data are becoming a feature for the training.
 
 The model testing is based on one of the three cross-validation types:
@@ -196,15 +197,19 @@ Training set is the input to learning algorithm, from which we generate an hypot
 
 In **regression analysis**, we are given a number of predictor (explanatory) variables and a continuous response variable (outcome), and we try to find a relationship between those variables that allows us to predict an outcome. 
 
-Hypothesis function `h` can be represented as a linear function of `x`:  
+Hypothesis function `h(x)` can be represented as a linear function of `x`:  
 
 ![](https://latex.codecogs.com/svg.latex?h(x)=\sum_{i} \theta_{i} * x_{i}= \theta^{T}*x){ width=300 }
 
 Xo = 1.
 
-A feature is a vector and `T` is also a row vector of dimension n+1, therefore `h` is a matrix multiplication. It is called **multivariate linear regression**.
+A feature is a vector and `T` is also a row vector of dimension n+1, therefore `h(x)` is a matrix multiplication. It is called **multivariate linear regression**.
 
-To find the good coefficients ![](https://latex.codecogs.com/svg.latex?\Theta_{i}), the algorithm needs to compare the results h(x) using a cost function:
+To find the good coefficients ![](https://latex.codecogs.com/svg.latex?\Theta_{i}), the algorithm needs to compare the results `h(x)` using a cost function.
+
+### Cost function
+
+One of the key ingredients of supervised machine learning algorithms is to define an objective function that is to be optimized during the learning process. This objective function is often a cost function that we want to minimize. So the weights update will minimize the cost function. The cost function could be the sum squared errors between the outcomes and the target label:
 
 ![](https://latex.codecogs.com/svg.latex?J( \theta_0,\theta_1,...,\theta_n) = \frac{1}{2m} \sum_{1}^{m}(h_{\theta} (x_{i}) - y_{i})^2){ width=300 }
 
@@ -215,18 +220,13 @@ The algorithm to minimize the cost function is called the **gradient descent**, 
 The principle is to climb down a hill until a local or global cost minimum is reached. In each algorithm iteration, we take a step away from the gradient where the step size is determined by the value of the **learning rate** (alpha) as well as the slope of the gradient.
 
 When J(Ti) is already at the local minimum the slope of the tangent is 0 so Tj will not change. When going closer to the local minimum the slope of the tangent will go slower so the algo will automatically take smaller steps.
-If alpha is too big, gradient  descent can overshoot the minimum and fail to converge or worse it could diverge. (The derivative is the slope of the tangent at the curve on point Tj; when derivative is close to zero, it means we reach a minima).
+If alpha is too big, gradient  descent can overshoot the minimum and fail to converge or worse, it could diverge. (The derivative is the slope of the tangent at the curve on point Tj; when derivative is close to zero, it means, we reach a minima).
 
-When the unit of each feature are very different the gradient descent will take a lot of time to find the minima. 
-So it is important to transform each feature so they are in the same scale. (e.g. from -1 to 1 range)
+When the unit of each feature are very different the gradient descent will take a lot of time to find the minima.
+So it is important to transform each feature so they are in the same scale. (e.g. from -1 to 1 range, or [0,1] range)
 
-### Cost function
 
-One of the key ingredients of supervised machine learning algorithms is to define an objective function that is to be optimized during the learning process. This objective function is often a cost function that we want to minimize. So the weights update will minimize the cost function. The cost function could be the sum squared errors between the outcomes and the target label:
-
-![](https://latex.codecogs.com/svg.latex?J(\theta)=\frac{1}{2} * \sum_{i} (y_{i} - \phi (z_{i}))^2){ width=300 }
-
-which translates in python as
+A cost function may be coded in Python as:
 
 ```python
 errors = (y - output)          

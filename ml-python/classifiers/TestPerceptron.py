@@ -10,13 +10,16 @@ from matplotlib.colors import ListedColormap
 from Perceptron import Perceptron
 
 import matplotlib
-matplotlib.use('agg')
+matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 import Tool as tool
 import numpy as np
 import pandas as pd
-plt.switch_backend('agg')
 
+#plt.switch_backend('agg')
+
+plt.ioff()
+#matplotlib.use("TkAgg")
 
 class TestPerceptron(unittest.TestCase):
 
@@ -32,7 +35,7 @@ class TestPerceptron(unittest.TestCase):
         pass
 
     def testPlotIrisData(self):
-        print("\n\n>> Plot the iris data for 100 records, x axe is for sepal, y for petal")
+        print("\n\n>> Plot the iris data for 100 records, x axis is for sepal, y for petal")
         print(" ################################################### ")
         df=self.loadIrisData()
         # build the label list for the first 100 records, label is in 5th column (idx=4)
@@ -50,7 +53,7 @@ class TestPerceptron(unittest.TestCase):
 
 
     def testPerceptron(self):
-        print("\n\n>> Use Perceptron train on first 100 records: eta=0.01 and 10 iterations, then present # of mis classification per iteration")
+        print("\n\n>> Use Perceptron to train on the first 100 records: eta=0.01 and 10 iterations, then present # of mis classification per iteration or epochs")
         print(" ################################################### ")
         df=self.loadIrisData()
         # build training set

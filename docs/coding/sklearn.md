@@ -1,16 +1,16 @@
-# Scikit-learn library
+# [Scikit-learn library](https://scikit-learn.org/stable/)
 
-Choosing an appropriate classification algorithm for a particular problem task requires practice: each algorithm has its own quirks and is based on certain assumptions.The performance of a classifier, computational power as well as predictive power, depends heavily on the underlying data that are available for learning. 
+Choosing an appropriate classification algorithm for a particular problem task requires practice: each algorithm has its own quirks and is based on certain assumptions.The performance of a classifier, its computational power as well as predictive power, depend heavily on the underlying data that are available for learning.
 
 The five main steps that are involved in training a machine learning algorithm can be summarized as follows:
 
-* Selection of features.
-* Choosing a performance metric.
-* Choosing a classifier and optimization algorithm.
-* Tune parameters
-* Evaluating the performance 
+1. Selection of features.
+1. Choosing a performance metric.
+1. Choosing a classifier and optimization algorithm.
+1. Tune parameters
+1. Evaluating the performance 
 
-The sklearn api offers a lot of classifier algorithms and utilities. 
+The sklearn APIs offer a lot of classifier algorithms and utilities to support those steps.
 
 For example the code below loads the predefined IRIS flower dataset, and select the feature 2 and 3, the petals length and width. 
 
@@ -49,7 +49,6 @@ X_train_std=sc.transform(X_train)
 # that both the values in the training and test dataset are comparable to each other.
 X_test_std=sc.transform(X_test)
 ```
-
 
 Using the training data set, create a Perceptron with 40 iterations and eta = 0.1
 
