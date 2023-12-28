@@ -16,3 +16,8 @@ ones_tensor = torch.ones(shape)
 ```
 
 Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other.
+
+
+## Resources
+
+* [Udemy content repo](https://github.com/mrdbourke/pytorch-deep-learning)

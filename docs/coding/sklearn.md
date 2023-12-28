@@ -10,6 +10,14 @@ The five main steps that are involved in training a machine learning algorithm c
 1. Tune parameters
 1. Evaluating the performance 
 
+## Installation
+
+```sh
+pip3 install pandas scikit-learn
+```
+
+## Getting started
+
 The sklearn APIs offer a lot of classifier algorithms and utilities to support those steps.
 
 For example the code below loads the predefined IRIS flower dataset, and select the feature 2 and 3, the petals length and width. 
@@ -28,13 +36,17 @@ print(np.unique(y))
 >>[0,1,2]
 ```
 
+## Splitting data
+
 To evaluate how well a trained model performs on unseen data, we will further split the dataset into separate training and test datasets.
 
 ```python
-from sklearn import cross_validation
+from sklearn.model_selection import train_test_split
 # Randomly split X and y arrays into 30% test data and 70% training set 
-X_train, X_test, y_train, y_test = cross_validation.train_test_split( X, y, test_size = 0.3, random_state = 0)
+X_train, X_test, y_train, y_test = train_test_split( X, y, test_size = 0.3, random_state = 0)
 ```
+
+## Scale data
 
 Many machine learning and optimization algorithms also require feature scaling for optimal performance. `StandardScaler` estimated the parameters `mu` (sample mean) and `delta` (standard deviation) for each feature dimension from the training data. The `transform` method helps to standardize the training data using those estimated parameters: `mu` and `delta`.  
 
@@ -50,7 +62,7 @@ X_train_std=sc.transform(X_train)
 X_test_std=sc.transform(X_test)
 ```
 
-Using the training data set, create a Perceptron with 40 iterations and eta = 0.1
+Using the training data set, create a [Multi-layer Perceptron (MLP)](https://scikit-learn.org/stable/modules/neural_networks_supervised.html#multi-layer-perceptron) with 40 iterations and eta = 0.1
 
 ```python
 from sklearn.linear_model import Perceptron

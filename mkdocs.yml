@@ -13,17 +13,20 @@ nav:
     - Kaggle: kaggle.md
     - Anomaly detection: anomaly.md
   - Coding:
-    - Environments: coding/index.md
+    - Getting started: coding/index.md
+    - Pandas: coding/pandas.md
     - Scikit-learn: coding/sklearn.md
     - PyTorch: coding/pytorch.md
     - LangChain: coding/langchain.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
   - Techno:
     - Introduction: techno/index.md
+    - Feature Store: techno/feature_store.md/
     - Key AI startups: techno/players_to_look.md
     - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker
     - Streamlit: techno/streamlit.md
-   
+  - Solutions:
+    - Introduction: solutions/index.md
   - Return to main: https://jbcodeforce.github.io
 
 theme: 
