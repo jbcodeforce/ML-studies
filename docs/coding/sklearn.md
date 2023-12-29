@@ -18,7 +18,7 @@ pip3 install pandas scikit-learn
 
 ## Getting started
 
-The sklearn APIs offer a lot of classifier algorithms and utilities to support those steps.
+The sklearn APIs offer a lot of classifier algorithms and utilities to support those steps. See [classifier note](../ml/classifier.md) for examples.
 
 For example the code below loads the predefined IRIS flower dataset, and select the feature 2 and 3, the petals length and width. 
 
@@ -29,7 +29,9 @@ X=iris.data[:,[2,3]]
 y=iris.target
 ```
 
-using numpy unique function to assess the potential classes we got 3 integers representing each class.
+The size of `X` is typically (n_samples, n_features). The target values `y` which are real numbers for regression tasks, or integers for classification. Both variables are numpy arrays.
+
+Using numpy unique function to assess the potential classes we got 3 integers representing each class.
 
 ```python
 print(np.unique(y))
@@ -56,6 +58,7 @@ from sklearn.preprocessing import StandardScaler
 sc=StandardScaler()
 # compute mean and std deviation for each feature using fit
 sc.fit(X_train)
+# transform the features
 X_train_std=sc.transform(X_train)
 # Note that we used the same scaling parameters to standardize the test set so 
 # that both the values in the training and test dataset are comparable to each other.
@@ -84,3 +87,26 @@ Scikit-learn also implements a large variety of different performance metrics th
 ![](./images/iris-classes.png){ width=500 }
 
 The Perceptron biggest disadvantage is that it never converges if the classes are not perfectly linearly separable.
+
+## Pipeline
+
+Transformers and estimators (predictors) can be combined together into a single unifying object: a Pipeline.
+
+```python
+from sklearn.preprocessing import StandardScaler
+from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.datasets import load_iris
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
+
+
+pipe = make_pipeline(StandardScaler(), LogisticRegression())
+X, y = load_iris(return_X_y=True)
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=0)
+pipe.fit(X_train, y_train)
+print(
+    "Accuracy with Logistic regression is: "
+    + str(accuracy_score(pipe.predict(X_test), y_test))
+)
+```

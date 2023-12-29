@@ -36,15 +36,14 @@ X_full.dropna(axis=0, subset=['SalePrice'], inplace=True)
 X = X_full.select_dtypes(exclude=['object'])
 ```
 
-Assess number of missing values in each column:
+Assess number of missing values in each column. Pandas offers capabilities to easily assess missing cell in a matrix: 
 
 ```python
 missing_val_count_by_column = (X_train.isnull().sum())
 print(missing_val_count_by_column[missing_val_count_by_column > 0])
 ```
 
-Avoid dropping a column when there are some missing values, except if the column has a lot of them
-and it does not seem to bring much more impact to the result.
+Avoid dropping a column when there are some missing values, except if the column has a lot of them, and it does not seem to bring much more impact to the result.
 
 ```python
 # Get names of columns with missing values
@@ -56,8 +55,11 @@ reduced_X_train = X_train.drop(cols_with_missing, axis=1)
 reduced_X_valid = X_valid.drop(cols_with_missing, axis=1)
 ```
 
-Use **'imputation'** by assigning the mean value of the column values into the unset cells.
- 
+We can use different interpolation techniques to estimate the missing values from the training samples. One of the most common interpolation techniques is mean imputation, where we simply replace the missing value by the mean value of the entire feature column. This is done by using the sklearn `Imputer`` class.
+
+The Imputer class belongs to the so-called transformer classes in scikit-learn that are used for data transformation. The two essential methods of those estimators are fit and transform. The fit method is used to learn the parameters from the training data, and the transform method uses those parameters to transform the data. Any data array that is to be transformed needs to have the same number of features as the data array that was used to fit the model.
+
+
 ```python
 from sklearn.impute import SimpleImputer
 my_imputer = SimpleImputer(strategy='median')
@@ -69,8 +71,7 @@ imputed_X_train.columns = X_train.columns
 imputed_X_valid.columns = X_valid.columns
 ```
 
-We can add a boolean column which will have cell set to true when a mean was assigned 
-to a missing value. In some cases, this will meaningfully improve results.
+We can add a boolean column which will have cell set to true when a mean was assigned to a missing value. In some cases, this will meaningfully improve results.
 
 
 ```python

@@ -179,6 +179,9 @@ The C=1/lambda parameter used in logistic regression api is the factor to contro
 
 ![](https://latex.codecogs.com/svg.latex?\frac{1}{2} ||W||^2) is the regularization bias to penalize extreme parameter weights.
 
+
+Logistic regression is a useful model for online learning via stochastic gradient descent, but also allows us to predict the probability of a particular event. 
+
 ### Fitting
 
 **Overfitting** is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. If a model suffers from overfitting, we also say that the model has a **high variance**, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. 
@@ -201,16 +204,116 @@ For C=100 we have now
 
 ## Maximum margin classification with support vector mancines (SVM)
 
-In SVM the goal is now to maximize the margin: the distance between the decision boundary and the training samples.
+In SVM, the goal is to maximize the margin: the distance between the decision boundary and the training samples.
 
 ![](./images/svn-1.png){ width=600 }
 
 The rationale behind having decision boundaries with large margins is that they tend to have a lower generalization error whereas models with small margins are more prone to overfitting.
 
-To train a SVM model
+To prepare the data here is the standard code that is using SciKit `model_selection` to split the input data set into training and test sets and then a standardScaler to normalize values
+
+```python
+from sklearn import model_selection
+from sklearn.preprocessing import StandardScaler
+
+iris = datasets.load_iris()
+X = iris.data[:, [2, 3]]
+y = iris.target
+
+X_train, X_test, y_train, y_test = model_selection.train_test_split(
+    X, y, test_size=0.3, random_state=0
+)
+
+sc = StandardScaler()
+sc.fit(X_train)
+X_train_std = sc.transform(X_train)
+X_test_std = sc.transform(X_test)
+```
+
+To train a SVM model using sklearn:
 
 ```python
 from sklearn.svm import SVC
 svm = SVC(kernel='linear',C=1.0,random_state=0)
 svm.fit(X_train_std,y_train)
 ```
+
+See [code in SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/SVM-IRIS.py)
+
+The SVMs mostly care about the points that are closest to the decision boundary (support vectors).
+
+![](./images/svm-results.png)
+
+The SVM can use Radial Basis Function kernel, to create nonlinear combinations of the original features to project them onto a higher dimensional space via a mapping function phi() where it becomes linearly separable. 
+
+```python
+svm = SVC(kernel='rbf',C=10.0,random_state=0, gamma=0.10)
+svm.fit(X_train_std,y_train)
+```
+
+Gamma is a cut-off parameter for the Gaussian sphere. If we increase the value for gamma, we increase the influence or reach of the training samples, which leads to a softer decision boundary. Gamma at 0.1. Optimizing Gamma is important to avoid overfitting.
+
+## Decision Trees
+
+The decision tree model learns a series of questions to infer the class labels of the samples. 
+
+The algorithm is to start at the tree root and to split the data on the feature that results in the largest information gain (IG). In an iterative process, we can then repeat this splitting procedure at each child node until the leaves are pure. This means that the samples at each node all belong to the same class. In practice, this can result in a very deep tree with many nodes, which can easily lead to overfitting. Thus, we typically want to prune the tree by setting a limit for the maximal depth of the tree.
+
+In order to split the nodes at the most informative features, we need to define an objective function that we want to optimize via the tree learning algorithm. In binary decision trees there are 3 commonly used impurity function: Gini_impurity(), entropy(), and the classification_error().
+
+```python
+def gini(p):
+    return p *(1-p) + (1-p)*(1-(1-p))
+
+def entropy( p):
+    return - p* np.log2( p) - (1 - p)* np.log2(( 1 - p))
+
+def error( p):
+    return 1 - np.max([ p, 1 - p])
+```
+
+Decision trees are particularly attractive if we care about interpretability. 
+
+See [DecisionTreeIRIS.py code](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/DecisionTreeIRIS.py) and [this DecisionTree notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/DecisionTree.ipynb).
+
+## Combining weak to strong learners via random forests 
+
+Random forests have gained huge popularity in applications of machine learning in 2010s due to their good classification performance, scalability, and ease of use. Intuitively, a random forest can be considered as an ensemble of decision trees. The idea behind ensemble learning is to combine weak learners to build a more robust model, that has a better generalization error and is less susceptible to overfitting.
+
+The only parameter to play with is the number of trees, and the max depth of each tree. The larger the number of trees, the better the performance of the random forest classifier at the expense of an increased computational cost. Scikit-learn provides tools to automatically find the best parameter combinations (via cross-validation)
+
+```python
+from sklearn.ensemble import RandomForestClassifier
+
+X_train, X_test, y_train, y_test = buildTrainingSet()
+forest = RandomForestClassifier(criterion ='entropy', n_estimators = 10, random_state = 1, n_jobs = 2)
+forest.fit( X_train, y_train)
+...
+```
+
+the sample size of the bootstrap sample is chosen to be equal to the number of samples in the original training set.
+
+## k-nearest neighbor classifier (KNN)
+
+For KNN, we define some distance metric between the items in our dataset, and find the K closest items.
+
+Machine learning algorithms can be grouped into parametric and nonparametric models. Using parametric models, we estimate parameters from the training dataset to learn a function that can classify new data points without requiring the original training dataset anymore.
+
+With nonparametric models there is no fixed set of parameters, and the number of parameters grows with the training data (decision tree, random forest and kernel SVM). 
+
+KNN belongs to a subcategory of nonparametric models that is described as instance-based learning which are characterized by memorizing the training dataset, and lazy learning is a special case of instance-based learning that is associated with no (zero) cost during the learning process.
+
+
+The KNN algorithm is fairly straightforward and can be summarized by the following steps:
+
+1. Choose the number of k and a distance metric function.
+1. Find the k nearest neighbors of the sample that we want to classify.
+1. Assign the class label by majority vote.
+
+In the case of a tie, the scikit-learn implementation of the KNN algorithm will prefer the neighbors with a closer distance to the sample.
+
+See the [KNN notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/KNN.ipynb).
+
+It is important to mention that KNN is very susceptible to overfitting due to the curse of dimensionality. The curse of dimensionality describes the phenomenon where the feature space becomes increasingly sparse for an increasing number of dimensions of a fixed-size training dataset.
+
+The K-nearest neighbor classifier offers lazy learning that allows us to make predictions without any model training but with a more computationally expensive prediction step.
