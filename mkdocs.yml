@@ -2,21 +2,24 @@ site_name: Machine Learning Studies
 repo_url: https://github.com/jbcodeforce/ML-studies
 nav:
   - Introduction: index.md
+  - Concepts: 
+    - Math summary: concepts/maths.md
   - Data management:
     - Introduction: data/index.md
     - Feature Engineering: data/features.md
   - Machine Learning:
     - Classifier: ml/classifier.md
     - Unsupervised Learning: ml/unsupervised.md
-    - Deep Learning: ml/deep-learning.md
-    - Generative AI: ml/generative-ai.md
-    - Kaggle: kaggle.md
     - Anomaly detection: anomaly.md
+  - Deep Learning: 
+    - Introduction: ml/deep-learning.md
+    - Generative AI: ml/generative-ai.md
   - Coding:
     - Getting started: coding/index.md
     - Pandas: coding/pandas.md
     - Scikit-learn: coding/sklearn.md
     - PyTorch: coding/pytorch.md
+    - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
   - Techno:

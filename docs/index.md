@@ -3,17 +3,22 @@
 !!! info "Update"
     Created 2017 - Update 12/2023
 
-This repository includes notes, code samples, and Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites on this exicting subjet.
+This repository includes notes, code samples, and Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites on this exiting subject.
 
 ## AI/ML Market
 
-AI/ML by 2030 will be a $B300 market. Every company is using AI/Ml already or consider using it in very short term. 2023 illustrated AI being part of the world with the arrival of Generative AI. Some on the main business drivers include:
+AI/ML by 2030 will be a $B300 market. Every company is using AI/Ml already or consider using it in very short term. 2023 illustrated that AI is part of the world with the arrival of Generative AI. Some on the main business drivers include:
 
 * Make **faster decisions** by extracting and analyzing data from unstructured documents, voice, video records, transcripts...
 * Generate and operationalize **predictive and prescriptive insights** to make decision at the right time.
-* Generative AI: create new content, ideas, conversations, stories, images, videos or music from question or suggestions.
+* Create new content, ideas, conversations, stories, images, videos or music from question or suggestions (Generative AI).
 
 The stakeholders interested by AI/ML are CTOs, CPOs, Data Scientists, business analysts who want to derive decision from data and improve their business processes.
+
+* If we can use a rule based system to address a problem, it is a better choice. It means you can have knowledge of the rules. ML will help when we do not have knowledge of all the rule conditions.
+* Deep learning can adapt to change in the environment and address new scenarios.
+* Discover insights within large data set.
+* Deep learning may not be suitable if we need explanations on what was done by the system, or when the error rate is unacceptable.
 
 ## Data Science major concepts
 
@@ -52,53 +57,6 @@ Statistics does not apply well to large-scale inference problems that big data b
 
 The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions of data points and thousands of metrics,  we are bound to identify coincidences that have no predictive power.
 
-### Mathematical foundations
-
-#### Covariance
-
-![\Large cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y})](https://latex.codecogs.com/svg.latex?cov(x,y)=\sum_{i}^{} (x_{i} - u_{x})(y_{i} - u_{y}))
-
-#### Correlation
-
-![\Large corr(x,y)](https://latex.codecogs.com/svg.latex?corr(x,y)=\frac{cov(x,y)}{\sqrt {\sum_{i}^{} (x_{i} - u_{x})^2} * \sqrt {\sum_{i}^{} (y_{i} - u_{y})^2 }) 
-
-#### Bayesian
-
-In machine learning, there are two main approaches: the **Bayesian** approach and the **frequentist** approach. The Bayesian approach is based on probability theory and uses Bayes' theorem to update probabilities based on new data. The frequentist approach, on the other hand, is based on statistical inference and uses methods such as hypothesis testing and confidence intervals to make decisions.
-
-**Bayes theorem**:
-
-The theorem works by taking into account the probability of events on their own as well as two events occurring in conjunction with each other. It helps to assess what causes events to occur and why. It then helps to predict future.
-
-The Bayes formula for the probability of having event A occuring knowing B occured:
-
-![](https://latex.codecogs.com/svg.latex?P(A|B) = P(B|A) P(A) / P(B))
-
-The numerator is the probability of event B given event A multiplied by the probability of event A occurring on its own. Denominator is probability of event B occuring on its own.
-
-![](./images/bayen.png){ width=500 }
-
-The Bayesian approach is often used in situations where there is uncertainty and the data is complex, while the frequentist approach is often used in situations where there is a large amount of data and the relationships between the variables are well-defined.
-
-Bayesian analysis allows you to compare false negative and false positive rates against the likelihood of obtaining a true negative or true positive result.
-
-[See the conditional probability notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/ConditionalProbabilityExercise.ipynb) exercise to simulate the probability of buying thing knowing the age and previous buying data: `totals` contains the total number of people in each age group and `purchases` contains the total number of things purchased by people in each age group.
-
-#### Data distributions
-
-[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) some python code on different data distributions like Uniform, Gaussian, Poisson. It can be executed in VScode using the pytorch kernel.
-
-#### Normalization
-
-Normalization of ratings means adjusting values measured on different scales to a notionally common scale, often prior to averaging.
-
-In statistics, normalization refers to the creation of shifted and scaled versions of statistics,
-where the intention is that these normalized values allow the comparison of corresponding normalized values for different
- datasets in a way that eliminates the effects of certain gross influences, as in an anomaly time series.
-
-Feature scaling used to bring all values into the range [0,1]. This is also called unity-based normalization.
-
-![](https://latex.codecogs.com/svg.latex?X'=(X-Xmin)/(Xmax-Xmin))
 
 ### Map - Reduce
 
@@ -280,6 +238,14 @@ So putting all together we have:
 the weight update is calculated based on all samples in the training set (instead of updating the weights incrementally after each sample), which is why this approach is also referred to as "batch" gradient descent.
 So basically to minimize the cost function we took steps into the opposite direction of a gradient calculated from the entire training set.
 
+## What skills needed to grow as data scientist
+
+* [See Udemy blog for what skills to become a DS.](https://blog.udemy.com/what-skills-do-you-need-to-become-a-data-scientist/)
+* [14 Data Science Projects From Beginner to Advanced Level.](https://blog.udemy.com/data-science-projects)
+
+But the 5 important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/ 
+Data visualization, 5/ Machine learning.
+
 ## Books and other sources
 
 Content is based of the following different sources:
@@ -290,6 +256,7 @@ Content is based of the following different sources:
 * [Dive into deep learning book](https://d2l.ai)
 * [Amazon Sagemaker Python SDK](https://sagemaker.readthedocs.io/en/stable/)
 * [Kaggle](http://kaggle.com)
+* [Papers with code - trends](https://paperswithcode.com/)
 * Introduction to Data Sciences - University of Washington.
 * [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)
 * [AWS SageMaker](https://aws.amazon.com/sagemaker/getting-started/).

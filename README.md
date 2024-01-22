@@ -1,13 +1,6 @@
 # [Machine Learning Studies - Basics](https://jbcodeforce.github.io/ML-studies/)
 
-Read documentation in [book format](https://jbcodeforce.github.io/ML-studies/).
-
-
-## Build docker image for local isolated environment
-
-```sh
-docker built -t jbcodeforce/python .
-```
+Read this ML study content in [book format](https://jbcodeforce.github.io/ML-studies/).
 
 ## Building this booklet locally
 

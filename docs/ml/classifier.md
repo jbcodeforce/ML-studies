@@ -182,9 +182,9 @@ The C=1/lambda parameter used in logistic regression api is the factor to contro
 
 Logistic regression is a useful model for online learning via stochastic gradient descent, but also allows us to predict the probability of a particular event. 
 
-### Fitting
+## Fitting
 
-**Overfitting** is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. If a model suffers from overfitting, we also say that the model has a **high variance**, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data. 
+**Overfitting** is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. If a model suffers from overfitting, we also say that the model has a **high variance**, which can be caused by having too many parameters that lead to a model that is too complex given the underlying data.
 
 **Variance** measures the consistency (or variability) of the model prediction for a particular sample instance if we would retrain the model multiple times: if the training set is splitted in multiple subsets, the model can be trained with those subsets and each time the sample instance prediction is run, the variance is computed. If the variability is big, then the model is sensitive to randomness.
 
@@ -202,7 +202,7 @@ For C=100 we have now
 
 ![](./images/iris-zone-2.png){ width=600 }
 
-## Maximum margin classification with support vector mancines (SVM)
+## Maximum margin classification with support vector machines (SVM)
 
 In SVM, the goal is to maximize the margin: the distance between the decision boundary and the training samples.
 
