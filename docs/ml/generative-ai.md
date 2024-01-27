@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Create new content (text, image, music, videos..) from existing ones and a requested query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters. 
+Create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters.
 
 Large Language Models have several key components. The underlying architecture is called a Transformer which uses self-attention mechanisms to weight the significance of different words to understand the context in sequences of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
@@ -386,7 +386,7 @@ The model was trained on trillions of words from the web, requiring massive numb
 
 ### [Amazon Bedrock](https://aws.amazon.com/bedrock/)
 
-[See techno summary in AWS studies.](https://jbcodeforce.github.io/aws-studies/ai-ml/bedrock/)
+[See techno summary in AWS studies.](https://jbcodeforce.github.io/yarfba/ai-ml/bedrock/)
 
 ### Amazon SageMaker
 
@@ -397,11 +397,11 @@ It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com
 Some useful articles:
 
 * [AWS- Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
-* [SageMaker my own personal study.](https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker/).
+* [SageMaker my own personal study.](https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker/).
 
 ### [Amazon CodeWhisperer](https://aws.amazon.com/codewhisperer/)
 
-[Own study.](https://jbcodeforce.github.io/aws-studies/coding/#codewhisperer)
+[Own study.](https://jbcodeforce.github.io/yarfba/coding/#codewhisperer)
 
 ### Databricks Dolly
 
