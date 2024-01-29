@@ -14,3 +14,4 @@ llm-langchain/**/data/**
 llm-langchain/featureform/.featureform/
 llm-langchain/chroma_db/
 deep-neural-net/d2l-en/
+**/*.pth
