@@ -4,3 +4,5 @@ awscli>=1.29.57
 transformers>=4.24,<5
 bs4
 unstructured
+langchain>=0.1.4
+langchain_experimental

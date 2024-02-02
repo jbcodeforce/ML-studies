@@ -317,3 +317,7 @@ See the [KNN notebook](https://github.com/jbcodeforce/ML-studies/blob/master/not
 It is important to mention that KNN is very susceptible to overfitting due to the curse of dimensionality. The curse of dimensionality describes the phenomenon where the feature space becomes increasingly sparse for an increasing number of dimensions of a fixed-size training dataset.
 
 The K-nearest neighbor classifier offers lazy learning that allows us to make predictions without any model training but with a more computationally expensive prediction step.
+
+## See also
+
+See also [classifiers done with PyTorch as neural network](../coding/pytorch.md).

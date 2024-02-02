@@ -16,16 +16,16 @@ The text is then broken down into chunks called tokens which are fed into the mo
 
 
 ???- info "Difference between ML and LLM"
-    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. And through their pre-training exposure to **i**nternet-scale** data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
+    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
     * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2022 is 540B parameters.
 
 A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
 
-The process is text -> tokens (may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Subword tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
+The process is text -> tokens (may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Sub-word tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
 
-**Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and qith high quality data.
+**Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and with high quality data.
 
 Three types of transformer:
 
@@ -43,11 +43,11 @@ For generative AI, the input is very ambiguous, but also the output: there is no
 Some ways to use Generative AI:
 
 * Build foundation model from scratch
-* Reuse existing foundation models available as open-source (Hugging Face) or proprietary, add the custom corpus on top of it, to fine tune tune the model for better accuracy.
-* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization. Use prompt engineering to get better answer.
+* Reuse existing foundation models available as open-source (Hugging Face hub) or proprietary, add the custom corpus on top of it, to fine tune tune the model for better accuracy.
+* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answer.
 
 ???- "Hugging Face"
-    [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to  applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
+    [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
 
 ## Use cases
 
@@ -66,7 +66,7 @@ We can group the use cases in categories:
     * Personalized learning path generation
 
 ???+ info "Creativity"
-    * Autogeneration of marketing material
+    * Auto-generation of marketing material
     * Personalized emails
     * Sales scripts for customer's industry or segment
     * Speeding the ideation phase of a product development
@@ -81,17 +81,20 @@ We can group the use cases in categories:
 
 It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training.
 
+The [Huggingface LLM leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good information about model quality for some use cases.
+
+
 ### Industries
 
-* Supply chain by improving the visibility to multi-tier supplier performance concerns, understand where risk can be found in the supply chain
-* Nonconformance/quality dispositioning, by identifying root cause of nonconformance, and prescribe resolutions
-* Engineering cost optimization by reusing common parts across plaforms.
+* Supply chain by improving the visibility to multi-tier supplier performance concerns, understand where risk can be found in the supply chain.
+* Nonconformance/quality dispositioning, by identifying root cause of nonconformance, and prescribe resolutions.
+* Engineering cost optimization by reusing common parts across platforms.
 * Automation for proofreading, updating databases, managing ads campaigns, analyzing customer reviews, monitoring social media platforms
-* Sentiment analysis
+* Sentiment analysis.
 * Content moderation and development for education and universities. Helps students to find the most effective pathways to graduation.
-* From identifying potential safety risks with gaz leaks, Gen AI can generate recommendations for remedial work. 
+* From identifying potential safety risks with gaz leaks, Gen AI can generate recommendations for remedial work.
 * Enhance trip planning with personalized recommendations, services and offers for travel industry.
-* product review summarization: today done by human, can be offloaded by LLM by adding those unstructured reviews as new corpus for search. Separate these reviews based on user-provided ratings and task an LLM to extract different sets of information from each high-level category of reviews.
+* Product review summarization: today done by human, can be offloaded by LLM by adding those unstructured reviews as new corpus for search. Separate these reviews based on user-provided ratings and task an LLM to extract different sets of information from each high-level category of reviews.
 
 ### Classical concerns and challenges
 
@@ -103,15 +106,11 @@ It would be difficult to find any business use-case where a base FM can be used 
 * Skill set
 * Hallucination where the models make up inaccurate responses that are not consistent with the training data.
 * Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
-* Sinmple to integrate with existing apps and data.
-
-???- definition "Accuracy"
-    Measure how accurate the response from LLM.
+* Simple to integrate with existing apps and data.
 
 ### Discovery Assessment
 
-When engaging with a customer it is important to assess where they are in their GenAi adoption. Think big about the opportunities, but start small with problems that cause day-to-day irritationsdps
- for the employees or customer.
+When engaging with a customer it is important to assess where they are in their GenAi adoption. Think big about the opportunities, but start small with problems that cause day-to-day irritations for the employees or customer.
 
 ???- question "Research for opportunities"
     * What manual or repetitive processes could be automated with generative AI?
@@ -170,12 +169,12 @@ When engaging with a customer it is important to assess where they are in their 
 
 ## Concepts
 
-A LLM is part of the evolation of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way that is like the function of the human brain.
-From 2017, many NLP models are based on transformers. Which is a neural-network that takes into account an entire sentence or paragraph at once, instead of one word at a time. It better understands the context of a word.
+A LLM is part of the evolution of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way similar of the human brain.
+From 2017, many NLP models are based on `transformers`. Which is a neural-network that takes into account an entire sentence or paragraph at once, instead of one word at a time. It better understands the context of a word.
 
-To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. 
+To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning.
 
-Below is a simple representation of the embeding in the 3 dimension space:
+Below is a simple representation of the embedding in the 3 dimension space:
 
 ![](./images/vector-embedding.png)
 
@@ -188,7 +187,7 @@ This process is called **autoregressive generation**.
 When processing text, the AI looks at a few tokens around each word to help understand the context. This surrounding group of tokens is called the **context window**. It is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
 
 ???- info "Context Window"
-    A context window is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
+    A **context window** is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
     
     If the current word is "apple", the AI might look at a context window of the 5 tokens before and after it. So the context window could be: "I ate a sweet red [apple] this morning for breakfast". The tokens in the context window give the AI useful information about the current word. In this case, they indicate [apple] is probably a noun referring to the fruit. 
 
@@ -198,7 +197,7 @@ Transformers do not need to code the grammar rules, they acquire them implicitly
 
 During the training process, the model learns the statistical relationships between words, phrases, and sentences, allowing it to generate coherent and contextually relevant responses when given a prompt or query.
 
-The techniques to customize LLM applications from simplest to more complex. 
+The techniques to customize LLM applications from simplest to more complex are:
 
 * **Zero-shot inference**: allows a pre-trained LLM to generate responses to tasks that it hasn’t been specifically trained for. In this technique, the model is provided with an input text and a prompt that describes the expected output from the model in natural language. 
 * Prompt engineering with zero-shot inference.
@@ -216,9 +215,9 @@ The techniques to customize LLM applications from simplest to more complex.
 | **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
 | **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
 | **Attention** | A math filter for focusing on the important parts of data inputs. |
-| **BARD** | AI chat service from google - powered by the LaMDA model. Similar to ChatGPT. |
+| **BARD** | AI chat service from Google - powered by the LaMDA model. Similar to ChatGPT. |
 | **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
-| **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an autoregressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
+| **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an auto regressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
 | **co:here** |	[Co:here](https://cohere.com/) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
 | Model **compression** | Technique to reduce the size of the model in memory, it includes *quantization* (approximating a neural network by using smaller precision 8-bit integers instead of 32-bit floating point numbers) and *distillation* (transferring of knowledge from a larger teacher model to a smaller student model).|
 | **Data Distributed Training**	| A distributed training algorithm which can speed up ML training by distributing batches of data between forward and backward passes in a model. This can be very helpful when we have large datasets but does not solve the problem of not being able to fit a model on one machine |
@@ -254,30 +253,9 @@ The techniques to customize LLM applications from simplest to more complex.
 | **Transformer** |	A ML model for transforming one sequence into another, using attention.|
 | **Vector Database** | A vector database is optimized for storing and querying large vector arrays using machine learning techniques. It's highly scalable and fast at performing operations like similarity searches across vectors. Queries return results based on vector similarity scores, revealing hidden semantic connections in data. | 
 
-### [Prompt engineering](https://www.promptingguide.ai)
+### Prompt engineering
 
-A prompt is an input that the model uses as the basis for generating a text. Prompts are a way to directly access the knowledge encoded in large language models. While all the information may be codes in the model, the knowledge extraction can be a hit or miss.
-
-Prompt involves instructions and context passed to a language model to acheive a desired task. 
-
-**Prompt Engineering** is a practice of developing and optimizing prompts to efficiently use LLMs for a varierty of applications. It is still a major research topic.
-
-Prompt engineering typically works by converting one or more tasks to a prompt-based dataset and training a language model with what has been called "prompt-based learning" or just "prompt learning".
-
-We can provide a prompt with examples so the LLM will condition on the new context to generate better results. Examples in summarization.
-
-Prompts can also help incorporate domain knowledge on specific tasks and improve interpretability. Creating high-quality prompts requires careful consideration of the task at hand, as well as a deep understanding of the model’s strengths and limitations.
-
-LLMs are very sensitive to small perturbations of the prompt: a single typo or word change can alter the output.
-
-There is still need to evaluate models robustness to prompt. 
-
-Many recent LLMs are fine-tuned with a powerful technique called **instruction tuning**, which helps the models generate responses to prompts without prompt-specific fine-tuning. It does not involve updating model weights.
-
-The [Huggingface LLM leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good information about model quality for some use cases.
-
-???- "Instruction tuning"
-    Technique to train the model with a set of input and output instructions for each task (instead of specific datasets for each task), allowing the model to generalize to new tasks that it hasn’t been explicitly trained on as long as prompts are provided for the tasks. It helps improve the accuracy and effectiveness of models and is helpful in situations where large datasets aren’t available for specific tasks.
+See [separate note](./prompt-eng.md)
 
 ### Summarization
 
@@ -311,17 +289,18 @@ Training from scratch produces the highest quality result amongst Prompt, RAG, f
 
 Foundation models support the following parameters to control randomness and diversity in the response:
 
-**Temperature** – Large language models use probability to construct the words in a sequence. For any given next word, there is a probability distribution of options for the next word in the sequence. When we set the temperature closer to zero, the model tends to select the higher-probability words. When we set the temperature further away from zero, the model may select a lower-probability word.
+**Temperature** – Large language models use probability to construct the words in a sequence. For any given next word, there is a probability distribution of options for the next word in the sequence. When we set the temperature closer to zero, the model tends to select the higher-probability words. When we set the temperature further away from zero, the model may select a lower-probability word which leads to creative output.
 
 In technical terms, the temperature modulates the probability density function for the next tokens, implementing the temperature sampling technique. This parameter can deepen or flatten the density function curve. A lower value results in a steeper curve with more deterministic responses, and a higher value results in a flatter curve with more random responses.
 
 **Top K** – Top K defines the cut off where the model no longer selects the words. For example, if K=50, the model selects from 50 of the most probable words that could be next in a given sequence. This reduces the probability that an unusual word gets selected next in a sequence.
+
 In technical terms, Top K is the number of the highest-probability vocabulary tokens to keep for Top-K-filtering - This limits the distribution of probable tokens, so the model chooses one of the highest-probability tokens.
 
 **Top P** – Top P defines a cut off based on the sum of probabilities of the potential choices. If we set Top P below 1.0, the model considers the most probable options and ignores less probable ones. Top P is similar to Top K, but instead of capping the number of choices, it caps choices based on the sum of their probabilities.
 For the example prompt "I hear the hoof beats of ," we may want the model to provide "horses," "zebras" or "unicorns" as the next word. If we set the temperature to its maximum, without capping Top K or Top P, we increase the probability of getting unusual results such as "unicorns." If we set the temperature to 0, we increase the probability of "horses." If we set a high temperature and set Top K or Top P to the maximum, we increase the probability of "horses" or "zebras," and decrease the probability of "unicorns."
 
-#### Length
+#### Lengths
 
 The following parameters control the length of the generated response.
 
@@ -369,7 +348,7 @@ Data enrichement, prompt engineering, user interface, deployment, HA, multi tena
 ### Scoping
 
 1. Go over the [discovery assessment](#discovery-assessment)
-1. Define what the key metric is and how to evaluate the solution. If the use case falls into the Document Q&A and Document Summarization categories, the metric used will be **accuracy**. **Accuracy** will be determined based on the documents (data) provided and the respective questions users ask against the model.
+1. Define what the key metrics are and how to evaluate the solution. If the use cases fall into the Document Q&A and Document Summarization categories, the metric used will be **accuracy**. **Accuracy** will be determined based on the documents (data) provided and the respective questions users ask against the model.
 1. Define a list of questions that we expect the application to answer. Be sure to have a list of correct answers. In case of summarization use cases, we need sample summaries and sample questions to generate those summaries for document summarization use cases.
 
 ### Consumers of LMs
@@ -390,7 +369,7 @@ The model was trained on trillions of words from the web, requiring massive numb
 
 ### Amazon SageMaker
 
-[SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pretrained, open-source models for a wide range of problem types to get started on ML.
+[SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pre-trained, open-source models for a wide range of problem types to get started on ML.
 
 It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Pretrained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
 
@@ -415,7 +394,7 @@ There are web sites to evaluate existing LLMs, but they are based on public data
 
 The methodology looks like:
 
-* Downselect models based on specific use case and tasks
+* Down select models based on specific use case and tasks
 * Human calibration of the models: understand behavior on certain tasks, fine tune prompts and assess against a ground truth using cosine-sim. Rouge scores can be used to compare summarizations, based on statistical word similarity scoring.
 * Automated evaluation of models: test scenario with deep data preparation, was is a good answer. LLM can be used as a judge: variables used are accuracy, coherence, factuality, completeness. Model card
 * ML Ops integration, self correctness
@@ -427,7 +406,7 @@ Considerations
 * Flexibility
 * Language support
 
-## Interresting legal considerations
+## Interesting legal considerations
 
 * Think not created by a human could not be copyrighted.
 * Model deployed will not use data sent to improve itself.
@@ -444,3 +423,6 @@ Considerations
 * [RAG with OpenSearch Service](https://catalog.workshops.aws/semantic-search/en-US/module-7-retrieval-augmented-generation).
 * [Running LLM on local laptop using llama.cpp](https://github.com/ggerganov/llama.cpp)
 * [BertNet knowledge graphs from llm](https://openreview.net/pdf?id=ntIq8Wm79G-)
+
+
+[>>> Prompt Engineering](./prompt-eng.md) 

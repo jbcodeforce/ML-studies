@@ -35,7 +35,7 @@ except botocore.exceptions.ClientError as error:
 
     if error.response['Error']['Code'] == 'AccessDeniedException':
            print(f"\x1b[41m{error.response['Error']['Message']}\
-                \nTo troubeshoot this issue please refer to the following resources.\
+                \nTo troubleshoot this issue please refer to the following resources.\
                  \nhttps://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_access-denied.html\
                  \nhttps://docs.aws.amazon.com/bedrock/latest/userguide/security-iam.html\x1b[0m\n")
 

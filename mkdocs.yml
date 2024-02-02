@@ -14,11 +14,13 @@ nav:
   - Deep Learning: 
     - Introduction: ml/deep-learning.md
     - Generative AI: ml/generative-ai.md
+    - Prompt Engineering: ml/prompt-eng.md
   - Coding:
     - Getting started: coding/index.md
     - Pandas: coding/pandas.md
     - Scikit-learn: coding/sklearn.md
     - PyTorch: coding/pytorch.md
+    - Data Visualization: coding/visualization.md
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
