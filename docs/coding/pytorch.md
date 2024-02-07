@@ -126,6 +126,7 @@ A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Mo
 
 * Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classifications.ipynb)
 * [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/multiclass-classifier.ipynb)
+* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/nn-classifier.py).
 
 ## PyTorch training loop
 

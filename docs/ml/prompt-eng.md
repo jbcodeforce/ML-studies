@@ -3,6 +3,7 @@
 This note includes a summary of prompt engineering practices and links to major information on this subject. Main sources of knowledge are:
 
 * [Prompt engineering guide](https://www.promptingguide.ai) covers the theory and practical aspects of prompt engineering and how to leverage the best prompting techniques to interact and build with LLMs.
+* [Wikipedia- prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering)
 
 ## Introduction
 
@@ -39,7 +40,7 @@ The classical [Temperature, Top-P](./generative-ai.md/#common-llm-inference-para
 * Use command to instruct the model to do something specific: "Write", "Classify", "Summarize", "Translate", "Order"
 * Be very specific about the instruction and task. 
 * Providing examples in the prompt is very effective to get desired output in specific formats.
-* Chain-of-thought ([CoT](https://www.promptingguide.ai/techniques/cot)) prompting used to address more complex arithmetic, commonsense, and symbolic reasoning tasks. The zero-shot CoT seems to get good result by adding "Let's think step by step". (see this test: `python TestBedrockCoT.py -p cot3.txt -m  ai21.j2-mid`)
+* Chain-of-thought ([CoT](https://www.promptingguide.ai/techniques/cot)) prompting using intermediate step.  It is used to address more complex arithmetic, commonsense, and symbolic reasoning tasks. The zero-shot CoT seems to get good result by adding "Let's think step by step". (see this test: `python TestBedrockCoT.py -p cot3.txt -m  ai21.j2-mid`)
 
 * Examples:
 
@@ -48,8 +49,25 @@ explain Quantum mechanics to high school student
 A:
 ```
 
+See [ask Claude to think step by step article.](https://docs.anthropic.com/claude/docs/ask-claude-to-think-step-by-step)
+
 * RLHF (reinforcement learning from human feedback) has been adopted to scale instruction tuning wherein the model is aligned to better fit human preferences.
 * Self consistency prompt uses sample multiple, diverse reasoning paths through few-shot CoT, and use the generations to select the most consistent answer.
+
+**[Tree of Thoughts](https://www.promptingguide.ai/techniques/tot)** is a generalization of CoT, where thoughts represent coherent language sequences that serve as intermediate steps toward solving a problem.
+The thoughts are organized in tree, which search algorithms are used to assess the best combination of thoughts via a multi-round conversation.
+
+### Prompt chaining
+
+Break into subtask, and add the response of a subtask to the next subtask call to LLM. It creates a chain of prompts. Prompt chaining is useful when building conversational assistants, for document QA.
+
+For document QA, a first prompt is used to extract the important quotes from the document given the question, the second prompt uses the generated quotes as input.
+
+See [Anthropic Claude - Prompt Chaining examples.](https://docs.anthropic.com/claude/docs/prompt-chaining)
+
+It can be used to validate a previous response to a prompt.
+
+
 
 ### Playground
 

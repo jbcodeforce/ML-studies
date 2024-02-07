@@ -76,6 +76,7 @@ We can group the use cases in categories:
     * Data augmentation to improve data set quality. Keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps.
     * Propose some supply chain scenario
 
+* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all SDLC phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate refactoring (?), unit test generation or e2e for mobile app, review code, code relationship map automatically created from call stacks, PR and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
@@ -267,7 +268,7 @@ Summarization works by sending a prompt instruction to the model, asking the mod
 
 ### Retrieval augmented generation (RAG)
 
-The act of supplementing generative text models with data outside of what it was trained on. This is extendable to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of this.
+RAG is the act of supplementing generative text models with data outside of what it was trained on. This is applied to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of the usage of RAG.
 
 The following diagram illustrates a classical RAG process using AWS SageMaker and OpenSearch.
 

@@ -8,14 +8,14 @@ note "invalid request":
 
 ## Pre-requisite
 
-* install lib for Bedrock and AWS: 
+* Install lib for Bedrock and AWS: 
 
     ```sh
     cd bedrock
     pip install -r requirements
     ```
 
-* install langchain and other dependencies
+* Install langchain and other dependencies
 
     ```sh
     cd ..
@@ -26,9 +26,9 @@ note "invalid request":
 
 The code is based on the content from [this article](https://python.langchain.com/docs/use_cases/question_answering/), and the code is [qa-pipeline.py](./qa-pipeline.py).
 
-* Install chromadb with: `pip install chromadb`
+* Install chromadb, as vector store, with: `pip install chromadb`
 * Get a client to Bedrock using boto3.
-* Use [WebBaseLoader](https://api.python.langchain.com/en/latest/document_loaders/langchain.document_loaders.web_base.WebBaseLoader.html) to load a website URL
+* Use [WebBaseLoader](https://api.python.langchain.com/en/latest/document_loaders/langchain.document_loaders.web_base.WebBaseLoader.html) to load content form a website giving its URL
 * Split the document in smaller chunks
 * Define Bedrock embeddings and use it to encode chunks to a vector store like chromaDB
 * Build a prompt
