@@ -1,4 +1,4 @@
-# Deep learning 
+# Deep learning
 
 It is a machine learning techniques which uses neural networks. 
 
@@ -84,7 +84,21 @@ Same as previous ML problems, we can use supervised ( picture and corresponding 
 
 Transfer learning is used to get what a first neural network as learn as input to a second NN. 
 
+## Computer Image
+
+### Convolutional Neural Network
+
+A [Neural Network](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) to process images by assigning learnable weights and biases to various aspects/objects in the image, and be able to differentiate one from the other
+It can successfully capture the spatial and temporal dependencies in an image through the application of relevant filters.
+Image has three matrices of values matching the size of the picture (H*W) and the RGB value.
+CNN reduces the size of the matrices without loosing the meaning. For that it uses the concept of Kernel, a window, shifting over the image.
+
+![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ciDgQEjViWLnCbmX-EeSrA.gif)
+
+See example of dataset [Fashion NIST](https://github.com/zalandoresearch/fashion-mnist)
+
 ## Sources of information
 
 * Big source of online book [Dive into Deep Learning from Amazoniens](https://d2l.ai).
 * [Udemy PyTorch for deep learning](https://www.learnpytorch.io/)
+

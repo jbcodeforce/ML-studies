@@ -122,7 +122,34 @@ The [binary cross-entropy / log loss](https://towardsdatascience.com/understandi
 
 ### Neural network
 
-A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends nn.Module. The constructor includes the nn structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output.
+A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends nn.Module. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. This is the more flexible way to declare a NN. As an alternate the following code use the Sequential method.
+
+```python
+model = nn.Sequential(
+    nn.Linear(x.shape[1], 50),
+    nn.ReLU(),
+    nn.Linear(50, 25),
+    nn.ReLU(),
+    nn.Linear(25, 1)
+).to(device)
+```
+
+Neural network has an input layer equal to the number of input features, and output equal to the number of response (1 output for binary classification). For activation function between hidden layers, ReLU is often used. The output layer will use no transfer function for a regression neural network, for classification, use the logistic for binary classification (just two classes) or log softmax for two or more classes.
+
+The hyperparameters to tune are:
+
+* The number of neuron in hidden layer: In general, more hidden neurons mean more capability to fit complex problems. But too many will lead to overfitting. Too few can lead to underfitting the problem and will sacrifice accuracy.
+
+* The number of layers: more layers allow the neural network to perform more of its feature engineering and data preprocessing.
+* The activation function between hidden layer and at the output layer too
+* The loss and optimizer function
+* The learning rate of the optimization function
+* Number of epochs to train the model. An epoch as one complete pass over the training set.
+
+For multi class training, LogSoftmax is used as transfer function and CrossEntropyLoss as loss function.
+With Softmax, the outputs are normalized probabilities that sum up to one,
+
+Some code samples:
 
 * Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classifications.ipynb)
 * [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/multiclass-classifier.ipynb)

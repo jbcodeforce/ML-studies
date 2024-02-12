@@ -5,6 +5,8 @@ DataScience-Python3/.ipynb_checkpoints/
 site/
 env/
 **/.venv/
+.conda/
+.vscode/
 **/logs/
 **/.ipynb_checkpoints/
 deep-neural-net/data/
@@ -15,3 +17,4 @@ llm-langchain/featureform/.featureform/
 llm-langchain/chroma_db/
 deep-neural-net/d2l-en/
 **/*.pth
+pytorch/computer-vision/data/

@@ -1,3 +1,6 @@
 torch
 torchmetrics
 matplotlib
+numpy
+scikit-learn
+torchvision
