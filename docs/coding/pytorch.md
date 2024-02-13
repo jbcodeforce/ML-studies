@@ -122,7 +122,7 @@ The [binary cross-entropy / log loss](https://towardsdatascience.com/understandi
 
 ### Neural network
 
-A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends nn.Module. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. This is the more flexible way to declare a NN. As an alternate the following code use the Sequential method.
+A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. This is the more flexible way [to declare a NN](). As an alternate the following code use the Sequential method 9using non linear layers (add ReLu).
 
 ```python
 model = nn.Sequential(
@@ -151,9 +151,15 @@ With Softmax, the outputs are normalized probabilities that sum up to one,
 
 Some code samples:
 
-* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classifications.ipynb)
-* [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/multiclass-classifier.ipynb)
-* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/nn-classifier.py).
+* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifications.ipynb)
+* [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/multiclass-classifier.ipynb)
+* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/nn-classifier.py).
+* Computer vision and the CNN [A notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/computer_vision.ipynb) and [Python code](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py)
+
+```Output
+{'model_name': 'FashionMNISTModel', 'model_loss': 0.41334256529808044, 'model_acc': tensor(0.8498, device='mps:0')}
+{'model_name': 'FashionNISTCNN', 'model_loss': 0.3709910213947296, 'model_acc': tensor(0.8716, device='mps:0')}
+```
 
 ## PyTorch training loop
 

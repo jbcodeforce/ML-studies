@@ -1,6 +1,6 @@
 # Deep learning
 
-It is a machine learning techniques which uses neural networks. 
+It is a machine learning techniques which uses neural networks with more than one layer.
 
 ## Neural Network
 
@@ -63,7 +63,7 @@ The general architecture of a classification neural network.
 | Loss function	| Binary cross entropy.  For multi-class Cross entropy |
 | Optimizer | SGD (stochastic gradient descent), Adam (see torch.optim for more options) |
 
-Below is an example of very simple NN in PyTorch
+Below is an example of very simple NN in PyTorch:
 
 ```python
 from torch import nn
@@ -76,7 +76,7 @@ model_0 = nn.Sequential(
 model_0
 ```
 
-Or use a subclass of `nn.Module` as demonstrated in [classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classifier.ipynb) notebook, to search for the circle classes in sklearn circles dataset, or a multi classes classification in [multiclass-classifier.ipynb]
+Or use a subclass of pyTorch `nn.Module` as demonstrated in [classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifier.ipynb) notebook, to search for the circle classes in sklearn circles dataset, or a multi classes classification in [multiclass-classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/multiclass-classifier.ipynb).
 
 ## Learning
 
@@ -84,21 +84,48 @@ Same as previous ML problems, we can use supervised ( picture and corresponding 
 
 Transfer learning is used to get what a first neural network as learn as input to a second NN. 
 
+### GPU vs CPU
+
+1. When the training loss is way lower than the test loss, it means "overfitting" and so loosing time.
+1. When both losses are identical, time will be wasted if we try to regularize the model.
+1. To optimize deep learning we need to maximize the compute-bound processing by reducing time spent on memory transfer and other things. Bandwidth cost is by moving the data from CPU to GPU, from one node to another, or even from CUDA global memory to CUDA shared memory.
+
 ## Computer Image
 
 ### Convolutional Neural Network
 
-A [Neural Network](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) to process images by assigning learnable weights and biases to various aspects/objects in the image, and be able to differentiate one from the other
-It can successfully capture the spatial and temporal dependencies in an image through the application of relevant filters.
+A [Neural Network](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) to process images by assigning learnable weights and biases to various aspects/objects in the image, and be able to differentiate one from the other. It can successfully capture the spatial and temporal dependencies in an image through the application of relevant filters.
 Image has three matrices of values matching the size of the picture (H*W) and the RGB value.
 CNN reduces the size of the matrices without loosing the meaning. For that it uses the concept of Kernel, a window, shifting over the image.
 
 ![](https://miro.medium.com/v2/resize:fit:1400/format:webp/1*ciDgQEjViWLnCbmX-EeSrA.gif)
 
-See example of dataset [Fashion NIST](https://github.com/zalandoresearch/fashion-mnist)
+A typical structure of a convolutional neural network:
+
+**Input layer -> [Convolutional layer -> activation layer -> pooling layer] -> Output layer**
+
+The layers between [] can be replicated.
+
+Every layer in a neural network is trying to compress data from higher dimensional space to lower dimensional space. Below is an example of those method
+
+```python
+# Convolutional layer
+nn.Conv2d(in_channels=input_shape, out_channels=hidden_units, kernel_size=3, stride=1, padding=1),
+nn.ReLU(),  # activation layer
+# pooling layer
+nn.MaxPool2d(kernel_size=2, stride=2),    
+```
+
+* Conv2d is compressing the information stored in the image to a smaller dimension image
+* MaxPool2d takes the maximum value from a portion of a tensor and disregard the rest.
+
+See this [CNN explainer tool.](https://poloclub.github.io/cnn-explainer/)
+
+See as an example of dataset using the [Fashion NIST](https://github.com/zalandoresearch/fashion-mnist). The non-linear classifier and one CNN is in [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py).
 
 ## Sources of information
 
 * Big source of online book [Dive into Deep Learning from Amazoniens](https://d2l.ai).
 * [Udemy PyTorch for deep learning](https://www.learnpytorch.io/)
+* [Horace He- Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)
 
