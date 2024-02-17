@@ -6,11 +6,11 @@ The sources for this content is from product documentation, [Zero to mastery - l
 
 ## Environment setup
 
-Use mini conda, and jupyter notebooks:
+Use mini conda for package management and virtual environment management, and jupyter notebooks.
 
 ### Install
 
-* Using Python 3 and pip:
+* Using Python 3 and pip3, install torch
 
     ```sh
     pip3 install torch torchvision torchaudio
@@ -104,6 +104,7 @@ See [Tim Dettmers has guide](https://timdettmers.com/2023/01/30/which-gpu-for-de
 
 ### Basic Algebra with Pytorch
 
+See [Algebra using Pytorch python code.](https://github.com/jbcodeforce/ML-studies/blob/master/pytorch/get_started/AlgebraPyTorch.py)
 
 ### [Loss functions](https://pytorch.org/docs/stable/nn.html#loss-functions)
 
@@ -122,7 +123,7 @@ The [binary cross-entropy / log loss](https://towardsdatascience.com/understandi
 
 ### Neural network
 
-A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. This is the more flexible way [to declare a NN](). As an alternate the following code use the Sequential method 9using non linear layers (add ReLu).
+A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. This is the most flexible way [to declare a NN](https://github.com/jbcodeforce/ML-studies/blob/4271cbd2fa3094cf672e038ee7559997e9d90443/pytorch/classification/nn-classifier.py#L17). As an alternate the following code uses the Sequential method using non linear layers (nn.ReLu()).
 
 ```python
 model = nn.Sequential(
@@ -134,20 +135,20 @@ model = nn.Sequential(
 ).to(device)
 ```
 
-Neural network has an input layer equal to the number of input features, and output equal to the number of response (1 output for binary classification). For activation function between hidden layers, ReLU is often used. The output layer will use no transfer function for a regression neural network, for classification, use the logistic for binary classification (just two classes) or log softmax for two or more classes.
+Neural network has an input layer equal to the number of input features, and output equal to the number of response (1 output for binary classification). For activation function between hidden layers, ReLU is often used when we want non-linearity. The output layer will not use a transfer function for a regression neural network, or use the logistic for binary classification (just two classes) or log softmax for two or more classes.
 
-The hyperparameters to tune are:
+The hyper-parameters to tune are:
 
-* The number of neuron in hidden layer: In general, more hidden neurons mean more capability to fit complex problems. But too many will lead to overfitting. Too few can lead to underfitting the problem and will sacrifice accuracy.
+* The number of neuron in hidden layer: In general, more hidden neurons means more capability to fit complex problems. But too many, will lead to overfitting. Too few, may lead to underfitting the problem and will sacrifice accuracy.
 
 * The number of layers: more layers allow the neural network to perform more of its feature engineering and data preprocessing.
-* The activation function between hidden layer and at the output layer too
-* The loss and optimizer function
-* The learning rate of the optimization function
+* The activation function between hidden layers and for the output layer.
+* The loss and optimizer functions.
+* The learning rate of the optimization functions
 * Number of epochs to train the model. An epoch as one complete pass over the training set.
 
-For multi class training, LogSoftmax is used as transfer function and CrossEntropyLoss as loss function.
-With Softmax, the outputs are normalized probabilities that sum up to one,
+For multi class training, `LogSoftmax` is used as transfer function and `CrossEntropyLoss` as loss function.
+With Softmax, the outputs are normalized probabilities that sum up to one.
 
 Some code samples:
 
@@ -161,7 +162,9 @@ Some code samples:
 {'model_name': 'FashionNISTCNN', 'model_loss': 0.3709910213947296, 'model_acc': tensor(0.8716, device='mps:0')}
 ```
 
-## PyTorch training loop
+## Model training
+
+### PyTorch training loop
 
 For the training loop, the steps to build:
 
@@ -241,21 +244,65 @@ with torch.inference_mode():
 
 ### Evaluate classification models
 
-Classification model can be measured using the following metrics:
+Classification model can be measured using the at least the following metrics (see more [PyTorch metrics](https://lightning.ai/docs/torchmetrics/stable/)):
 
 | Metric name/Evaluation method	| Definition | Code |
 | --- | --- | --- |
-| Accuracy	| Out of 100 predictions, how many does your model get correct? E.g. 95% accuracy means it gets 95/100 predictions correct. |	torchmetrics.Accuracy() or sklearn.metrics.accuracy_score() |
-| Precision	| Proportion of true positives over total number of samples. Higher precision leads to less false positives (model predicts 1 when it should've been 0). | torchmetrics.Precision() or sklearn.metrics.precision_score() |
-| Recall | Proportion of true positives over total number of true positives and false negatives (model predicts 0 when it should've been 1). Higher recall leads to less false negatives. |	torchmetrics.Recall() or sklearn.metrics.recall_score()|
-| F1-score | Combines precision and recall into one metric. 1 is best, 0 is worst. | torchmetrics.F1Score() or sklearn.metrics.f1_score() |
-| Confusion matrix | Compares the predicted values with the true values in a tabular way, if 100% correct, all values in the matrix will be top left to bottom right.| torchmetrics.ConfusionMatrix or sklearn.metrics.plot_confusion_matrix() |
-| Classification report | Collection of some of the main classification metrics such as precision, recall and f1-score. | [sklearn.metrics.classification_report()](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) |
+| **Accuracy**	| Out of 100 predictions, how many does your model get correct? E.g. 95% accuracy means it gets 95/100 predictions correct. |	torchmetrics.Accuracy() or sklearn.metrics.accuracy_score() |
+| **Precision**	| Proportion of true positives over total number of samples. Higher precision leads to less false positives (model predicts 1 when it should've been 0). | torchmetrics.Precision() or sklearn.metrics.precision_score() |
+| **Recall** | Proportion of true positives over total number of true positives and false negatives (model predicts 0 when it should've been 1). Higher recall leads to less false negatives. |	torchmetrics.Recall() or sklearn.metrics.recall_score()|
+| **F1-score** | Combines precision and recall into one metric. 1 is best, 0 is worst. | torchmetrics.F1Score() or sklearn.metrics.f1_score() |
+| **Confusion matrix** | Compares the predicted values with the true values in a tabular way, if 100% correct, all values in the matrix will be top left to bottom right.| [torchmetrics.classification.ConfusionMatrix]()https://lightning.ai/docs/torchmetrics/stable/classification/confusion_matrix.html or sklearn.metrics.plot_confusion_matrix() |
+| **Classification report** | Collection of some of the main classification metrics such as precision, recall and f1-score. | [sklearn.metrics.classification_report()](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.classification_report.html) |
+
+
+## Pytorch datasets
+
+PyTorch includes many existing functions to load in various custom datasets in the [TorchVision](https://pytorch.org/vision/stable/index.html), [TorchText](https://pytorch.org/text/stable/index.html), [TorchAudio](https://pytorch.org/audio/stable/index.html) and [TorchRec](https://pytorch.org/torchrec/) domain libraries.
+
+
+## Some How to
+
+???- question "How to set the device dynamically"
+    ```python
+    def getDevice():
+        if torch.backends.mps.is_available():
+            device = torch.device("mps")
+        elif torch.backends.cuda.is_available():
+            device = torch.device("cuda")
+        else: 
+            device = torch.device("cpu")
+        return device   
+    ```
+
+???- question "How to save and load a model?"
+    ```python
+    # saving using Pytorch
+    MODEL_SAVE_PATH = MODEL_PATH / filename
+    torch.save(model.state_dict(), MODEL_SAVE_PATH)
+    # Load is reusing the class declaration
+    model=FashionNISTCNN(input_shape=1,hidden_units=10,output_shape=10)
+    model.load_state_dict(torch.load("models/fashion_cnn_model.pth"))
+    ```
+
+???- question "Display the confusion matrix for a multiclass prediction"
+    ```python
+    def make_confusion_matrix(pred_tensor, test_labels, class_names):
+        # Present a confustion matrix between the predicted labels and the true labels from test data
+        cm = MulticlassConfusionMatrix(num_classes=len(class_names))
+        cm.update(pred_tensor, test_labels)
+        fig,ax = cm.plot(labels=class_names)
+        plt.show()
+    ```
+
+???- question "Transform an image into a Tensor"
+    Use [torchvision.transforms]() module
 
 ## Code samples
 
-* [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
-* [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/workflow-basic.ipynb)
+* [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
+* [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb)
+* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer_vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer_vision/use_fashion_cnn.py)
 
 ## Resources
 

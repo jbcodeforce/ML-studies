@@ -18,3 +18,4 @@ llm-langchain/chroma_db/
 deep-neural-net/d2l-en/
 **/*.pth
 pytorch/computer-vision/data/
+**/models/

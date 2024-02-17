@@ -168,6 +168,9 @@ def evaluate_model(model: nn.Module,
             "model_acc": accuracy.item(),
             "training_time": training_time}
 
+'''
+Presents an histogram of the 3 tested model with accuracy values 
+'''
 def bestModel(model_0_results, model_1_results, model_2_results):
     compare_results = pd.DataFrame([model_0_results, model_1_results, model_2_results])
     print(compare_results)
@@ -181,7 +184,7 @@ def train_model(model, train_dl, test_dl):
     torch.manual_seed(42)
     device = torch.device("mps") if torch.backends.mps.is_available() else "cpu"
     model.to(device)
-    print(f"Train {model.__class__.__name__} using {device} device")
+    print(f"\n--- Train {model.__class__.__name__} using {device} device\n")
     # create a loss function
     loss_fn = nn.CrossEntropyLoss()
 
@@ -204,69 +207,16 @@ def train_model(model, train_dl, test_dl):
     training_time=print_train_time(train_time_start, train_time_stop, device)
     return evaluate_model(model, test_dl, loss_fn, accuracy_fn, device,training_time)
 
-def make_predictions(model, data):
-    pred_probs = []
-    model.eval()
-    device = torch.device("mps") if torch.backends.mps.is_available() else "cpu"
-    with torch.inference_mode():
-        for sample in data:
-            sample = torch.unsqueeze(sample, dim=0).to(device)
-            pred_logit = model(sample)
-            pred_prob = torch.softmax(pred_logit.squeeze(), dim=0) 
-            # note: perform softmax on the "logits" dimension, not "batch" dimension 
-            # (in this case we have a batch size of 1, so can perform on dim=0)
-
-            # Get pred_prob off GPU for further calculations
-            pred_probs.append(pred_prob.cpu())
-    return torch.stack(pred_probs)
-
-def samplePredictions(model, data):
-    test_samples = []
-    test_labels = []
-    for sample, label in random.sample(list(data), k=9):
-        test_samples.append(sample)
-        test_labels.append(label)
-    pred_probs= make_predictions(model=model, 
-                             data=test_samples)
-    pred_classes = pred_probs.argmax(dim=1)
-    plot_predictions(test_samples, pred_classes, test_labels)
-    return pred_classes, test_labels
-
-def plot_predictions(test_samples, pred_classes, test_labels):
-    class_names = test_samples.classes
-    plt.figure(figsize=(9, 9))
-    nrows = 3
-    ncols = 3
-    for i, sample in enumerate(test_samples):
-        # Create a subplot
-        plt.subplot(nrows, ncols, i+1)
-
-        # Plot the target image
-        plt.imshow(sample.squeeze(), cmap="gray")
-
-        # Find the prediction label (in text form, e.g. "Sandal")
-        pred_label = class_names[pred_classes[i]]
-
-        # Get the truth label (in text form, e.g. "T-shirt")
-        truth_label = class_names[test_labels[i]] 
-
-        # Create the title text of the plot
-        title_text = f"Pred: {pred_label} | Truth: {truth_label}"
-        
-        # Check for equality and change title colour accordingly
-        if pred_label == truth_label:
-            plt.title(title_text, fontsize=10, c="g") # green text if correct
-        else:
-            plt.title(title_text, fontsize=10, c="r") # red text if wrong
-        plt.axis(False);
 
 def saveModel(model, filename):
+    print(f"\n--- Save best model -> {model.__class__.__name__}")
     MODEL_PATH = Path("models")
     MODEL_PATH.mkdir(parents=True, # create parent directories if needed
                     exist_ok=True # if models directory already exists, don't error
     )
     MODEL_SAVE_PATH = MODEL_PATH / filename
     torch.save(model.state_dict(), MODEL_SAVE_PATH)
+    print("\n\n---- SAVED")
 
 if __name__ == "__main__":
     # load the data
@@ -287,5 +237,5 @@ if __name__ == "__main__":
 
     bestModel(model_0_results, model_1_results, model_2_results)
    
-    samplePredictions(model_2,test_dl)
+    
     saveModel(model_2, "fashion_cnn_model.pth")

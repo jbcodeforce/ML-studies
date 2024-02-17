@@ -92,6 +92,8 @@ Transfer learning is used to get what a first neural network as learn as input t
 
 ## Computer Image
 
+Address how a computer sees, images.
+
 ### Convolutional Neural Network
 
 A [Neural Network](https://towardsdatascience.com/a-comprehensive-guide-to-convolutional-neural-networks-the-eli5-way-3bd2b1164a53) to process images by assigning learnable weights and biases to various aspects/objects in the image, and be able to differentiate one from the other. It can successfully capture the spatial and temporal dependencies in an image through the application of relevant filters.
@@ -121,11 +123,17 @@ nn.MaxPool2d(kernel_size=2, stride=2),
 
 See this [CNN explainer tool.](https://poloclub.github.io/cnn-explainer/)
 
-See as an example of dataset using the [Fashion NIST](https://github.com/zalandoresearch/fashion-mnist). The non-linear classifier and one CNN is in [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py).
+Simple image dataset using the [Fashion NIST](https://github.com/zalandoresearch/fashion-mnist) and the [PyTorch Image Models](https://github.com/huggingface/pytorch-image-models) as a collection of image models, layers, utilities, optimizers, schedulers, data-loaders / augmentations, and reference training / validation scripts
+
+The non-linear classifier and one CNN is in [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py).
+
+[MIT - Convolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
 
 ## Sources of information
 
 * Big source of online book [Dive into Deep Learning from Amazoniens](https://d2l.ai).
 * [Udemy PyTorch for deep learning](https://www.learnpytorch.io/)
 * [Horace He- Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)
+* [MIT - CNConvolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
+
 

@@ -424,6 +424,6 @@ Considerations
 * [RAG with OpenSearch Service](https://catalog.workshops.aws/semantic-search/en-US/module-7-retrieval-augmented-generation).
 * [Running LLM on local laptop using llama.cpp](https://github.com/ggerganov/llama.cpp)
 * [BertNet knowledge graphs from llm](https://openreview.net/pdf?id=ntIq8Wm79G-)
-
+* [ ] [Study this hyperpod workshop on Sagemaker](https://catalog.workshops.aws/sagemaker-hyperpod/en-US)
 
 [>>> Prompt Engineering](./prompt-eng.md) 
