@@ -3,6 +3,7 @@ repo_url: https://github.com/jbcodeforce/ML-studies
 nav:
   - Introduction: index.md
   - Concepts: 
+    - Main concepts: concepts/index.md
     - Math summary: concepts/maths.md
   - Data management:
     - Introduction: data/index.md

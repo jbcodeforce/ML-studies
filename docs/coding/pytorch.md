@@ -260,6 +260,21 @@ Classification model can be measured using the at least the following metrics (s
 
 PyTorch includes many existing functions to load in various custom datasets in the [TorchVision](https://pytorch.org/vision/stable/index.html), [TorchText](https://pytorch.org/text/stable/index.html), [TorchAudio](https://pytorch.org/audio/stable/index.html) and [TorchRec](https://pytorch.org/torchrec/) domain libraries.
 
+### Data augmentation
+
+Data augmentation is the process of altering the data in such a way that this artificially increases the diversity of the training set.
+
+The purpose of [torchvision.transforms](https://pytorch.org/vision/stable/transforms.html) is to alter the images in some way and turning them into a tensor, or cropping an image or randomly erasing a portion or randomly rotating them.
+
+Training a model on this artificially altered dataset hopefully results in a model that is capable of better **generalization** (the patterns it learns are more robust to future unseen examples).
+
+Researches show that random transforms (like `transforms.RandAugment()` and `transforms.TrivialAugmentWide()`) generally perform better than hand-picked transforms.
+
+We usually don't perform data augmentation on the test set. The idea of data augmentation is to artificially increase the diversity of the training set to better predict on the testing set.
+
+See also in [PyTorch's Illustration of Transforms](https://pytorch.org/vision/stable/auto_examples/transforms/plot_transforms_illustrations.html) examples.
+
+
 
 ## Some How to
 
@@ -296,7 +311,16 @@ PyTorch includes many existing functions to load in various custom datasets in t
     ```
 
 ???- question "Transform an image into a Tensor"
-    Use [torchvision.transforms]() module
+    Use [torchvision.transforms](https://pytorch.org/vision/stable/transforms.html) module
+    ```python
+    train_transformer=v2.Compose([v2.Resize((224,224)), v2.TrivialAugmentWide(num_magnitude_bins=31), v2.ToTensor()])
+    ```
+
+???- question "How to get visibility into a neural network"
+    ```
+    import torchinfo
+    torchinfo.summary()
+    ```
 
 ## Code samples
 
@@ -310,3 +334,5 @@ PyTorch includes many existing functions to load in various custom datasets in t
 * [Zero to mastery - learning pytorch](https://www.learnpytorch.io/)
 * [The incredible pytorch](https://github.com/ritchieng/the-incredible-pytorch):  curated list of tutorials, projects, libraries, videos, papers, books..
 * [Dan Fleisch's video: What's a tensor?](https://www.youtube.com/watch?v=f5liqUk0ZTw)
+* [How to train state of the art models using Torchvision - PyTorch blog.](https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives)
+* [Jeff Heaton - Using Convolutional Neural Networks.](https://github.com/jeffheaton/app_deep_learning/blob/main/t81_558_class_05_2_cnn.ipynb)
