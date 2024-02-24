@@ -6,7 +6,16 @@ from pathlib import Path
 from PIL import Image
 import matplotlib.pyplot as plt
 import random
-from typing import List
+from typing import List, Dict
+
+def getDevice():
+        if torch.backends.mps.is_available():
+            device = torch.device("mps")
+        elif torch.backends.cuda.is_available():
+            device = torch.device("cuda")
+        else: 
+            device = torch.device("cpu")
+        return device
 
 def save_model(model: torch.nn.Module,
                target_dir: str,
@@ -81,3 +90,43 @@ def display_random_images(dataset: torch.utils.data.dataset.Dataset,
         plt.title(title)
     plt.show()
         
+def plot_loss_curves(results: Dict[str, List[float]]):
+    """Plots training curves of a results dictionary.
+    Args:
+        results (dict): dictionary containing list of values, e.g.
+            {"train_loss": [...],
+             "train_acc": [...],
+             "test_loss": [...],
+             "test_acc": [...]}
+    """
+    
+    # Get the loss values of the results dictionary (training and test)
+    loss = results['train_loss']
+    test_loss = results['test_loss']
+
+    # Get the accuracy values of the results dictionary (training and test)
+    accuracy = results['train_acc']
+    test_accuracy = results['test_acc']
+
+    # Figure out how many epochs there were
+    epochs = range(len(results['train_loss']))
+
+    # Setup a plot 
+    plt.figure(figsize=(15, 7))
+
+    # Plot loss
+    plt.subplot(1, 2, 1)
+    plt.plot(epochs, loss, label='train_loss')
+    plt.plot(epochs, test_loss, label='test_loss')
+    plt.title('Loss')
+    plt.xlabel('Epochs')
+    plt.legend()
+
+    # Plot accuracy
+    plt.subplot(1, 2, 2)
+    plt.plot(epochs, accuracy, label='train_accuracy')
+    plt.plot(epochs, test_accuracy, label='test_accuracy')
+    plt.title('Accuracy')
+    plt.xlabel('Epochs')
+    plt.legend();
+    plt.show()

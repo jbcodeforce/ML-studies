@@ -33,14 +33,6 @@ def trace_dataset(train_data):
     print(f"Label datatype: {type(label)}")
     utils.display_image(img, train_data.classes[label])
 
-def getDevice():
-        if torch.backends.mps.is_available():
-            device = torch.device("mps")
-        elif torch.backends.cuda.is_available():
-            device = torch.device("cuda")
-        else: 
-            device = torch.device("cpu")
-        return device
 
 def tryOneImage(model,device,train_dl):
     img_batch, label_batch = next(iter(train_dl))
@@ -122,7 +114,7 @@ if __name__ == "__main__":
     #img,label = next(iter(train_dl))
     #display_image(img, train_data.classes[label])
     #display_random_images(train_data,classes,8)
-    device=getDevice()
+    device=utils.getDevice()
     NUM_EPOCHS = 20
     print(f"\n--- 2: build and train the model using {NUM_EPOCHS} epochs on {device}") 
     model =TinyVGG(input_shape=3, hidden_units=20, output_shape=len(classes)).to(device)

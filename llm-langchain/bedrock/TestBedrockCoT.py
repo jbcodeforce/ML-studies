@@ -1,5 +1,4 @@
-import json
-import os
+import os,logging
 import sys, getopt
 
 from langchain_community.llms import Bedrock
@@ -26,23 +25,19 @@ default_instance_modifier= {
     "maxTokens":300,
 }
 
-def textPlayground(model,prompt):
-    if "claude" in model:
-        inference_modifier= claude_inference_modifier
-    else:
-        inference_modifier=default_instance_modifier
+def textPlayground(model,prompt,inference_modifier):
+
     textgen_llm = Bedrock(
         model_id=model,
         client=bedrock_runtime,
         model_kwargs=inference_modifier,
     )
     response = textgen_llm.invoke(prompt)
-    print_ww(response)
     return response
 
 def usage():
-    print("Usage: python TestBedrockCoT.py [-h | --help] [ -p file_name_prompt -m model_name ]")
-    print("Example: python TestBedrockCoT.py -p cot1.txt -m anthropic.claude-v2")
+    logging.error("Usage: python TestBedrockCoT.py [-h | --help] [ -p file_name_prompt -m model_name ]")
+    logging.error("Example: python TestBedrockCoT.py -p cot1.txt -m anthropic.claude-v2")
     sys.exit(1)
 
 def processArguments():
@@ -72,5 +67,9 @@ def buildPrompt(FILENAME):
 if __name__ == '__main__':
     FILENAME,MODEL_NAME=processArguments()
     prompt=buildPrompt(FILENAME)
-    print(prompt)
-    textPlayground(MODEL_NAME,prompt)
+    logging.info(prompt)
+    if "claude" in model:
+        inference_modifier= claude_inference_modifier
+    else:
+        inference_modifier=default_instance_modifier
+    textPlayground(MODEL_NAME,prompt,inference_modifier)

@@ -28,8 +28,9 @@ nav:
   - Techno:
     - Introduction: techno/index.md
     - Feature Store: techno/feature_store.md/
+    - Apache Spark studies: https://jbcodeforce.github.io/spark-studies/
     - Key AI startups: techno/players_to_look.md
-    - SageMaker: https://jbcodeforce.github.io/aws-studies/ai-ml/sagemaker
+    - Amazon SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
     - Streamlit: techno/streamlit.md
   - Solutions:
     - Introduction: solutions/index.md
@@ -66,6 +67,7 @@ markdown_extensions:
   - admonition
   - codehilite
   - footnotes
+  - tables
   - pymdownx.smartsymbols
   - pymdownx.superfences
   - toc:

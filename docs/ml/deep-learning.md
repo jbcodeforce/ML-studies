@@ -129,6 +129,14 @@ The non-linear classifier and one CNN is in [fashion_cnn.py](https://github.com/
 
 [MIT - Convolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
 
+## Transfer Learning
+
+Takes an existing pre-trained model, and use it on our own data to fine tune the parameters. It helps to get better results with less data, and lesser cost and time. In Computer Vision, [Image Net](https://www.image-net.org) includes million of images on which models were trained. 
+
+[PyTorch has pre-trained models](https://pytorch.org/vision/stable/models.html), [Hugging Face](https://huggingface.co/models), [PyTorch Image Models - Timm](https://github.com/huggingface/pytorch-image-models) is a collection of image models, layers, utilities, optimizers, schedulers, data-loaders / augmentations, and reference training / validation scripts. [Paper with code](https://paperswithcode.com/sota) is a collection of the latest state-of-the-art machine learning papers with code implementations attached.
+
+See [PyTorch transfer learning for image classification]()
+
 ## Sources of information
 
 * Big source of online book [Dive into Deep Learning from Amazoniens](https://d2l.ai).

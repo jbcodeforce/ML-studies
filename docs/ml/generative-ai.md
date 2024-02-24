@@ -424,6 +424,10 @@ Considerations
 * [RAG with OpenSearch Service](https://catalog.workshops.aws/semantic-search/en-US/module-7-retrieval-augmented-generation).
 * [Running LLM on local laptop using llama.cpp](https://github.com/ggerganov/llama.cpp)
 * [BertNet knowledge graphs from llm](https://openreview.net/pdf?id=ntIq8Wm79G-)
-* [ ] [Study this hyperpod workshop on Sagemaker](https://catalog.workshops.aws/sagemaker-hyperpod/en-US)
 
+### Amazon specifics
+
+
+* [ ] [Study this hyperpod workshop on Sagemaker](https://catalog.workshops.aws/sagemaker-hyperpod/en-US)
+* [ ] [Generative AI on Amazon SageMaker - Workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/972fd252-36e5-4eed-8608-743e84957f8e/en-US)
 [>>> Prompt Engineering](./prompt-eng.md) 

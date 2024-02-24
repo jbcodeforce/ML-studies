@@ -1,7 +1,7 @@
 # AI and Machine Learning studies
 
 !!! info "Update"
-    Created 2017 - Update 12/2023
+    Created 2017 - Update 2/19/2024
 
 This repository includes notes, code samples, and Jupyter notebooks, to learn how to do machine learning using Python and other technologies. This content comes from studying different labs at IBM, AWS, Kaggle, Coursera and Udemy courses, and reading different books and web sites on this exiting subject.
 

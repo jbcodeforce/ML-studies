@@ -83,7 +83,7 @@ PyTorch has two important modules we can use to create neural network: `torch.nn
 
 ### GPU
 
-On Linux need the Cuda (Compute Unified Device Architecture) library for Nvidia GPU. See [AWS deep learning container](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/what-is-dlc.html).
+On Linux, we need to use the Cuda (Compute Unified Device Architecture) library for Nvidia GPU. See [AWS deep learning container](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/what-is-dlc.html). For Mac it is `mps`
 
 Here is sample code to set the mps to access GPU (mps for Mac) for tensor computation
 
@@ -207,6 +207,7 @@ with torch.inference_mode():
     y_preds = model(X_test)
 ```
 
+See [train_step function in engine.py](https://github.com/jbcodeforce/ML-studies/blob/e895a9af9d1d36fe3e5a540d8d0fb3224f71646d/pytorch/computer-vision/engine.py#L5)
 
 ### PyTorch testing loop
 
@@ -230,6 +231,8 @@ with torch.inference_mode():
 
 ```
 
+See [test_step function in engine.py](https://github.com/jbcodeforce/ML-studies/blob/e895a9af9d1d36fe3e5a540d8d0fb3224f71646d/pytorch/computer-vision/engine.py#L46)
+
 ### Improving a model
 
 | Model improvement technique | What does it do? |
@@ -246,10 +249,10 @@ with torch.inference_mode():
 
 Classification model can be measured using the at least the following metrics (see more [PyTorch metrics](https://lightning.ai/docs/torchmetrics/stable/)):
 
-| Metric name/Evaluation method	| Definition | Code |
-| --- | --- | --- |
-| **Accuracy**	| Out of 100 predictions, how many does your model get correct? E.g. 95% accuracy means it gets 95/100 predictions correct. |	torchmetrics.Accuracy() or sklearn.metrics.accuracy_score() |
-| **Precision**	| Proportion of true positives over total number of samples. Higher precision leads to less false positives (model predicts 1 when it should've been 0). | torchmetrics.Precision() or sklearn.metrics.precision_score() |
+| Metric name/ Evaluation method | Definition | Code |
+| :--- | :--- | :--- |
+| **Accuracy** | Out of 100 predictions, how many does your model get correct? E.g. 95% accuracy means it gets 95/100 predictions correct. | torchmetrics.Accuracy() or sklearn.metrics.accuracy_score() |
+| **Precision** | Proportion of true positives over total number of samples. Higher precision leads to less false positives (model predicts 1 when it should've been 0). | torchmetrics.Precision() or sklearn.metrics.precision_score() |
 | **Recall** | Proportion of true positives over total number of true positives and false negatives (model predicts 0 when it should've been 1). Higher recall leads to less false negatives. |	torchmetrics.Recall() or sklearn.metrics.recall_score()|
 | **F1-score** | Combines precision and recall into one metric. 1 is best, 0 is worst. | torchmetrics.F1Score() or sklearn.metrics.f1_score() |
 | **Confusion matrix** | Compares the predicted values with the true values in a tabular way, if 100% correct, all values in the matrix will be top left to bottom right.| [torchmetrics.classification.ConfusionMatrix]()https://lightning.ai/docs/torchmetrics/stable/classification/confusion_matrix.html or sklearn.metrics.plot_confusion_matrix() |
@@ -274,7 +277,27 @@ We usually don't perform data augmentation on the test set. The idea of data aug
 
 See also in [PyTorch's Illustration of Transforms](https://pytorch.org/vision/stable/auto_examples/transforms/plot_transforms_illustrations.html) examples.
 
+### Transfer learning for image classification
 
+With transfer learning is to take an already well-performing model on a problem-space similar to the one to address and then to customize it.
+
+For custom data to go into the model, need to be prepared in the same way as the original training data that went into the model.
+
+PyTorch models has weights and we can get the transformers from the weight.
+
+```python
+weights = torchvision.models.EfficientNet_B0_Weights.DEFAULT
+transformer= weights.transforms()
+model=torchvision.models.efficientnet_b0(weights=weights).to(device)
+```
+
+efficientnet_b0 comes in three main parts:
+
+* **Features**: A collection of convolutional layers and other various activation layers to learn a base representation of vision data.
+* **avgpool**: Takes the average of the output of the features layer(s) and turns it into a feature vector.
+* **classifier**: - Turns the feature vector into a vector with the same dimensionality as the number of required output classes (ImageNet has 1000 classes, out_features=1000).
+
+The process of transfer learning usually freezes some base layers of a pre-trained model, typically the features section, and then adjusts the output layers (also called head/classifier layers) to suit our needs.
 
 ## Some How to
 
