@@ -47,7 +47,7 @@ docker run -v $(pwd):/home --runtime nvidia --rm -it gcr.io/kaggle-gpu-images/py
 
 ### Conda
 
-Conda provides package, dependency, and environment management for any language. 
+Conda provides package, dependency, and environment management for many languages. 
 
 On Mac M1 we need ARM64 architecture. 
 
@@ -63,6 +63,9 @@ On Mac M1 we need ARM64 architecture.
 1. Install the following: `conda install pytorch pandas scikit-learn`
 1. Start Jupiter: `jupiter notebook`
 1. Execute the notebook in to test [test-env.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/deep-neural-net/test-env.ipynb)
+
+
+[Install Conda on Windows.](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
 
 ### Run Jupyter notebooks
 

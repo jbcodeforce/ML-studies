@@ -84,7 +84,7 @@ optimizer = torch.optim.SGD(model.parameters(), lr=1e-3)
 
 '''
 In a single training loop, the model makes predictions on the training dataset 
-(fed to it in batches), and backpropagates the prediction error to adjust 
+(fed to it in batches), and back propagates the prediction error to adjust 
 the model’s parameters
 '''
 def train(dataloader, model, loss_fn, optimizer):
@@ -97,7 +97,7 @@ def train(dataloader, model, loss_fn, optimizer):
         pred = model(X)
         loss = loss_fn(pred, y)
 
-        # Backpropagation
+        # Back propagation
         loss.backward()
         optimizer.step()
         optimizer.zero_grad()

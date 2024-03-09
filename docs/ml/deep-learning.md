@@ -26,7 +26,7 @@ Modern neural network does not use sigmoid function anymore but the [Rectifier L
 
 Neural networks input and output can be an image, a series of numbers that could represent text, audio, or a time series...
 
-The simplest architecture is the [perceptron](./classifier/#perceptron), represented by the following diagram:
+The simplest architecture is the [perceptron](./classifier.md#perceptron), represented by the following diagram:
 
 ![](./images/perceptron.png)
 

@@ -5,6 +5,7 @@ DataScience-Python3/.ipynb_checkpoints/
 site/
 env/
 **/.venv/
+**/.pytorch/
 .conda/
 .vscode/
 **/logs/

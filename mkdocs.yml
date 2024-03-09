@@ -14,8 +14,12 @@ nav:
     - Anomaly detection: anomaly.md
   - Deep Learning: 
     - Introduction: ml/deep-learning.md
-    - Generative AI: ml/generative-ai.md
-    - Prompt Engineering: ml/prompt-eng.md
+    - Distributed Data Parallel: coding/ddp.md
+  - Generative AI: 
+    - Introduction: genAI/index.md
+    - Prompt Engineering: genAI/prompt-eng.md
+    - Reference Architecture: genAI/ref-arch.md
+  
   - Coding:
     - Getting started: coding/index.md
     - Pandas: coding/pandas.md

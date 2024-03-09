@@ -6,7 +6,7 @@ The sources for this content is from product documentation, [Zero to mastery - l
 
 ## Environment setup
 
-Use mini conda for package management and virtual environment management, and jupyter notebooks.
+Use pip or  mini conda for package management and virtual environment management, and jupyter notebooks.
 
 ### Install
 
@@ -31,7 +31,7 @@ Use mini conda for package management and virtual environment management, and ju
     1. To activate conda environment: `conda activate torch`
     1. Install pytorch `conda install pandas pytorch::pytorch torchvision torchaudio -c pytorch`
     1. [optional] Install jupyter packaging: `conda install -y jupyter`
-    1. Register a new runtime env for jupyter: `python -m ipykernel install --user --name pytorch --display-name "Python 3.9 (pytorch)"`
+    1. Register a new runtime env for jupyter: `python -m ipykernel install --user --name pytorch --display-name "Python 3.11 (pytorch)"`
 
 ### Run once conda installed
 
@@ -100,7 +100,7 @@ tensor_on_gpu = tensor.to(device)
 tensor_back_on_cpu = tensor_on_gpu.cpu().numpy()
 ```
 
-See [Tim Dettmers has guide](https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/).
+See [Tim Dettmers's guide](https://timdettmers.com/2023/01/30/which-gpu-for-deep-learning/).
 
 ### Basic Algebra with Pytorch
 
@@ -353,6 +353,7 @@ The process of transfer learning usually freezes some base layers of a pre-train
 
 ## Resources
 
+* [PyTorch.org tutorial](https://pytorch.org/tutorials/beginner/basics/intro.html)
 * [Udemy content repo](https://github.com/mrdbourke/pytorch-deep-learning)
 * [Zero to mastery - learning pytorch](https://www.learnpytorch.io/)
 * [The incredible pytorch](https://github.com/ritchieng/the-incredible-pytorch):  curated list of tutorials, projects, libraries, videos, papers, books..
