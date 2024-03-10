@@ -9,9 +9,9 @@ import random
 from typing import List, Dict
 
 def getDevice():
-        if torch.backends.mps.is_available():
-            device = torch.device("mps")
-        elif torch.backends.cuda.is_available():
+        #if torch.mps.is_available():
+        #    device = torch.device("mps")
+        if torch.cuda.is_available():
             device = torch.device("cuda")
         else: 
             device = torch.device("cpu")
@@ -130,3 +130,5 @@ def plot_loss_curves(results: Dict[str, List[float]]):
     plt.xlabel('Epochs')
     plt.legend();
     plt.show()
+
+print(getDevice())

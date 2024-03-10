@@ -7,7 +7,7 @@ Read this ML study content in [book format](https://jbcodeforce.github.io/ML-stu
 The content of this repository is written with markdown files, packaged with [MkDocs](https://www.mkdocs.org/) and can be built into a book-readable format by MkDocs build processes.
 
 1. Install MkDocs locally following the [official documentation instructions](https://www.mkdocs.org/#installation).
-1. Install Material plugin for mkdocs:  `pip install mkdocs-material` 
+1. Install Material plugin for mkdocs:  `pip install -r requirements.txt ` 
 2. `git clone https://github.com/jbcodeforce/ML-studies.git` _(or your forked repository if you plan to edit)_
 3. `cd ML-studies`
 4. `mkdocs serve`
