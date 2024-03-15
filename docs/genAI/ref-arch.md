@@ -1,11 +1,16 @@
 
 # Reference Architecture for LLM solution
 
-A generic reference architecture (defined by [A16Z](https://a16z.com/emerging-architectures-for-llm-applications)) for a LLM solution looks like in the following diagram, which I extended with event streaming as a source:
+Developing and serving custom LLMs require a lot of work around managing infrastructure, data, models, pipelines, prompts, context windows, application states, observability, embeddings, storage mechanisms, caching and augmented generation. 
+
+
+## Application integration with LLM
+
+This section present a generic reference architecture as defined by [A16Z](https://a16z.com/emerging-architectures-for-llm-applications) for a LLM solution.  I extended their architecture with event streaming as a source of data and knowledge:
 
 ![](./diagrams/llm-ra-1.drawio.png)
 
-1. **Data pipelines** are batch processing, which in the context of LLM, may process unstructured documents with structured CSVs, Json, or SQL tables. This data processing may be done in a map-reduce platform to do Extract Transform Load job. Most of existing pipelines land their output to Data Lake. But modern data pipelines may call directly a LLM to build embeddings and to save them into a Vector Store. The flow will look like in the figure below, which is based on classical Retrieval Augmented Generation (RAG) process.
+1. **Data pipelines** are batch processing, which in the context of LLM, may combine unstructured documents with structured CSVs, Json, or SQL table content. This data processing may be done in a map-reduce platform, like Apache Spark, to perform the Extract Transform Load job. Most of existing pipelines land their output to Data Lake. But modern data pipelines may call directly a LLM to build embeddings and save them into a Vector Store. The flow looks like in the figure below, which is based on classical Retrieval Augmented Generation (RAG) process.
 
     ![](./diagrams/rag.drawio.png)
 
@@ -16,3 +21,5 @@ A generic reference architecture (defined by [A16Z](https://a16z.com/emerging-ar
 1. **Vector Store**, persits vectors, a numerical representation of NL sentence, with indexing capability and similarity search function. Multiple solutions exist as Vector Store: [Faiss](https://faiss.ai/index.html), [ChromaDB](https://www.trychroma.com/), [AWS OpenSearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html), Redis, Kendra, OpenSearch Serverless, RDS for PostgreSQL, Aurora PostgreSQL, Pinecone.
 1. **Hosted LLM** is a model serving service with LLM accessed via API. 
 1. **Orchestrator** is the solution code, which connects all those components together. It may use session caching in distributed, cloud based environment, uses Vector Store to do silimarity semantic search, and exposes API to be used by a ChatBot or a Q&A user interface.
+
+## LLM training architecture

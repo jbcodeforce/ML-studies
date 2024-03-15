@@ -1,25 +1,21 @@
 # Some LLM and LangChain implementations
 
-Use python docker image with the script `./startPythonDocker.sh`
-
-note "invalid request":
-
-    In any code connected to AWS, if there is this kind of message: ` when calling the InvokeModel operation: The security token included in the request is invalid`, be sure to get the AWS_SESSION_TOKEN environment variable set.
+Use python docker image with the script `./startPythonDocker.sh` or a virtual python environment.
 
 ## Pre-requisite
 
-* Install lib for Bedrock and AWS: 
+* When using AWS Bedrock, install Bedrock library: 
 
     ```sh
     cd bedrock
-    pip install -r requirements
+    pip install -r requirements.txt
     ```
 
-* Install langchain and other dependencies
+* Install Langchain and other dependencies
 
     ```sh
     cd ..
-    pip install -r requirements
+    pip install -r requirements.txt
     ```
 
 ## A RAG pipeline for Q&A

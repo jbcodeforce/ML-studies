@@ -88,9 +88,9 @@ Recall that splitting data processing between machine over network is less effic
 
 ### Slurm as orchestrator
 
+[Andrej Karathy's minGPT repository](https://github.com/karpathy/minGPT) is a PyTorch re-implementation of the GPT with a small size, to learn the GPT architecture. It includes small projects for sandboxing. And [nanoGPT](https://github.com/karpathy/nanoGPT) to reproduces GPT-2 (124M) on OpenWebText, running on a single 8XA100 40GB node in about 4 days of training.
 
-
-### Code sample
+### Code samples
 
 * [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/ddp/multi_gpu_ddp.py) demonstrates the basic DDP code to train a model using multiple GPUs machine, and the `from torch.utils.data.distributed import DistributedSampler` the `torch.nn.parallel.DistributedDataParallel` and `torch.distributed` modules. 
 

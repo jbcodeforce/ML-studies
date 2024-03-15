@@ -3,12 +3,13 @@ repo_url: https://github.com/jbcodeforce/ML-studies
 nav:
   - Introduction: index.md
   - Concepts: 
-    - Main concepts: concepts/index.md
+    - Core concepts: concepts/index.md
     - Math summary: concepts/maths.md
   - Data management:
     - Introduction: data/index.md
     - Feature Engineering: data/features.md
   - Machine Learning:
+    - Introduction: ml/index.md
     - Classifier: ml/classifier.md
     - Unsupervised Learning: ml/unsupervised.md
     - Anomaly detection: anomaly.md
@@ -62,6 +63,7 @@ plugins:
       lang: en
   - minify:
       minify_html: true
+  - mermaid2
   #- bibtex:
   #    bib_file: "docs/refs.bib"
 markdown_extensions:
@@ -73,7 +75,11 @@ markdown_extensions:
   - footnotes
   - tables
   - pymdownx.smartsymbols
-  - pymdownx.superfences
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:mermaid2.fence_mermaid_custom
   - toc:
       permalink: true
       toc_depth: 3

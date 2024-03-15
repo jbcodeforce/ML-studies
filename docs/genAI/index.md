@@ -2,9 +2,9 @@
 
 ## Introduction
 
-Create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters.
+Generative AI is a new AI deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters.
 
-Large Language Models have several key components. The underlying architecture is called a Transformer which uses self-attention mechanisms to weight the significance of different words to understand the context in sequences of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
+Large Language Models have several key components. The underlying architecture is called a **Transformer** which uses self-attention mechanisms to weight the significance of different words to understand the context in sequences of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
 
 This training has 2 stages: Pre-training where the model attempts to predict the next word in a sentence, and fine tuning where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all this training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
@@ -64,6 +64,7 @@ We can group the use cases in categories:
     * Search via Q&A Agent for specific subject, based on internal documents.
     * Self service tutor based on student progress, prompt activities, and respond  to questions
     * Personalized learning path generation
+    * Low-code development with GenAI agents
 
 ???+ info "Creativity"
     * Auto-generation of marketing material
@@ -280,7 +281,7 @@ Training from scratch produces the highest quality result amongst Prompt, RAG, f
 
 [See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation).
 
-### Common LLM inference parameter definitions
+### Common LLM inference parameters
 
 #### Randomness and Diversity
 
@@ -336,9 +337,9 @@ Data enrichement, prompt engineering, user interface, deployment, HA, multi tena
 
 There are web sites to evaluate existing LLMs, but they are based on public data, and may not perform well in the context of a specific use case with private data.
 
-The methodology looks like:
+The methodology looks like in the following steps:
 
-* Down select models based on specific use case and tasks
+* Select models based on specific use case and tasks
 * Human calibration of the models: understand behavior on certain tasks, fine tune prompts and assess against a ground truth using cosine-sim. Rouge scores can be used to compare summarizations, based on statistical word similarity scoring.
 * Automated evaluation of models: test scenario with deep data preparation, was is a good answer. LLM can be used as a judge: variables used are accuracy, coherence, factuality, completeness. Model card
 * ML Ops integration, self correctness
@@ -348,7 +349,7 @@ Considerations
 * Licensing / copyright
 * Operational
 * Flexibility
-* Language support
+* Human language support
 
 ### Consumers of LMs
 
@@ -358,7 +359,7 @@ This is the category of application that consumes pre-trained models to generate
 
 ### [ChatGPT](https://openai.com/blog/chatgpt)
 
-Chat Generative Pretrained Transformer is a proprietary instruction-following model, was released in November 2022. It is a system of models designed to create human like conversations and generating text by using statistics. It is a Causal Language Model (CLM) trained to predict the next token.
+Chat Generative pre-trained Transformer is a proprietary instruction-following model, was released in November 2022. It is a system of models designed to create human like conversations and generating text by using statistics. It is a Causal Language Model (CLM) trained to predict the next token.
 
 The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](https://en.wikipedia.org/wiki/GPT-3), but with different data collection setup. 
 

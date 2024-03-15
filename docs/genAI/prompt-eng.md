@@ -1,9 +1,15 @@
 # Prompt engineering
 
-This note includes a summary of prompt engineering practices and links to major information on this subject. Main sources of knowledge are:
+???- info "Upadte"
+    Created Aug 2023 - Updated 02/2024
 
-* [Prompt engineering guide](https://www.promptingguide.ai) covers the theory and practical aspects of prompt engineering and how to leverage the best prompting techniques to interact and build with LLMs.
+This chapter includes a summary of prompt engineering practices and links to major information on this subject. Main sources of knowledge are:
+
+* [Prompt engineering guide from (promptingguide.ai)](https://www.promptingguide.ai) which covers the theory and practical aspects of prompt engineering and how to leverage the best prompting techniques to interact and build with LLMs.
 * [Wikipedia- prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering)
+* [Anthropic - Claude - Prompt engineering.](https://docs.anthropic.com/claude/docs/prompt-engineering)
+
+This repository includes some code, prompts to test on different LLM.
 
 ## Introduction
 

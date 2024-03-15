@@ -8,6 +8,10 @@ Anthropic is an AI safety and research company developing Claude 2 LLM, a secure
 
 Andrew Ng's company to educate on deep learning and anything related.
 
+## [outsystems](https://www.outsystems.com/)
+
+Low-code no-code platform with new AI agents builder.
+
 ## [WorkHelix](https://www.workhelix.com/)
 
 Help assessing a company’s Generative AI opportunity. The software constantly scans 450M+ publicly available data points across 3,000+ jobs and 70,000 work activities to answer questions such as how big of a productivity boost can Generative AI bring to the organization?.
