@@ -20,6 +20,7 @@ nav:
     - Introduction: genAI/index.md
     - Prompt Engineering: genAI/prompt-eng.md
     - Reference Architecture: genAI/ref-arch.md
+    - RAG: genAI/rag.md
   
   - Coding:
     - Getting started: coding/index.md

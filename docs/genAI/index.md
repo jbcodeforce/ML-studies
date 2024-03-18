@@ -77,19 +77,19 @@ We can group the use cases in categories:
     * Data augmentation to improve data set quality. Keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps.
     * Propose some supply chain scenario
 
-* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all SDLC phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate refactoring (?), unit test generation or e2e for mobile app, review code, code relationship map automatically created from call stacks, PR and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
+* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all Software Development Life Cycle phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate refactoring (?), unit test generation or e2e for mobile app, review code, code relationship map automatically created from call stacks, PR and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
 It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training.
 
-The [Huggingface LLM leaderboard](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good information about model quality for some use cases.
+The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good information about model quality for some use cases.
 
 
 ### Industries
 
 * Supply chain by improving the visibility to multi-tier supplier performance concerns, understand where risk can be found in the supply chain.
-* Nonconformance/quality dispositioning, by identifying root cause of nonconformance, and prescribe resolutions.
+* Nonconformance/quality disposition, by identifying root cause of nonconformance, and prescribe resolutions.
 * Engineering cost optimization by reusing common parts across platforms.
 * Automation for proofreading, updating databases, managing ads campaigns, analyzing customer reviews, monitoring social media platforms
 * Sentiment analysis.
@@ -101,7 +101,7 @@ The [Huggingface LLM leaderboard](https://huggingface.co/spaces/HuggingFaceH4/op
 ### Classical concerns and challenges
 
 * There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs.
-* Protect Intellectual Property: not pass  confidential information to Chatbots for training
+* Protect Intellectual Property: not pass  confidential information to Chatbot for training
 * Protect the brand, avoid bias, discrimination, aligned to company values
 * Response accuracy, fairness, toxicity, and privacy
 * No move private data to public internet
@@ -137,7 +137,7 @@ When engaging with a customer it is important to assess where they are in their 
     * Are subject matter experts available to support the use case?
     * Who is the end user?
     * What are the current user's challenges and pains?
-    * What will be the "haha" moment for the user?
+    * What will be the "ha-ha" moment for the user?
     * Do you have data sets? Quality?
 
 ???- question "Experience in AI"
@@ -184,7 +184,7 @@ Below is a simple representation of the embedding in the 3 dimension space:
 
 Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
 
-This process is called **autoregressive generation**.
+This process is called **auto-regressive generation**.
 
 When processing text, the AI looks at a few tokens around each word to help understand the context. This surrounding group of tokens is called the **context window**. It is the sliding group of tokens around a word that provides contextual information to help the AI understand and generate natural language.
 
@@ -232,24 +232,24 @@ The techniques to customize LLM applications from simplest to more complex are:
 | **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
 | **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
 | **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
-| **GPT** | OpenAI's generalized pretrained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multimodal. |
-| **Hallucinations** | LLMs to sometimes give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be innacurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
-| **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extermely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
+| **GPT** | OpenAI's generalized pre-trained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multi-modal. |
+| **Hallucinations** | LLMs to sometimes give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be inaccurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
+| **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extremely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
 | **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
-| [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assits with retieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
-| **Llama** | A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. The weights have been leaked and have been found on torrents around the web.  Note that many models have been released based on this, but they also inherit the licencing requirement for non-commercial use. |
+| [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assists with retrieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
+| **Llama** | A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. The weights have been leaked and have been found on torrents around the web.  Note that many models have been released based on this, but they also inherit the license requirement for non-commercial use. |
 | **Large Language Model (LLM’s)** | Transformers trained on millions of documents |
-| **Model compilation** | Model compilation is the act of tracing a model computational graph in order to deploy to lower level hardware and code. This is a necessary step to run on specialized hardware like AWS Inferentia and Trainium. |
+| **Model compilation** | Model compilation is the act of tracing a model computational graph in order to deploy to lower level hardware and code. This is a necessary step to run on specialized hardware. |
 | **Model Distribution** | When a model's size prohibits it from being stored on one GPU. This occurs when models start to be in the 10's of billions of parameter range. This has a few consequences 1) it costs a lot to train and host these models 2) specialized libraries are required to help. |
-| **MultiModal Models**	| Multimodal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
-| **OpenAI** | OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1)With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2)DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3) Whisper can transcribe speech into text and translate many languages into English. |
+| **MultiModal Models**	| Multi-modal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
+| **OpenAI** | OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1/With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2/ DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3/ Whisper can transcribe speech into text and translate many languages into English. |
 | **Pinecone** | A sparse dense vector database which can be used to store sentence embeddings and then utilize approximate nearest neighbor search to fine similarity matches. This can be used for semantic search (search which matches the meaning) and then applied as 'context' to LLMs for question and answering. |
-| **Pretraining** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pretraining FLAN with Medical documents to understand medical context previously missing from the model. |
+| **Pre-training** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pre-training FLAN with Medical documents to understand medical context previously missing from the model. |
 | **RAG** |  It is a technique for providing additional, targeted information to the model through the prompt. While using any search to find data for the prompt could be considered RAG, it often refers to the specific technique of creating embeddings from a corpus of documents, storing those embeddings in a vector database, searching that database with a user query, and then providing those results to the LLM for completion. This gives the LLM the ability to do a semantic search over a knowledge base and to use the results of that search in formulating the answer. This technique can be used to provide more up-to-date or more use-case-specific information to the model to enhance its accuracy for specific use cases. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results. |
-| **Reinforcement learning with human feedback (RLHF)** | The secret sauce to making chat based foundation models. The process involves using human feedback with LLM chat interactions to inform a reinforcement learning procedure to help train an LLM to "talk to humans" instead of only prompts. There are two huge benefits 1) this substantially reduces the amount of prompt engineering required and 2) this allow the LLM to take into account chat context as well as the information it has available to it. |
+| **Reinforcement learning with human feedback (RLHF)** | The secret sauce to making chat based foundation models. The process involves using human feedback with LLM chat interactions to inform a reinforcement learning procedure to help train an LLM to "talk to humans" instead of only prompts. There are two huge benefits 1/ this substantially reduces the amount of prompt engineering required and 2/ this allow the LLM to take into account chat context as well as the information it has available to it. |
 | **Single shot learning** | *Zero-shot learning* (ZSL) is a problem setup in ML where, at test time, a learner observes samples from classes which were not observed during training, and needs to predict the class that they belong to | 
 | **Stability.ai** | Stability AI is open source generative AI company currently developing breakthrough AI models applied to imaging, language, code, audio, video, 3D content, design, biotech. With AWS they provide the world’s fifth-largest supercomputer – the Ezra-1 UltraCluster – supplying the necessary power to generate these advancements. Stability AI’s premium imaging application DreamStudio, alongside externally built products like Lensa, Wonder and NightCafe, have amassed over 40 million users. |
-| **Stable Diffusion** | Stable diffusion is a popular open source text to image generation tool. It can be used for use cases like 1) marketing content generation 2) game design 3) fashion design and more. |
+| **Stable Diffusion** | Stable diffusion is a popular open source text to image generation tool. It can be used for use cases like 1/ marketing content generation 2/ game design 3/ fashion design and more. |
 | **Text to text** | Any model which takes in text inputs and produces text outputs. Ex: entity extraction, summarization, question answer. |
 | **Transfer learning**	| The act of transferring the power of a foundation model to your specific task. |
 | **Transformer** |	A ML model for transforming one sequence into another, using attention.|
@@ -265,21 +265,7 @@ Summarization works by sending a prompt instruction to the model, asking the mod
 
 ### Retrieval augmented generation (RAG)
 
-RAG is the act of supplementing generative text models with data outside of what it was trained on. This is applied to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of the usage of RAG.
-
-The following diagram illustrates a classical RAG process using AWS SageMaker and OpenSearch.
-
-![](./diagrams/rag.drawio.png)
-
-And a classical RAG with LangChain:
-
-![](../coding/diagrams/rag-process.drawio.png)
-
-RAG produces great quality result, due to augmenting use-case specific context coming directly from vectorized information stores. It has the highest degree of flexibility when it comes to changes in the architecture. We can change the embedding model, vector store and LLM independently with minimal to moderate impact on other components.
-
-Training from scratch produces the highest quality result amongst Prompt, RAG, fine tuning, but cost far more and need deep data science skill set.
-
-[See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation).
+[See separate chapter](./rag.md)
 
 ### Common LLM inference parameters
 
@@ -320,7 +306,7 @@ The following parameters help control repetition in the generated response.
 
 In enterprise, there will be a large library of dedicated models. There will be still developers, data scientists, product manager, to develop solution around LLM. A solution will use different LLM and different capabilities to support multiple requirements that a business application needs: summarization, Q&A, chatbot, translation for example will mostly be combined of a lot of enterprise solution.
 
-Data enrichement, prompt engineering, user interface, deployment, HA, multi tenancy, security,  may all be part of a solution.
+Data enrichment, prompt engineering, user interface, deployment, HA, multi tenancy, security,  may all be part of a solution.
 
 [Deeplearning.ai](https://www.deeplearning.ai/) proposes the following LLM project life cycle:
 
@@ -367,7 +353,7 @@ The model was trained on trillions of words from the web, requiring massive numb
 
 [SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pre-trained, open-source models for a wide range of problem types to get started on ML.
 
-It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Pretrained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
+It supports training on LLMs not in Bedrock, like [OpenLLama](https://github.com/openlm-research/open_llama), [RedPajama](https://github.com/togethercomputer/RedPajama-Data), [Mosaic Pre-trained Transformer-7B](https://www.mosaicml.com/blog/mpt-7b), [Flan-T5/UL2](https://huggingface.co/docs/transformers/main/model_doc/flan-ul2), [GPT-J-6B](https://huggingface.co/EleutherAI/gpt-j-6b), [NEOX-20B](https://huggingface.co/EleutherAI/gpt-neox-20b) and [Bloom/BloomZ](https://huggingface.co/bigscience/bloom), with a gain of up to 40% faster.
 
 Some useful articles:
 
@@ -386,7 +372,7 @@ Some useful articles:
 * [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
 * [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)
 * [Artificial Intelligence and the Future of Teaching and Learning](https://www2.ed.gov/documents/ai-report/ai-report.pdf).
-* [Fine-tune a pretrained model HuggingFace tutorial](https://huggingface.co/docs/transformers/training).
+* [Fine-tune a pre-trained model HuggingFace tutorial](https://huggingface.co/docs/transformers/training).
 * [Prompt engineering is the new feature engineering.](https://www.amazon.science/blog/emnlp-prompt-engineering-is-the-new-feature-engineering)
 * [Amazon-sponsored workshop advances deep learning for code.](https://www.amazon.science/blog/amazon-sponsored-workshop-advances-deep-learning-for-code)
 * [RAG with OpenSearch Service](https://catalog.workshops.aws/semantic-search/en-US/module-7-retrieval-augmented-generation).
