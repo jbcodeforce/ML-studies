@@ -110,12 +110,7 @@ The goal is to add custom dataset not already part of a  trained model and use t
 
 ![](./diagrams/rag-process.drawio.png)
 
-Before being able to answer the questions, the documents must be processed and a stored in a document store index:
 
-* Load the documents
-* Process and split them into smaller chunks
-* Create a numerical vector representation of each chunk using Embeddings model
-* Create an index using the chunks and the corresponding embeddings
 
 The code to do the above processing is in [prepareVectorStore.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/prepareVectorStore.py).
 
