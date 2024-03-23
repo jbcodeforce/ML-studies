@@ -40,8 +40,8 @@ The classical [Temperature, Top-P](./index.md/#common-llm-inference-parameter-de
 
 ## Prompting techniques
 
-* Zero-shot prompting: a unique question. No instruction
-* Few-shot prompting includes some samples like a list of Q&A. 
+* **Zero-shot prompting:** a unique question. No instruction
+* **Few-shot prompting** includes some samples like a list of Q&A. 
 * A prompt contains any of the following elements: instruction, context, input data, output indicator
 * Use command to instruct the model to do something specific: "Write", "Classify", "Summarize", "Translate", "Order"
 * Be very specific about the instruction and task. 
@@ -58,7 +58,7 @@ explain Quantum mechanics to high school student
 A:
 ```
 
-See also the article from Anthorpic: ["ask Claude to think step by step"](https://docs.anthropic.com/claude/docs/ask-claude-to-think-step-by-step)
+See also the article from Anthropic: ["ask Claude to think step by step"](https://docs.anthropic.com/claude/docs/ask-claude-to-think-step-by-step)
 
 * **RLHF** (reinforcement learning from human feedback) has been adopted to scale instruction tuning wherein the model is aligned to better fit human preferences.
 
@@ -78,14 +78,14 @@ See [Anthropic Claude - Prompt Chaining examples.](https://docs.anthropic.com/cl
 
 It can be used to validate a previous response to a prompt.
 
-### [Tree of Thoughts](https://www.promptingguide.ai/techniques/tot)** 
+### [Tree of Thoughts](https://www.promptingguide.ai/techniques/tot) 
 
 Tree of Thoughts is a generalization of CoT, where thoughts represent coherent language sequences that serve as intermediate steps toward solving a problem.
 The thoughts are organized in tree, which search algorithms (breadth-first search and depth-first search) are used to assess the best combination of thoughts via a multi-round conversation.
 
 ### [Automatic Prompt Engineering](https://www.promptingguide.ai/techniques/ape)
 
-Another approach to automate the prompt creation and selection using LLMs as inference models followed by LLMs as scoring models. 
+Another approach to automate the prompt creation and selection using LLMs as inference models followed by LLMs as scoring models. [DSPy ](https://github.com/stanfordnlp/dspy) is a framework for algorithmically optimizing LM prompts and weights. 
 
 ### Other techniques
 

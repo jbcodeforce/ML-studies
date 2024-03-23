@@ -13,7 +13,7 @@ The standard interface that LangChain provides has two methods:
 * `predict`: Takes in a string, returns a string
 * `predict_messages`: Takes in a list of messages, returns a message.
 
-Modules are extendable interfaces to Langchain.
+Modules are extendable interfaces to LangChain.
 
 ### Environment to test LangChain code with Amazon Bedrock
 
@@ -167,7 +167,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 
 ## Q&A chain
 
-![](./diagrams/qa-ref-arch.png)
+![](./diagrams/qa-llm.drawio.png)
 
 ???- code "Use RAG with Q&A"
         ```python

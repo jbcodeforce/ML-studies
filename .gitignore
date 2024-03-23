@@ -20,4 +20,4 @@ deep-neural-net/d2l-en/
 **/*.pth
 pytorch/computer-vision/data/
 **/models/
-.env
+**/.env

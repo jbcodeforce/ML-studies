@@ -38,27 +38,27 @@ Models with encoder-decoder and decoder-only architectures are **generative** mo
 
 A single large model is unlikely to solve every business problem. Custom data sets help companies to differentiate their generative AI applications. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples.
 
-For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
+For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
 
 Some ways to use Generative AI:
 
 * Build foundation model from scratch
 * Reuse existing foundation models available as open-source (Hugging Face hub) or proprietary, add the custom corpus on top of it, to fine tune tune the model for better accuracy.
-* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answer.
+* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answers, or [RAG techniques](./rag.md).
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
 
 ## Use cases
 
-We can group the use cases in categories:
+We can group the use cases in different categories:
 
 ???+ info "Improve customer experiences"
     * Chatbot functionality with context, with better user's experiences. Reduce operational costs using automated response.
     * Documentation summarization: See model like Jurassic-2 Jumbo from [AI21 studio](https://www.ai21.com/studio), claude-v2 works well too.
     * Personalization
 
-???+ info "Employee productivity"
+???+ info "Improve Employee productivity"
     * Code generation
     * Translation, reports, summarization...
     * Search via Q&A Agent for specific subject, based on internal documents.
@@ -77,7 +77,7 @@ We can group the use cases in categories:
     * Data augmentation to improve data set quality. Keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps.
     * Propose some supply chain scenario
 
-* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all Software Development Life Cycle phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate refactoring (?), unit test generation or e2e for mobile app, review code, code relationship map automatically created from call stacks, PR and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
+* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all Software Development Life Cycle phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate code refactoring (?), unit test generation or e2e testing for mobile app, review code, code relationship map automatically created from call stacks, Pull Request and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
@@ -100,8 +100,8 @@ The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/o
 
 ### Classical concerns and challenges
 
-* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs.
-* Protect Intellectual Property: not pass  confidential information to Chatbot for training
+* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs?.
+* Protect Intellectual Property: never pass confidential information to Chatbot for training
 * Protect the brand, avoid bias, discrimination, aligned to company values
 * Response accuracy, fairness, toxicity, and privacy
 * No move private data to public internet
@@ -109,6 +109,7 @@ The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/o
 * Hallucination where the models make up inaccurate responses that are not consistent with the training data.
 * Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
 * Simple to integrate with existing apps and data.
+* Whenever we want to teach an LLM to use a tool, we need enough annotated tool calls to fine tune the LLM. We can use in-context learning to create a model that annotates tool calls for the input query. Incorrect calls can be filtered by executing the tools and filtering the outputs based on the ground truth answer.
 
 ### Discovery Assessment
 
@@ -304,7 +305,7 @@ The following parameters help control repetition in the generated response.
 
 ## Methodology
 
-In enterprise, there will be a large library of dedicated models. There will be still developers, data scientists, product manager, to develop solution around LLM. A solution will use different LLM and different capabilities to support multiple requirements that a business application needs: summarization, Q&A, chatbot, translation for example will mostly be combined of a lot of enterprise solution.
+In enterprise, there will be a large library of dedicated models. There will be still developers, data scientists, product managers, to develop solution around LLM. A solution will use different LLMs and different capabilities to support multiple requirements that a business application needs: summarization, Q&A, chatbot, translation for example will mostly be combined of a lot of enterprise solution.
 
 Data enrichment, prompt engineering, user interface, deployment, HA, multi tenancy, security,  may all be part of a solution.
 

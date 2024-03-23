@@ -1,46 +1,47 @@
-site_name: Machine Learning Studies
+site_name: Machine Learning Studies - Jerome Boyer
 repo_url: https://github.com/jbcodeforce/ML-studies
 nav:
-  - Introduction: index.md
-  - Concepts: 
-    - Core concepts: concepts/index.md
-    - Math summary: concepts/maths.md
-  - Data management:
-    - Introduction: data/index.md
-    - Feature Engineering: data/features.md
+  - About:
+    - Introduction: index.md
+    - Concepts: 
+      - Core concepts: concepts/index.md
+      - Math summary: concepts/maths.md
+      - Neuro-Symbolic AI: neuro-symbolic/index.md
+    - Data management:
+      - Introduction: data/index.md
+      - Feature Engineering: data/features.md
   - Machine Learning:
     - Introduction: ml/index.md
     - Classifier: ml/classifier.md
     - Unsupervised Learning: ml/unsupervised.md
     - Anomaly detection: anomaly.md
-  - Deep Learning: 
-    - Introduction: ml/deep-learning.md
-    - Distributed Data Parallel: coding/ddp.md
-  - Generative AI: 
-    - Introduction: genAI/index.md
-    - Prompt Engineering: genAI/prompt-eng.md
-    - Reference Architecture: genAI/ref-arch.md
-    - RAG: genAI/rag.md
-  
-  - Coding:
-    - Getting started: coding/index.md
+    - Deep Learning: 
+      - Introduction: ml/deep-learning.md
+      - Distributed Data Parallel: coding/ddp.md
+    - Generative AI: 
+      - Introduction: genAI/index.md
+      - Prompt Engineering: genAI/prompt-eng.md
+      - Reference Architecture: genAI/ref-arch.md
+      - RAG: genAI/rag.md
+      - Anthropic: genAI/anthropic.md
+  - Techno:
+    - Coding getting started: coding/index.md
     - Pandas: coding/pandas.md
     - Scikit-learn: coding/sklearn.md
     - PyTorch: coding/pytorch.md
+    - Feature Store: techno/feature_store.md/
     - Data Visualization: coding/visualization.md
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
+    - Streamlit: techno/streamlit.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
-  - Techno:
-    - Introduction: techno/index.md
-    - Feature Store: techno/feature_store.md/
     - Apache Spark studies: https://jbcodeforce.github.io/spark-studies/
     - Key AI startups: techno/players_to_look.md
     - Amazon SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
-    - Streamlit: techno/streamlit.md
+
   - Solutions:
     - Introduction: solutions/index.md
-  - Return to main: https://jbcodeforce.github.io
+  - Home: https://jbcodeforce.github.io
 
 theme: 
   name: material
@@ -52,7 +53,7 @@ theme:
   features:
       - content.code.annotate
       - content.tooltips
-      # - navigation.tabs
+      - navigation.tabs
       - navigation.instant
       - navigation.tracking
       # - navigation.sections

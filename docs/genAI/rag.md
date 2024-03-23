@@ -54,11 +54,15 @@ The retrieval is very important. The main concept is using the TF-IDF measure: i
 
 [Dense retrieval](https://arxiv.org/abs/2004.04906) brings semantic similarity (cosinus score between embeddings) on a dense representations of words and documents by pre-training the retriever with relevant information. 
 
+#### Retriever considerations
+
+* In a multi-step question answering system, it is challenging to select the correct documents based on the question alone. [IRCoT](https://arxiv.org/abs/2212.10509) uses LLM to generate a thought sentence used to retrieve documents from the corpus. The documents are then added to the context and prompt.
+
 ### Vector Database
 
 The first vector databases were based on [FAISS](https://github.com/facebookresearch/faiss), a library for efficient similarity search and clustering of dense vectors.
 
-## Langchain example
+## LangChain examples
 
 For a classical RAG using LangChain:
 
