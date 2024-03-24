@@ -7,3 +7,4 @@ print("Generate random data")
 rdata = np.random.randn(5000) * 20 + 20
 
 sns.boxplot(data=rdata)
+plt.show()
