@@ -1,7 +1,7 @@
 '''
 Prepare a subset of images from a big dataset.
 The data set is food 101 from PyTorch vision https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/ 
-with only select classes 
+with only the selected classes: sushi,steak,pizza
 '''
 import argparse
 import os
@@ -12,6 +12,8 @@ import torchvision.datasets as ds
 DATA_ROOT_FOLDER="data/"
 DATA_FOOD_FOLDER="food-101/"
 SAMPLE_AMOUNT=0.2
+
+
 
 def process_program_arguments():
     parser = argparse.ArgumentParser(description='Prepare a subset of images from a big dataset')
@@ -33,10 +35,14 @@ def build_target_structure(data_folder,classes):
     os.makedirs(os.path.join(dst, "test"), exist_ok=True)
     return dst
     
-def download_food_101_dataset(data_folder):
+def download_food_101_dataset(data_folder,download: False):
+    """
+    Download the 4GB of photos to data_folder and then create a folder
+    data/sushi_meat_pizza for example with train and test subfolders
+    """
     os.makedirs(data_folder, exist_ok=True)
-    train_ds = ds.Food101(root=data_folder, split='train', download=True)
-    test_ds = ds.Food101(root=data_folder, split='test', download=True)
+    ds.Food101(root=data_folder, split='train', download=download)
+    ds.Food101(root=data_folder, split='test', download=download)
 
 def prepare_data_subset(food_src,classes):
     '''
@@ -78,7 +84,7 @@ def move_data_clean(src,label_splits,dst):
 if __name__ == '__main__':
     classes = process_program_arguments()
     dst=build_target_structure(DATA_ROOT_FOLDER,classes)
-    #download_food_101_dataset(DATA_FOOD_FOLDER)
+    download_food_101_dataset(DATA_FOOD_FOLDER,True)
     label_splits=prepare_data_subset(DATA_FOOD_FOLDER,classes)
     print(label_splits["train"][:10])
     print(label_splits["test"][:5])

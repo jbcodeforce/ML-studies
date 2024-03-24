@@ -7,36 +7,36 @@ Generative AI is a new AI deep learning model to create new content (text, image
 Large Language Models have several key components. The underlying architecture is called a **Transformer** which uses self-attention mechanisms to weight the significance of different words to understand the context in sequences of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
 
-This training has 2 stages: Pre-training where the model attempts to predict the next word in a sentence, and fine tuning where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all this training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
+This training has 2 stages: **Pre-training** where the model attempts to predict the next word in a sentence, and **fine tuning** where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
 
 Those models are commonly referred to as foundation models (FMs).
 
-This unlabeled data used for pre-training is usually obtained by crawling the Web and contains information from publicly crawled sources.
+The unlabeled data used for pre-training is usually obtained by crawling the Web and contains information from public sources.
 The text is then broken down into chunks called tokens which are fed into the model. After processing the model returns result tokens which are then turned back into readable text.
 
 
 ???- info "Difference between ML and LLM"
-    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
+    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
     * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2022 is 540B parameters.
 
 A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
 
-The process is text -> tokens (may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Sub-word tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
+The process is text -> tokens (a token may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Sub-word tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
 
 **Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and with high quality data.
 
 Three types of transformer:
 
-1. *Encoded only*: generate no human readable content, used when applications need to efficiently query to find similar items.
-1. *Encoder-decoder* model is trained to treat every natural language processing (NLP) problem (e.g.,
+1. **Encoded only**: generate no human readable content, used when applications need to efficiently query to find similar items.
+1. **Encoder-decoder** model is trained to treat every natural language processing (NLP) problem (e.g.,
 translate an input string in one language to another) as a text-to-text conversion problem.
-1. *Decoder-only* model is for text generation.
+1. **Decoder-only** model is for text generation.
 
 Models with encoder-decoder and decoder-only architectures are **generative** models.
 
-A single large model is unlikely to solve every business problem. Custom data sets help companies to differentiate their generative AI applications. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples.
+A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies rely on custom data sets tailored to their unique requirements. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs.
 
 For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
 
@@ -44,7 +44,7 @@ Some ways to use Generative AI:
 
 * Build foundation model from scratch
 * Reuse existing foundation models available as open-source (Hugging Face hub) or proprietary, add the custom corpus on top of it, to fine tune tune the model for better accuracy.
-* Use generative AI services or APIs offered by foundation model vendors. There is not control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answers, or [RAG techniques](./rag.md).
+* Use generative AI services or APIs offered by foundation model vendors. There is no control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answers, or [RAG techniques](./rag.md).
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
@@ -77,26 +77,61 @@ We can group the use cases in different categories:
     * Data augmentation to improve data set quality. Keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps.
     * Propose some supply chain scenario
 
-* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all Software Development Life Cycle phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate code refactoring (?), unit test generation or e2e testing for mobile app, review code, code relationship map automatically created from call stacks, Pull Request and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
+* Uber has [conducted Hackathon using genAI](https://www.uber.com/blog/the-transformative-power-of-generative-ai/) and identified that all Software Development Life Cycle phases are impacted by Generative AI usages, including: capturing complete specifications faster, explain existing code, generating UI code, automate code refactoring, unit test generation or e2e testing for mobile app, review code, code relationship map automatically created from call stacks, Pull Request and code review automation, code documentation generation based on PRs. But LLMs may generate buggy code, as well as spreading error-prone code pattern. 
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
-It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training.
+It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training, knowledge graph and neurosumbolic AI.
 
-The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good information about model quality for some use cases.
+The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good source of information for model quality assessement relative to certain use cases.
 
 
 ### Industries
 
-* Supply chain by improving the visibility to multi-tier supplier performance concerns, understand where risk can be found in the supply chain.
-* Nonconformance/quality disposition, by identifying root cause of nonconformance, and prescribe resolutions.
-* Engineering cost optimization by reusing common parts across platforms.
-* Automation for proofreading, updating databases, managing ads campaigns, analyzing customer reviews, monitoring social media platforms
-* Sentiment analysis.
-* Content moderation and development for education and universities. Helps students to find the most effective pathways to graduation.
-* From identifying potential safety risks with gaz leaks, Gen AI can generate recommendations for remedial work.
-* Enhance trip planning with personalized recommendations, services and offers for travel industry.
-* Product review summarization: today done by human, can be offloaded by LLM by adding those unstructured reviews as new corpus for search. Separate these reviews based on user-provided ratings and task an LLM to extract different sets of information from each high-level category of reviews.
+These following industry-specific use cases present potential usage of Generative AI:
+
+1. Supply Chain Management:
+
+    * Improve visibility into multi-tier supplier performance concerns
+    * Identify potential risk areas within the supply chain
+
+1. Quality Control and Nonconformance Management:
+
+    * Identify the root cause of nonconformance issues
+    * Prescribe resolutions to address quality concerns
+
+1. Engineering Cost Optimization:
+
+    * Promote the reuse of common parts across different platforms to reduce costs
+
+1. Cross industry:
+
+    * Sentiment analysis: Gauge customer sentiment towards products, services, or brands
+    * Assist with proofreading tasks
+    * Update and maintain databases
+    * Analyze customer reviews
+    * Monitor social media platforms
+
+1. Education and Universities:
+
+    * Moderate and develop educational content
+    *  Help students find the most effective pathways to graduation
+
+1. Safety and Risk Management:
+
+    * Identify potential safety risks, such as gas leaks
+    * Generate recommendations for remedial work to mitigate risks
+
+1. Travel Industry:
+
+    * Enhance trip planning with personalized recommendations, services, and offers
+
+1. Product Review Summarization:
+
+    * Offload the task of summarizing product reviews from humans to LLMs
+    * Add unstructured reviews as a new corpus for search functionality
+    * Separate reviews based on user-provided ratings
+    * Task an LLM to extract different sets of information from each high-level category of reviews
 
 ### Classical concerns and challenges
 
@@ -110,65 +145,6 @@ The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/o
 * Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
 * Simple to integrate with existing apps and data.
 * Whenever we want to teach an LLM to use a tool, we need enough annotated tool calls to fine tune the LLM. We can use in-context learning to create a model that annotates tool calls for the input query. Incorrect calls can be filtered by executing the tools and filtering the outputs based on the ground truth answer.
-
-### Discovery Assessment
-
-When engaging with a customer it is important to assess where they are in their GenAi adoption. Think big about the opportunities, but start small with problems that cause day-to-day irritations for the employees or customer.
-
-???- question "Research for opportunities"
-    * What manual or repetitive processes could be automated with generative AI?
-    * Where do employees spend the most time today gathering information to do their jobs?
-    * What customer/user pain points could be addressed with more natural conversation?
-    * What content creation processes could be enhanced through AI generated drafts?
-    * What expert skills are scarce in your organization that AI models could supplement?
-    * What insights could be uncovered from large volumes of unstructured data using AI?
-    * What risks or inefficiencies exist from decisions made with incomplete information?
-    * Where does communication break down today between teams, customers or regions?
-    * What predictions would help you make smarter real-time decisions?
-    * What new products, services or business models could AI capabilities enable?
-    * What tasks or processes still rely heavily on tribal knowledge that could be systematized?
-    * What information gets trapped in siloed systems and could be unlocked with AI?
-    * What customer research efforts could be accelerated with interactive AI agents?
-    * What compliance processes result in slowdowns getting products/services to market?
-
-???- question "Use cases and business needs"
-    * What are the potential use cases? B2B, B2C, Employees?
-    * Is the use case considered a strategic priority? Sponsor?
-    * What is the value associated with the use case?
-    * Are subject matter experts available to support the use case?
-    * Who is the end user?
-    * What are the current user's challenges and pains?
-    * What will be the "ha-ha" moment for the user?
-    * Do you have data sets? Quality?
-
-???- question "Experience in AI"
-    * Are you using AI in your current business applications, or processes?
-    * What are current/past successes by adopting AI in the business execution?
-    * What is the current level of ML support needed for your technical staff?
-    * Do you need capabilities like summarization, text generation, speech recognition?
-    * How will you monitor model performance and detect model drift over time?
-
-
-???- question "Generative AI current adoption"
-    * How familiar with Generative AI? and its common use cases?
-    * What GenAI technologies have you/are you evaluating?
-    * Have you started prototyping?
-    * Do you have AI-powered products or features on your roadmap?
-    * Do you have tried to use an existing generative models? to tune it?
-    * What are the current process to evaluate Gen AI models?
-    * What is your risk appetite for model hallucination and its potential consequences?
-    * How do you plan to do domain  adaptation? Do you plan to pre-train, fine-tune or do some in-context  prompting for domain adaptation?
-    * How frequently data changes? How frequently do you expect to need to retrain models with new data?
-
-
-???- question "Integration needs"
-    * Is it a new solution or extending an existing one?
-    * Where data coming from?
-    * What type of systems to integrate the solution with? 
-    * Any expected performance requirements? 
-
-???- question "Security and compliance needs"
-    * Code privacy and IP related code control
 
 ## Concepts
 
@@ -303,44 +279,7 @@ The following parameters help control repetition in the generated response.
 1.0 means no penalty. Greater than 1.0 decreases repetition.
 
 
-## Methodology
 
-In enterprise, there will be a large library of dedicated models. There will be still developers, data scientists, product managers, to develop solution around LLM. A solution will use different LLMs and different capabilities to support multiple requirements that a business application needs: summarization, Q&A, chatbot, translation for example will mostly be combined of a lot of enterprise solution.
-
-Data enrichment, prompt engineering, user interface, deployment, HA, multi tenancy, security,  may all be part of a solution.
-
-[Deeplearning.ai](https://www.deeplearning.ai/) proposes the following LLM project life cycle:
-
-![](./diagrams/llm-project.drawio.png)
-
-### Scoping
-
-1. Go over the [discovery assessment](#discovery-assessment)
-1. Define what the key metrics are and how to evaluate the solution. If the use cases fall into the Document Q&A and Document Summarization categories, the metric used will be **accuracy**. **Accuracy** will be determined based on the documents (data) provided and the respective questions users ask against the model.
-1. Define a list of questions that we expect the application to answer. Be sure to have a list of correct answers. In case of summarization use cases, we need sample summaries and sample questions to generate those summaries for document summarization use cases.
-
-
-### Model Evaluation
-
-There are web sites to evaluate existing LLMs, but they are based on public data, and may not perform well in the context of a specific use case with private data.
-
-The methodology looks like in the following steps:
-
-* Select models based on specific use case and tasks
-* Human calibration of the models: understand behavior on certain tasks, fine tune prompts and assess against a ground truth using cosine-sim. Rouge scores can be used to compare summarizations, based on statistical word similarity scoring.
-* Automated evaluation of models: test scenario with deep data preparation, was is a good answer. LLM can be used as a judge: variables used are accuracy, coherence, factuality, completeness. Model card
-* ML Ops integration, self correctness
-
-Considerations
-
-* Licensing / copyright
-* Operational
-* Flexibility
-* Human language support
-
-### Consumers of LMs
-
-This is the category of application that consumes pre-trained models to generate text, image, videos, audio or code.
 
 ## Current Technology Landscape
 

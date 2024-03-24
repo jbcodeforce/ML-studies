@@ -6,7 +6,6 @@ nav:
     - Concepts: 
       - Core concepts: concepts/index.md
       - Math summary: concepts/maths.md
-      - Neuro-Symbolic AI: neuro-symbolic/index.md
     - Data management:
       - Introduction: data/index.md
       - Feature Engineering: data/features.md
@@ -18,8 +17,10 @@ nav:
     - Deep Learning: 
       - Introduction: ml/deep-learning.md
       - Distributed Data Parallel: coding/ddp.md
+      - Neuro-Symbolic AI: neuro-symbolic/index.mds
     - Generative AI: 
       - Introduction: genAI/index.md
+      - Methodology: genAI/methodology.md
       - Prompt Engineering: genAI/prompt-eng.md
       - Reference Architecture: genAI/ref-arch.md
       - RAG: genAI/rag.md
@@ -54,10 +55,10 @@ theme:
       - content.code.annotate
       - content.tooltips
       - navigation.tabs
-      - navigation.instant
+      #- navigation.instant
       - navigation.tracking
-      # - navigation.sections
-      # - navigation.expand
+      - navigation.sections
+      - navigation.expand
       - navigation.tabs.sticky
 extra_css: ["extra.css"]
 plugins:

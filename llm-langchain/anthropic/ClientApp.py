@@ -9,6 +9,8 @@ except KeyError:
     print(" Set the ANTHROPIC_API_KEY environment variable")
     sys.exit(1)
 
+print("------ Welcome to simple Anthropic Claude text improvement client")
+
 parser = argparse.ArgumentParser(description='Simple text improvement with Claude ')
 parser.add_argument('text', type=str, help='The text to improve')
 args = parser.parse_args()

@@ -30,7 +30,7 @@ def create_data_loaders(train_dir,test_dir,train_transform,test_transform,batch_
                              batch_size=32
                             )
     """
-    print(f"Number of CPUs:{os.cpu_count()}")
+    print(f"--- Number of CPUs:{os.cpu_count()}")
     train_ds=datasets.ImageFolder(train_dir, transform=train_transform)
 
     test_ds=datasets.ImageFolder(test_dir,transform=test_transform)

@@ -10,7 +10,7 @@ Use pip or  mini conda for package management and virtual environment management
 
 ### Install
 
-* Using Python 3 and pip3, install torch
+* Using Python 3 and pip3, use a virtual environment, install torch
 
     ```sh
     pip3 install torch torchvision torchaudio
@@ -75,15 +75,15 @@ PyTorch has two important modules we can use to create neural network: `torch.nn
 * See basic code in [basic-torch.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/basic-torch.py) with inline explanations.
 
 | Modules | Description |
-| --- | --- |
+| :----- | :--- |
 | `torch.nn` | 	Contains all of the building blocks for computational graphs. |
-| `torch.nn.Parameter` | Stores tensors that can be used with nn.Module. If requires_grad=True gradients descent are calculated automatically. |
+| `torch.nn. Parameter` | Stores tensors that can be used with nn.Module. If requires_grad=True gradients descent are calculated automatically. |
 | `torch.nn.Module` | The base class for all neural network modules. Need to subclass it. Requires a forward() method be implemented. |
 | `torch.optim` |  various optimization algorithms to tell the model parameters how to best change to improve gradient descent and in turn reduce the loss |
 
 ### GPU
 
-On Linux, we need to use the Cuda (Compute Unified Device Architecture) library for Nvidia GPU. See [AWS deep learning container](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/what-is-dlc.html). For Mac it is `mps`
+On Linux or Windows with nvidia GPU, we need to use the Cuda (Compute Unified Device Architecture) library. See [AWS deep learning container](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/what-is-dlc.html). For Mac it is `mps`
 
 Here is sample code to set the mps to access GPU (mps for Mac) for tensor computation
 
@@ -135,17 +135,17 @@ model = nn.Sequential(
 ).to(device)
 ```
 
-Neural network has an input layer equal to the number of input features, and output equal to the number of response (1 output for binary classification). For activation function between hidden layers, ReLU is often used when we want non-linearity. The output layer will not use a transfer function for a regression neural network, or use the logistic for binary classification (just two classes) or log softmax for two or more classes.
+Neural network has an input layer equal to the number of input features, and output equal to the number of response (1 output for binary classification). For activation function between hidden layers, ReLU is often used when we want non-linearity. The output layer will not use a transfer function for a regression neural network, or use the logistic function for binary classification (just two classes) or log softmax for two or more classes.
 
 The hyper-parameters to tune are:
 
-* The number of neuron in hidden layer: In general, more hidden neurons means more capability to fit complex problems. But too many, will lead to overfitting. Too few, may lead to underfitting the problem and will sacrifice accuracy.
+* **The number of neuron in hidden layer**: In general, more hidden neurons means more capability to fit complex problems. But too many, will lead to overfitting. Too few, may lead to underfitting the problem and will sacrifice accuracy.
 
-* The number of layers: more layers allow the neural network to perform more of its feature engineering and data preprocessing.
-* The activation function between hidden layers and for the output layer.
-* The loss and optimizer functions.
-* The learning rate of the optimization functions
-* Number of epochs to train the model. An epoch as one complete pass over the training set.
+* **The number of layers**: more layers allow the neural network to perform more of its feature engineering and data preprocessing.
+* The **activation function** between hidden layers and for the output layer.
+* The **loss and optimizer** functions.
+* The **learning rate** of the optimization functions
+* Number of **epochs** to train the model. An epoch as one complete pass over the training set.
 
 For multi class training, `LogSoftmax` is used as transfer function and `CrossEntropyLoss` as loss function.
 With Softmax, the outputs are normalized probabilities that sum up to one.
@@ -169,12 +169,12 @@ Some code samples:
 For the training loop, the steps to build:
 
 | Step	| What does it do? | Code example |
-| --- | --- | --- |
-| Forward pass | The model goes through all of the training data once, performing its forward() function calculations.	| model(x_train) |
-| Calculate the loss | The model's predictions are compared to the ground truth and evaluated to see how wrong they are. | loss = loss_fn(y_pred, y_train) |
-| Zero gradients | The optimizers gradients are set to zero to be recalculated for the specific training step. | optimizer.zero_grad() |
-| Perform back propagation on the loss | Computes the gradient of the loss with respect for every model parameter to be updated (each parameter with requires_grad=True) | loss.backward() |
-| Update the optimizer (gradient descent)| Update the parameters with requires_grad=True with respect to the loss gradients in order to improve them. | optimizer.step() |
+| :--- | --- | --- |
+| **Forward pass** | The model goes through all of the training data once, performing its forward() function calculations.	| model(x_train) |
+| **Calculate the loss** | The model's predictions are compared to the ground truth and evaluated to see how wrong they are. | loss = loss_fn(y_pred, y_train) |
+| **Zero gradients** | The optimizers gradients are set to zero to be recalculated for the specific training step. | optimizer.zero_grad() |
+| **Perform back propagation** on the loss | Computes the gradient of the loss with respect for every model parameter to be updated (each parameter with requires_grad=True) | loss.backward() |
+| **Update the optimizer (gradient descent)**| Update the parameters with requires_grad=True with respect to the loss gradients in order to improve them. | optimizer.step() |
 
 Example of code for training on multiple epochs:
 
@@ -215,9 +215,9 @@ The typical steps include:
 
 | Step | Description| 	Code example |
 | --- | --- | --- |
-| Forward pass	| The model goes through all of the test data |	model(x_test) |
-| Calculate the loss | The model's predictions are compared to the ground truth. | loss = loss_fn(y_pred, y_test) |
-| Calculate evaluation metrics | Calculate other evaluation metrics such as accuracy on the test set. | Custom function |
+| **Forward pass**	| The model goes through all of the test data |	model(x_test) |
+| **Calculate the loss** | The model's predictions are compared to the ground truth. | loss = loss_fn(y_pred, y_test) |
+| **Calculate evaluation metrics** | Calculate other evaluation metrics such as accuracy on the test set. | Custom function |
 
 ```python
 model.eval()
@@ -262,6 +262,8 @@ Classification model can be measured using the at least the following metrics (s
 ## Pytorch datasets
 
 PyTorch includes many existing functions to load in various custom datasets in the [TorchVision](https://pytorch.org/vision/stable/index.html), [TorchText](https://pytorch.org/text/stable/index.html), [TorchAudio](https://pytorch.org/audio/stable/index.html) and [TorchRec](https://pytorch.org/torchrec/) domain libraries.
+
+See [prepare_image_dataset.py](https://github.com/jbcodeforce/ML-studies/blob/master/pytorch/computer-vision/prepare_image_dataset.py) to get food images from [PyTorch vision](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/).
 
 ### Data augmentation
 
@@ -350,6 +352,7 @@ The process of transfer learning usually freezes some base layers of a pre-train
 * [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
 * [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb)
 * [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer_vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer_vision/use_fashion_cnn.py)
+* [Pizza, steak, sushi image classifier]()
 
 ## Resources
 

@@ -96,7 +96,7 @@ def plot_loss_curves(results: Dict[str, List[float]]):
 if __name__ == "__main__":
 
     
-    root_folder=os.path.join(DATA_ROOT_FOLDER, "pizza_steak_sushi")
+    root_folder=os.path.join(DATA_ROOT_FOLDER, "sushi_steak_pizza")
 
     print(f"\n---The images for training and test are prepared by prepare_image_dataset.py")
    
@@ -105,21 +105,21 @@ if __name__ == "__main__":
     test_transformer=v2.Compose([v2.Resize((IMAGE_SIZE,IMAGE_SIZE)), v2.ToTensor()])
  
     print("\n--- 1: Build dataloader for training and test so neural network can iterate on data")
-    train_dl, test_dl,classes = create_data_loaders(os.path.join(root_folder,"train"), 
-                                          os.path.join(root_folder,"test"),
+    train_dl, test_dl, classes = create_data_loaders(os.path.join(root_folder,"train/images"), 
+                                          os.path.join(root_folder,"test/images"),
                                           train_transformer,
                                           test_transformer,
                                           batch_size=32)
     print(f"--- The classes to be used for this problem are {classes}")
-    #img,label = next(iter(train_dl))
-    #display_image(img, train_data.classes[label])
-    #display_random_images(train_data,classes,8)
     device=utils.getDevice()
-    NUM_EPOCHS = 20
+    NUM_EPOCHS = 10
     print(f"\n--- 2: build and train the model using {NUM_EPOCHS} epochs on {device}") 
     model =TinyVGG(input_shape=3, hidden_units=20, output_shape=len(classes)).to(device)
-    summary(model, input_size=[1, 3, IMAGE_SIZE, IMAGE_SIZE])
-    #tryOneImage(model, device,train_dl)
+    try:
+        model_info=summary(model, input_size=[1, 3, IMAGE_SIZE, IMAGE_SIZE])
+    except UnicodeEncodeError:
+        print("problem unicode on windows")
+    tryOneImage(model, device,train_dl)
     # Setup loss function and optimizer
     loss_fn = torch.nn.CrossEntropyLoss()
     optimizer = torch.optim.Adam(params=model.parameters(), lr=0.001)

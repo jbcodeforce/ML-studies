@@ -12,17 +12,20 @@ from PIL import Image
 import random
 
 
-ROOT_FOLDER="./data/pizza_steak_sushi"
+ROOT_FOLDER="./data/sushi_steak_pizza"
 IMAGE_SIZE=224
 BATCH_SIZE=32
 MODEL_FILE_NAME="EfficientNet_B0_pss.pth"
 
 def print_model_summary(model):
-    summary(model, input_size=[BATCH_SIZE, 3, IMAGE_SIZE, IMAGE_SIZE],
-            col_names=["input_size", "output_size", "num_params", "trainable"],
-            col_width=20,
-            row_settings=["var_names"]
-            )
+    try:
+        summary(model, input_size=[BATCH_SIZE, 3, IMAGE_SIZE, IMAGE_SIZE],
+                col_names=["input_size", "output_size", "num_params", "trainable"],
+                col_width=20,
+                row_settings=["var_names"]
+                )
+    except UnicodeEncodeError:
+        print("problem unicode on windows")
 
 def pred_and_plot_image(model: torch.nn.Module,
                         image_path: str, 
@@ -91,8 +94,8 @@ def model_saved():
     return os.path.exists(os.path.join("models",MODEL_FILE_NAME))
       
 if __name__ == "__main__":
-    test_dir=os.path.join(ROOT_FOLDER, "test")
-    train_dir=os.path.join(ROOT_FOLDER, "train")
+    test_dir=os.path.join(ROOT_FOLDER, "test/images")
+    train_dir=os.path.join(ROOT_FOLDER, "train/images")
     device= utils.getDevice()
     weights = torchvision.models.EfficientNet_B0_Weights.DEFAULT
     transformer= weights.transforms()
@@ -119,7 +122,7 @@ if __name__ == "__main__":
         print("\n--- 3/ train the model")
         for param in model.features.parameters():  # Freeze the features
             param.requires_grad = False
-        # Adjust the classifier - output layer
+        # Adjust the classifier output layer to te 3 expected classes
         model.classifier = torch.nn.Sequential(
                 torch.nn.Dropout(p=0.2, inplace=True), 
                 torch.nn.Linear(in_features=1280, 

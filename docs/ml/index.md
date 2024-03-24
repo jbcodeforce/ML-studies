@@ -160,3 +160,10 @@ So putting all together we have:
 
 the weight update is calculated based on all samples in the training set (instead of updating the weights incrementally after each sample), which is why this approach is also referred to as "batch" gradient descent.
 So basically to minimize the cost function we took steps into the opposite direction of a gradient calculated from the entire training set.
+
+## Experiment Tracking
+
+The goal is to assess and track the different machine learning experiments. This is particularly useful when the number of experiments grows. 
+
+To track we can use python discotionaries to keep model metadata and results. But others solutions includes [Tensorboard](https://www.tensorflow.org/tensorboard/get_started), [MLFlow tracking](https://mlflow.org/), [Weights and biases system of records](https://wandb.ai/site/experiment-tracking).
+

@@ -101,5 +101,5 @@ Content is based of the following different sources:
 * [Papers with code - trends](https://paperswithcode.com/)
 * Introduction to Data Sciences - University of Washington.
 * [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)
-* [AWS SageMaker](https://aws.amazon.com/sagemaker/getting-started/).
-* [Partyrock for LLM applications](https://partyrock.aws)
+* [poe.com](https://poe.com)
+* [Made with ML from Goku Mohandas.](https://madewithml.com/)

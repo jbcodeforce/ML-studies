@@ -54,7 +54,7 @@ class CustomImageFolder(torch.utils.data.Dataset):
     
 # Example of how to use it
 if __name__ == "__main__":
-    root_folder="./data/pizza_steak_sushi"
+    root_folder="./data/sushi_steak_pizza"
     trans=transforms.Compose([transforms.Resize((128,128)), transforms.RandomHorizontalFlip(p=0.5), transforms.ToTensor()])
     train_data=CustomImageFolder(os.path.join(root_folder,"train"), transform=trans)
     img, label = train_data[0][0], train_data[0][1]

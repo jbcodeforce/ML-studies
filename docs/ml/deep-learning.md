@@ -131,11 +131,57 @@ The non-linear classifier and one CNN is in [fashion_cnn.py](https://github.com/
 
 ## Transfer Learning
 
-Takes an existing pre-trained model, and use it on our own data to fine tune the parameters. It helps to get better results with less data, and lesser cost and time. In Computer Vision, [Image Net](https://www.image-net.org) includes million of images on which models were trained. 
+Take an existing pre-trained model, and use it on our own data to fine tune the parameters. It helps to get better results with less data, and lesser cost and time. In Computer Vision, [Image Net](https://www.image-net.org) includes million of images on which models were trained. 
 
-[PyTorch has pre-trained models](https://pytorch.org/vision/stable/models.html), [Hugging Face](https://huggingface.co/models), [PyTorch Image Models - Timm](https://github.com/huggingface/pytorch-image-models) is a collection of image models, layers, utilities, optimizers, schedulers, data-loaders / augmentations, and reference training / validation scripts. [Paper with code](https://paperswithcode.com/sota) is a collection of the latest state-of-the-art machine learning papers with code implementations attached.
+[PyTorch has pre-trained models](https://pytorch.org/vision/stable/models.html), [Hugging Face](https://huggingface.co/models) too, [PyTorch Image Models - Timm](https://github.com/huggingface/pytorch-image-models) is a collection of image models, layers, utilities, optimizers, schedulers, data-loaders / augmentations, and reference training / validation scripts. [Paper with code](https://paperswithcode.com/sota) is a collection of the latest state-of-the-art machine learning papers with code implementations attached.
 
-See [PyTorch transfer learning for image classification]()
+The custom data going into the model needs to be prepared in the same way as the original training data that went into the model: 
+
+```python
+weights = torchvision.models.EfficientNet_B0_Weights.DEFAULT
+# Get the transforms used to create our pretrained weights
+transformer= weights.transforms()
+```
+
+The transformer is used to create the data loaders:
+
+```python
+train_dl,test_dl, classes=data_setup.create_data_loaders(
+                            train_dir,
+                            test_dir,
+                            transformer,
+                            transformer,
+                            batch_size=BATCH_SIZE)
+```
+
+And then take an existing model. Often bigger are better but it may be linked to the type of device used and hardware capacity. `efficientnet_b0` has 288,548 parameters.
+
+```
+model=torchvision.models.efficientnet_b0(weights=weights).to(device)
+```
+
+???- info 'efficientnet_b0 parts'
+    efficientnet_b0 comes in three main parts:
+    * **features**: A collection of convolutional layers and other various activation layers to learn a base representation of vision data.
+    * **avgpool**: Takes the average of the output of the features layer(s) and turns it into a feature vector.
+    * **classifier**: Turns the feature vector into a vector with the same dimensionality as the number of required output classes (since efficientnet_b0 is pretrained on ImageNet with 1000 classes.
+
+The process of transfer learning usually goes: freeze some base layers of a pretrained model (typically the features section) and then adjust the output layers (also called head/classifier layers) to suit your needs.
+
+```python
+for param in model.features.parameters():  # Freeze the features
+    param.requires_grad = False
+
+model.classifier = torch.nn.Sequential(
+        torch.nn.Dropout(p=0.2, inplace=True), 
+        torch.nn.Linear(in_features=1280, 
+                        out_features=len(classes), 
+                        bias=True)).to(device)
+```
+
+Dropout layers randomly remove connections between two neural network layers with a probability of p.  This practice is meant to help regularize (prevent overfitting) a model by making sure the connections that remain learn features to compensate for the removal of the other connections.
+
+See [PyTorch transfer learning for image classification code.](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/transfer_learning.py)
 
 ## Sources of information
 
