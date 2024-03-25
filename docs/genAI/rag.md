@@ -62,6 +62,63 @@ The retrieval is very important. The main concept is using the TF-IDF measure: i
 
 The first vector databases were based on [FAISS](https://github.com/facebookresearch/faiss), a library for efficient similarity search and clustering of dense vectors.
 
+## Knowledge graph integration in RAG
+
+From the standard RAG architecture, the pre-processing step may be modified by adding context to the query before it performs a retrieval from the vector database. This context may specify enterprise specific ontology and term definitions. Since years, Knowledge graphs (KG) are helping search engine to build acronym dictionaries.
+
+???+ info "Knowledge Graph"
+    *A Knowledge Graph is a set of data points connected by relations that describe a domain, for instance, a business, an organization, or a field of study.*
+
+Question may be broken down into sub-questions and can require numerous documents to be provided to the LLM to generate an accurate answer.
+
+For chunks selection, document hierarchies can be used to reference which documents the query needs to use. One KG with document hierarchy to chunks in the vector database.
+
+Use contextual dictionary to understand which document chunks contain important topics. Natural language rules define how to search document related to the meaning of the query.
+
+KG may help to add additional information that must exist in any answer referring to a specific concept that failed to be retrieved or did not exist in the vector database. This is the concept of **answer augmentation**. 
+
+Rules may be used to eliminate repetition within the LLM results, and personalize response to the users.
+
+An hypothetical sequence diagram for a RAG orchestrator enhanced by a knowledge graph, may look like:
+
+```mermaid
+sequenceDiagram
+    UI->>Orchestrator: initial query
+    activate Orchestrator
+    Orchestrator->>KG: initial query
+    deactivate Orchestrator
+    activate KG
+    KG->>Orchestrator: specific terms and ontology
+    activate Orchestrator
+    deactivate KG
+    Orchestrator->>Vector Database: augmented query
+    deactivate Orchestrator
+    activate Vector Database
+    Vector Database->>KG: search document context
+    activate KG
+    KG->>Vector Database: chunks mapping
+    deactivate KG
+    Vector Database->>Orchestrator: context for llm
+    deactivate Vector Database
+    activate Orchestrator
+    Orchestrator->>LLM: query, context
+    activate LLM
+    LLM->>Orchestrator: LLM response
+    deactivate LLM
+    Orchestrator->>KG: LLM response
+    KG->>Orchestrator: augmented LLM response
+    Orchestrator->>UI: augmented LLM response
+    deactivate Orchestrator
+```
+
+Knowledge graph is easily extractable in a coherent form. 
+
+#### Sources of information
+
+* [Read more from this medium article](https://medium.com/enterprise-rag/injecting-knowledge-graphs-in-different-rag-stages-a3cd1221f57b).
+
+* [Pykg2vec- Python Library for KGE Methods](https://github.com/Sujit-O/pykg2vec)
+
 ## LangChain examples
 
 For a classical RAG using LangChain:

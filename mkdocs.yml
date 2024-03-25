@@ -9,6 +9,7 @@ nav:
     - Data management:
       - Introduction: data/index.md
       - Feature Engineering: data/features.md
+    - Methodology: methodology/index.md
   - Machine Learning:
     - Introduction: ml/index.md
     - Classifier: ml/classifier.md
@@ -20,7 +21,7 @@ nav:
       - Neuro-Symbolic AI: neuro-symbolic/index.mds
     - Generative AI: 
       - Introduction: genAI/index.md
-      - Methodology: genAI/methodology.md
+      
       - Prompt Engineering: genAI/prompt-eng.md
       - Reference Architecture: genAI/ref-arch.md
       - RAG: genAI/rag.md

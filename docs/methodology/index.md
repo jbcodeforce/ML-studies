@@ -1,6 +1,8 @@
-## Methodology
+# Implementation solution methodology
 
-The adoption of generative AI in the enterprise follows the same project management practices as any data, analytics and decision system solution implementation practices. In this section we define what are the specifics needs the methodology needs to address and the proposed phase and team engagements to put in place.
+## Introduction
+
+The adoption of generative AI in the enterprise follows the same project management practices as any data, analytics and decision system solution implementation practices. In this section we define what are the specifics requirements the methodology needs to address and the proposed phase and team engagements to put in place.
 
 The proposed methodology uses the successful practices used during thousands of consulting engagements around decision automation solution implementations.
 
