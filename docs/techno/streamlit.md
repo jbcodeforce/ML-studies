@@ -1,6 +1,8 @@
 # [Streamlit](https://streamlit.io/)
 
-Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. It uses an integrated cloud based IDE with integration to github codespaces and deploy on
+Streamlit is an open-source Python library that makes it easy to create and share beautiful, custom web apps for machine learning and data science. It uses an integrated cloud based IDE with integration to github codespaces and deploy on streamlit SaaS servers.
+
+See [Getting started]
 
 ## Main concepts
 
