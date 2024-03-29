@@ -1,7 +1,10 @@
 
-langchain>=0.0.325
-langchain_experimental
+langchain
+langsmith
+langchain-community
+langchain-experimental
 anthropic
 faiss-cpu>=1.7,<2
 pypdf>=3.8,<4
 sqlalchemy>1,<2
+python-dotenv

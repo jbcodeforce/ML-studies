@@ -1,6 +1,16 @@
 # LangChain notes
 
-[LangChain](https://python.langchain.com/docs/get_started/introduction) is a framework for developing applications powered by large language models, connecting them to external data sources.
+[LangChain](https://python.langchain.com/docs/get_started/introduction) is a framework for developing applications powered by large language models, connecting them to external data sources. They are adding new products to their portfolio quickly like LangSmith (get visibility on LLMs execution), and LangServe (server API for LangChain apps).
+
+## Value propositions
+
+Develop apps with context awareness, and that can reason using LLMs. 
+
+* **LangChain**: Python and Javascript libraries
+* **LangServe:** a library for deploying LangChain chains as a REST API.
+* **LangSmith:** a platform that lets developers debug, test, evaluate, and monitor chains
+
+##  LangChain libraries
 
 The core building block of LangChain applications is the LLMChain:
 
@@ -15,66 +25,92 @@ The standard interface that LangChain provides has two methods:
 
 Modules are extendable interfaces to LangChain.
 
-### Environment to test LangChain code with Amazon Bedrock
+## Getting started
 
-1. [Optional] To use the image generation of Stability Diffusion, start Xquarts on Mac, be sure in the security settings that 'Allow connections from network clients' is enabled.
-1. Start the docker image with python 3.11: `startPythonDocker.sh`
-1. Goes under /app/llm-langchain/bedrock and do a `pip install -r requirements.txt`
+All codes for OpenAI LLM are in 
 
-## Use cases
+| Backend | Type of chains |
+| --- | --- |
+| [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples siple, RAG, chatbot, agent  |
+| [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/anthropic) | |
+| [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/mistral) | |
+| [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/watsonX) | | 
+| [AWS Bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock) | zero_shot generation | 
 
-* **Text generation**: from a prompt like an email, and generate a response taking into account some variables.
-* **Summarization**: summarize call transcripts, meetings transcripts, books, articles, blog posts, and other relevant content.
-* **Q&A**: ask questions on a knowledge corpus, LLM helps understanding the text and the questions. Here the LLM is enriched, trained on proprietary corpus:
 
-    ![](./diagrams/qa-llm.drawio.png)
+Each project needs to specify the LangChain module needed to keep the executable size low. 
 
-    The pipeline to build the Q&A over existing documents is illustrated in the figure below:
+## Main Concepts
 
-    ![](./diagrams/lg-pipeline.drawio.png)
+### Model I/O
 
-* **Chatbots**: Aside from basic prompting and LLMs, memory and retrieval are the core components of a chatbot. ChatModels do not need LLM, as they are conversational. 
+* Model I/O are building blocks to interface with any language model. It facilitates the interface of model input (prompts) with the LLM model to produce the model output.
+* LangChain uses [Prompt templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/).
+* Two prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
+* We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt using [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat).
+* Feature stores, like [Feast](https://github.com/feast-dev/feast), can be a great way to keep information about the user conversation or query, and LangChain provides an easy way to combine that data with LLMs. 
+
+### Typical chains
+
+Chains allow developers to combine multiple components together to create a single, coherent application, or to  also combine chains.
+
+* **Q&A**: The pipeline to build the Q&A over existing documents is illustrated in the figure below:
+
+    ![](./diagrams/lg-pipeline.drawio.png){width=700}
+
+    **Embeddings** capture the semantic meaning of the text, which helps to do similarity search. **Vector store** supports storage and searching of these embeddings. Retrievers use [different algorithms](https://python.langchain.com/docs/modules/data_connection/retrievers/) for the semantic search to load vectors. 
+
+
+
+???- code "Use RAG with Q&A"
+    ```python
+    from langchain.chains import RetrievalQA
+    from langchain.prompts import PromptTemplate
+
+    prompt_template = """Human: Use the following pieces of context to provide a concise answer to the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
+
+    {context}
+
+    Question: {question}
+    Assistant:"""
+
+    PROMPT = PromptTemplate(
+        template=prompt_template, input_variables=["context", "question"]
+    )
+
+    qa = RetrievalQA.from_chain_type(
+        llm=llm,
+        chain_type="stuff",
+        retriever=vectorstore_faiss.as_retriever(
+            search_type="similarity", search_kwargs={"k": 3}
+        ),
+        return_source_documents=True,
+        chain_type_kwargs={"prompt": PROMPT}
+    )
+    query = "Is it possible that I get sentenced to jail due to failure in filings?"
+    result = qa({"query": query})
+    print_ww(result['result'])
+    ```
+
+* **Chatbots**: Aside from basic prompting and LLMs, memory and retrieval are the core components of a chatbot. 
 
     ![](./diagrams/chatbot.drawio.png)
 
-* **Code Understanding**
-* Extraction
+    The retriever needs to take into account the history of the conversation.
 
 * **[Web scraping](https://python.langchain.com/docs/use_cases/web_scraping)** for LLM based web research. It uses the same process: document/page loading, transformation with tool like BeautifulSoup, to HTML2Text.
 
-## Chains
-
-Chains allow us to combine multiple components together to create a single, coherent application, and also  combine chains.
-
-[LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) is the basic chain to integrate with a LLM.
+* [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with a LLM.
 
 
-## Model I/O
+### Text Generation Examples
 
-* Model I/O are building blocks to interface with any language model. It facilitates the interface of model input (prompts) with the LLM model to produce the model output.
-* A **prompt** for a language model is a set of instructions or input provided by a user to guide the model's response, helping it understand the context and generate relevant and coherent language-based output. See the[Prompt templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/).
-* Two prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
-* We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt usine [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat).
-* Feature stores, like [Feast](https://github.com/feast-dev/feast), can be a great way to keep information abount the user fresh, and LangChain provides an easy way to combine that data with LLMs. Below is [an example](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/feast/feast-prompt.py) of getting a LLM api using AWS Bedrock service, build a prompt using Feast feature stores, a chain using Langchain and call it with the value of one of the driver_id.
-
-```python
-titan_llm = Bedrock(model_id="amazon.titan-tg1-large", client=bedrock_client)
-prompt_template = FeastPromptTemplate(input_variables=["driver_id"])
-
-chain = LLMChain(llm=titan_llm, prompt=prompt_template)
-# run has positional arguments or keyword arguments, 
-print(chain.run(1001))
-```
-
-## Text Generation Examples
-
-Getting started with LangChain, the [following code (llm-langchain/langchain-1.py)](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langchain-1.py) regroups the getting started examples from LangChain docs to illustrate calls to LLM Bedrock Claude2 and text generation.
 
 * [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
 * Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information later and get model outputs based on different scenarios. [text_generation/ResponseToUnhappyCustomer](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
 
 
-## Summarization chain
+### Summarization chain
 
 Always assess the size of the content to send, as the approach can be different: for big doc we need to split the doc in chunks.
 
@@ -104,13 +140,11 @@ Always assess the size of the content to send, as the approach can be different:
     output = summary_chain.run(docs)
     ```
 
-## Retrieval Augmented Generation
+### Retrieval Augmented Generation
 
 The goal is to add custom dataset not already part of a  trained model and use the dataset as input into the prompt sent to the LLM. This is the Retrieval Augmented Generation or RAG and illustrated in figure below:
 
 ![](./diagrams/rag-process.drawio.png)
-
-
 
 The code to do the above processing is in [prepareVectorStore.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/prepareVectorStore.py).
 
@@ -165,44 +199,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 ???- info "LLM and FeatureForm"
     See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
 
-## Q&A chain
-
-![](./diagrams/qa-llm.drawio.png)
-
-???- code "Use RAG with Q&A"
-        ```python
-        from langchain.chains import RetrievalQA
-        from langchain.prompts import PromptTemplate
-
-        prompt_template = """Human: Use the following pieces of context to provide a concise answer to the question at the end. If you don't know the answer, just say that you don't know, don't try to make up an answer.
-
-        {context}
-
-        Question: {question}
-        Assistant:"""
-
-        PROMPT = PromptTemplate(
-            template=prompt_template, input_variables=["context", "question"]
-        )
-
-        qa = RetrievalQA.from_chain_type(
-            llm=llm,
-            chain_type="stuff",
-            retriever=vectorstore_faiss.as_retriever(
-                search_type="similarity", search_kwargs={"k": 3}
-            ),
-            return_source_documents=True,
-            chain_type_kwargs={"prompt": PROMPT}
-        )
-        query = "Is it possible that I get sentenced to jail due to failure in filings?"
-        result = qa({"query": query})
-        print_ww(result['result'])
-        ```
-
-## Chat chain
-
-
-Combine chat history with new question to ask follow up questions.
+## Agent
 
 ## Deeper dive
 

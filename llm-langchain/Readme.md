@@ -1,6 +1,13 @@
 # Some LLM and LangChain implementations
 
-Use python docker image with the script `./startPythonDocker.sh` or a virtual python environment.
+Use python docker image with the script `./startPythonDocker.sh` or a virtual python environment:
+
+```sh
+# First time to create an environment
+python -n venv .venv
+# Then each time we need a virtual env
+source .venv/Scripts/activate
+```
 
 ## Pre-requisite
 
@@ -42,3 +49,6 @@ result=qa_chain({"query": question})
 ## RAG on markdown files and opensearch
 
 Same approach but it uses OpenSearch as vector store, and markdown files as source. See [this code](./qa-chat-md-os.py) which uses a chatbot interface.
+
+
+## Using AWS Bedrock
