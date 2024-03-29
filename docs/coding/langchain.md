@@ -1,6 +1,6 @@
 # LangChain notes
 
-[LangChain](https://python.langchain.com/docs/get_started/introduction) is a framework for developing applications powered by language models, connecting them to external data sources.
+[LangChain](https://python.langchain.com/docs/get_started/introduction) is a framework for developing applications powered by large language models, connecting them to external data sources.
 
 The core building block of LangChain applications is the LLMChain:
 

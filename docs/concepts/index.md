@@ -27,7 +27,7 @@ During hyperparameter tuning, several performance metrics can be used to evaluat
 
 * **Mean Average Precision (MAP)**: MAP is often used for evaluating models in information retrieval or recommendation systems. It considers the average precision at different recall levels and provides a single metric to assess the model's ranking or recommendation performance.
 
-## Regulaziation
+## Regularization
 
 **Regularization** is a very useful method to handle collinearity (high correlation among features), filter out noise from data, and eventually prevent overfitting. It adds a penalty term to the regression equation. For regularization to work properly, we need to ensure that all our features are on comparable scales. There are various regularization techniques available, such as L1 regularization (Lasso), [L2 regularization (Ridge)](), and [elastic net regularization](). Each technique adds a regularization term to the model's objective function, which penalizes certain model parameters and helps control their impact on the final predictions. Use regularization strength to determine the degree of influence the regularization term has on the model. It is typically controlled by a hyperparameter (e.g., lambda or alpha) that needs to be tuned.
 

@@ -190,7 +190,7 @@ The techniques to customize LLM applications from simplest to more complex are:
 
 * **Zero-shot inference**: allows a pre-trained LLM to generate responses to tasks that it hasn’t been specifically trained for. In this technique, the model is provided with an input text and a prompt that describes the expected output from the model in natural language. 
 * Prompt engineering with zero-shot inference.
-* **Prompt engineering with few-shot inference**: **Few-shot** learning involves training a model to perform new tasks by providing only a few examples. This is useful where limited labeled data is available for training.
+* **Prompt engineering with few-shot inference**: **Few-shot** learning involves training a model to perform new tasks by providing few examples. This is useful where limited labeled data is available for training.
 * [Retrieval augmented generation (more complex)](#retrieval-augmented-generation-rag).
 * Fine tune an existing foundation model.
 * Pre-train an existing foundation model: example is domain specific model, like the Bloomberg's LLM.
@@ -201,7 +201,7 @@ The techniques to customize LLM applications from simplest to more complex are:
 
 | Term | Definition |
 | --- | --- |
-| **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
+| **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Ex. Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
 | **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
 | **Attention** | A math filter for focusing on the important parts of data inputs. |
 | **BARD** | AI chat service from Google - powered by the LaMDA model. Similar to ChatGPT. |
@@ -220,16 +220,14 @@ The techniques to customize LLM applications from simplest to more complex are:
 | **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
 | **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
 | **GPT** | OpenAI's generalized pre-trained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multi-modal. |
-| **Hallucinations** | LLMs to sometimes give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be inaccurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
+| **Hallucinations** | LLMs may give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be inaccurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
 | **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extremely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
 | **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
 | [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications.The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assists with retrieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
-| **Llama** | A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. The weights have been leaked and have been found on torrents around the web.  Note that many models have been released based on this, but they also inherit the license requirement for non-commercial use. |
 | **Large Language Model (LLM’s)** | Transformers trained on millions of documents |
 | **Model compilation** | Model compilation is the act of tracing a model computational graph in order to deploy to lower level hardware and code. This is a necessary step to run on specialized hardware. |
 | **Model Distribution** | When a model's size prohibits it from being stored on one GPU. This occurs when models start to be in the 10's of billions of parameter range. This has a few consequences 1) it costs a lot to train and host these models 2) specialized libraries are required to help. |
 | **MultiModal Models**	| Multi-modal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
-| **OpenAI** | OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 1/With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy. 2/ DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles. 3/ Whisper can transcribe speech into text and translate many languages into English. |
 | **Pinecone** | A sparse dense vector database which can be used to store sentence embeddings and then utilize approximate nearest neighbor search to fine similarity matches. This can be used for semantic search (search which matches the meaning) and then applied as 'context' to LLMs for question and answering. |
 | **Pre-training** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pre-training FLAN with Medical documents to understand medical context previously missing from the model. |
 | **RAG** |  It is a technique for providing additional, targeted information to the model through the prompt. While using any search to find data for the prompt could be considered RAG, it often refers to the specific technique of creating embeddings from a corpus of documents, storing those embeddings in a vector database, searching that database with a user query, and then providing those results to the LLM for completion. This gives the LLM the ability to do a semantic search over a knowledge base and to use the results of that search in formulating the answer. This technique can be used to provide more up-to-date or more use-case-specific information to the model to enhance its accuracy for specific use cases. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results. |
@@ -240,7 +238,7 @@ The techniques to customize LLM applications from simplest to more complex are:
 | **Text to text** | Any model which takes in text inputs and produces text outputs. Ex: entity extraction, summarization, question answer. |
 | **Transfer learning**	| The act of transferring the power of a foundation model to your specific task. |
 | **Transformer** |	A ML model for transforming one sequence into another, using attention.|
-| **Vector Database** | A vector database is optimized for storing and querying large vector arrays using machine learning techniques. It's highly scalable and fast at performing operations like similarity searches across vectors. Queries return results based on vector similarity scores, revealing hidden semantic connections in data. | 
+
 
 ### Summarization
 
@@ -248,11 +246,11 @@ Text summarization is a Natural Language Processing (NLP) technique that involve
 
 Summarization works by sending a prompt instruction to the model, asking the model to summarize our text.
 
-[See hands-on with LangChain](../coding/langchain.md/#summarization-chain)
+[See hands-on notes on LangChain.](../coding/langchain.md/#summarization-chain)
 
 ### Retrieval augmented generation (RAG)
 
-[See separate chapter](./rag.md)
+[See separate chapter](./rag.md).
 
 ### Common LLM inference parameters
 
@@ -288,16 +286,48 @@ The following parameters help control repetition in the generated response.
 **Repetition penalty (presence penalty)** – Prevents repetitions of the same words (tokens) in responses. 
 1.0 means no penalty. Greater than 1.0 decreases repetition.
 
+### Vector Database
 
+A vector database is optimized for storing and querying large vector arrays using machine learning techniques. It's highly scalable and fast at performing operations like similarity searches across vectors. 
 
+Similarity search helps to identify items (vectors) that share similar characteristics or properties with the query item (a new vector). 
+
+![](https://latex.codecogs.com/svg.latex?j=argmin_i \left\|| x - x_i\right\||)
+
+Queries return results based on vector similarity scores, revealing hidden semantic connections in data. 
+
+[FAISS](https://faiss.ai/index.html) from Facebook is a library for efficient similarity search and clustering of dense vectors. Faiss can compute vector Euclidien distance using GPU or CPU.
+
+[ChromaDB](https://github.com/chroma-core/chroma) an open source embedding database which supports Queries, filtering, density estimation.
+
+Traditional open source index or database such as OpenSearch, Postgresql support now vector store and similarity search. 
 
 ## Current Technology Landscape
 
-### [ChatGPT](https://openai.com/blog/chatgpt)
+### OpenAI - [ChatGPT](https://openai.com/blog/chatgpt)
 
-Chat Generative pre-trained Transformer is a proprietary instruction-following model, was released in November 2022. It is a system of models designed to create human like conversations and generating text by using statistics. It is a Causal Language Model (CLM) trained to predict the next token.
+OpenAI is an AI research and deployment company. Their vision: intelligence—AI systems are generally smarter than humans: 
+
+1. With broad general knowledge and domain expertise, GPT-4 can follow complex instructions in natural language and solve difficult problems with accuracy.
+1. DALL·E 2 can create original, realistic images and art from a text description. It can combine concepts, attributes, and styles.
+1. Whisper can transcribe speech into text and translate many languages into English.
+
+Chat Generative pre-trained Transformer is a proprietary instruction-following model, which was released in November 2022. It is a system of models designed to create human like conversations and generating text by using statistics. It is a Causal Language Model (CLM) trained to predict the next token.
 
 The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](https://en.wikipedia.org/wiki/GPT-3), but with different data collection setup. 
+
+### [LLama2](https://llama.meta.com/llama2/)
+
+A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. Many models have been released based on Llama2, but they also inherit the license requirement for non-commercial use.
+
+### [Mistral - Mixture of Experts](https://mistral.ai/news/mixtral-of-experts/)
+
+A french company who has developed the **Mixtral 8x7B** model, a high-quality sparse mixture of experts model (SMoE) with open weights.
+
+
+### [Google Gemini](https://gemini.google.com/)
+
+Is the public Generative multimodal AI from Google DeepMind team with the support of 3 different sizes, the smallest being able to run on Mobile. Its [reasoning capabilities](https://blog.google/technology/ai/google-gemini-ai/#capabilities) can help make sense of complex written and visual information.
 
 ### Amazon SageMaker
 
@@ -309,6 +339,7 @@ Some useful articles:
 
 * [AWS- Quickly build high-accuracy Generative AI applications on enterprise data using Amazon Kendra, LangChain, and large language models.](https://aws.amazon.com/blogs/machine-learning/quickly-build-high-accuracy-generative-ai-applications-on-enterprise-data-using-amazon-kendra-langchain-and-large-language-models/)
 * [SageMaker my own personal study.](https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker/).
+
 
 
 ## Interesting legal considerations

@@ -1,5 +1,7 @@
 site_name: Machine Learning Studies - Jerome Boyer
 repo_url: https://github.com/jbcodeforce/ML-studies
+site_url: https://jeromeboyer.net/ML-studies
+copyright: Copyright &copy; 2018 - 2024 Jerome Boyer
 nav:
   - About:
     - Introduction: index.md
@@ -55,12 +57,17 @@ theme:
   features:
       - content.code.annotate
       - content.tooltips
+      - search.highlight
+      - navigation.instant
+      - navigation.instant.progress
       - navigation.tabs
-      #- navigation.instant
+      - navigation.tabs.sticky
+      - navigation.instant
       - navigation.tracking
       - navigation.sections
-      - navigation.expand
-      - navigation.tabs.sticky
+      #- navigation.expand
+      - navigation.top
+      - navigation.footer
 extra_css: ["extra.css"]
 plugins:
   - search:
@@ -94,3 +101,12 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.tasklist:
       custom_checkbox: true
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: 'https://github.com/jbcodeforce'
+    - icon: fontawesome/brands/linkedin
+      link: 'https://linkedin.com/in/jeromeboyer'
+    - icon: fontawesome/solid/paper-plane
+      mailto: jerome@intelligent-automations.com
