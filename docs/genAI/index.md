@@ -51,7 +51,7 @@ Some ways to use Generative AI:
 
 ## Use cases
 
-We can group the use cases in different categories:
+We can group the Generative AI use cases in different categories:
 
 ???+ info "Improve customer experiences"
     * Chatbot functionality with context, with better user's experiences. Reduce operational costs using automated response.
@@ -61,7 +61,7 @@ We can group the use cases in different categories:
 ???+ info "Improve Employee productivity"
     * Code generation
     * Translation, reports, summarization...
-    * Search via Q&A Agent for specific subject, based on internal documents.
+    * Search via Q&A Agent for specific subject, based on Corporate document processing.
     * Self service tutor based on student progress, prompt activities, and respond  to questions
     * Personalized learning path generation
     * Low-code development with GenAI agents
@@ -73,7 +73,10 @@ We can group the use cases in different categories:
     * Speeding the ideation phase of a product development
 
 ???+ info "Business process optimization"
-    * Automatically extracting and summarizing data from documents
+    * Automatically extracting and summarizing data from documents: combine OCR with prompt to extract data and build json doc to be structured for downstream processing: Gen AI based intelligent document processing may looks like this:
+
+    ![](./diagrams/idp-genai.drawio.png)
+
     * Data augmentation to improve data set quality. Keep the privacy of original data sources, and help trains other models: generate image of rusted pumps to train an anomaly detection model on pumps.
     * Propose some supply chain scenario
 
@@ -88,7 +91,7 @@ The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/o
 
 ### Industries
 
-These following industry-specific use cases present potential usage of Generative AI:
+These following industry-specific use cases present the potential applications of Generative AI:
 
 1. Supply Chain Management:
 
@@ -135,14 +138,21 @@ These following industry-specific use cases present potential usage of Generativ
 
 ### Classical concerns and challenges
 
-* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs?.
-* Protect Intellectual Property: never pass confidential information to Chatbot for training
-* Protect the brand, avoid bias, discrimination, aligned to company values
+* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs? Size of the model is linked to the compute power you have and can pay for on the Cloud providers. 
+* We need to optimize for training cost, and inference cost. And then assess how to amortization of the training cost to integrate to what can be billed to end-users.
+* How to leverage open model like Mistral?
+* How to verify accuracy on unstructured data as query and documents? 
+* AI Models are becoming stronger when connected to data, enterprise data, and fine tuning. It is important to adopt a Gen AI strategy that is linked to the data strategy too. Model will be deployed where data is. 
+* When moving to more stateful Gen AI based solutions, to make model more specialized or more tuned for a dedicated use cases, when model will need self improvement, the solution will need to keep states. Those states will be persisted in Lake House technology.
+* Current main stakeholder for Gen AI, is the developer, moving to business end users will be challenging as some of their jobs are at risk.
+* How to stop doing a lot of prompt engineering and start doing model fine tuning? Always address what we should evaluate the solution on. Gen AI can elp pn building prompt with the use of [meta prompting](./prompt-eng.md/#automatic-prompt-engineering). 
+* Protect Intellectual Property: never pass confidential information to Gen AI SaaS based API
+* Protect the brand, avoid bias, discrimination, aligned to company values: any business decision should not be done by uncontrolled Gen AI.
 * Response accuracy, fairness, toxicity, and privacy
 * No move private data to public internet
-* Skill set
 * Hallucination where the models make up inaccurate responses that are not consistent with the training data.
 * Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
+* How to integrate those capabilities in enterprise business processes and decisions? How does human in the loop step can be added to the process?
 * Simple to integrate with existing apps and data.
 * Whenever we want to teach an LLM to use a tool, we need enough annotated tool calls to fine tune the LLM. We can use in-context learning to create a model that annotates tool calls for the input query. Incorrect calls can be filtered by executing the tools and filtering the outputs based on the ground truth answer.
 

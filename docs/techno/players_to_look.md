@@ -8,6 +8,10 @@ Anthropic is an AI safety and research company developing Claude 2 LLM, a secure
 
 Andrew Ng's company to educate on deep learning and anything related.
 
+## [Mistral](https://mistral.ai)
+
+The mission to bring AI to all developers, pushing for more open platforms and spreading the adoption of AI. They develop different model size, with open model approach (weights are shared).
+
 ## [outsystems](https://www.outsystems.com/)
 
 Low-code no-code platform with new AI agents builder.
