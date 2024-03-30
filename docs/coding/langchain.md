@@ -9,6 +9,7 @@ Develop apps with context awareness, and that can reason using LLMs.
 * **LangChain**: Python and Javascript libraries
 * **LangServe:** a library for deploying LangChain chains as a REST API.
 * **LangSmith:** a platform that lets developers debug, test, evaluate, and monitor chains
+* Predefined prompt template fomr langChain Hub.
 
 ##  LangChain libraries
 
@@ -32,11 +33,11 @@ All codes for OpenAI LLM are in
 | Backend | Type of chains |
 | --- | --- |
 | [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples siple, RAG, chatbot, agent  |
+| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to lollama |
 | [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/anthropic) | |
 | [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/mistral) | |
 | [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/watsonX) | | 
 | [AWS Bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock) | zero_shot generation | 
-
 
 Each project needs to specify the LangChain module needed to keep the executable size low. 
 
@@ -102,9 +103,7 @@ Chains allow developers to combine multiple components together to create a sing
 
 * [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with a LLM.
 
-
 ### Text Generation Examples
-
 
 * [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
 * Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information later and get model outputs based on different scenarios. [text_generation/ResponseToUnhappyCustomer](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
@@ -200,6 +199,27 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
     See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
 
 ## Agent
+
+[Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decide what steps to take. Consider the tools, services, the agent needs to access. See code [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py)
+
+The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool, and Tavily is a search API to get the last trusted news.
+
+```python
+retriever_tool = create_retriever_tool(
+    retriever,
+    "langsmith_search",
+    "Search for information about LangSmith. For any questions about LangSmith, you must use this tool!",
+)
+search = TavilySearchResults()
+tools = [retriever_tool, search]
+```
+
+???- info "Tavily"
+    [Tavily](https://docs.tavily.com/) is the leading search engine optimized for LLMs. It provides factual, explicit and objective answers. It is a GPT researcher which queries, filters and aggregates over 20+ web sources per a single research task. It focuses on optimizing search for AI developers and autonomous AI agents. See [this git repo](https://github.com/assafelovic/gpt-researcher.git)
+
+## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
+
+LCEL to support streaming te LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results. define schemas.
 
 ## Deeper dive
 

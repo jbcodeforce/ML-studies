@@ -2,7 +2,9 @@ from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
 import os,sys
 import argparse
+from dotenv import load_dotenv
 
+load_dotenv(dotenv_path="../../.env")
 try:
     api_key=os.environ.get("ANTHROPIC_API_KEY")
 except KeyError:

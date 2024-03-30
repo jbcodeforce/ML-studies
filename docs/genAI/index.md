@@ -323,6 +323,8 @@ The model was trained on trillions of words from the web, requiring massive numb
 
 A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. Many models have been released based on Llama2, but they also inherit the license requirement for non-commercial use.
 
+It is possible to run LLama2 on local machine with [ollama](https://ollama.com/), and a [simple LangChain]()
+
 ### [Mistral - Mixture of Experts](https://mistral.ai/news/mixtral-of-experts/)
 
 A french company who has developed the **Mixtral 8x7B** model, a high-quality sparse mixture of experts model (SMoE) with open weights.
