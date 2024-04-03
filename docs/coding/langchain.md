@@ -202,7 +202,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 
 [Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decide what steps to take. Consider the tools, services, the agent needs to access. See code [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py)
 
-The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool, and Tavily is a search API to get the last trusted news.
+The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool, and [Tavily](https://tavily.com/) is a search API to get the last trusted news.
 
 ```python
 retriever_tool = create_retriever_tool(
