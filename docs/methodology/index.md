@@ -1,20 +1,48 @@
 # Implementation solution methodology
 
+The adoption of LLM in an enterprise ecosystem should not be an afterthought process. Leaders should go over the hype, and really address what those technologies can help with. Interesting to see that companies who offer hosted LLMs in the cloud are not encouraging their employees to use those LLMs. With text generation and text enhancement, all employees will bring the same type of results and it will be difficult to measure them.
+
+AI systems are helping to take million of business decisions every days with classical expert systems, or business rule management systems, ML predictive scoring. Any business process activities involving human task, may be able to leverage better automation by adopting AI agent to help them doing their task quicker with better results and accuracy. Actually LLM has poor accuracy result to be trustable for any business. But there is way to improve this.
+
+The classical LLM use cases of summarization, text improvement, and idea generations are useful and halucinations have no dramatic impact as the human is still taking the lead on acting on what the LLM results are. 
+
+The current tendency to imagine LLM being an orchestrator and so embbedable into a business process, is another category. Process automation needs consistency and high level of accuracy and coded logic to manage exceptions. Well, those well adopted practices, should help us adopting LLM as a suppprting technology to help human takes the next best actions.
+
 ## Introduction
 
-The adoption of generative AI in the enterprise follows the same project management practices as any data, analytics and decision system solution implementation practices. In this section we define what are the specifics requirements the methodology needs to address and the proposed phase and team engagements to put in place.
+The adoption of generative AI in the enterprise follows the same project management practices as the ones of any data, analytics and decision system solution implementation. In this section, we define what are the specifics requirements, the methodology needs to address and the proposed phase and team engagements to put in place.
 
 The proposed methodology uses the successful practices used during thousands of consulting engagements around decision automation solution implementations.
 
 Always starts by the business problem to solve.
+
+## Classical business process Generative AI can help to address
+
+In the context of a business process, like insurance claim processing, there are some activities that were already automated with the adootion of decision services, which uses inference rule engine, (the AI of the 90s), with hundred of rules to address insurance product configuration, feature eligibility, pricing computation, basic claim acceptance, risk scoring, to name a few.
+
+Parts of those process, have human activities, and the complete orchestration is done by business process management system or application logic mostly coded as state machines. When humans are involved, they verify documents, correlate information between different data sources, some time rekey data into different systems, and apply some non-coded business policies, but documented somewhere to decide to accept, reject the claim or most likely ask for more information. 
+
+Obviously with SOA and microservice adoption, rekeying data should be history, and most middleware integrations, can move those data between systems. Document processing is already well cocvered by OCR product. The document processing with OCR give good results but are not 100% accurate, Robot Process Automation (RPA) has helped to integrate new data source to legacy systems. 
+
+So how a Gen AI, multi model deep learning, may help in this claim example? Human can get document summarization, query a corporate document corpus to get better semantic search results, extract specific facts relevant to the claim from unstructured data like emails, paper mail scanned in pdf, or even images. 
+
+We can then generalize these to a lot of business processes as soon as they have those characteristics:
+
+- humans are involved to make the process progressing
+- the process is running for a long time. Straight throught processing flows are already fine tuned for automation and bringing unstructured response may impact the latency then improve it.
+- humans needs a lot of knowledge about the business, the process, some previous cases, to take quick decsion.
+- SMEs are leaving company, new comers need to be efficiently trained,
+- human has a way to ask to line if management or subject matter experts when a case is more complex, to get advice.
+- human may needs to consult other datasources to get better data to take decision. 
 
 ## Methodology requirements
 
 The methodology needs to support:
 
 * simple and short requirements discovery phase,
-* the definition of a sustainable architecture, selecting the products or software components for what they are supposed to purpose,
-* the implementation simple minimum valuable product to proof the value of the proposed solution with working software
+* focuses on the task within a business process where AI may be able to help, so we can narrow the scope to bring immediate value
+* the definition of a sustainable architecture, selecting the products or software components for what they are supposed to help with,
+* the implementation od  minimum valuable product to proof the value of the proposed solution with working software
 * the integration of continuous end user feedbacks with playback the solution
 
 ## Best practices
@@ -31,7 +59,9 @@ AI helps to take business decision, if not, it is useless. So understanding the 
 
 ### Generative AI context
 
-In enterprise, there will be a large library of dedicated models. There will be still developers, data scientists, product managers, to develop solution around LLMs. A solution will use different LLMs and different capabilities to support multiple requirements that a business application needs: summarization, Q&A, chatbot, translation for example will mostly be combined in a lot of enterprise solutions.
+Some cloud provider leaders think, that enterprise will have a large library of dedicated models. Training model cost a lot of money for ensure results. Fine tuning a model may be attractive, but needs experts in deep learning tuning. We are currently more seeing a library of prompts and a small set of reliable LLMs that developers can trust. 
+
+There will be still developers, data scientists, product managers, to develop solution around LLMs. A solution will use different LLMs and different capabilities to support multiple requirements that a business application needs: summarization, Q&A, chatbot, translation for example will mostly be combined in a lot of enterprise solutions.
 
 Data enrichment, prompt engineering, user interface, deployment, HA, multi tenancy, security, decision governance may all be part of any AI solution.
 

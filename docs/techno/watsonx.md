@@ -9,4 +9,5 @@ Once done a sandbox project is created, we need to get the project ID using the 
 ![](./images/watsonx-project.png)
 
 * Create an IBM API KEY with Manage (in top menu bar) > Access (IAM) > API keys.
+* Get watson.ai endpoint URLs to connect with, set as env variables
 to start using Watson with [LangChain chain](https://python.langchain.com/docs/integrations/llms/ibm_watsonx)
