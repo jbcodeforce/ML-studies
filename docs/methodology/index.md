@@ -1,16 +1,16 @@
 # Implementation solution methodology
 
-The adoption of LLM in an enterprise ecosystem should not be an afterthought process. Leaders should go over the hype, and really address what those technologies can help with. Interesting to see that companies who offer hosted LLMs in the cloud are not encouraging their employees to use those LLMs. With text generation and text enhancement, all employees will bring the same type of results and it will be difficult to measure them.
+The adoption of LLM in an enterprise ecosystem should not be an afterthought process. Leaders should go over the hype, and really address what those technologies can help with. Interesting to see that companies who offer hosted LLMs in the cloud are not encouraging their own employees to use those LLMs internally. With text generation and text enhancement, all employees will bring the same quality of results and it will be difficult to measure them.
 
-AI systems are helping to take million of business decisions every days with classical expert systems, or business rule management systems, ML predictive scoring. Any business process activities involving human task, may be able to leverage better automation by adopting AI agent to help them doing their task quicker with better results and accuracy. Actually LLM has poor accuracy result to be trustable for any business. But there is way to improve this.
+Currently AI systems are helping to take million of business decisions every days using classical expert systems, or business rule management systems, combined or not with ML predictive scoring. Any business process activities involving human task, may be able to leverage better automation by adopting AI agent to help them doing their task quicker with better results and accuracy. Actually LLM has poor accuracy result to be trustable for any business. But there is way to improve this.
 
-The classical LLM use cases of summarization, text improvement, and idea generations are useful and halucinations have no dramatic impact as the human is still taking the lead on acting on what the LLM results are. 
+The classical LLM use cases of summarization, text improvement, and idea generations are useful for a lot of busness activities, and halucinations have no dramatic impact as the human is still taking the lead on acting on what the LLM results are. He can judge the result content, pick and choose from the returned text what makes sense or not.
 
-The current tendency to imagine LLM being an orchestrator and so embbedable into a business process, is another category. Process automation needs consistency and high level of accuracy and coded logic to manage exceptions. Well, those well adopted practices, should help us adopting LLM as a suppprting technology to help human takes the next best actions.
+The current tendency to imagine LLM being an orchestrator of functions or services and therefore embbedable into a business process, may not be acceptable in many use cases. Process automation needs consistency, high level of accuracy and coded business logic to manage orchestration and compensation flow when exceptions occur. For each function or service to integrate. developer needs to revieew the interface characteristics which provided semantic and behavior description of the system to integrate with. There are a lot of best practices inherited from SOA, that should help us deciding how much a LLMs can do for integration, and how much they may help human takes the next best actions.
 
 ## Introduction
 
-The adoption of generative AI in the enterprise follows the same project management practices as the ones of any data, analytics and decision system solution implementation. In this section, we define what are the specifics requirements, the methodology needs to address and the proposed phase and team engagements to put in place.
+The adoption of generative AI in the enterprise, follows the same project management practices as the ones of any data, analytics and decision system solution implementation. In this chapter, we define what are the specifics requirements, the methodology needs to address and the proposed phase and team engagements to put in place.
 
 The proposed methodology uses the successful practices used during thousands of consulting engagements around decision automation solution implementations.
 
@@ -18,7 +18,7 @@ Always starts by the business problem to solve.
 
 ## Classical business process Generative AI can help to address
 
-In the context of a business process, like insurance claim processing, there are some activities that were already automated with the adootion of decision services, which uses inference rule engine, (the AI of the 90s), with hundred of rules to address insurance product configuration, feature eligibility, pricing computation, basic claim acceptance, risk scoring, to name a few.
+In the context of a business process, like in insurance claim processing, there are some activities that were already automated with the adoption of decision services, which uses inference rule engine, (the AI of the 90s), with hundred of rules to address insurance product configuration, feature eligibility, pricing computation, basic claim acceptance, risk scoring, to name a few.
 
 Parts of those process, have human activities, and the complete orchestration is done by business process management system or application logic mostly coded as state machines. When humans are involved, they verify documents, correlate information between different data sources, some time rekey data into different systems, and apply some non-coded business policies, but documented somewhere to decide to accept, reject the claim or most likely ask for more information. 
 
@@ -56,6 +56,65 @@ As we focus in business problem to address. the methodology adopts the following
 * **Decisions and data focus** to address the need for data, and normalize the decisions to be taken in the context of a business process, a business applications and the data to use.
 
 AI helps to take business decision, if not, it is useless. So understanding the decisiosn to take are keys to the success of any AI project implementation.
+
+### Interface Characteristics
+
+This section lists the full set of interface characteristics to consider for each system to integrate with:
+
+* FUNCTIONAL DEFINITION
+
+    * Principal data objects
+    * Operation/function
+    * Read or change
+    * Request/response objects
+
+* TECHNICAL INTERFACE
+
+    * Transport
+    * Protocol
+    * Data format
+
+* INTERACTION TYPE
+
+    * Request-response or fire-forget
+    * Thread-blocking or asynchronous
+    * Batch or individual
+    * Message size
+
+* PERFORMANCE
+
+    * Response times
+    * Throughput
+    * Volumes
+    * Concurrency
+
+* INTEGRITY
+
+    * Validation
+    * Transactionality
+    * Statefulness
+    * Event sequence
+    * Idempotence
+
+* SECURITY
+
+    * Identity/authentication
+    * Authorization
+    * Data ownership
+    * Privacy
+
+* RELIABILITY
+
+    * Availability
+    * Delivery assurance
+
+* ERROR HANDLING
+
+    * Error management capabilities
+    * Known exception conditions
+    * Unexpected error presentation
+
+From these characteristics, it does not seem realist to design a solution where the LLM service provider will be able to execute some function code from their SaaS platform to integrate on-premises services, with interface characteristic that is no REST, json, stateless, idempotent, synchronous. So outside of toy solution we need something else to get real adoption.
 
 ### Generative AI context
 

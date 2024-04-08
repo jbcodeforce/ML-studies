@@ -90,7 +90,7 @@ The modern synchronous based microservice component view may look like in the fo
 headers = {
 	"Accept": "application/json",
 	"Content-Type": "application/json",
-	"Authorization": "Bearer YOUR_ACCESS_TOKEN"
+	"Authorization": "Bearer " + iam_token
 }
 
 response = requests.post(
