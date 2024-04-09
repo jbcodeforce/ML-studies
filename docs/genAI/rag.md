@@ -15,13 +15,18 @@ The following diagram illustrates a classical RAG architecture.
 
 1. The user ask queries, with a prompt via a Q&A or Chat interface.
 1. An application orchestrator uses the retriever to do a semantic search in the vector database, and build a context. 
-1. Context, query, prompt are sent to the model, to get generated answer.
-1. Answer is sent back to the user.
+1. Context, query, prompt are sent to the model, to get generated answers. For this step there are two approaches: sequential where text generation follows retrievals, or parallel processing where retrievals and text generations are done in parallele and then intertwined. 
+1. Response is sent back to the user.
 
-## Scoping discovery
+## Scoping questions
 
 Before doing an efficient RAG implementation, we need to address a set of important questions:
 
+* Who is the end user? External user, clients of the enterprise may have an incredible power to impact the brand. 
+* What is the source of the documentation? What are the current data pipelines in place for each data sources, what are the touch points and security boundaries in place?
+* How often the documentation change over time? Is there any governance in place to manage documents quality?
+* How to extract relevant information from the document? Is there any PII in any document that may breach?
+* How to avoid ingestion of malicious content into the knowledge corpus? Who can access what?
 * How to chunk the documents?
 * How to encode the chunks?
 * When to retrieve? How and what to retrieve?
@@ -33,12 +38,15 @@ Before doing an efficient RAG implementation, we need to address a set of import
 * How to scale?
 * What to optimize this entire system?
 * Do we need fine tuning and existing model?
+* How to handle queries outside of the domain? This may lead to adopt a domain specific LLM and combined with a generalized LLM.
+* How the deployment will occur? Self-hosted, using API-based LLM? What is the expected latency supported? What cost is expected?
+* Is there any compliances and regulations to follow?
 
 ### Training and test time
 
-There are really two different scopes to consider. Training time includes addressing how to update model, how to update document encoder, and query encoder. Do we need to pre-train from zero or leverage an existing model. 
+There are really two different scopes to consider. Training time includes addressing how to update model, how to update the document encoder, and the query encoder. Do we need to pre-train from zero or leverage an existing model? 
 
-For testing the model phase, we need to address what index to use, may it be different than during training? How to combine the different models to work together to address the business requirements.
+For testing the model phase, we need to address what index to use, may it be different than during training? How to combine the different models to work together to address the business requirements?
 
 ### Frozen RAG
 
@@ -50,13 +58,24 @@ The result of the search is pass to the LLM as context. This is very limited to 
 
 ### Retrievers
 
-The retrieval is very important. The main concept is using the TF-IDF measure: it is a parse (most words never occur) retrieval approach using to compute a cost function for a query within a document, based on the term-frequency (TF) and the [inverse document frequency (IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) which measures the importance of a word to a document. 
+RAG architecture is based by the retrieval method used, such as BM25 (a traditional one) or more advanced dense retrievers which use neural network based embeddings.
+
+The main concept is using the TF-IDF measure: it is a parse (most words never occur) retrieval approach using to compute a cost function for a query within a document, based on the term-frequency (TF) and the [inverse document frequency (IDF)](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) which measures the importance of a word to a document. 
 
 [Dense retrieval](https://arxiv.org/abs/2004.04906) brings semantic similarity (cosinus score between embeddings) on a dense representations of words and documents by pre-training the retriever with relevant information. 
 
+The generative part of RAG usually uses transformer based models like GPT2 or 3.
+
 #### Retriever considerations
 
+* RAG models need to be fine-tuned to improve the retrieval and the generation processes. The fine tuning includes integrating the specific, domain knowledge to assess the quality of the retrieved information and the generated one.
+* RAG processing needs to take into considearation the different configuration parameters to get good results with minimum latency: consider the number of documents to return, the size of the returned vectors, the total length of the text returned, then number of queries run in parallel. The retrieval vector size impacts th granularity of the semantic match between the query and the documents.
 * In a multi-step question answering system, it is challenging to select the correct documents based on the question alone. [IRCoT](https://arxiv.org/abs/2212.10509) uses LLM to generate a thought sentence used to retrieve documents from the corpus. The documents are then added to the context and prompt.
+* Effective retrieval is fundamental in RAG system. Assessing the quality of the search results is not easy, and may combine similarity matrix and rule based systems. Different alogrithms may be used like cosine similarity, multi query retrievers, ensemble retrievers.
+* RAG may generate wrong results, so some quality control needs to be deployed to remove noise.
+* RAG application design should address all the discovery questions and so use extensive planning, extensive testing using multi-scenario of user behavior and query. Use "what-if" simulations. Address hallucination prevention, privacy protection, and source quality control.
+* Start small with all the guard rail in place.
+* Using small LLM for embedding may lead to issues as some terms used in the knowledge based may not be part of the primary LLM corpus. If cost and skill are not an issue, then training its own LLM may be a better solution to reach higher quality, as even fine tuning a model may not bring enough quality to the responses.
 
 ### Vector Database
 
