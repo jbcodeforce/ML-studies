@@ -2,12 +2,12 @@
 
 ## Introduction
 
-Generative AI is a new AI deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model, pre-trained on huge amount of documents, using 500B of parameters.
+Generative AI is a new deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model (LLM), pre-trained on huge amount of documents, using fro 7B up to 500B of parameters.
 
-Large Language Models have several key components. The underlying architecture is called a **Transformer** which uses self-attention mechanisms to weight the significance of different words to understand the context in sequences of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
+The LLM underlying architecture is called a **Transformer** which uses self-attention mechanisms to weight the significance of different words to understand the context in a sequence of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
 
-This training has 2 stages: **Pre-training** where the model attempts to predict the next word in a sentence, and **fine tuning** where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
+This training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
 
 Those models are commonly referred to as foundation models (FMs).
 

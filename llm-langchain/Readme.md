@@ -11,12 +11,6 @@ source .venv/Scripts/activate
 
 ## Pre-requisite
 
-* When using AWS Bedrock, install Bedrock library: 
-
-    ```sh
-    cd bedrock
-    pip install -r requirements.txt
-    ```
 
 * Install Langchain and other dependencies
 
@@ -52,3 +46,10 @@ Same approach but it uses OpenSearch as vector store, and markdown files as sour
 
 
 ## Using AWS Bedrock
+
+* When using AWS Bedrock, install Bedrock library: 
+
+    ```sh
+    cd bedrock
+    pip install -r requirements.txt
+    ```

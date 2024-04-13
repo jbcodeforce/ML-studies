@@ -1,11 +1,12 @@
 # [OpenAI](https://platform.openai.com/docs/overview)
 
-The offering includes [ChatGPT URL](https://chat.openai.com), models (GPT-4, DALL.E, TTS, Whisper, Embeddings), SDK, APIs.
+The offering includes [ChatGPT URL](https://chat.openai.com), different GPT models (GPT-4, DALL.E, TTS, Whisper, Embeddings), a SDK, and a set of APIs.
 
 ## Notes
 
-* personal data is not used to train or improve the models
+* Personal data is not used to train or improve the models
 * API data may be retained for up to 30 days. Except customers willing to do zero data retention.
+* Support tool definitions to decide to call external systems 
 
 ## Quickstart
 
@@ -15,9 +16,9 @@ Once we got an API key, it is important to understand the [API limits](https://p
 
 [Assistants](https://platform.openai.com/docs/assistants/overview) can leverage models and tools like Code Interpreter (OpenAI hosted), Retrieval (OpenAI hosted), and Function calling, to respond to user queries.
 
-Assistants are created via API by specifying its name, instructions, a set of tools and then the LLM model name to use.
+Assistants are created via API by specifying its name, instructions, a set of tools and then the LLM model name to use. One assistant per tool.
 
-OpenAI uses the concept of Thread to represent a conversation between a user and one or many Assistants. Messages are added to the Thread. The Thread is explicitly executed with a run.
+OpenAI uses the concept of Thread to represent a conversation between a user and one or many Assistants. Messages are added to the Thread. The Thread is explicitly executed with a `run`.
 
 Threads simplify AI application development by storing message history and truncating it when the conversation gets too long for the model’s context length.
 
@@ -49,7 +50,7 @@ run = client.beta.threads.runs.create(
 
 Code Interpreter may execute our own nodejs or python code on OpenAI hosts.
 
-The Assistants API automatically manages the context window such that you never exceed the model's context length.
+The Assistants API automatically manages the context window such that we never exceed the model's context length.
 
-Run has states: Queued, In progress, requires actions, expired, completed, failed, cancelling, cancelled.
-We can poll the run states. 
+Run has states: `Queued, In progress, Requires actions, Expired, Completed, Failed, Cancelling, Cancelled`.
+We can poll the run states via API. 

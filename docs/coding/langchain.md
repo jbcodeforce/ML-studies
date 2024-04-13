@@ -200,7 +200,11 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 
 ## Agent
 
-[Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decide what steps to take. Consider the tools, services, the agent needs to access. See code [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py)
+[Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
+
+There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
+
+When developing a solution based on agent, consider the tools, services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
 The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool, and [Tavily](https://tavily.com/) is a search API to get the last trusted news.
 
@@ -216,6 +220,13 @@ tools = [retriever_tool, search]
 
 ???- info "Tavily"
     [Tavily](https://docs.tavily.com/) is the leading search engine optimized for LLMs. It provides factual, explicit and objective answers. It is a GPT researcher which queries, filters and aggregates over 20+ web sources per a single research task. It focuses on optimizing search for AI developers and autonomous AI agents. See [this git repo](https://github.com/assafelovic/gpt-researcher.git)
+
+* [Existing LangChain tools](https://python.langchain.com/docs/integrations/tools/)
+* [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the @tool annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. The second approach is to subclass the langchain.pydantic_v1.BaseModel class. Finally the approach is to use `StructuredTool` dataclass. 
+
+When doing agent we need to manage exception and implement handle_tool_error. 
+
+To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 

@@ -46,7 +46,7 @@ Your response:"""
                 "driver_hourly_stats:acc_rate",
                 "driver_hourly_stats:avg_daily_trips",
             ],
-            entity_rows=[{"driver_id": driver_id}],  # cloud be a list of driver_ids
+            entity_rows=[{"driver_id": driver_id}],  # could be a list of driver_ids
         ).to_dict()
         kwargs["conv_rate"] = feature_vector["conv_rate"][0]
         kwargs["acc_rate"] = feature_vector["acc_rate"][0]
