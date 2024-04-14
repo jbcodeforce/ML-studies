@@ -12,21 +12,21 @@ import os
 
 
 """
-Add Retrieval to get better data, by crawling a product documentation from the web using BeautifulSoup
+Add Retriever to get better data, by crawling a LangChain product documentation from the web using BeautifulSoup
 then FAISS vector store
 """
 load_dotenv(dotenv_path="../../.env")
 
-print(" Load source document from web site")
+print("--- Load source document from langchain.com/user_guide web site")
 loader = WebBaseLoader("https://docs.smith.langchain.com/user_guide")
 
 docs = loader.load()
-# index it into a vectorstore
+
 embeddings = OpenAIEmbeddings()
-print(" Split the documents into chunks")
+print("\tSplit the documents into chunks")
 text_splitter = RecursiveCharacterTextSplitter()
 documents = text_splitter.split_documents(docs)
-print(" Create embeddings and save them in vector stores")
+print("\tCreate embeddings and save them in FAISS vector stores")
 vector = FAISS.from_documents(documents, embeddings)
 
 # create a retrieval chain
@@ -48,5 +48,5 @@ retrieval_chain = create_retrieval_chain(retriever, document_chain)
 
 print("--- call openAI via a retrieval LangChain chain")
 
-response = retrieval_chain.invoke({"input": "how can langsmith help with testing?"})
+response = retrieval_chain.invoke({"input": "how can LangSmith help with testing?"})
 print(response["answer"])

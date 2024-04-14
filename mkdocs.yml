@@ -64,7 +64,7 @@ theme:
       - navigation.tabs.sticky
       - navigation.instant
       - navigation.tracking
-      - navigation.sections
+      # - navigation.sections
       #- navigation.expand
       - navigation.top
       - navigation.footer

@@ -160,8 +160,9 @@ And then take an existing model. Often bigger are better but it may be linked to
 model=torchvision.models.efficientnet_b0(weights=weights).to(device)
 ```
 
-???- info 'efficientnet_b0 parts'
-    efficientnet_b0 comes in three main parts:
+???- info "efficientnet_b0 parts"
+    `efficientnet_b0` comes in three main parts:
+    
     * **features**: A collection of convolutional layers and other various activation layers to learn a base representation of vision data.
     * **avgpool**: Takes the average of the output of the features layer(s) and turns it into a feature vector.
     * **classifier**: Turns the feature vector into a vector with the same dimensionality as the number of required output classes (since efficientnet_b0 is pretrained on ImageNet with 1000 classes.

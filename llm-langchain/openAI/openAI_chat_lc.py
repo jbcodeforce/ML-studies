@@ -14,8 +14,7 @@ import os
 
 
 """
-Add Retrieval to get better data, by crawling a product documentation from the web using BeautifulSoup
-then FAISS vector store
+Use the Langchain user guide, FAISS and use chat history
 """
 load_dotenv(dotenv_path="../../.env")
 

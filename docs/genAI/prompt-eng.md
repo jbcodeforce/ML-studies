@@ -95,6 +95,16 @@ Another approach to automate the prompt creation and selection using LLMs as inf
 
 * **ReAct Prompting** uses LLMs to generate both reasoning traces and task-specific actions.
 
+## OpenAI
+
+[The best practices for prompt engineering using OpenAI models](https://platform.openai.com/docs/guides/prompt-engineering) can be summarized as:
+
+* Write clear instruction with "ask for brief replies", or "expert-level writing", or demonstrate expected result.
+* Provide reference text
+* Split complex tasks into simpler subtasks
+* Give the model time to "think"
+
+
 ## Playground
 
 * Use Bedrock interface for [text playground](https://us-west-2.console.aws.amazon.com/bedrock/home?region=us-west-2#/text-playground) one of the integrated model.

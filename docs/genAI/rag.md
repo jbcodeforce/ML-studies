@@ -1,24 +1,36 @@
-# Retrieval augmented generation (RAG)
+# Retrieval Augmented Generation (RAG)
 
-RAG is the act of supplementing generative text models with data outside of what it was trained on. This is applied to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentation which is not public is a good example of the usage of RAG. RAG also helps reducing hallucinations.
+LLMs have a knowledge cut-off, pre-training is a one-off exercise. RAG addresses this problem as it is the act of supplementing generative text models with data outside of what it was trained on. 
+
+RAG is applied to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentations which are not public, are good examples of the usage of RAG. RAG also helps reducing hallucinations.
+
+## Basic architecture
 
 The following diagram illustrates a classical RAG architecture.
 
 ![](./diagrams/rag.drawio.png)
 
-1. Before being able to answer any user's questions, the documents must be processed and a stored in a document store index using the following process:
+1. Before being able to answer any user's questions, the documents must be processed and stored in a vector store index using the following process:
 
     * Load the documents from the sources (object storage).
     * Process and split them into smaller chunks.
-    * Create a numerical vector representation of each chunk using Embeddings model.
+    * Create a numerical vector representation of each chunk using **Embeddings**.
     * Create an index using the chunks and the corresponding embeddings.
 
-1. The user ask queries, with a prompt via a Q&A or Chat interface.
-1. An application orchestrator uses the retriever to do a semantic search in the vector database, and build a context. 
-1. Context, query, prompt are sent to the model, to get generated answers. For this step there are two approaches: sequential where text generation follows retrievals, or parallel processing where retrievals and text generations are done in parallele and then intertwined. 
+1. The user ask queries via a Q&A or Chat user interface.
+1. An application orchestrator uses the retriever to do a **semantic search** into the vector database, and build a context. 
+1. Context, query, system prompt are sent to the model, to get the generated text. For this step there are two approaches: sequential where text generation follows retrievals, or parallel processing where retrievals and text generations are done in parallel and then intertwined. 
 1. Response is sent back to the user.
 
-## Scoping questions
+???- Info "Embeddings"
+    **Embeddings** are vectors of numbers that represent an underlying concept. The numbers intend to capture the attributes of the object. Dense embeddings were introduced by Google’s **word2vec** (Mikolov et al) in 2014. This transformation of word to vector, gives the capability to compute arithmetics with words, like **similarity** computation. Vectors that are closer together mean they represent semantically similar concepts. With embeddings, we are representing things in a high-dimensional space (dimensions are the count of numbers a vector has), and we are giving each element a place and direction in space.
+
+RAG systems work well because LLMs has the in-context learning capability, which allows models to use previously unseen data to perform accurate predictions without weight training.
+
+
+???- Info "In-context learning"
+
+## RAG assessment scoping questions
 
 Before doing an efficient RAG implementation, we need to address a set of important questions:
 
@@ -140,7 +152,7 @@ sequenceDiagram
 
 Knowledge graph is easily extractable in a coherent form. 
 
-#### Sources of information
+## Sources of information
 
 * [Read more from this medium article](https://medium.com/enterprise-rag/injecting-knowledge-graphs-in-different-rag-stages-a3cd1221f57b).
 

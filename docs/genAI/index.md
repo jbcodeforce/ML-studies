@@ -4,8 +4,11 @@
 
 Generative AI is a new deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model (LLM), pre-trained on huge amount of documents, using fro 7B up to 500B of parameters.
 
-The LLM underlying architecture is called a **Transformer** which uses self-attention mechanisms to weight the significance of different words to understand the context in a sequence of data. The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
+The LLM underlying architecture is called a **Transformer** which uses self-**attention** mechanisms to weight the significance of different words to understand the context in a sequence of data. The attention mechanism computes the similarity between tokens (the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space the higher the attention scores they will obtain and the higher the attention they will give to each other.
+
+The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
+
 
 This training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
 
@@ -87,7 +90,7 @@ We can group the Generative AI use cases in different categories:
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
-It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training, knowledge graph and neurosumbolic AI.
+It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training, knowledge graph and neuro symbolic AI.
 
 The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good source of information for model quality assessement relative to certain use cases.
 
@@ -318,6 +321,8 @@ OpenAI is an AI research and deployment company. Their vision: intelligence—AI
 Chat Generative pre-trained Transformer is a proprietary instruction-following model, which was released in November 2022. It is a system of models designed to create human like conversations and generating text by using statistics. It is a Causal Language Model (CLM) trained to predict the next token.
 
 The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](https://en.wikipedia.org/wiki/GPT-3), but with different data collection setup. 
+
+* [Build an AI that can answer questions about your website](https://platform.openai.com/docs/tutorials/web-qa-embeddings): crawl, use embeddings, and a search function. It is a good starting point for knowledge based app. [I did my own on EDA book](openai_km.py)
 
 ### [LLama2](https://llama.meta.com/llama2/)
 

@@ -32,7 +32,7 @@ All codes for OpenAI LLM are in
 
 | Backend | Type of chains |
 | --- | --- |
-| [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples siple, RAG, chatbot, agent  |
+| [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples, RAG, chatbot, agent  |
 | [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to lollama |
 | [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/anthropic) | |
 | [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/mistral) | |
@@ -105,6 +105,7 @@ Chains allow developers to combine multiple components together to create a sing
 
 ### Text Generation Examples
 
+* [Basic query with unknown content to generate hallucination: 1st_openAI_lc.py ](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/1st_openAI_lc.py)
 * [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
 * Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information later and get model outputs based on different scenarios. [text_generation/ResponseToUnhappyCustomer](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
 
@@ -113,8 +114,9 @@ Chains allow developers to combine multiple components together to create a sing
 
 Always assess the size of the content to send, as the approach can be different: for big doc we need to split the doc in chunks.
 
+* Small text summary with OpenAI. 
 * Small text to summarize, with [bedrock client](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/utils/bedrock.py) and the invoke_model on the client see the code in [llm-langchain/summarization/SmallTextSummarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/summarization/SmallTextSummarization.py)
-* For big document, langchain provides the load_summarize_chain to summarize by chunks and get the summary of the summaries. See code with 'manual' extraction of the summaries as insights and then creating a summary of insights in [summarization/long-text-summarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/summarization/long-text-summarization.py) or using a LangChain summarization with map-reduce in [summarization/long-text-summarization-mr.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/summarization/long-text-summarization-mr.py).
+* For big document, langchain provides the load_summarize_chain to summarize by chunks and get the summary of the summaries. See code with 'manual' extraction of the summaries as insights and then creating a summary of insights in [summarization/long-text-summarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/summarization/long-text-summarization.py) or using a LangChain summarization with map-reduce in [summarization/long-text-summarization-mr.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/summarization/long-text-summarization-mr.py).
 
 ???- code "Using langchain summarize chain"
     ```python
@@ -173,12 +175,13 @@ To load PDF documents Langchain offers a loader.
 Creating chunks is necessary because language models generally have a limit to the amount of token they can deal with.
 
 ???- code "Search similarity in vector DB"
-        ```python
-        bedrock_embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v1", client=bedrock_runtime)
-        query = """Is it possible that ...?"""
-        query_embedding =bedrock_embeddings.embed_query(query)
-        relevant_documents = vectorstore_faiss.similarity_search_by_vector(query_embedding)
-        ```
+    [OpenAIEmbeddings](https://python.langchain.com/docs/integrations/text_embedding/openai/)
+    ```python
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-large", dimensions=1024)
+    query = """Is it possible that ...?"""
+    query_embedding = embeddings.embed_query(query)
+    relevant_documents = vectorstore_faiss.similarity_search_by_vector(query_embedding)
+    ```
 
 During the interaction with the end-user, the system (a chain in LangChain) retrieves the data most relevant to the question asked, and passes it to LLM in the generation step.
 
@@ -201,12 +204,12 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 ## Agent
 
 [Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
-
+s
 There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
 
-When developing a solution based on agent, consider the tools, services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
+When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
-The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool, and [Tavily](https://tavily.com/) is a search API to get the last trusted news.
+The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool. A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News.
 
 ```python
 retriever_tool = create_retriever_tool(
@@ -222,7 +225,7 @@ tools = [retriever_tool, search]
     [Tavily](https://docs.tavily.com/) is the leading search engine optimized for LLMs. It provides factual, explicit and objective answers. It is a GPT researcher which queries, filters and aggregates over 20+ web sources per a single research task. It focuses on optimizing search for AI developers and autonomous AI agents. See [this git repo](https://github.com/assafelovic/gpt-researcher.git)
 
 * [Existing LangChain tools](https://python.langchain.com/docs/integrations/tools/)
-* [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the @tool annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. The second approach is to subclass the langchain.pydantic_v1.BaseModel class. Finally the approach is to use `StructuredTool` dataclass. 
+* [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. The second approach is to subclass the langchain.`pydantic_v1.BaseModel` class. Finally the last possible approach is to use `StructuredTool` dataclass. 
 
 When doing agent we need to manage exception and implement handle_tool_error. 
 
