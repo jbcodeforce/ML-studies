@@ -5,12 +5,12 @@ from langchain_core.prompts import MessagesPlaceholder
 from dotenv import load_dotenv
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_openai import OpenAIEmbeddings
-from langchain_community.vectorstores import FAISS
+from langchain_community.vectorstores import Chroma
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain_core.messages import HumanMessage, AIMessage
 from langchain.chains import create_retrieval_chain
-import os
+import os, sys
 
 
 """
@@ -18,17 +18,17 @@ Use the Langchain user guide, FAISS and use chat history
 """
 load_dotenv(dotenv_path="../../.env")
 
-print(" Load source document from web site")
-loader = WebBaseLoader("https://docs.smith.langchain.com/user_guide")
-
-docs = loader.load()
-# index it into a vectorstore
 embeddings = OpenAIEmbeddings()
-print(" Split the documents into chunks")
-text_splitter = RecursiveCharacterTextSplitter()
-documents = text_splitter.split_documents(docs)
-print(" Create embeddings and save them in vector stores")
-vector = FAISS.from_documents(documents, embeddings)
+CHROMA_DB_FOLDER="./chroma_db"
+
+vectorstore=None
+
+if os.path.isdir(CHROMA_DB_FOLDER):
+    vectorstore=Chroma(persist_directory=CHROMA_DB_FOLDER,embedding_function=embeddings)
+else:
+    print("Need to run openAI_retrieval to create the vectorDB")
+    sys.exit(1)
+
 
 # create a retrieval chain
 
@@ -41,7 +41,7 @@ prompt = ChatPromptTemplate.from_messages([
 ])
 
 
-retriever = vector.as_retriever()
+retriever = vectorstore.as_retriever()
 retriever_chain  = create_history_aware_retriever(llm, retriever, prompt)
 
 

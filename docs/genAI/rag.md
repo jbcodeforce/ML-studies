@@ -46,7 +46,7 @@ Before doing an efficient RAG implementation, we need to address a set of import
 * What pre-processing is needed before calling the model API?
 * How to prompt?
 * How to post process the answer?
-* How to learn?
+* How to learn new information?
 * How to scale?
 * What to optimize this entire system?
 * Do we need fine tuning and existing model?
@@ -66,7 +66,7 @@ This is the Retrieval augmented generation with no training. Data are in context
 
 ![](./diagrams/frozen-rag.drawio.png)
 
-The result of the search is pass to the LLM as context. This is very limited to in-context learning. 
+The result of the search is pass to the LLM as context. This is limited to in-context learning. 
 
 ### Retrievers
 

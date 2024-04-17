@@ -28,7 +28,7 @@ Modules are extendable interfaces to LangChain.
 
 ## Getting started
 
-All codes for OpenAI LLM are in 
+All codes for LangChain with LLM are in:
 
 | Backend | Type of chains |
 | --- | --- |
@@ -39,7 +39,7 @@ All codes for OpenAI LLM are in
 | [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/watsonX) | | 
 | [AWS Bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock) | zero_shot generation | 
 
-Each project needs to specify the LangChain module needed to keep the executable size low. 
+Each code needs to define only the needed LangChain modules to keep the executable size low. 
 
 ## Main Concepts
 
@@ -183,10 +183,10 @@ Creating chunks is necessary because language models generally have a limit to t
     relevant_documents = vectorstore_faiss.similarity_search_by_vector(query_embedding)
     ```
 
-During the interaction with the end-user, the system (a chain in LangChain) retrieves the data most relevant to the question asked, and passes it to LLM in the generation step.
+During the interaction with the end-user, the system (a chain in LangChain) retrieves the most relevant data to the question asked, and passes it to LLM in the generation step.
 
 * Embeddings capture the semantic meaning of the text to help do similarity search
-* Persist the embeddings into a Vector store. Faiss and ChromaDB are common, but OpenSearch, Postgresql can also being used.
+* Persist the embeddings into a Vector store. Faiss and ChromaDB are common vector stores to use, but OpenSearch, Postgresql can also being used.
 * Retriever includes semantic search and efficient algorithm to prepare the prompt. To improve on vector similarity search we can generate variants of the input question.
 
 See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/qa-faiss-store.py).
@@ -204,8 +204,18 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 ## Agent
 
 [Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
-s
+
 There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
+
+### Core concepts
+
+LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: AgentAction, with tool and tool_input; AgentFinish.
+
+The **Agent** is a chain. See the existing [agent types](https://python.langchain.com/docs/modules/agents/agent_types/). Agent has input and output and intermediate steps.
+
+**Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
+
+Tool calling allows a model to detect when one or more tools should be called and respond with the inputs that should be passed to those tools.
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
