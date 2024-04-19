@@ -47,9 +47,10 @@ Each code needs to define only the needed LangChain modules to keep the executab
 
 * Model I/O are building blocks to interface with any language model. It facilitates the interface of model input (prompts) with the LLM model to produce the model output.
 * LangChain uses [Prompt templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/).
-* Two prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
+* Two common prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
 * We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt using [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat).
-* Feature stores, like [Feast](https://github.com/feast-dev/feast), can be a great way to keep information about the user conversation or query, and LangChain provides an easy way to combine that data with LLMs. 
+* LangChain offers a prompt hub.
+* Feature stores, like [Feast](https://github.com/feast-dev/feast), can be a great way to keep information about the user conversation or query, and LangChain provides an easy way to combine data from Feast with LLMs. 
 
 ### Typical chains
 
@@ -209,11 +210,13 @@ There are [different types](https://python.langchain.com/docs/modules/agents/age
 
 ### Core concepts
 
-LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: AgentAction, with tool and tool_input; AgentFinish.
+LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: AgentAction, with tool and tool_input and AgentFinish.
 
-The **Agent** is a chain. See the existing [agent types](https://python.langchain.com/docs/modules/agents/agent_types/). Agent has input and output and intermediate steps.
+* The **Agent** is a chain. See the existing [agent types](https://python.langchain.com/docs/modules/agents/agent_types/). Agent has input and output and intermediate steps.
 
-**Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
+* **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
+
+* [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
 
 Tool calling allows a model to detect when one or more tools should be called and respond with the inputs that should be passed to those tools. The inputs match a defined schema. 
 
@@ -232,7 +235,9 @@ Chains let create a pre-defined sequence of tool usage(s), while Agents let the 
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
-The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base is a tool. A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News.
+The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base may be a tool. 
+
+A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News.
 
 ```python
 retriever_tool = create_retriever_tool(
@@ -256,6 +261,30 @@ Chat models supporting tool calling features implement a `.bind_tools` method, w
 When doing agent we need to manage exception and implement handle_tool_error. 
 
 To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
+
+### How to
+
+???- question "q1"
+    Define  an agent with user input,  a component for formatting intermediate steps (agent action, tool output pairs) (`format_to_openai_tool_messages`: convert (AgentAction, tool output) tuples into FunctionMessages), and  a component for converting the output message into an agent action/agent finish:
+
+    ```python 
+    agent = (
+            {
+                "input": lambda x: x["input"],
+                "agent_scratchpad": lambda x: format_to_openai_tool_messages(
+                    x["intermediate_steps"]
+                ),
+                 "chat_history": lambda x: x["chat_history"],
+            }
+            | prompt
+            | llm_with_tools
+            | OpenAIToolsAgentOutputParser()
+        )
+    ```
+
+    [OpenAIToolsAgentOutputParser](https://api.python.langchain.com/en/latest/_modules/langchain/agents/output_parsers/openai_tools.html) used with OpenAI models, as it relies on the specific
+    tool_calls parameter from OpenAI to convey what tools to use.
+
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 

@@ -9,6 +9,7 @@ env/
 .conda/
 .vscode/
 **/logs/
+**/chroma_db/
 **/.ipynb_checkpoints/
 deep-neural-net/data/
 llm-langchain/dependencies/**
