@@ -215,7 +215,20 @@ The **Agent** is a chain. See the existing [agent types](https://python.langchai
 
 **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
 
-Tool calling allows a model to detect when one or more tools should be called and respond with the inputs that should be passed to those tools.
+Tool calling allows a model to detect when one or more tools should be called and respond with the inputs that should be passed to those tools. The inputs match a defined schema. 
+
+```
+```
+
+A schema is defined, we need to create custom parsing logic.
+
+The model is coming up with the arguments to a tool. 
+
+Below is the classical application flow when using tool, for example with a remote microservice.
+
+![](./diagrams/tool_calling.drawio.png)
+
+Chains let create a pre-defined sequence of tool usage(s), while Agents let the model use tools in a loop, so that it can decide how many times to use tools.
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
@@ -231,10 +244,13 @@ search = TavilySearchResults()
 tools = [retriever_tool, search]
 ```
 
+
+Chat models supporting tool calling features implement a `.bind_tools` method, which receives a list of LangChain tool objects and binds them to the chat model in its expected forma
+
 ???- info "Tavily"
     [Tavily](https://docs.tavily.com/) is the leading search engine optimized for LLMs. It provides factual, explicit and objective answers. It is a GPT researcher which queries, filters and aggregates over 20+ web sources per a single research task. It focuses on optimizing search for AI developers and autonomous AI agents. See [this git repo](https://github.com/assafelovic/gpt-researcher.git)
 
-* [Existing LangChain tools](https://python.langchain.com/docs/integrations/tools/)
+* Many LLM providers, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
 * [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. The second approach is to subclass the langchain.`pydantic_v1.BaseModel` class. Finally the last possible approach is to use `StructuredTool` dataclass. 
 
 When doing agent we need to manage exception and implement handle_tool_error. 

@@ -2,8 +2,12 @@ from langchain import hub
 from langchain.agents import AgentExecutor, create_json_chat_agent
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langchain_openai import ChatOpenAI
+
 from dotenv import load_dotenv
 
+"""
+Simple tool calling with tracing
+"""
 load_dotenv(dotenv_path="../../.env")
 
 tools = [TavilySearchResults(max_results=1)]
@@ -11,7 +15,7 @@ tools = [TavilySearchResults(max_results=1)]
 prompt = hub.pull("hwchase17/react-chat-json")
 print(prompt[0])
 
-llm = ChatOpenAI()
+llm = ChatOpenAI(temperature=0)
 
 agent = create_json_chat_agent(llm, tools, prompt)
 
