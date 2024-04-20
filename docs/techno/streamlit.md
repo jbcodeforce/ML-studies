@@ -11,7 +11,7 @@ See [Getting started](https://docs.streamlit.io/library/get-started/create-an-ap
 ```sh
 streamlit run your_script.py
 # or 
-python -m streamlit your_script.py
+python -m streamlit run your_script.py
 # or using a script in a git url
 streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py
 ```
@@ -31,6 +31,15 @@ streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/
 * [Streamlit Cheat Sheet app in Streamlit](https://cheat-sheet.streamlit.app/).
 
 ## Some How To
+
+
+???- question "File Uploaded and processing"
+    ```python
+    pdf = st.file_uploader('Upload your PDF Document', type='pdf')
+    if pdf is not None:
+        reader = PdfReader(pdf)
+    ```
+    See [e2e-demos/chat_with_pdf/app.py](https://github.com/jbcodeforce/ML-studies/blob/main/e2e-demos/chat_with_pdf/app.py)
 
 ???- question "How to share data between pages?"
     Use st.session_state. For example a page get some settings in a form and a save button. The supporting function needs to use the session_state.

@@ -1,4 +1,4 @@
-# LangChain notes
+# LangChain Study
 
 [LangChain](https://python.langchain.com/docs/get_started/introduction) is a framework for developing applications powered by large language models, connecting them to external data sources. They are adding new products to their portfolio quickly like LangSmith (get visibility on LLMs execution), and LangServe (server API for LangChain apps).
 
@@ -18,13 +18,6 @@ The core building block of LangChain applications is the LLMChain:
 * A LLM
 * Prompt templates
 * Output parsers
-
-The standard interface that LangChain provides has two methods:
-
-* `predict`: Takes in a string, returns a string
-* `predict_messages`: Takes in a list of messages, returns a message.
-
-Modules are extendable interfaces to LangChain.
 
 ## Getting started
 
@@ -49,12 +42,20 @@ Each code needs to define only the needed LangChain modules to keep the executab
 * LangChain uses [Prompt templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/).
 * Two common prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
 * We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt using [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat).
-* LangChain offers a prompt hub.
+* LangChain offers a prompt hub to get predefined prompts easyly loadable:
+
+    ```python
+    from langchain import hub
+    prompt = hub.pull("hwchase17/openai-functions-agent")
+    ```
+    
+* [Chains](https://python.langchain.com/docs/modules/chains/) allow developers to combine multiple components together to create a single, coherent application, or to combine other chains.
+
 * Feature stores, like [Feast](https://github.com/feast-dev/feast), can be a great way to keep information about the user conversation or query, and LangChain provides an easy way to combine data from Feast with LLMs. 
 
 ### Typical chains
 
-Chains allow developers to combine multiple components together to create a single, coherent application, or to  also combine chains.
+Chains allow developers to combine multiple components together to create a single, coherent application, or to combine other chains.
 
 * **Q&A**: The pipeline to build the Q&A over existing documents is illustrated in the figure below:
 
@@ -212,32 +213,34 @@ There are [different types](https://python.langchain.com/docs/modules/agents/age
 
 LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: AgentAction, with tool and tool_input and AgentFinish.
 
-* The **Agent** is a chain. See the existing [agent types](https://python.langchain.com/docs/modules/agents/agent_types/). Agent has input and output and intermediate steps.
+**Chains** let create a pre-defined sequence of tool usage(s), while **Agents** let the model use tools in a loop, so that it can decide how many times to use tools.
+
+* The **Agent** loops on user input until it returns AgentFinish action. If the Agent returns an AgentAction, then use that to call a tool and get an Observation. Agent has input and output and intermediate steps. AgentAction is a response that consists of action and action_input.
 
 * **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
 
 * [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
+
+* See the existing [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
 
 Tool calling allows a model to detect when one or more tools should be called and respond with the inputs that should be passed to those tools. The inputs match a defined schema. 
 
 ```
 ```
 
-A schema is defined, we need to create custom parsing logic.
-
-The model is coming up with the arguments to a tool. 
+A schema is defined, we need to create custom parsing logic. The model response includes the arguments to a tool. 
 
 Below is the classical application flow when using tool, for example with a remote microservice.
 
 ![](./diagrams/tool_calling.drawio.png)
 
-Chains let create a pre-defined sequence of tool usage(s), while Agents let the model use tools in a loop, so that it can decide how many times to use tools.
+It is conveniant to use embeddings to do tool selection before calling LLM.
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
-The approach is to define tools, and prompt linked to the tool. Retriever from a vector data base may be a tool. 
+The approach is to define tools, and prompt linked to the tool. Retriever from a vector database is a tool. 
 
-A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News.
+A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News, so most recent information than the cutoff data of the LLM.
 
 ```python
 retriever_tool = create_retriever_tool(
@@ -249,13 +252,12 @@ search = TavilySearchResults()
 tools = [retriever_tool, search]
 ```
 
-
 Chat models supporting tool calling features implement a `.bind_tools` method, which receives a list of LangChain tool objects and binds them to the chat model in its expected forma
 
 ???- info "Tavily"
     [Tavily](https://docs.tavily.com/) is the leading search engine optimized for LLMs. It provides factual, explicit and objective answers. It is a GPT researcher which queries, filters and aggregates over 20+ web sources per a single research task. It focuses on optimizing search for AI developers and autonomous AI agents. See [this git repo](https://github.com/assafelovic/gpt-researcher.git)
 
-* Many LLM providers, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
+* Many LLM providers support tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
 * [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. The second approach is to subclass the langchain.`pydantic_v1.BaseModel` class. Finally the last possible approach is to use `StructuredTool` dataclass. 
 
 When doing agent we need to manage exception and implement handle_tool_error. 
@@ -264,10 +266,11 @@ To map the tools to OpenAI function call there is a module called: `from langcha
 
 ### How to
 
-???- question "q1"
-    Define  an agent with user input,  a component for formatting intermediate steps (agent action, tool output pairs) (`format_to_openai_tool_messages`: convert (AgentAction, tool output) tuples into FunctionMessages), and  a component for converting the output message into an agent action/agent finish:
+???- question "Defining an agent with tool calling, and the concept of scratchpad"
+    Define  an agent with 1/ a user input, 2/ a component for formatting intermediate steps (agent action, tool output pairs) (`format_to_openai_tool_messages`: convert (AgentAction, tool output) tuples into FunctionMessages), and 3/ a component for converting the output message into an agent action/agent finish:
 
-    ```python 
+    ```python
+    # x is the response from LLM 
     agent = (
             {
                 "input": lambda x: x["input"],
@@ -285,6 +288,17 @@ To map the tools to OpenAI function call there is a module called: `from langcha
     [OpenAIToolsAgentOutputParser](https://api.python.langchain.com/en/latest/_modules/langchain/agents/output_parsers/openai_tools.html) used with OpenAI models, as it relies on the specific
     tool_calls parameter from OpenAI to convey what tools to use.
 
+
+???- question "Example of Intended Model"
+
+
+???- question "Example of Supports Multi-Input Tools"
+
+
+???- question "Use a vector store to keep the list of agent and description"
+    As we cannot put the description of all the tools in the prompt (because of context length issues) 
+    so instead we dynamically select the N tools we do want to consider using, at run time.
+    See the code in [agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py). 
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 
