@@ -31,11 +31,15 @@ RAG  helps reducing hallucinations.
 
 ## Basic architecture
 
-he Retrieval Augmented Generation may be seen as a three stages process:
+The Retrieval Augmented Generation may be seen as a three stages process:
 
 ![](./diagrams/rag_3_stages.drawio.png)
 
-This process is supported by tools that support documents ingestion, splitting, embedding, indexing, retrieval and integration in the real time conversation components, which needs to support query construction, translation, and LLM calling. The following diagram illustrates a classical RAG architecture:
+1. **Indexing** a batch processing to ingest documents and data from a source and indexing them. During processing semantic search is used to retrieve relevant documents from the index. Indexing supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the documents and index of the splits.
+1. **Retrieval**: retrieves the relevant data (splits) from the index, then passes that to the model as part of the context.
+1. **Generation**: generate the response in plain natural language.
+
+This process is supported by tools for documents ingestion, splitting, embedding, indexing, retrieval and integration with the real time conversation flow. From the simple query text  the process needs to do query construction, translation, and LLM calling. The following diagram illustrates a classical RAG architecture:
 
 ![](./diagrams/rag.drawio.png)
 
