@@ -1,12 +1,41 @@
 # Retrieval Augmented Generation (RAG)
 
-LLMs have a knowledge cut-off, pre-training is a one-off exercise. RAG addresses this problem as it is the act of supplementing generative text models with data outside of what it was trained on. 
+## What is covered in this section
 
-RAG is applied to businesses who want to include proprietary information which was not previously used in a foundation model training set but does have the ability to search. Technical documentations which are not public, are good examples of the usage of RAG. RAG also helps reducing hallucinations.
+```mermaid
+mindmap
+  root((RAG))
+    Understand the Goals
+      Reduce Hallucinations
+      Integrate corporate knowledge
+    Reference Architecture
+        Product capability
+    Review Document Pipeline
+      Ingestion
+      Embeddings
+      Practices
+    Using Tools
+      Vector Store
+      Embeddings
+      Retriever
+      LangChain Chains
+```
+
+LLMs have a knowledge cut-off time, where data coming after are not known by the model.  Pre-training is a one-off exercise. When enterprises need to get their private knowledge integrated to LLM, they can do fine tuning or present semantic search results as part of the input context window. RAG addresses this problem as it is the act of supplementing generative text models with data outside of what it was trained on. 
+
+![](./diagrams/llm_size_window.drawio.png)
+
+While model increases in token pre-training size, they also increase the size of the context window. When the context window is big enough, application can send more contextual data, that leads to better results.
+
+RAG  helps reducing hallucinations.
 
 ## Basic architecture
 
-The following diagram illustrates a classical RAG architecture.
+he Retrieval Augmented Generation may be seen as a three stages process:
+
+![](./diagrams/rag_3_stages.drawio.png)
+
+This process is supported by tools that support documents ingestion, splitting, embedding, indexing, retrieval and integration in the real time conversation components, which needs to support query construction, translation, and LLM calling. The following diagram illustrates a classical RAG architecture:
 
 ![](./diagrams/rag.drawio.png)
 
