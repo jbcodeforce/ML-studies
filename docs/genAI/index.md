@@ -61,14 +61,15 @@ We can group the Generative AI use cases in different categories:
     * Documentation summarization: See model like Jurassic-2 Jumbo from [AI21 studio](https://www.ai21.com/studio), claude-v2 works well too.
     * Personalization
 
+
 ???+ info "Improve employee productivity"
     * Code generation
     * Translation, reports, summarization...
-    * Search via Q&A Agent for specific subject, based on Corporate document processing. LLM helps understanding the text and the questions. Here the LLM is enriched, trained on proprietary corpus:
+    * Search via Q&A Agent for specific subject, based on Corporate document processing. LLM helps understanding the text and the questions. The LLM is enriched, trained on proprietary corpus:
 
     ![](./diagrams/qa-llm.drawio.png){ width=400}
 
-    * Self service tutor based on student progress, prompt activities, and respond  to questions
+    * Self service tutor based on student progress, prompt activities, and respond to questions
     * Personalized learning path generation
     * Low-code development with GenAI agents
 

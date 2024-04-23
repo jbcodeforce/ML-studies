@@ -60,8 +60,13 @@ This process is supported by tools for documents ingestion, splitting, embedding
 
 RAG systems work well because LLMs has the in-context learning capability, which allows models to use previously unseen data to perform accurate predictions without weight training.
 
+??? practice "Domain specific vector store"
+    The presence of mixed-domain data in the same vector store can introduce noise and potentially degrade performance.
+    Isolating vector stores for each domain can help maintain domain-specific information and improve model accuracy within individual domains
+
 
 ???- Info "In-context learning"
+    Traditional machine learning models are typically trained on fixed datasets and do not adapt well to new data or tasks without retraining from scratch. With NLP in-context learning involves continually updating the model as new data becomes available. The techniques include online learning, transfer learning, fine-tuning, or using memory-based architectures.
 
 ## RAG assessment scoping questions
 

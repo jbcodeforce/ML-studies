@@ -16,7 +16,7 @@ llm-langchain/dependencies/**
 llm-langchain/my_feature_repo/**
 llm-langchain/**/data/**
 llm-langchain/featureform/.featureform/
-llm-langchain/chroma_db/
+llm-langchain/openAI/agent_domain_store/
 deep-neural-net/d2l-en/
 **/*.pth
 pytorch/computer-vision/data/
