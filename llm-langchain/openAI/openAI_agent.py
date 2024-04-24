@@ -2,7 +2,6 @@ from langchain_openai import ChatOpenAI,OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.tools.retriever import create_retriever_tool
 from langchain_community.tools.tavily_search import TavilySearchResults
-from langchain import hub
 from langchain.agents import create_tool_calling_agent
 from langchain_core.prompts import ChatPromptTemplate
 from langchain.agents import AgentExecutor
