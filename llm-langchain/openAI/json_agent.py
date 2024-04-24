@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
 """
-Simple tool calling with tracing
+Tool calling for last news Tabily search, using a React Prompt and create_json_chat_agent
 """
 load_dotenv(dotenv_path="../../.env")
 

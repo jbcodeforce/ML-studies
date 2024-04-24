@@ -30,21 +30,21 @@ nav:
       - Anthropic: genAI/anthropic.md
   - Techno:
     - Coding getting started: coding/index.md
-    - Pandas: coding/pandas.md
-    - Scikit-learn: coding/sklearn.md
-    - PyTorch: coding/pytorch.md
-    - Feature Store: techno/feature_store.md/
     - Data Visualization: coding/visualization.md
+    - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
-    - Streamlit: techno/streamlit.md
+    - NiceGUI: techno/nicegui.md
+    - Pandas: coding/pandas.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
-    - Apache Spark studies: https://jbcodeforce.github.io/spark-studies/
-    - Key AI startups: techno/players_to_look.md
-    - Amazon SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
-
+    - PyTorch: coding/pytorch.md
+    - SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
+    - Scikit-learn: coding/sklearn.md
+    - Spark studies: https://jbcodeforce.github.io/spark-studies/
+    - Streamlit: techno/streamlit.md
   - Solutions:
     - Introduction: solutions/index.md
+    - Key AI startups: techno/players_to_look.md
   - Home: https://jbcodeforce.github.io
 
 theme: 
