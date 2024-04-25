@@ -70,22 +70,76 @@ Each code needs to define only the needed LangChain modules to keep the executab
     prompt = hub.pull("hwchase17/openai-functions-agent")
     ```
 
-* [Chains](https://python.langchain.com/docs/modules/chains/) allow developers to combine multiple components together (or to combine other chains) to create a single, coherent application.
-
-    ```python
-    # a chain definition using Langchain expression language
-    chain = prompt | model | output_parser
-    ```    
-
-    * [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains.
-
-* [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with any LLM.
+* [Chains](https://python.langchain.com/docs/modules/chains/) allow developers to combine multiple components together (or to combine other chains) to create a single, coherent application. 
 
 
 * **OutputParsers** convert the raw output of a language model into a format that can be used downstream
 
 
 *Feature stores, like [Feast](https://github.com/feast-dev/feast), can be a great way to keep information about the user conversation or query, and LangChain provides an easy way to combine data from Feast with LLMs.*
+
+### Chain 
+
+Chains are runnable, observable and composable.
+
+* [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with any LLM.
+
+```python
+# Basic chain
+chain = LLMChain(llm=model, prompt = prompt)
+chain.invoke("a query")
+```
+
+* Sequential chain combines chains in sequence with single input and output (SimpleSequentialChain)
+
+    ```python
+    overall_simple_chain = SimpleSequentialChain(chains=[chain_one, chain_two],
+                                                verbose=True
+                                                )
+    ```
+
+    or multiple inputs and outputs with prompt using the different environment variables (see [this code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/multi_chains.py)).
+
+* [LLMRouterChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.router.llm_router.LLMRouterChain.html#langchain.chains.router.llm_router.LLMRouterChain) is a chain that outputs the name of a destination chain and the inputs to it.
+
+* [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains.
+
+```python
+# a chain definition using Langchain expression language
+chain = prompt | model | output_parser
+```    
+
+* Chain can be executed asynchronously in its own Thread using the `ainvoke` method.
+
+### Memory 
+
+Large Language Models are stateless and do not remember anything. Chatbot seems to have memory, because conversation is kept in the context. 
+
+With a simple conversation like the following code, the conversation is added as string into the context:
+
+```python
+llm = ChatOpenAI(temperature = 0)
+memory = ConversationBufferMemory()
+conversation = ConversationChain(
+    llm= llm,
+    memory=memory,
+    verbose=True   # trace the chain
+)
+```
+
+The memory is just a container in which we can save {"input:""} and {"output": ""} content.
+
+But as the conversation goes, the size of the context grows, and so the cost of operating this chatbot, as API are charged by the size of the token. Using `ConversationBufferWindowMemory(k=1)` with a k necessary to keep enough context, we can limit cost. Same with `ConversationTokenBufferMemory` to limit the token in memory.
+
+
+
+[ConversationChain](https://python.langchain.com/docs/modules/memory/conversational_customization/) is a predefined chain to have a conversation and load context from memory.
+
+As part of memory component there is the [ConversationSummaryMemory](https://python.langchain.com/docs/modules/memory/types/summary/) to get the conversation summary so far.
+
+The other important memory is [Vector Data memory](https://python.langchain.com/docs/modules/memory/types/vectorstore_retriever_memory/) and entity memory or [knowledgeGraph](https://python.langchain.com/docs/modules/memory/types/kg/)
+
+See related code [conversation_with_memory.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/conversation_with_memory.py)
 
 ### Q&A app
 
@@ -134,8 +188,6 @@ For **Q&A** the pipeline will most likely integrate with existing documents as i
 **[Chatbots](https://python.langchain.com/docs/use_cases/chatbots/)** is the most common app for LLM: Aside from basic prompting and LLMs call, chatbots have **memory** and retrievers:
 
 ![](./diagrams/chatbot.drawio.png)
-
-
 
 ### Text Generation Examples
 
@@ -247,6 +299,12 @@ LangChain offers an API to the LLM called `bind_tools` to pass the definition of
 
 The following [prompt](https://smith.langchain.com/hub/hwchase17/openai-tools-agent) is the simplest prompt for OpenAI. It uses `agent_scratchpad` variable, which is a `MessagesPlaceholder`. Intermediate agent actions and tool output messages will be passed in here.
 
+### Evaluating results
+
+The evaluation of a chain, we need to define the data points to be measured. Building Questions and accepted answers is a classical approach.
+
+We can use LLM and a special chain ([QAGenerateChain](https://api.python.langchain.com/en/latest/evaluation/langchain.evaluation.qa.generate_chain.QAGenerateChain.html)) to build Q&A from a document.
+
 ## Agent
 
 [Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
@@ -278,7 +336,7 @@ Below is the classical application flow when using tool, for example with a remo
 
 ![](./diagrams/tool_calling.drawio.png)
 
-It is conveniant to use embeddings to do tool selection before calling LLM.
+It is convenient to use embeddings to do tool selection before calling LLM.
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
@@ -309,6 +367,8 @@ When doing agent we need to manage exception and implement handle_tool_error.
 To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
 
 ### How to
+
+???- question "How to trace the agent execution?"
 
 ???- question "Defining an agent with tool calling, and the concept of scratchpad"
     Define  an agent with 1/ a user input, 2/ a component for formatting intermediate steps (agent action, tool output pairs) (`format_to_openai_tool_messages`: convert (AgentAction, tool output) tuples into FunctionMessages), and 3/ a component for converting the output message into an agent action/agent finish:
@@ -346,11 +406,9 @@ To map the tools to OpenAI function call there is a module called: `from langcha
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 
-LCEL to support streaming te LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results. define schemas.
+LCEL supports streaming the LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results. define schemas.
 
 ## Deeper dive
-
-
 
 ???- code "Chatbot with LangChain"
     ```python

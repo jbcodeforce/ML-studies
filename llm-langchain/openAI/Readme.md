@@ -1,12 +1,13 @@
 # OpenAI examples
 
-To get access to the OPENAI_API_KEY, be sure to have the .env in the ML-studies folder. The following code can be run with python 3.11 in the openAI folder.
+All the code access env variables, like OPENAI_API_KEY, with dotenv module, be sure to have the .env in the ML-studies folder. The following code can be run with python 3.11 in the openAI folder.
+
+## Code reference
 
 | Example | Purpose |
 | --- | --- |
 | 1st_openAI_lc.py | A simple chain to ask about LangSmith and testing. Which should generate hallucination as ChatGPT was cutoff in 2023 |
 | agent_memory| use tool and chat_history to keep memory of the conversation |
-
 | agent with tools retriever | tool descriptions are added to a vector store. with vector store retreiver we can get the relevant document / tool to support the query |
 | json_agent | Tool calling for last news Tabily search, using a React Prompt (using question, thought, action, observation) and create_json_chat_agent |
 | openAI_agent.py | An agent using retriever and Tavily Search as tools for tool calling llm |
@@ -16,3 +17,7 @@ To get access to the OPENAI_API_KEY, be sure to have the .env in the ML-studies 
 | streamin_ouput.py | testing the model streaming api |
 | text_summarization.py | Summarization of text from tecton.ai blog |
 | work_struct_output_for_tool |  tool calling with structured response and custom parser |
+
+
+## Some specific considerations
+
