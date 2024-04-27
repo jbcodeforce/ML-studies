@@ -35,6 +35,10 @@ We can then generalize these to a lot of business processes as soon as they have
 - human has a way to ask to line if management or subject matter experts when a case is more complex, to get advice.
 - human may needs to consult other datasources to get better data to take decision. 
 
+
+Event storming methodology helps to identify the business process to model. During this workshop we can add special notation to highlight human tasks candidate to be supported by generative AI
+
+
 ## Methodology requirements
 
 The methodology needs to support:

@@ -131,8 +131,6 @@ The memory is just a container in which we can save {"input:""} and {"output": "
 
 But as the conversation goes, the size of the context grows, and so the cost of operating this chatbot, as API are charged by the size of the token. Using `ConversationBufferWindowMemory(k=1)` with a k necessary to keep enough context, we can limit cost. Same with `ConversationTokenBufferMemory` to limit the token in memory.
 
-
-
 [ConversationChain](https://python.langchain.com/docs/modules/memory/conversational_customization/) is a predefined chain to have a conversation and load context from memory.
 
 As part of memory component there is the [ConversationSummaryMemory](https://python.langchain.com/docs/modules/memory/types/summary/) to get the conversation summary so far.
@@ -289,15 +287,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 ???- info "LLM and FeatureForm"
     See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
 
-### Tool Calling
 
-With Tool Calling we can define function or tool to be referenced as part of the LLM response, and LLM will prepare the arguments for the function. It is used to generate tool invocations, not to execute it. LangChain has a lot of [predefined tool definitions already](https://python.langchain.com/docs/integrations/tools/).
-
-We can use tool calling in chain (to use tools in sequence) or [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
-
-LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool in as part of each call to the model, so that the model can invoke the tool when appropriate.
-
-The following [prompt](https://smith.langchain.com/hub/hwchase17/openai-tools-agent) is the simplest prompt for OpenAI. It uses `agent_scratchpad` variable, which is a `MessagesPlaceholder`. Intermediate agent actions and tool output messages will be passed in here.
 
 ### Evaluating results
 
@@ -313,36 +303,61 @@ There are [different types](https://python.langchain.com/docs/modules/agents/age
 
 ### Core concepts
 
-LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: AgentAction, with tool and tool_input and AgentFinish.
+LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: **AgentAction**, with tool and tool_input and **AgentFinish**.
 
-**Chains** let create a pre-defined sequence of tool usage(s), while **Agents** let the model use tools in a loop, so that it can decide how many times to use tools.
+**Chains** let create a pre-defined sequence of tool usage(s), while **Agents** let the model uses tools in a loop, so that it can decide how many times to use its defined tools.
 
-* The **Agent** loops on user input until it returns AgentFinish action. If the Agent returns an AgentAction, then use that to call a tool and get an Observation. Agent has input and output and intermediate steps. AgentAction is a response that consists of action and action_input.
+```python
+from langchain.agents import create_tool_calling_agent
+from langchain.agents import AgentExecutor
+from langchain.tools.retriever import create_retriever_tool
+from langchain_community.tools.tavily_search import TavilySearchResults
+
+...
+tools = [retriever_tool, search, llm_math, wikipedia]
+
+agent = create_tool_calling_agent(llm, tools, prompt)
+agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+```
+
+* To create agents use the constructor methods like `create_react_agent, create_json_agent, create_structured_chat_agent`, [create_tool_calling_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.tool_calling_agent.base.create_tool_calling_agent.html#langchain-agents-tool-calling-agent-base-create-tool-calling-agent) etc
+* The **Agent** loops on user input until it returns AgentFinish action. If the Agent returns an AgentAction, then use that to call a tool and get an Observation. Agent has input and output and intermediate steps. AgentAction is a response that consists of action and action_input. 
+* See the existing predefined [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
+* [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
 
 * **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
 
-* [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
 
-* See the existing [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
+### Tool Calling
 
-Tool calling allows a model to detect when one or more tools should be called and respond with the inputs that should be passed to those tools. The inputs match a defined schema. 
+With Tool Calling we can define function or tool to be referenced as part of the LLM response, and LLM will prepare the arguments for the function. It is used to generate tool invocations, not to execute it.
 
-```
-```
+Tool calling allows a model to detect when one or more tools should be called and responds with the inputs that should be passed to those tools. The inputs match a defined schema. 
 
-A schema is defined, we need to create custom parsing logic. The model response includes the arguments to a tool. 
+Prompt defines placeholders to get tools parameters. The following [langchain prompt](https://smith.langchain.com/hub/hwchase17/openai-tools-agent) for OpenAI uses `agent_scratchpad` variable, which is a `MessagesPlaceholder`. Intermediate agent actions and tool output messages, will be passed in here. 
 
-Below is the classical application flow when using tool, for example with a remote microservice.
+LangChain has a lot of [predefined tool definitions already](https://python.langchain.com/docs/integrations/tools/).
+
+We can use tool calling in chain (to use tools in sequence) or [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
+
+LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool in as part of each call to the model, so that the model can invoke the tool when appropriate.
+
+See also [the load tools api with a list of predefined tools](https://api.python.langchain.com/en/latest/agents/langchain.agents.load_tools.load_tools.html#langchain.agents.load_tools.load_tools).
+
+Below is the classical application flow when using tool calling. The function wraps a remote microservice.
 
 ![](./diagrams/tool_calling.drawio.png)
 
-It is convenient to use embeddings to do tool selection before calling LLM.
-
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
-The approach is to define tools, and prompt linked to the tool. Retriever from a vector database is a tool. 
+Many LLM providers support tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
 
-A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News, so most recent information than the cutoff data of the LLM.
+### Interesting tools
+
+#### Search recent news
+
+A common tool integrated in agent, is the [Tavily](https://tavily.com/) search API, used to get the last trusted News, so the most recent information created after the cutoff date of the LLM.
 
 ```python
 retriever_tool = create_retriever_tool(
@@ -354,21 +369,35 @@ search = TavilySearchResults()
 tools = [retriever_tool, search]
 ```
 
-Chat models supporting tool calling features implement a `.bind_tools` method, which receives a list of LangChain tool objects and binds them to the chat model in its expected forma
-
 ???- info "Tavily"
     [Tavily](https://docs.tavily.com/) is the leading search engine optimized for LLMs. It provides factual, explicit and objective answers. It is a GPT researcher which queries, filters and aggregates over 20+ web sources per a single research task. It focuses on optimizing search for AI developers and autonomous AI agents. See [this git repo](https://github.com/assafelovic/gpt-researcher.git)
 
-* Many LLM providers support tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
-* [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. The second approach is to subclass the langchain.`pydantic_v1.BaseModel` class. Finally the last possible approach is to use `StructuredTool` dataclass. 
+#### Python REPLtool
+
+[PythonREPLTool](https://api.python.langchain.com/en/latest/tools/langchain_experimental.tools.python.tool.PythonREPLTool.html#langchain_experimental.tools.python.tool.PythonREPLTool) is a tool for running python code in REPL (look like a jupiter notebook).
+
+#### Our own tools
+
+[Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. 
+
+A second approach is to subclass the langchain.`pydantic_v1.BaseModel` class. 
+
+Finally the last possible approach is to use `StructuredTool` dataclass. 
 
 When doing agent we need to manage exception and implement handle_tool_error. 
 
 To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
 
+It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time. It uses a vector store to create embeddings for each tool description.
+
 ### How to
 
 ???- question "How to trace the agent execution?"
+    ```
+    import langchain
+    langchain.debug = True
+    ```
+    Or use LangSmith
 
 ???- question "Defining an agent with tool calling, and the concept of scratchpad"
     Define  an agent with 1/ a user input, 2/ a component for formatting intermediate steps (agent action, tool output pairs) (`format_to_openai_tool_messages`: convert (AgentAction, tool output) tuples into FunctionMessages), and 3/ a component for converting the output message into an agent action/agent finish:
@@ -392,6 +421,13 @@ To map the tools to OpenAI function call there is a module called: `from langcha
     [OpenAIToolsAgentOutputParser](https://api.python.langchain.com/en/latest/_modules/langchain/agents/output_parsers/openai_tools.html) used with OpenAI models, as it relies on the specific
     tool_calls parameter from OpenAI to convey what tools to use.
 
+
+???- question "How to support streaming the LLM's output?"
+    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) vis needed to make the app more responsive for end-users. All Runnable objects implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
+    
+    ```python
+
+    ```
 
 ???- question "Example of Intended Model"
 

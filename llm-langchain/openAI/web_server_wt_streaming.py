@@ -89,6 +89,7 @@ def define_sync_agent():
 
 async def send_message_using_chain(msg: str) -> AsyncIterable[str]:
     """
+    
     """
     callback = AsyncIteratorCallbackHandler()
     llm = ChatOpenAI(
@@ -97,7 +98,8 @@ async def send_message_using_chain(msg: str) -> AsyncIterable[str]:
         callbacks=[callback],
     )
     tools = [get_items_sync]
-    chain = prompt | llm | tools
+    parser = StrOutputParser()
+    chain = prompt | llm | parser
     task = asyncio.create_task(
         chain.agenerate(messages={"input": msg})
     )

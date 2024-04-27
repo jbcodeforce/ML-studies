@@ -23,18 +23,21 @@ nav:
       - Neuro-Symbolic AI: neuro-symbolic/index.md
     - Generative AI: 
       - Introduction: genAI/index.md
-      
       - Prompt Engineering: genAI/prompt-eng.md
       - Reference Architecture: genAI/ref-arch.md
       - RAG: genAI/rag.md
       - Anthropic: genAI/anthropic.md
+      - OpenAI: genAI/openai.md
+      - Mixtral: genAI/mixtral.md
   - Techno:
     - Coding getting started: coding/index.md
+    - Airflow: techno/airflow.md
     - Data Visualization: coding/visualization.md
     - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
     - NiceGUI: techno/nicegui.md
+    - OpenSearch: techno/opensearch.md
     - Pandas: coding/pandas.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
     - PyTorch: coding/pytorch.md
@@ -42,6 +45,7 @@ nav:
     - Scikit-learn: coding/sklearn.md
     - Spark studies: https://jbcodeforce.github.io/spark-studies/
     - Streamlit: techno/streamlit.md
+    - WatsonX: techno/watsonx.md
   - Solutions:
     - Introduction: solutions/index.md
     - Key AI startups: techno/players_to_look.md

@@ -31,7 +31,9 @@ def buildRetrieverChain():
     )
     return chain
 
-
+"""
+Stream the output as it arrives. but in a sync context
+"""
 def run_continue_chat(chain): 
     print("\t 2/Starting iterative question and answer\n\n")
     finish=False

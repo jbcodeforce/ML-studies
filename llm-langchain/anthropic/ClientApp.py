@@ -23,11 +23,11 @@ system = (
     "You are a helpful technical writer that improve the following content:"
 )
 human = args.text
-prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)])
+prompt = ChatPromptTemplate.from_messages([("system", system), ("human", "")])
 
 chain = prompt | chat
 
-for chunk in chain.stream({}):
-    print(chunk.content, end="", flush=True)
+async for chunk in chain.astream({"human": human}):
+    print(chunk.content, end="|", flush=True)
 
 
