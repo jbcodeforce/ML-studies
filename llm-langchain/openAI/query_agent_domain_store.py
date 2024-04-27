@@ -10,7 +10,9 @@ from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 
 DOMAIN_VS_PATH="./agent_domain_store"
-
+"""
+Query the domain store, with a text chat
+"""
 
 def format_docs(docs):
     return "\n\n".join(doc.page_content for doc in docs)

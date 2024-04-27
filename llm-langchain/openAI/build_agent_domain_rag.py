@@ -50,7 +50,7 @@ if __name__ == "__main__":
     print(f"---> The length of the page content: {len(docs[0].page_content)}")
     print(f"---> 2/ build and persist vector store in: {DOMAIN_VS_PATH}")
     vectorstore = build_indexing(docs) 
-    print(f"---> 3 Test sematic search on this vector store with the following \nquestion: What are the approaches to Task Decomposition?")
+    print(f"---> 3 Test semantic search on this vector store with the following \nquestion: What are the approaches to Task Decomposition?")
     retriever = vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 6})
     retrieved_docs = retriever.invoke("What are the approaches to Task Decomposition?")
     print(f"\t Number of documents retrieved {len(retrieved_docs)}")

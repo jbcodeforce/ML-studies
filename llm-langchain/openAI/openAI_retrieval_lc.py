@@ -35,7 +35,7 @@ CHROMA_DB_FOLDER="./chroma_db"
 
 vectorstore=None
 
-if os.path.isdir(CHROMA_DB_FOLDER):
+if os.path.isabs(CHROMA_DB_FOLDER):
     vectorstore=load_documents_from_blog(embeddings)
 else:
     vectorstore=Chroma(persist_directory=CHROMA_DB_FOLDER,embedding_function=embeddings)
