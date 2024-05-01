@@ -56,14 +56,13 @@ This process is supported by tools for documents ingestion, splitting, embedding
 1. Response is sent back to the user.
 
 ???- Info "Embeddings"
-    **Embeddings** are vectors of numbers that represent an underlying concept. The numbers intend to capture the attributes of the object. Dense embeddings were introduced by Google’s **word2vec** (Mikolov et al) in 2014. This transformation of word to vector, gives the capability to compute arithmetics with words, like **similarity** computation. Vectors that are closer together mean they represent semantically similar concepts. With embeddings, we are representing things in a high-dimensional space (dimensions are the count of numbers a vector has), and we are giving each element a place and direction in space.
+    **Embeddings** are vectors of numbers that represent an underlying concept. The numbers intend to capture the attributes of the object. Dense embeddings were introduced by Google’s **word2vec** (Mikolov et al) in 2014. This transformation of word to vector, gives the capability to compute arithmetics with words, like **similarity** computation. Vectors that are closer together mean they represent semantically similar concepts. With embeddings, we are representing things in a high-dimensional space (dimensions are the count of numbers a vector has), and we are giving each element a place and direction in space. See [this basic code]() which uses `SentenceTransformer all-MiniLM-L6-v2` model to encode sentences of 100 tokens, construct from a markdown file.
 
 RAG systems work well because LLMs has the in-context learning capability, which allows models to use previously unseen data to perform accurate predictions without weight training.
 
 ??? practice "Domain specific vector store"
     The presence of mixed-domain data in the same vector store can introduce noise and potentially degrade performance.
     Isolating vector stores for each domain can help maintain domain-specific information and improve model accuracy within individual domains
-
 
 ???- Info "In-context learning"
     Traditional machine learning models are typically trained on fixed datasets and do not adapt well to new data or tasks without retraining from scratch. With NLP in-context learning involves continually updating the model as new data becomes available. The techniques include online learning, transfer learning, fine-tuning, or using memory-based architectures.
@@ -74,23 +73,24 @@ Before doing an efficient RAG implementation, we need to address a set of import
 
 * Who is the end user? External user, clients of the enterprise may have an incredible power to impact the brand. 
 * What is the source of the documentation? What are the current data pipelines in place for each data sources, what are the touch points and security boundaries in place?
+* Is there any structured data sources we need to consider for the search?
 * How often the documentation change over time? Is there any governance in place to manage documents quality?
 * How to extract relevant information from the document? Is there any PII in any document that may breach?
 * How to avoid ingestion of malicious content into the knowledge corpus? Who can access what?
-* How to chunk the documents?
-* How to encode the chunks?
+* How does the content look like in the document to determine chunk size and overlap?
 * When to retrieve? How and what to retrieve?
-* How to encode query?
-* What pre-processing is needed before calling the model API?
-* How to prompt?
+* What are the expected set of most asked questions on the current corpus?
 * How to post process the answer?
 * How to learn new information?
-* How to scale?
-* What to optimize this entire system?
-* Do we need fine tuning and existing model?
+* What to optimize in this entire system?
 * How to handle queries outside of the domain? This may lead to adopt a domain specific LLM and combined with a generalized LLM.
 * How the deployment will occur? Self-hosted, using API-based LLM? What is the expected latency supported? What cost is expected?
 * Is there any compliances and regulations to follow?
+
+The above questions should help to address:
+
+* Can RAG give good answers?
+* Do we need fine tuning an existing model?
 
 ### Training and test time
 

@@ -9,6 +9,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 
+
 DOMAIN_VS_PATH="./agent_domain_store"
 """
 Query the domain store, with a text chat
