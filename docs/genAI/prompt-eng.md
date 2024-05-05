@@ -1,7 +1,7 @@
 # Prompt engineering
 
-???- info "Upadte"
-    Created Aug 2023 - Updated 02/2024
+???- info "Update"
+    Created Aug 2023 - Updated 05/2024
 
 This chapter includes a summary of prompt engineering practices and links to major information on this subject. Main sources of knowledge are:
 
@@ -9,7 +9,7 @@ This chapter includes a summary of prompt engineering practices and links to maj
 * [Wikipedia- prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering)
 * [Anthropic - Claude - Prompt engineering.](https://docs.anthropic.com/claude/docs/prompt-engineering)
 
-This repository includes some code, prompts to test on different LLM.
+This repository includes code, prompts to test on different LLMs.
 
 ## Introduction
 
@@ -49,7 +49,7 @@ The classical [Temperature, Top-P](./index.md/#common-llm-inference-parameter-de
 
 ### Chain of Thought
 
-Chain-of-thought ([CoT](https://www.promptingguide.ai/techniques/cot)) prompting using intermediate step.  It is used to address more complex arithmetic, commonsense, and symbolic reasoning tasks. The zero-shot CoT seems to get good results by adding "Let's think step by step" sentence. (see the test code [under llm-langchain/bedrock folder](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/TestBedrockCoT.py): `python TestBedrockCoT.py -p cot3.txt -m  ai21.j2-mid`)
+Chain-of-thought ([CoT](https://www.promptingguide.ai/techniques/cot)) prompting using intermediate steps.  It is used to address more complex arithmetic, commonsense, and symbolic reasoning tasks. The zero-shot CoT seems to get good results by adding "Let's think step by step" sentence. (see the test code [under llm-langchain/bedrock folder](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/TestBedrockCoT.py): `python TestBedrockCoT.py -p cot3.txt -m  ai21.j2-mid`)
 
 * Examples:
 

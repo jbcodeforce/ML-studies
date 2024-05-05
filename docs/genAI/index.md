@@ -22,7 +22,7 @@ The text is then broken down into chunks called tokens which are fed into the mo
     * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
     * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
 
-The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2022 is 540B parameters.
+The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
 
 A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
 
@@ -39,14 +39,20 @@ translate an input string in one language to another) as a text-to-text conversi
 
 Models with encoder-decoder and decoder-only architectures are **generative** models.
 
-A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies rely on custom data sets tailored to their unique requirements. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs.
+### Challenges
+
+A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies rely on custom data sets tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs.
 
 For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
+
+For large enterprise, adopting LLM at scale means running hundreds, even thousands, of models at any time. With high frequency of innovation, lead customers to replace their models quicker than expected, reinforcing the need to train and deploy new models in production quickly and seamlessly.
+
+### Generic development approach
 
 Some ways to use Generative AI:
 
 * Build foundation model from scratch
-* Reuse existing foundation models available as open-source (Hugging Face hub) or proprietary, add the custom corpus on top of it, to fine tune tune the model for better accuracy.
+* Reuse existing foundation models available as open-source (hundred of model on [Hugging Face hub](https://huggingface.co/models)) or proprietary, add the custom corpus on top of it, to fine tune the model for better accuracy.
 * Use generative AI services or APIs offered by foundation model vendors. There is no control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answers, or [RAG techniques](./rag.md).
 
 ???- "Hugging Face"
@@ -322,13 +328,19 @@ Chat Generative pre-trained Transformer is a proprietary instruction-following m
 
 The model was trained on trillions of words from the web, requiring massive numbers of GPUs to develop. The model was trained using Reinforcement Learning from Human Feedback (RLHF), using the same methods as [InstructGPT](https://en.wikipedia.org/wiki/GPT-3), but with different data collection setup. 
 
-* [Build an AI that can answer questions about your website](https://platform.openai.com/docs/tutorials/web-qa-embeddings): crawl, use embeddings, and a search function. It is a good starting point for knowledge based app. [I did my own on EDA book](openai_km.py)
+* [Build an AI that can answer questions about your website](https://platform.openai.com/docs/tutorials/web-qa-embeddings): crawl, use embeddings, and a search function. It is a good starting point for knowledge based app.
 
-### [LLama2](https://llama.meta.com/llama2/)
+### Meta with [LLama 2 & 3](https://meta.ai/llama3/)
 
 A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. Many models have been released based on Llama2, but they also inherit the license requirement for non-commercial use.
 
 It is possible to run LLama2 on local machine with [ollama](https://ollama.com/), and a [simple LangChain]()
+
+* [Anakin](https://anakin.ai/) is a platform to access different models 
+* [Perplexity Labs](https://labs.perplexity.ai/), a part of Perplexity AI, provides a user-friendly platform for developers to explore and experiment with large language models, including Llama 3
+* [https://huggingface.co/chat/](https://huggingface.co/chat/)
+* [Replicate](https://replicate.com/)
+* [Vercel](https://vercel.com/)
 
 ### [Mistral - Mixture of Experts](https://mistral.ai/news/mixtral-of-experts/)
 

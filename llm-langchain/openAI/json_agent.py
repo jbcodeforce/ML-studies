@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
 
 """
-Tool calling for last news Tabily search, using a React Prompt and create_json_chat_agent
+Tool calling for last news using Tabily search, and using a ReAct Prompt and create_json_chat_agent
 """
 load_dotenv(dotenv_path="../../.env")
 
@@ -23,6 +23,6 @@ agent_executor = AgentExecutor(
     agent=agent, tools=tools, verbose=True, handle_parsing_errors=True
 )
 
-resp=agent_executor.invoke({"input": "what is LangServe?"})
+resp=agent_executor.invoke({"input": "When GPT 4 was released?"})
 
 print(resp['output'])

@@ -1,6 +1,7 @@
 """
 A simple tool to interact with LLM and RAG with a specific knowledge based
 """
+import os, sys
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain import hub
@@ -51,6 +52,9 @@ def run_continue_chat(chain):
 
 if __name__ == "__main__":
     print("---> Welcome to query the Multi Agent knowledge based")
+    if not os.path.isdir(DOMAIN_VS_PATH):
+        print("You need to run build_agent_domain_rag.py before")
+        sys.exit(1)
     load_dotenv("../../.env")
     print("\t 1/ Build chain")
     chain = buildRetrieverChain()
