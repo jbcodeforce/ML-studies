@@ -4,7 +4,7 @@ from langchain_ibm import WatsonxLLM
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-load_dotenv(dotenv_path="../.env")
+load_dotenv(dotenv_path=".env")
 try:
     api_key=os.environ.get("IBM_API_KEY")
     project_id=os.environ.get("IBM_WATSON_PROJECT_ID")
@@ -13,7 +13,8 @@ except KeyError:
     print(" Set the IBM_API_KEY environment variable")
     sys.exit(1)
 
-print(api_key)
+print(f"--> API key: {api_key}\n")
+
 # Get an IAM token from IBM Cloud
 url     = "https://iam.cloud.ibm.com/identity/token"
 headers = { "Content-Type" : "application/x-www-form-urlencoded" }
@@ -22,12 +23,14 @@ data    =  "grant_type=urn:ibm:params:oauth:grant-type:apikey&apikey="+api_key
 response  = requests.post( url, headers=headers, data=data)
 iam_token = response.json()["access_token"]
 
-print(iam_token)
+print(f"--> Token: {iam_token}")
+
 
 from ibm_watsonx_ai.foundation_models.utils.enums import ModelTypes
 import json
 
-print( json.dumps( ModelTypes._member_names_, indent=2 ) )
+print("--> existing models in WatsonX.ai:")
+print(json.dumps( ModelTypes._member_names_, indent=2 ) )
 
 
 parameters = {
@@ -40,11 +43,11 @@ parameters = {
         }
 
 llm = WatsonxLLM(
-            model_id="ibm/granite-13b-instruct-v2",
+            #model_id="ibm/granite-13b-instruct-v2",
+            model_id="ibm-mistralai/mixtral-8x7b-instruct-v01-q",
             url="https://us-south.ml.cloud.ibm.com",
             project_id=project_id,
             params=parameters,
-            api_key=watson_api_key
         )
 
 print(llm.invoke("Who is man's best friend?"))
@@ -70,17 +73,17 @@ The modern synchronous based microservice component view may look like in the fo
 	"moderations": {
 		"hap": {
 			"input": {
-				"enabled": true,
+				"enabled": True,
 				"threshold": 0.5,
 				"mask": {
-					"remove_entity_value": true
+					"remove_entity_value": True
 				}
 			},
 			"output": {
-				"enabled": true,
+				"enabled": True,
 				"threshold": 0.5,
 				"mask": {
-					"remove_entity_value": true
+					"remove_entity_value": True
 				}
 			}
 		}

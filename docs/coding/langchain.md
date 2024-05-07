@@ -444,6 +444,39 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 LCEL supports streaming the LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results. define schemas.
 
+## LangGraph
+
+LangGraph is a library for building stateful, **multi-actor** applications, to add cycles to LLM app. It is not a DAG. [States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph. Each node updates this internal state with its return value after it executes
+
+Graph definitions are immutable so are compiled once defined:
+
+```python
+graph = MessageGraph()
+
+graph.add_node("oracle", model)
+graph.add_edge("oracle", END)
+
+graph.set_entry_point("oracle")
+
+runnable = graph.compile()
+```
+
+`add_node()` takes an function or runnable, with the input to the runnable is the entire current state.
+
+Graph may include ToolNode to call function and tool which can be called via conditions on edge. Conditional edge helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
+
+LangGraph comes with built-in persistence, allowing you to save the state of the graph at point and resume from there.
+
+The interesting use cases are:
+
+- workflow with cycles and conditional output
+- planning agent for plan and execute  
+
+- using reflection and self critique
+- multi agent collaboration, with or without supervisor
+
+See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) my [own samples](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
+
 ## Deeper dive
 
 ???- code "Chatbot with LangChain"

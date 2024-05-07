@@ -45,6 +45,7 @@ nav:
     - SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
     - Scikit-learn: coding/sklearn.md
     - Spark studies: https://jbcodeforce.github.io/spark-studies/
+    - Gradio: techno/gradio.md
     - Streamlit: techno/streamlit.md
     - WatsonX: techno/watsonx.md
   - Solutions:
