@@ -12,7 +12,7 @@ DOMAIN_VS_PATH="./agent_domain_store"
 
 langchain.debug = True
 
-def define_HyDE(question: str):
+def define_HyDE():
     template = """
     Please write a scientific paper passage to answer the question
 
@@ -51,15 +51,17 @@ def build_rag_chain():
 
 
 if __name__ == "__main__":
-    print("---> Welcome to demo for Rag fusion using 4 queries")
+    print("---> Welcome to demo for Rag Hypothetical Document Embedding")
     if not os.path.isdir(DOMAIN_VS_PATH):
         print("You need to run build_agent_domain_rag.py before")
         sys.exit(1)
-    load_dotenv("../../.env")
+    load_dotenv("../.env")
     print("\t 1/ Build a HyDE")
+    generate_docs_for_retrieval = define_HyDE()
+    print("\t 2/ Retrieve docs for question")
     question = "What is task decomposition for LLM agents?"
-    generate_docs_for_retrieval = define_HyDE(question)
     retrieved_docs=retrieve_docs(generate_docs_for_retrieval, question)
     final_rag_chain = build_rag_chain()
+    print("\t 3/ invoke")
     resp=final_rag_chain.invoke({"context": retrieved_docs, "question":question})
     print(resp)

@@ -84,11 +84,11 @@ Chains are runnable, observable and composable.
 
 * [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with any LLM.
 
-```python
-# Basic chain
-chain = LLMChain(llm=model, prompt = prompt)
-chain.invoke("a query")
-```
+    ```python
+    # Basic chain
+    chain = LLMChain(llm=model, prompt = prompt)
+    chain.invoke("a query")
+    ```
 
 * Sequential chain combines chains in sequence with single input and output (SimpleSequentialChain)
 
@@ -104,10 +104,10 @@ chain.invoke("a query")
 
 * [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains.
 
-```python
-# a chain definition using Langchain expression language
-chain = prompt | model | output_parser
-```    
+    ```python
+    # a chain definition using Langchain expression language
+    chain = prompt | model | output_parser
+    ```    
 
 * Chain can be executed asynchronously in its own Thread using the `ainvoke` method.
 
@@ -138,6 +138,100 @@ As part of memory component there is the [ConversationSummaryMemory](https://pyt
 The other important memory is [Vector Data memory](https://python.langchain.com/docs/modules/memory/types/vectorstore_retriever_memory/) and entity memory or [knowledgeGraph](https://python.langchain.com/docs/modules/memory/types/kg/)
 
 See related code [conversation_with_memory.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/conversation_with_memory.py)
+
+### Retrieval Augmented Generation
+
+The goal for **Retrieval Augmented Generation** (RAG) is to add custom dataset not already part of a trained model and use the dataset as input sent to the LLM. RAG is illustrated in figure below:
+
+![](./diagrams/rag-process.drawio.png)
+
+Embed is the vector representation of a chunk of text. Different embedding can be used.
+
+???+ code "Embeddings"
+    The classical Embedding is the [OpenAIEmbeddings](https://api.python.langchain.com/en/latest/embeddings/langchain_community.embeddings.openai.OpenAIEmbeddings.htm) but Hugging Face offers an open source version: the [**SentenceTransformers**]()https://huggingface.co/sentence-transformers which is a Python framework for state-of-the-art sentence, text and image embeddings.
+    
+    ```python
+    from langchain_openai import OpenAIEmbeddings
+    vectorstore =  Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(),
+                                         persist_directory=DOMAIN_VS_PATH)
+    # With HuggingFace
+    from sentence_transformers import SentenceTransformer
+    def build_embedding(docs):
+        model = SentenceTransformer("all-MiniLM-L6-v2")
+        return model.encode(docs)
+    # With AWS embedding
+    from langchain.embeddings import BedrockEmbeddings
+    ```
+
+Different code that implement RAG
+
+| Code | Notes |
+| --- | --- |
+| [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/build_agent_domain_rag.py/) | Read Lilian Weng blog and  create a ChromeDB vector store with OpenAIEmbeddings |
+| [query_agent_domain_store.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/query_agent_domain_store.py/) | Query the persisted vector store for similarity search |
+| [prepareVectorStore.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/prepareVectorStore.py) | Use AWS Bedrock Embeddings |
+| [embeddings_hf.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/embeddings_hf.py) | Use Hunggingface embeddings with splitting a markdown file and use FAISS vector store |
+| [rag_HyDE.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/rag_HyDE.py) | Hypothetical Document Embedding (HyDE) the first prompt create an hypothetical document  |
+ 
+Creating chunks is necessary because language models generally have a limit to the amount of token they can deal with. It also improve the similarity search based on vector.
+
+???- code "Split docs and save in vector store"
+    [RecursiveCharacterTextSplitter](https://api.python.langchain.com/en/latest/character/langchain_text_splitters.character.RecursiveCharacterTextSplitter.html) splits text by recursively look at characters. `text_splitter.split_documents(documents)` return a list of [Document](https://api.python.langchain.com/en/latest/documents/langchain_core.documents.base.Document.html) which is a wrapper to page content and some metadata for the indexes from the source document.
+
+    ```python
+    # ...
+    from langchain.text_splitter import RecursiveCharacterTextSplitter
+    from langchain.vectorstores import FAISS
+    from langchain.indexes.vectorstore import VectorStoreIndexWrapper
+
+    loader = PyPDFDirectoryLoader("./data/")
+    documents = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size = 1000,
+        chunk_overlap  = 100,
+    )
+    docs = text_splitter.split_documents(documents)
+
+    vectorstore_faiss = FAISS.from_documents(
+        docs,
+        embeddings,
+    )
+    vectorstore_faiss.save_local("faiss_index")
+    ```
+
+
+
+???- code "Search similarity in vector DB"
+    [OpenAIEmbeddings](https://python.langchain.com/docs/integrations/text_embedding/openai/)
+    ```python
+    embeddings = OpenAIEmbeddings(model="text-embedding-3-large", dimensions=1024)
+    query = """Is it possible that ...?"""
+    query_embedding = embeddings.embed_query(query)
+    relevant_documents = vectorstore_faiss.similarity_search_by_vector(query_embedding)
+    ```
+
+During the interaction with the end-user, the system (a chain in LangChain) retrieves the most relevant data to the question asked, and passes it to LLM in the generation step.
+
+* Embeddings capture the semantic meaning of the text to help do similarity search
+* Persist the embeddings into a Vector store. Faiss and ChromaDB are common vector stores to use, but OpenSearch, Postgresql can also being used.
+* Retriever includes semantic search and efficient algorithm to prepare the prompt. To improve on vector similarity search we can generate variants of the input question.
+
+See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/qa-faiss-store.py).
+
+
+* [Another example of LLM Chain with AWS Bedrock llm and Feast as feature store](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/feast/feast-prompt.py)
+
+* **[Web scraping](https://python.langchain.com/docs/use_cases/web_scraping)** for LLM based web research. It uses the same process: document/page loading, transformation with tool like BeautifulSoup, to HTML2Text.
+
+
+???- info "Getting started with Feast"
+    Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. See [my summary on Feast](../data/features.md#feast-open-source)
+
+???- info "LLM and FeatureForm"
+    See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
+
+
+
 
 ### Q&A app
 
@@ -224,69 +318,6 @@ Always assess the size of the content to send, as the approach can be different:
     summary_chain = load_summarize_chain(llm=llm, chain_type="map_reduce", verbose=True)
     output = summary_chain.run(docs)
     ```
-
-### Retrieval Augmented Generation
-
-The goal is to add custom dataset not already part of a  trained model and use the dataset as input into the prompt sent to the LLM. This is the Retrieval Augmented Generation or RAG and illustrated in figure below:
-
-![](./diagrams/rag-process.drawio.png)
-
-The code to do the above processing is in [prepareVectorStore.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/prepareVectorStore.py).
-
-To load PDF documents Langchain offers a loader. 
-
-???- code "Split docs and save in vector store"
-    ```python
-    # ...
-    from langchain.vectorstores import FAISS
-    from langchain.indexes.vectorstore import VectorStoreIndexWrapper
-
-    loader = PyPDFDirectoryLoader("./data/")
-    documents = loader.load()
-    text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size = 1000,
-        chunk_overlap  = 100,
-    )
-    docs = text_splitter.split_documents(documents)
-
-    vectorstore_faiss = FAISS.from_documents(
-        docs,
-        bedrock_embeddings,
-    )
-    vectorstore_faiss.save_local("faiss_index")
-    ```
-
-Creating chunks is necessary because language models generally have a limit to the amount of token they can deal with.
-
-???- code "Search similarity in vector DB"
-    [OpenAIEmbeddings](https://python.langchain.com/docs/integrations/text_embedding/openai/)
-    ```python
-    embeddings = OpenAIEmbeddings(model="text-embedding-3-large", dimensions=1024)
-    query = """Is it possible that ...?"""
-    query_embedding = embeddings.embed_query(query)
-    relevant_documents = vectorstore_faiss.similarity_search_by_vector(query_embedding)
-    ```
-
-During the interaction with the end-user, the system (a chain in LangChain) retrieves the most relevant data to the question asked, and passes it to LLM in the generation step.
-
-* Embeddings capture the semantic meaning of the text to help do similarity search
-* Persist the embeddings into a Vector store. Faiss and ChromaDB are common vector stores to use, but OpenSearch, Postgresql can also being used.
-* Retriever includes semantic search and efficient algorithm to prepare the prompt. To improve on vector similarity search we can generate variants of the input question.
-
-See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/qa-faiss-store.py).
-
-
-* [Another example of LLM Chain with AWS Bedrock llm and Feast as feature store](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/feast/feast-prompt.py)
-
-* **[Web scraping](https://python.langchain.com/docs/use_cases/web_scraping)** for LLM based web research. It uses the same process: document/page loading, transformation with tool like BeautifulSoup, to HTML2Text.
-
-
-???- info "Getting started with Feast"
-    Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. See [my summary on Feast](../data/features.md#feast-open-source)
-
-???- info "LLM and FeatureForm"
-    See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
-
 
 
 ### Evaluating results

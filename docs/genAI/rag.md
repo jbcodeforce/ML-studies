@@ -243,7 +243,7 @@ Question: {question}
 Passage:""
 ```
 
-See the related code in [rag_HyDE.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/rag_HyDE.py).
+See the related code in [rag_HyDE.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/rag_HyDE.py).
 
 ## Query Routing
 
