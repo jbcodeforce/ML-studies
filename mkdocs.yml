@@ -37,7 +37,7 @@ nav:
     - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
-    - NiceGUI: techno/nicegui.md
+
     - OpenSearch: techno/opensearch.md
     - Pandas: coding/pandas.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
@@ -45,8 +45,9 @@ nav:
     - SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
     - Scikit-learn: coding/sklearn.md
     - Spark studies: https://jbcodeforce.github.io/spark-studies/
-    - Gradio: techno/gradio.md
+    - Gradio: techno/gradio/index.md
     - Streamlit: techno/streamlit.md
+    - NiceGUI: techno/nicegui.md
     - WatsonX: techno/watsonx.md
   - Solutions:
     - Introduction: solutions/index.md

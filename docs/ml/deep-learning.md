@@ -184,9 +184,15 @@ Dropout layers randomly remove connections between two neural network layers wit
 
 See [PyTorch transfer learning for image classification code.](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/transfer_learning.py)
 
+## Named Entity Recognition
+
+Named Entity Recognition (NER) is a Natural Language Processing (NLP) technique used to identify and extract important entities from unstructured text data. It is achieved by using NN trained on labeled data to recognize patterns and extract entity from text.
+
+Some techniques uses Gen AI model to do NER with a good prompt.
+
 ## Sources of information
 
-* Big source of online book [Dive into Deep Learning from Amazoniens](https://d2l.ai).
+* Big source of online book [Dive into Deep Learning from Amazons](https://d2l.ai).
 * [Udemy PyTorch for deep learning](https://www.learnpytorch.io/)
 * [Horace He- Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)
 * [MIT - CNConvolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
