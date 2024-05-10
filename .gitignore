@@ -22,3 +22,4 @@ deep-neural-net/d2l-en/
 pytorch/computer-vision/data/
 **/models/
 **/.env
+**/.taipy/

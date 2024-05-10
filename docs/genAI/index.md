@@ -41,11 +41,15 @@ Models with encoder-decoder and decoder-only architectures are **generative** mo
 
 ### Challenges
 
-A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies rely on custom data sets tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs.
+A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies rely on custom data sets tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training, retraining and even inference are expensive.
 
-For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
+For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  They produce incorrect and contradictory answers. 
+
+With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
 
 For large enterprise, adopting LLM at scale means running hundreds, even thousands, of models at any time. With high frequency of innovation, lead customers to replace their models quicker than expected, reinforcing the need to train and deploy new models in production quickly and seamlessly.
+
+There is difficulty to determine which source documents are leading to the given answers.
 
 ### Generic development approach
 

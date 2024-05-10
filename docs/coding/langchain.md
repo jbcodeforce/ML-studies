@@ -455,21 +455,18 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 ???- question "How to support streaming the LLM's output?"
     [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) vis needed to make the app more responsive for end-users. All Runnable objects implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
-    
-    ```python
-
-    ```
 
 ???- question "Example of Intended Model"
-
+    to be done
 
 ???- question "Example of Supports Multi-Input Tools"
-
+    to be done
 
 ???- question "Use a vector store to keep the list of agent and description"
     As we cannot put the description of all the tools in the prompt (because of context length issues) 
     so instead we dynamically select the N tools we do want to consider using, at run time.
     See the code in [agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py). 
+
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 
@@ -477,52 +474,52 @@ LCEL supports streaming the LLM results, use async communication, run in paralle
 
 ## LangGraph
 
-LangGraph is a library for building stateful, **multi-actor** applications, to add cycles to LLM app. It is not a DAG. [States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph. Each node updates this internal state with its return value after it executes
+LangGraph is a library for building stateful, **multi-actor** applications, and by adding cycles to LLM app. It is not a DAG. [States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph.  Nodes represent units of work.  It can be either a function or a runnable. Each node updates this internal state with its return value after it executes.
 
 Graph definitions are immutable so are compiled once defined:
 
 ```python
 graph = MessageGraph()
 
-graph.add_node("oracle", model)
-graph.add_edge("oracle", END)
+graph.add_node("chatbot", chatbot_func)
+graph.add_edge("chatbot", END)
 
-graph.set_entry_point("oracle")
+graph.set_entry_point("chatbot")
 
 runnable = graph.compile()
 ```
 
 `add_node()` takes an function or runnable, with the input to the runnable is the entire current state.
 
-Graph may include ToolNode to call function and tool which can be called via conditions on edge. Conditional edge helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
+Graph may include `ToolNode` to call function or tool which can be called via conditions on edge. Conditional edge helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
 
 LangGraph comes with built-in persistence, allowing you to save the state of the graph at point and resume from there.
+
+    ```python
+    memory = SqliteSaver.from_conn_string(":memory:")
+    app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
+    ```
+
+Graphs such as StateGraph's naturally can be composed. Creating subgraphs lets you build things like multi-agent teams, where each team can track its own separate state.
+
+
+### Use cases
 
 The interesting use cases are:
 
 - workflow with cycles and conditional output
 - planning agent for plan and execute  
-
 - using reflection and self critique
 - multi agent collaboration, with or without supervisor
+- human in the loop (by adding an "interrupt" before a node is executed.)
+
+### Code 
 
 See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) my [own samples](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
 
-## Deeper dive
+* [LangGraph product reference documentation.](https://langchain-ai.github.io/langgraph/reference/prebuilt/)
 
-???- code "Chatbot with LangChain"
-    ```python
-    from langchain.chains import ConversationChain
-    from langchain.llms.bedrock import Bedrock
-    from langchain.memory import ConversationBufferMemory
+## LangChain Deeper dive
 
-    titan_llm = Bedrock(model_id="amazon.titan-tg1-large", client=boto3_bedrock)
-    memory = ConversationBufferMemory()
-    conversation = ConversationChain(
-        llm=titan_llm, verbose=True, memory=memory
-    )
-
-    print_ww(conversation.predict(input="Hi there!"))
-    ```
 
 

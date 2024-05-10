@@ -22,6 +22,8 @@ Open in a browser on http://localhost:7860
 * Any Component that acts as an input to an event listener is made interactive
 * Global state can be set via variable at the top of the program, and are shared between connected session
 
+* [Chatbot](https://www.gradio.app/docs/gradio/chatbot) and [ChatInterface](https://www.gradio.app/guides/creating-a-chatbot-fast) to build simple user interface for a chat bot demo.
+
 ## How to
 
 * Add [accordion to an interface](https://www.gradio.app/guides/the-interface-class#additional-inputs-within-an-accordion)

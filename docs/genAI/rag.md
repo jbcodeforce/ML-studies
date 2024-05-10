@@ -134,13 +134,18 @@ The RAG preparation is a very important part of the process to ensure good retri
 
 * **Chunk creation** is to segment text into smaller chunks or sections. This step is essential for efficient retrieval and processing. Chunk size is important to keep the context and some sort of semantic, while overlapping between chunks will help to create vector that are still close while the text section is bigger than the chunk size. Tuning chunk parameters is balancing between preserving context and keeping accuracy. Sophisticated sentence segmentation techniques can be used. Some references are [SBERT](https://www.sbert.net/) and HuggingFace [SentenceTransformer](https://www.philschmid.de/optimize-sentence-transformers).
 
-The other two components are already described. 
+The two other components are already described. 
 
 Document processing is hard because of the different document type (HTML, PDF, Doc, Markdown, Tex...) and structure. It is better to use template and structure to facilitate content extraction. Extracting metadata requires understanding of the document structure. For pdf, advanced solution mix OCR and neural network.
 
 For short sentence smaller than 256 chars, the all sentence can be used as chunk. For bigger text section, the embedding used may have some better results with chunks from 256 to 512 tokens. The bigger the size of the chunk, the higher the risk of hallucination. While too short, will miss the meaning. The word embedding introduced with Word2Vec or Bert has still given good results but with a lot of computation.
 
-* The [Unstructured.io API Services](https://unstructured-io.github.io/unstructured/api.html) with a python library can be used for ingesting and digesting unstructured documents of various type.
+One chunk strategy is to construct chunk from document elements: the document is broken down into atomic elements, which are combined into chunk until reaching a token threshold. Align the chunking break condition to the structure of the document: per section, new title...
+
+* The [Unstructured.io API Services](https://unstructured-io.github.io/unstructured/api.html) with a python library can be used for ingesting and digesting unstructured documents of various type (See also deeplearning.ai tutorial).
+
+???- info "Extract from pdf"
+    There are different techniques to get content from unstructured file like a pdf. The first is to use object detection to draw and label bounding boxes around the layout elements on a document image (Document Layout Detection). OCR is used to extract text from bounding box. Some pdf as text the extraction can be done without OCR. The second technique use vision transformers.
 
 ### Vector Store
 
