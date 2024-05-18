@@ -2,13 +2,12 @@
 
 ## Introduction
 
-Generative AI is a new deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model (LLM), pre-trained on huge amount of documents, using fro 7B up to 500B of parameters.
+Generative AI is a new deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model (LLM), pre-trained on huge amount of unlabeled data, using from 7B up to 500B of parameters.
 
 The LLM underlying architecture is called a **Transformer** which uses self-**attention** mechanisms to weight the significance of different words to understand the context in a sequence of data. The attention mechanism computes the similarity between tokens (the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space the higher the attention scores they will obtain and the higher the attention they will give to each other.
 
 The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
-
 
 This training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
 
@@ -19,7 +18,7 @@ The text is then broken down into chunks called tokens which are fed into the mo
 
 
 ???- info "Difference between ML and LLM"
-    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
+    * **Foundational Models** can perform many tasks because twatsonhey contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
     * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
@@ -41,7 +40,7 @@ Models with encoder-decoder and decoder-only architectures are **generative** mo
 
 ### Challenges
 
-A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies rely on custom data sets tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training, retraining and even inference are expensive.
+A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies should rely on their own data sets tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training, retraining model and even inference are expensive.
 
 For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  They produce incorrect and contradictory answers. 
 

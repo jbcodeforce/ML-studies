@@ -68,6 +68,7 @@ This process is supported by tools for documents ingestion, splitting, embedding
 
 1. Response is sent back to the user.
 
+[RunnablePassthrough pass inputs unchanged](https://python.langchain.com/v0.1/docs/expression_language/primitives/passthrough/).
 
 RAG systems work well because LLMs has the in-context learning capability, which allows models to use previously unseen data to perform accurate predictions without weight training.
 

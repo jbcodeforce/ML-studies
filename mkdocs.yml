@@ -30,6 +30,7 @@ nav:
       - Anthropic: genAI/anthropic.md
       - OpenAI: genAI/openai.md
       - Mixtral: genAI/mixtral.md
+      - WatsonX.ai:  techno/watsonx.md
   - Techno:
     - Coding getting started: coding/index.md
     - Airflow: techno/airflow.md
