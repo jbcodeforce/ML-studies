@@ -1,6 +1,6 @@
 # Neuro Symbolic AI
 
-Neuro Symbolic AI combines elements of neural networks and symbolic reasoning to develop intelligent systems. Neural networks excel at pattern recognition and learning from data, while  traditional AI like rule engines focuses on logic, reasoning, and symbolic representations.
+Neuro Symbolic AI combines elements of neuron networks and symbolic reasoning to develop intelligent systems. Neural networks excel at pattern recognition and learning from data, while  traditional AI like rule engines focuses on logic, reasoning, and symbolic representations.
 
 The goal is to create more interpretable, explainable, and robust AI systems.
 
@@ -15,13 +15,21 @@ LLMs are trained on static document sets, which means gaps exist with newly crea
 We may consider three entry points for transforming existing business processes with AI and automation: 
 
 1. Process automation using STP, integration of human workflow with document classification and data capture.
-1. Decision based on business policies
+1. Decision based on business policies, including risk scoring, fraud detection, KYC
 1. Improved user experience to find solutions and make adhoc decisions.
 
 LLM are amazing tool for understanding and generating natural language, however they are not able to make consistent business decisions. 
 
 * **Healthcare**: Deep learning can do medical images or analog graph pattern recognition, predictive analytics, classification, with symbolic reasoning to deliver personalized treatment recommendations, or help on diagnostic.
 * **Complaint management:** combine workflow, chatbot, decision rules for next best actions, product recommendation, ML for sentiment analysis. 
+* **Financial risk management**: is about continuously and dynamically altering the user experience to reduce false positives and slow down or stop adversarial patterns. Risk identification is about integrating event and real time processing to get user action context within time windows. Risk context comes from data that may come from different sources. Risk scoring includes a combination of ML model developed on top of structured or unstructured data (anomaly detection), and business logic coded in a form of `if condition then action` rules and rule flow to organize the rule execution in minimum calls. Decision acts in the moment of the transaction.
+
+???- example "Some risky behaviors"
+        1. If user tried to login 3 times in the last 10 minutes, change the password, add a new beneficiary, and trigger a transfer once the account is accepted. Some data elements may be of interest to assess for potential fraud, like the user IP address, the country of origin, the type of bank or country for the beneficiary.
+        1. Two gas transactions within 5 minutes in the same gaz stations is most likely a fraud.
+        1. Transaction amount higher than average spent habit.
+
+As soon as we add a touch point with a human, like a natural language interface, we have to think about risk and playing the system.
 
 ## Intelligent Assistant
 
