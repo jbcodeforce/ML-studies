@@ -20,7 +20,7 @@ nav:
     - Deep Learning: 
       - Introduction: ml/deep-learning.md
       - Distributed Data Parallel: coding/ddp.md
-      - Neuro-Symbolic AI: neuro-symbolic/index.md
+      - Hybrid AI: neuro-symbolic/index.md
     - Generative AI: 
       - Introduction: genAI/index.md
       - Prompt Engineering: genAI/prompt-eng.md

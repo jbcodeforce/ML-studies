@@ -1,6 +1,6 @@
-# Neuro Symbolic AI
+# Hybrid AI
 
-Neuro Symbolic AI combines elements of neuron networks and symbolic reasoning to develop intelligent systems. Neural networks excel at pattern recognition and learning from data, while  traditional AI like rule engines focuses on logic, reasoning, and symbolic representations.
+Hybrid AI or Neuro Symbolic AI combines elements of neuron networks and symbolic reasoning to develop intelligent systems. Neural networks excel at pattern recognition and learning from data, while  traditional AI like rule engines focuses on logic, reasoning, and symbolic representations.
 
 The goal is to create more interpretable, explainable, and robust AI systems.
 
@@ -49,6 +49,9 @@ Some use cases where semantic routing will be relevant:
 * Avoid sensitive topic to avoid inappropriate content
 * Simplify function calling within applications
 * Optimize database query and RAG query
+
+## Rule Engine
+
 
 ## Sources
 

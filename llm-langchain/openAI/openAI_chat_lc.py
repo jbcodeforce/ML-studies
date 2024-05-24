@@ -14,7 +14,7 @@ import os, sys
 
 
 """
-Use the Langchain user guide, FAISS and use chat history
+Use the Langchain user guide, Chromadb and use chat history
 """
 load_dotenv(dotenv_path="../../.env")
 
@@ -26,7 +26,7 @@ vectorstore=None
 if os.path.isdir(CHROMA_DB_FOLDER):
     vectorstore=Chroma(persist_directory=CHROMA_DB_FOLDER,embedding_function=embeddings)
 else:
-    print("Need to run openAI_retrieval to create the vectorDB")
+    print("Need to run openAI_retrieval.py program to create the vectorDB")
     sys.exit(1)
 
 
