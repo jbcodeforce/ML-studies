@@ -1,9 +1,6 @@
 **/__pycache__/
 data/17flowers/
-**/.ipynb_checkpoints/*
-DataScience-Python3/.ipynb_checkpoints/
 site/
-env/
 **/.venv/
 **/.pytorch/
 .conda/
