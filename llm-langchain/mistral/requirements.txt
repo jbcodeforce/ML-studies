@@ -1,0 +1,3 @@
+langchain-mistralai
+langchain-core 
+langchain-community

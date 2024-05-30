@@ -1,0 +1,2 @@
+ibm-watsonx-ai
+langchain-ibm

@@ -1,0 +1,5 @@
+athena:
+  backend:
+    qa_url: http://localhost:8000/generic_qa
+    chat_url: http://localhost:8000/generic_chat
+    document_url: http://localhost:8000/documents

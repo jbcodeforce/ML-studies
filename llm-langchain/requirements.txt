@@ -1,0 +1,12 @@
+
+langchain
+langsmith
+langchain-community
+langchain-experimental
+anthropic
+faiss-cpu>=1.7,<2
+pypdf>=3.8,<4
+sqlalchemy>1,<2
+python-dotenv
+sentence-transformers
+faiss-cpu
