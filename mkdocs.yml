@@ -45,10 +45,12 @@ nav:
     - SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
     - Scikit-learn: coding/sklearn.md
     - Spark studies: https://jbcodeforce.github.io/spark-studies/
-    - Gradio: techno/gradio/index.md
-    - Streamlit: techno/streamlit.md
-    - TaiPy: techno/taipy/index.md
-    - NiceGUI: techno/nicegui.md
+    - UI:
+      - Gradio: techno/gradio/index.md
+      - Streamlit: techno/streamlit.md
+      - TaiPy: techno/taipy/index.md
+      - NiceGUI: techno/nicegui.md
+    - GCP: techno/gcp.md
     - WatsonX: techno/watsonx.md
   - Solutions:
     - Introduction: solutions/index.md
