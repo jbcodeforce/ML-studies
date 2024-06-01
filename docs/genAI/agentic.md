@@ -23,10 +23,16 @@ Focus is becoming important as the context windows are becoming larger. With too
 
 Too much tools adds confusion for the agents, as they have hard time to select tool, or distinguish what is a tool, a context or an history. Be sure to give them tools for what they need to do. 
 
+For task definition, think about process, actors and tasks. Have a clear definition for each task, with expectation and context. Task may use tools, should be able to run asynchronously, output in different format like json, xml, ...
+
 ## Use cases
 
 * Agents to plan an article, write this article and review for better edition. [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py)
-* 
+* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
+* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing lead analysis.
+* Crew to tailor job application with multiple agents [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
+
+## Design Patterns
 
 ## CrewAI
 
@@ -48,7 +54,7 @@ Agent needs the following 6 elements:
 
 1. Focus on goals and expectations to better prompt the agent: "give me an analysis of xxxx stock". Too much stuff in the context window is confusing the model, and may hallucinate. May be splitting into multiple agents is a better solution instead of using a single prompt.
 
-1. Tools is to call external system, and is well described so the model can build parameters for the function and be able to assess when to call the function. Now too many tools will also add to the confusion. Small model will have hard time to select tools. So think to have multiple-agent with only the tools they need to do their task.
+1. Tool is used to call external system, and is well described so the model can build parameters for the function and be able to assess when to call the function. Now too many tools will also add to the confusion. Small model will have hard time to select tools. So think to have multiple-agent with only the tools they need to do their task.
 1. Cooperation has proved to deliver better results than unique big model. Model can take feedbacks from each others, they can delegate tasks.
 1. Guardrails are helping to avoid models to loop over tool usages, creating hallucinations, and deliver consistent results. Models work on fuzzy input, generate fuzzy output, so it is important to be able to set guardrails to control outcomes or runtime execution.
 1. Memory is important to keep better context, understand what was done so far, apply this knowledge for future execution. Short term memory is used during the crew execution of a task. It is shared between agents even before task completion. Long term memory is used after task execution, and can be used in any future tasks. LTM is stored in a DB. Agent can learn from previous executions. This should lead agent to self-improve. The last type of memory is the entity memory (person, organization, location). It is also a short term, and keep information of the entity extracted from NLP.

@@ -21,6 +21,20 @@ Tap into previous conversations, load data from a CRM, checking existing bug rep
 
 ## Code
 
+Start virtual env 
+
+```sh
+source .venv/bin/activate
+```
+
+and `pip3 install -r requirements.txt`
+s
+In case of error like: "Could not build wheels for chroma-hnswlib" this is linked to C++ library. The bypass on Mac is 
+
+```
+export HNSWLIB_NO_NATIVE=1 
+```
+
 ### Agent to do research
 
 The code [research-agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/research-agent.py) illustrates the use of one agent to plan for the documentation, then a writer agent taking the plan to write a short blog and last an editor agent to fix the content for compliance to internal writing rules.
@@ -28,3 +42,9 @@ The code [research-agent.py](https://github.com/jbcodeforce/ML-studies/tree/mast
 ### Support Representative
 
 The [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools. 
+
+### Customer outreach campaign
+
+Demonstrate tool usage with fault tolerance and caching for a sale rep and sale leader working together on leads generation
+
+The tools used are DirectoryReadTool, FileReadTool, SerperDevTool (to perform a semantic search for a specified query from a text's content across the internet). 

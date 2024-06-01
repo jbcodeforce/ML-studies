@@ -8,6 +8,7 @@ This chapter includes a summary of prompt engineering practices and links to maj
 * [Prompt engineering guide from (promptingguide.ai)](https://www.promptingguide.ai) which covers the theory and practical aspects of prompt engineering and how to leverage the best prompting techniques to interact and build with LLMs.
 * [Wikipedia- prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering)
 * [Anthropic - Claude - Prompt engineering.](https://docs.anthropic.com/claude/docs/prompt-engineering)
+* [Mistral prompting capabilities.](https://docs.mistral.ai/guides/prompting_capabilities/)
 
 This repository includes code, prompts to test on different LLMs.
 
