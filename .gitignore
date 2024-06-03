@@ -2,6 +2,7 @@
 data/17flowers/
 site/
 **/.venv/
+venv/
 **/.pytorch/
 .conda/
 .vscode/
@@ -20,3 +21,4 @@ pytorch/computer-vision/data/
 **/models/
 **/.env
 **/.taipy/
+techno/crew-ai/db/

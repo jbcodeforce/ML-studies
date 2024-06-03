@@ -1,12 +1,16 @@
 from crewai import Crew, Task, Agent
 from crewai_tools import FileReadTool, ScrapeWebsiteTool, MDXSearchTool, SerperDevTool
 from dotenv import load_dotenv
-import os
+import os, getopt,sys
 
 load_dotenv("../../.env")
 
 SERPER_API_KEY= os.getenv("SERPER_API_KEY")
-
+"""
+A program using multiple agents to analyse a job posting, do personal profiling, and resume tuning
+from a source resume to taylor it for the job
+Use web scrapping and search tools.
+"""
 search_tool = SerperDevTool()
 scrape_tool = ScrapeWebsiteTool()
 read_resume = FileReadTool(file_path='./a_resume.md')
@@ -159,19 +163,48 @@ job_application_crew = Crew(
     verbose=True
 )
 
-job_application_inputs = {
-    'job_posting_url': 'https://www.google.com/about/careers/applications/jobs/results/134490933082104518-field-solution-architect-iii-generative-ai-google-cloud',
-    'github_url': 'https://github.com/jbcodeforce',
-    'personal_writeup': """Jerome is an accomplished Software
-    Engineering Leader with 25 years of experience, former ibm distinguished engineer, 
-    and principal solution architect at AWS, he is hands-on consultant around AI, generative AI and cloud deployments.
-    With years of experience in business process automation and decision automation with rule engine systems. Book authors, conferences speaker, still hands-on to develop MVPs, and proof of technology. 
 
-Contributed to multiple patents and publications on business rule models, IBM BPM and decision management integratio
 
-"""
-}
 
-result = job_application_crew.kickoff(inputs=job_application_inputs)
-print(result)
+
+def usage():
+    print("--- Job application resume tayloring ---")
+    print("python3 job_application -u URL_OF_JOB -g GITHUB_URL -p personal_write_up")
+
+def parse_args():
+    GITHUB='https://github.com/jbcodeforce'
+    PERSONAL="""Jerome is an accomplished Software
+        Engineering Leader with 25 years of experience, former ibm distinguished engineer, 
+        and principal solution architect at AWS.
+    """
+    URL=""
+    try:
+        opts, args = getopt.getopt(sys.argv[1:],"hu:g:p:",["url=","github=","pers_write_up="])
+    except getopt.GetoptError:
+        print(usage())
+        sys.exit(2)
+    for opt, arg in opts:
+        print(opt, arg)
+        if opt == '-h':
+            usage()
+            sys.exit()
+        elif opt in ("-u", "--url"):
+            URL = arg
+        elif opt in ("-g", "--github"):
+            GITHUB = arg
+        elif opt in ("-p", "--pers_write_up"):
+            PERSONAL = arg
+    return URL,GITHUB,PERSONAL
+
+if __name__ == "__main__":    
+    URL,GITHUB,PERSONAL = parse_args()
+    job_application_inputs = {
+        'job_posting_url': URL,
+        'github_url': GITHUB,
+        'personal_writeup': PERSONAL
+    }
+    print(job_application_inputs)
+    
+    result = job_application_crew.kickoff(inputs=job_application_inputs)
+    print(result)
 
