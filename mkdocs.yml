@@ -38,6 +38,7 @@ nav:
     - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
+    - LangGraph: coding/langgraph.md
     - LlamaIndex: coding/llama_index.md
     - OpenSearch: techno/opensearch.md
     - Pandas: coding/pandas.md
