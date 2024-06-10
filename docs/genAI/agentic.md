@@ -2,6 +2,8 @@
 
 [Agent](https://lilianweng.github.io/posts/2023-06-23-agent/) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
 
+## Introduction
+
 The reference architecture for an agent looks like what Lilian Weng illustrated in the following figure (light adaptation):
 
 ![](./diagrams/agent-ref-arch.drawio.png)
@@ -14,6 +16,29 @@ Tools are used to call external services or other LLMs. Neuro-symbolic architect
 
 There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
 
+## Use cases
+
+* Agents to plan an article, write this article and review for better edition. [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py)
+* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
+* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing lead analysis.
+* Crew to tailor job application with multiple agents [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
+
+## Challenges
+
+Existing demonstration of agent in actions are very specific use cases and are giving too much freedom to Agents without enough controls. This not ready for production usages. LLMs in the agent are loosing their efficiency overtime. 
+
+Developers need to address the level of freedom to give to the LLMs
+
+| Type | Decide output | Decide steps to take | Determine step sequences |
+| --- | --- | --- | --- |
+| Code| Code | Code | Code |
+| LLM Call | On step of LLM | Code | Code |
+| Chain | Multiple calls to LLM | Code | Code |
+| Router | LLM | LLM without cycle | Code |
+| State Machine | LLM | LLM with cycle | Code |
+| Agent (Autonomous) | LLM | LLM | LLM |
+
+LangGraph will help better support the Router, State Machine and chain implementations.
 
 ## Guidelines
 
@@ -24,13 +49,6 @@ Focus is becoming important as the context windows are becoming larger. With too
 Too much tools adds confusion for the agents, as they have hard time to select tool, or distinguish what is a tool, a context or an history. Be sure to give them tools for what they need to do. 
 
 For task definition, think about process, actors and tasks. Have a clear definition for each task, with expectation and context. Task may use tools, should be able to run asynchronously, output in different format like json, xml, ...
-
-## Use cases
-
-* Agents to plan an article, write this article and review for better edition. [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py)
-* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
-* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing lead analysis.
-* Crew to tailor job application with multiple agents [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
 
 ## Design Patterns
 

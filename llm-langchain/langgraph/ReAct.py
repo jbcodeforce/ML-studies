@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 load_dotenv("../../.env")
 import openai, re, httpx, os
 """
-Reason Act cycle using LangGraph. The action acts on an environment that returns observations, which are interpreted
+Reason Act cycle using OpenAI API only. The action acts on an environment that returns observations, which are interpreted
 by the model to assess new action...
 It uses a special special prompt to model a chain of thoughts, follow by action, and observation.
 This illustrates manual chaining of the LLM conversation

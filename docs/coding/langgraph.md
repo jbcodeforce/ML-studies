@@ -2,6 +2,19 @@
 
 [LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, **multi-actor** applications, and being able to add cycles to LLM app. It is not a DAG. 
 
+Single and multi-agent flows are described and represented as graphs.
+
+## Value propositions 
+
+* build stateful, multi-actor applications with LLMs
+* coordinate multiple chains or actors across multiple steps of computation in a cyclic manner
+* build plan of the actions to take
+* take the actions
+* observe the effects
+* support persistence to allow human in the loop pattern
+
+## [Concepts](https://langchain-ai.github.io/langgraph/concepts/)
+
 [States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph.  Nodes represent units of work.  It can be either a function or a runnable. Each node updates this internal state with its return value after it executes.
 
 Graph definitions are immutable so are compiled once defined:
@@ -44,7 +57,9 @@ The interesting use cases are:
 ## Reason Act (ReAct) implementation
 
 See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and a raw code using openAI API [code: ReAct.py](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py)
+and the [one using LangGraph]()
 
+An interesting prompt to use in the ReAct implementation [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
 ## Code 
 
 See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) in my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 

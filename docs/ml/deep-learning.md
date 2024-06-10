@@ -1,10 +1,10 @@
 # Deep learning
 
-It is a machine learning techniques which uses neural networks with more than one layer.
+Deep learning is a machine learning techniques which uses neural networks with more than one layer.
 
 ## Neural Network
 
-A Neural network processes numerical representation of unstructured data, injected in an 'input layer' (called "feature vector") to generate result as part of the output layer by using a mathematical construct of network of hidden layers (See YouTube video: ["Neural Network the ground up"](https://www.youtube.com/watch?v=aircAruvnKk)). "Deep" learning means many hidden layers.
+The basic structure of a neural network includes an input layer (called "feature vector"), where the data is fed into the model, hidden layers that perform the computational processing, and an output layer that generates the final result. (See YouTube video: ["Neural Network the ground up"](https://www.youtube.com/watch?v=aircAruvnKk)).
 
 A classical learning example of neural network usage, is to classify images, like the hand written digits of the NIST dataset.
 

@@ -143,7 +143,7 @@ crew = Crew(
 )
 
 financial_trading_inputs = {
-    'stock_selection': 'IBM',
+    'stock_selection': 'SNOW',
     'initial_capital': '100000',
     'risk_tolerance': 'Medium',
     'trading_strategy_preference': 'Day Trading',
