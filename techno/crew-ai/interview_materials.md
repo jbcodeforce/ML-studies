@@ -1,24 +1,21 @@
-Here are some potential interview questions and talking points:
+Here are the potential interview questions and talking points for the candidate:
 
-1. Can you discuss your role as a Distinguished Engineer at IBM and how it prepared you for a position as an Engineering Manager?
-2. You mentioned that you co-authored the books "Sustainable IT Architecture" and "Agile Business Rule Development with JRules". Could you elaborate on that and how it reflects your capabilities as an Engineering Manager?
-3. You have a patent issued for "Contextual evaluation of process model and extraction". Can you talk about this patent and how it is relevant to this role?
-4. You were a speaker at IBM conferences and other external conferences. How do you think this experience will benefit you in an Engineering Manager role?
-5. Can you elaborate on your experience in transforming a 10M$ to 80M$ consulting business in two years?
-6. Can you talk about your technical skills, particularly in Amazon Cloud Architecture, Event-driven architecture, AI, and data governance? How have you utilized these skills in your previous roles?
-7. You have a number of professional certifications, including being an AWS Solution Architect Professional and an IBM Distinguished Engineer. How do these certifications make you a strong candidate for the Engineering Manager role?
-8. Can you discuss your experience with Agile development, and how you've applied this methodology in your previous roles?
-9. How do you approach technical selling and solution selling? Can you provide examples of when you've successfully employed these strategies?
-10. Can you share more about your significant projects and how they demonstrate your capabilities as an Engineering Manager?
+Interview Questions:
+1. Can you share an example of a project where you designed and implemented an event-driven architecture? What were the key challenges and how did you overcome them?
+2. Tell us about your experience with streaming technologies. Which technologies have you worked with and what were your key learnings?
+3. You have experience in designing and implementing cloud architectures and solutions, and you are certified in Amazon Cloud Architecture. Can you discuss a project where this certification significantly benefited the project outcome?
+4. As a Senior Solutions Engineer, you would be expected to manage complex software development projects. Can you share an example where you demonstrated leadership skills in such a scenario? 
+5. You have worked with data governance solutions like Databricks and Iceberg lakehouse. Can you provide an instance where your proficiency in these tools significantly improved the data governance of a project?
+6. Can you share how your proficiency in Python, Java, and Node.js was utilised in a project? 
+7. How do you stay updated with the latest technologies and trends in event-driven architectures, cloud solutions, and data governance?
+8. As a Senior Solutions Engineer, how would you handle conflicts within your team or with stakeholders?
 
 Talking Points:
-
-1. The candidate's distinguished career with IBM and AWS.
-2. The candidate's co-authored books and patents.
-3. The candidate's experience in speaking at conferences.
-4. The candidate's notable achievement in business transformation.
-5. The candidate's technical skills and how they apply to the Engineering Manager role.
-6. The candidate's professional certifications.
-7. The candidate's experience with Agile development.
-8. The candidate's approach to technical and solution selling.
-9. The candidate's significant projects.
+1. Discuss the candidate's extensive experience in designing and implementing event-driven architectures.
+2. Discuss the candidate's experience with streaming technologies.
+3. Talk about the candidate's certification in Amazon Cloud Architecture and how it has been utilised in previous projects.
+4. Discuss the leadership roles the candidate has assumed in managing complex software development projects.
+5. Discuss the candidate's experience with data governance solutions like Databricks and Iceberg lakehouse.
+6. Discuss the candidate's proficiency in programming languages such as Python, Java, and Node.js.
+7. Discuss the candidate's strategies for staying updated with the latest technologies and trends.
+8. Discuss the candidate's approach to conflict management within the team or with stakeholders.

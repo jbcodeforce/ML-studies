@@ -19,7 +19,14 @@
 
 
 ???- Info "Granite from IBM Research"
-    Granite is IBM's flagship series of LLM foundation models based on decoder-only transformer architecture. Granite language models are trained on trusted enterprise data spanning internet, academic, code, legal and finance. [See model documentation.](https://www.ibm.com/products/watsonx-ai/foundation-models#generative)
+    Granite is IBM's flagship series of LLM foundation models based on decoder-only transformer architecture. Granite language models are trained on trusted enterprise data spanning internet, academic, code, legal and finance. The data sets that have been vigorously filtered to remove:
+
+    * Hate, Abuse, and Profanity content 
+    * Copyright and licensed materials 
+    * Duplications 
+    * Any other undesirable, blacklisted material, and blocked URLs 
+    
+    [See model documentation.](https://www.ibm.com/products/watsonx-ai/foundation-models#generative)
 
 ## Getting started
 
@@ -40,7 +47,17 @@ Once done a sandbox project is created, we need to get the project ID using the 
     print(json.dumps( ModelTypes._member_names_, indent=2 ) )
     ```
 
-* Python code to connect to WatsonX ai model
+* Python code to connect to WatsonX ai model:
+
+    ```python
+    from langchain_ibm import WatsonxLLM
+    llm = WatsonxLLM(
+            model_id="ibm-mistralai/mixtral-8x7b-instruct-v01-q",
+            url="https://us-south.ml.cloud.ibm.com",
+            project_id=project_id,
+            params=parameters,
+        )
+    ```
 
 ## Prompt Lab
 
@@ -58,7 +75,7 @@ Extraction, Question Answering, Code, Translation.
 
 ![](./images/model-parameters.PNG)
 
-* In Greedy mode, the model selects the highest probability tokens at every step of decoding. It is less creative. With Sampling we can tune temperature (float), top k(int) and top P (float). Top P sampling chooses from the smallest possible set of “next” words whose cumulative probability exceeds the probability p. The higher the value of Top P, the larger the candidate list of words and so the more random the outcome would be. Top K is for the number of words to choose from to be the output.
+* In Greedy mode, the model selects the highest probability tokens at every step of decoding. It is less creative. With Sampling we can tune temperature (float), top k(int) and top P (float). Top P sampling chooses from the smallest possible set of "next" words whose cumulative probability exceeds the probability p. The higher the value of Top P, the larger the candidate list of words and so the more random the outcome would be. Top K is for the number of words to choose from to be the output.
 * Repetition penalty (1 or 2) is used to counteract a model’s tendency to repeat the prompt text verbatim.
 
 * In general, the **"instruct"** models are better at handling requests for structured output and following instructions.
@@ -81,7 +98,20 @@ Foundation models are not answering questions. Instead, they are calculating the
 
 ## Prompt tuning
 
-This is not the same as prompt engineering, the goal is to have a user providing a set of labeled data to tune the model, Watsonx.ai will tune the model using this data and create a "soft prompt", without changing the model's weights.
+This is not the same as prompt engineering, the goal is to have a user providing a set of labeled data to tune the model. Watsonx.ai will tune the model using this data and create a "soft prompt", without changing the model's weights.
 
-* LLMs are generally not good enough where there are specific business languages and operational details, especially where terminologies and 
-business requirements are constantly being updated. 
+LLMs are generally not good enough where there are specific business languages and operational details, especially where terminologies and business requirements are constantly being updated. 
+
+Prompt tuning may help to add classes to different query according to human labelled queries. Only certain all LLMs support this kind of tuning. A one-time tuning can outperform at a lower cost than multi-shot prompting. In addition, multi-shot prompting only works for a particular prompt, and it may not work for a different prompt.
+
+It is important to pay attention to the content of the training data. New data should not bring bias because of bad value distribution. LLM could not learn business rules with training.
+
+## Synthetic Data
+
+Synthetic data can be used to augment or replace real data for improving AI models, protecting sensitive data, and mitigating bias. Developer starts from existing dataset, so generated data will conform to existing schema.
+
+Use Project > Assets menu in WatsonX.
+
+WatsonX can generate categorical value to string given a list of string with some occurrence numbers. For numerical, it can use standard distribution with specific mean and deviation. Some column can be anonymized. It uses different methods to generate data: Kolmogorov-Smirnov and Anderson-Darling. And developers can profile the datasets and build correlations between different columns to reflect real-world data.
+
+The generated data can be saved in .xls format. 
