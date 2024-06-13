@@ -1,4 +1,5 @@
 streamlit
 langchain
+langchainhub
 pypdf
 langchain-anthropic

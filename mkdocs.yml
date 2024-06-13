@@ -23,13 +23,14 @@ nav:
       - Hybrid AI: neuro-symbolic/index.md
     - Generative AI: 
       - Introduction: genAI/index.md
+      - Review: genAI/review.md
       - Prompt Engineering: genAI/prompt-eng.md
       - Reference Architecture: genAI/ref-arch.md
       - RAG: genAI/rag.md
-      - Agentic: genAI/agentic.md
+      - Agents: genAI/agentic.md
       - Anthropic: genAI/anthropic.md
       - OpenAI: genAI/openai.md
-      - Mixtral: genAI/mixtral.md
+      - Mistral: genAI/mixtral.md
       - WatsonX.ai:  techno/watsonx.md
   - Techno:
     - Coding getting started: coding/index.md
