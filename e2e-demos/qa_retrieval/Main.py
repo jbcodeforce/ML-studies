@@ -2,7 +2,7 @@
 streamlit app to demonstrate RAG using web crawler
 """
 import streamlit as st
-import bs4,os
+import bs4
 from langchain import hub
 from langchain_openai import ChatOpenAI
 from langchain_anthropic import ChatAnthropic
@@ -37,16 +37,15 @@ model_to_use= ChatOpenAI(temperature=.3)
 use_rag = False
 DEFAULT_PROMPT="You are a helpful assistant, expert in Information Technology architecture and Generative AI solutions."
 current_prompt = DEFAULT_PROMPT
-
 VS_PATH="./chroma_db"
+vectorstore =  Chroma(persist_directory=VS_PATH)
+
 
 # ------------------- RAG related functions --------------------
 
-def get_vector_store():
-    
-def process_text(text):
+
+def process_text(text, vectorstore ):
     # Split the text into chunks using langchain
-    global vectorstore
     text_splitter = CharacterTextSplitter(
         separator="\n",
         chunk_size=500,
@@ -55,25 +54,23 @@ def process_text(text):
     )
     chunks=text_splitter.split_text(text)
     embeddings = OpenAIEmbeddings()
-    vectorstore = Chroma.from_texts(texts=chunks, embeddings=embeddings,persist_directory=VS_PATH)
+    vectorstore.from_texts(texts=chunks, embeddings=embeddings)
 
 
-def build_indexing(url):
-    global vectorstore
-    if vectorstore is None:
-        loader = WebBaseLoader(
-            web_paths=(url,),
-            bs_kwargs=dict(
-                parse_only=bs4.SoupStrainer(
-                    class_=("post-content", "post-title", "post-header")
-                )
-            ),
-        )
-        docs = loader.load()
-        text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
-        splits = text_splitter.split_documents(docs)
-        vectorstore =  Chroma.from_documents(documents=splits, embedding=OpenAIEmbeddings(), persist_directory=VS_PATH)
-    return vectorstore
+def build_indexing(url, vectorstore):
+    loader = WebBaseLoader(
+        web_paths=(url,),
+        bs_kwargs=dict(
+            parse_only=bs4.SoupStrainer(
+                class_=("post-content", "post-title", "post-header")
+            )
+        ),
+    )
+    docs = loader.load()
+    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
+    splits = text_splitter.split_documents(docs)
+    vectorstore.from_documents(documents=splits, embedding=OpenAIEmbeddings())
+
 
 def define_model(name: str):
     global model_to_use
@@ -221,7 +218,7 @@ def user_interface():
         processDoc=st.button("Process this blog to vector store")
         if processDoc:
             with st.spinner("Load doc, and build indexing..."):  
-                vectorstore=build_indexing(url)
+                build_indexing(url, vectorstore)
             st.write("Done !")
 
         st.markdown("## Query the model:")

@@ -346,7 +346,7 @@ Queries return results based on vector similarity scores, revealing hidden seman
 
 [FAISS](https://faiss.ai/index.html) from Facebook is a library for efficient similarity search and clustering of dense vectors. Faiss can compute vector Euclidien distance using GPU or CPU.
 
-[ChromaDB](https://github.com/chroma-core/chroma) an open source embedding database which supports Queries, filtering, density estimation.
+[ChromaDB](https://github.com/chroma-core/chroma) is an open source embedding database which supports Queries, filtering, density estimation and similarity search. It can persist on local disk or use a server deployment. (Code using ChromaDB []())
 
 Traditional open source index or database such as OpenSearch, Postgresql support now vector store and similarity search. 
 

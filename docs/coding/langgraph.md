@@ -36,10 +36,10 @@ Graph may include `ToolNode` to call function or tool which can be called via co
 
 LangGraph comes with built-in persistence, allowing you to save the state of the graph at point and resume from there.
 
-    ```python
-    memory = SqliteSaver.from_conn_string(":memory:")
-    app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
-    ```
+```python
+memory = SqliteSaver.from_conn_string(":memory:")
+app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
+```
 
 Graphs such as StateGraph's naturally can be composed. Creating subgraphs lets you build things like multi-agent teams, where each team can track its own separate state.
 
@@ -56,14 +56,22 @@ The interesting use cases are:
 
 ## Reason Act (ReAct) implementation
 
-See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and a raw code using openAI API [code: ReAct.py](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py)
-and the [one using LangGraph]()
+See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and a raw code using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py)
+and the [one using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py)
 
 An interesting prompt to use in the ReAct implementation [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
+
 ## Code 
 
 See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) in my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
 
+
+
+
+## Deeper dive
+
 * [LangGraph product reference documentation.](https://langchain-ai.github.io/langgraph/reference/prebuilt/)
+* [LangGraph git repository](https://github.com/langchain-ai/langgraph)
+* [LangGraph API reference guide](https://langchain-ai.github.io/langgraph/reference/graphs/)
 * [Deeplearning.ai AI Agents in LangGraph](https://learn.deeplearning.ai/courses/ai-agents-in-langgraph) with matching code 
 * [A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern)
