@@ -35,12 +35,12 @@ The Retrieval Augmented Generation may be seen as a three stages process:
 
 1. **Indexing** a batch processing to ingest documents and data from a source and indexing them. During processing semantic search is used to retrieve relevant documents from the index. Indexing supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the documents and index of the splits.
 
-  * [Simple indexing code from a blog content](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/build_agent_domain_rag.py#L17-L43) using LangChain RecursiveCharacterTextSplitter and Chroma DB for vector store and retriever.
+  * [Simple indexing code from a blog content (build_agent_domain_rag.py)](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/build_agent_domain_rag.py#L17-L43) using LangChain RecursiveCharacterTextSplitter and Chroma DB for vector store and retriever.
 
 1. **Retrieval**: retrieves the relevant data (splits) from the index, then passes that to the model as part of the context.
 1. **Generation**: generate the response in plain natural language.
 
-This process is supported by tools for documents ingestion, splitting, embedding, indexing, retrieval and integration with the real time conversation flow. From the simple query text  the process needs to do query construction, translation, and LLM calling. The following diagram illustrates a classical a natural conversation application with RAG architecture:
+This process is supported by tools for documents ingestion, splitting, embedding, indexing, retrieval and integration with the real time conversation flow. From the simple query text, the process needs to do query construction, translation, and LLM calling. The following diagram illustrates a classical a natural conversation application with RAG architecture:
 
 ![](./diagrams/rag.drawio.png)
 
@@ -57,7 +57,7 @@ This process is supported by tools for documents ingestion, splitting, embedding
 1. Context, query, system prompt are sent to the model, to get the generated text. For this step there are two approaches: sequential where text generation follows retrievals, or parallel processing where retrievals and text generations are done in parallel and then intertwined. 
 
     ```python
-      # with a langchain that use the context variable as defined within the Prompt to pass the retrieved documents:
+    # with a langchain that use the context variable as defined within the Prompt to pass the retrieved documents:
     rag_chain = (
       {"context": retriever, "question": RunnablePassthrough()}
       | prompt
@@ -77,7 +77,7 @@ RAG systems work well because LLMs has the in-context learning capability, which
     Isolating vector stores for each domain can help maintain domain-specific information and improve model accuracy within individual domains
 
 ???- Info "In-context learning"
-    Traditional machine learning models are typically trained on fixed datasets and do not adapt well to new data or tasks without retraining from scratch. With NLP in-context learning involves continually updating the model as new data becomes available. The techniques include online learning, transfer learning, fine-tuning, or using memory-based architectures.
+    The NLP in-context learning involves continually updating the model as new data becomes available. The techniques include online learning, transfer learning, fine-tuning, or using memory-based architectures.
 
 ## Embeddings
 

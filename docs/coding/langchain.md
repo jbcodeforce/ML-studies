@@ -368,15 +368,15 @@ Tool calling allows a model to detect when one or more tools should be called an
 
 Prompt defines placeholders to get tools parameters. The following [langchain prompt](https://smith.langchain.com/hub/hwchase17/openai-tools-agent) for OpenAI uses `agent_scratchpad` variable, which is a `MessagesPlaceholder`. Intermediate agent actions and tool output messages, will be passed in here. 
 
-LangChain has a lot of [predefined tool definitions already](https://python.langchain.com/docs/integrations/tools/).
+LangChain has a lot of [predefined tool definitions done to be reused](https://python.langchain.com/docs/integrations/tools/).
 
 We can use tool calling in chain (to use tools in sequence) or [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
 
-LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool in as part of each call to the model, so that the model can invoke the tool when appropriate.
+LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool, as part of each call to the model, so that the model can invoke the tool when appropriate.
 
 See also [the load tools api with a list of predefined tools](https://api.python.langchain.com/en/latest/agents/langchain.agents.load_tools.load_tools.html#langchain.agents.load_tools.load_tools).
 
-Below is the classical application flow when using tool calling. The function wraps a remote microservice.
+Below is the classical application flow using tool calling. The function wraps a remote microservice.
 
 ![](./diagrams/tool_calling.drawio.png)
 
@@ -419,7 +419,7 @@ When doing agent we need to manage exception and implement handle_tool_error.
 
 To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
 
-It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time. It uses a vector store to create embeddings for each tool description.
+It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time, without having to pass all the tool definitions within the context window. It uses a vector store to create embeddings for each tool description.
 
 ### How to
 
@@ -454,7 +454,7 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 
 ???- question "How to support streaming the LLM's output?"
-    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) vis needed to make the app more responsive for end-users. All Runnable objects implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
+    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) is needed to make the app more responsive for end-users. All [Runnable objects](https://python.langchain.com/v0.1/docs/expression_language/interface/) implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
 
 ???- question "Example of Intended Model"
     to be done
@@ -470,10 +470,4 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 
-LCEL supports streaming the LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results. define schemas.
-
-
-## LangChain Deeper dive
-
-
-
+LCEL supports streaming the LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results.

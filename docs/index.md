@@ -96,7 +96,7 @@ But the 5 important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/
     The regularization techniques are L1 regularization (Lasso), L2 regularization (Ridge), and elastic net regularization.  [See regularization section](./concepts/index.md/#regulaziation).
 
 ???- question "Overfitting / underfitting"
-    Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./concepts/#fitting)
+    Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./concepts.md/#fitting)
 
 ???- question "What are the steps involved in the machine learning pipeline?"
 

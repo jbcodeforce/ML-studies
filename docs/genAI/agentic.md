@@ -23,6 +23,12 @@ There are [different types](https://python.langchain.com/docs/modules/agents/age
 * Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing lead analysis.
 * Crew to tailor job application with multiple agents [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
 
+### Small Specialist Agents
+
+Small Specialist Agents (SSAs) is an agentic approach to perform planning and reasoning to enhance AI capabilities for complex problem using domain-specific knowledge. It may implement the OODA loop: Observe, Orient, Decide, and Act, with Hierarchical Task Planning to cut bigger tasks in smaller ones. Planning can use up to date data to define future actions. Agentic AI can respond swiftly and effectively to changing environments. SSAs predict maintenance needs, adjust operational parameters to prevent downtime, and ensure that energy production meets demand without excess waste. In healthcare, SSAs may analyzing genetic data, medical histories, and real-time responses to various treatments.
+
+[See OpenSSA project](https://github.com/aitomatic/openssa)
+
 ## Challenges
 
 Existing demonstration of agent in actions are very specific use cases and are giving too much freedom to Agents without enough controls. This not ready for production usages. LLMs in the agent are loosing their efficiency overtime. 
@@ -52,7 +58,20 @@ For task definition, think about process, actors and tasks. Have a clear definit
 
 ## Design Patterns
 
-## CrewAI
+## Technologies
+
+### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
+
+In Agents, a language model is used as a reasoning engine to determine which actions
+to take and in which order. 
+
+[LangChain agents package API doc.](https://api.python.langchain.com/en/latest/_modules/langchain_core/agents.html)
+
+### LangGraph
+
+LangGraph supports well the implementation of Agents. See [this samples repository](https://github.com/langchain-ai/langgraph)
+
+### CrewAI
 
 [crewAI](https://www.crewai.com/) is a framework to develop application using multiple-agent. It uses the concepts of Agent, Task and Crew to organize the work between agents. The concepts are common to any Agentic AI solutions.
 
@@ -81,7 +100,7 @@ CrewAI has tools to scrape website, search internet ([Serper](https://serper.dev
 
 See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai)
 
-### Some guidelines
+#### Some guidelines
 
 * Adapt the task and agent granularity
 * Task can be executed in different ways, parallel, sequential,... so test and iterate
@@ -93,9 +112,13 @@ See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/
 * CrewAI offers a cross-agent caching mechanism. It is also compatible with LangChain tools.
 * Think as a manager: define the goal and what is the process to follow. What are the people I need to hire to get the job done. Use keyword and specific attributes for the role, agent needs to play.
 
-## AutoGen
+### AutoGen
 
 [Microsoft AutoGen](https://microsoft.github.io/autogen/) is a multi-agent conversation framework to help developers build LLM workflows. The first abstraction is a ConversableAgent
+
+### OpenSSA
+
+[Small Specialist Agents for Problem-Solving](https://github.com/aitomatic/openssa)
 
 ## References
 

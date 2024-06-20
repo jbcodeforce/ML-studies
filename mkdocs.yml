@@ -40,7 +40,7 @@ nav:
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
     - LangGraph: coding/langgraph.md
-    - LlamaIndex: coding/llama_index.md
+    - LlamaIndex: coding/llama-index.md
     - OpenSearch: techno/opensearch.md
     - Pandas: coding/pandas.md
     - Python studies:  https://jbcodeforce.github.io/python-code/

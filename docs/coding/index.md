@@ -74,6 +74,7 @@ On Mac M1 we need ARM64 architecture.
     ```sh
     conda install -y jupyter
     ```
+    
 ### JupyterLab
 
 The following works as of April 2023:

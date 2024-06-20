@@ -36,7 +36,7 @@ At **inference** time, the input text is tokenized into individual tokens which 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
 
 
-A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
+A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
 
 Three types of transformer:
 
@@ -207,12 +207,9 @@ A single large model is unlikely to solve every business problem effectively. To
 
 ## Concepts
 
-A LLM is part of the evolution of NLP as it is a trained deep learning model that understands and generates text in a human like fashion. 
+A LLM is part of the evolution of NLP as it is a trained deep learning model that understands and generates text in a human like fashion. But they are doing stupid mistakes.
 
-
-To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning.
-
-Below is a simple representation of the embedding in the 3 dimension space:
+To process a text input with a transformer model, the text is **tokenized** into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Below is a simple representation of the embedding in the 3 dimension space:
 
 ![](./images/vector-embedding.png)
 
@@ -252,7 +249,6 @@ The techniques to customize LLM applications from simplest to more complex are:
 | --- | --- |
 | **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Ex. Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
 | **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
-| **Attention** | A math filter for focusing on the important parts of data inputs. |
 | **BARD** | AI chat service from Google - powered by the LaMDA model. Similar to ChatGPT. |
 | **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
 | **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an auto regressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
@@ -266,7 +262,7 @@ The techniques to customize LLM applications from simplest to more complex are:
 | **Few shot Learning** | or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
 | **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
 | **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
-| **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
+| **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this, includes creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
 | **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
 | **GPT** | OpenAI's generalized pre-trained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multi-modal. |
 | **Hallucinations** | LLMs may give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be inaccurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
@@ -346,7 +342,20 @@ Queries return results based on vector similarity scores, revealing hidden seman
 
 [FAISS](https://faiss.ai/index.html) from Facebook is a library for efficient similarity search and clustering of dense vectors. Faiss can compute vector Euclidien distance using GPU or CPU.
 
-[ChromaDB](https://github.com/chroma-core/chroma) is an open source embedding database which supports Queries, filtering, density estimation and similarity search. It can persist on local disk or use a server deployment. (Code using ChromaDB []())
+[ChromaDB](https://github.com/chroma-core/chroma) is an open source embedding database which supports Queries, filtering, density estimation and similarity search. It can persist on local disk or use a server deployment. It uses collection for storing the documents, metadatas, embeddings, and ids. Chroma DB by default uses a sentence transformer model to calculate embeddings.
+
+(Code using ChromaDB [end to end solution with qa-retrieval](https://github.com/jbcodeforce/ML-studies/blob/master/e2e-demos/qa_retrieval/Main.py)) or [code langchain/rag folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/rag) specially [build_agent_domain_rag.py]()https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/rag/build_agent_domain_rag.py
+
+Docker compose to start chromadb
+
+```yaml
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    volumes:
+      - ./chromadb/.chroma/index
+    ports:
+      - 8005:8000
+```
 
 Traditional open source index or database such as OpenSearch, Postgresql support now vector store and similarity search. 
 
@@ -407,7 +416,7 @@ Some useful articles:
 * Right to use an image/photo to train a model is a problem.
 
 
-## More interesting readings
+## Deeper dive
 
 * [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
 * [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)

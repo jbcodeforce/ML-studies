@@ -30,11 +30,13 @@ graph.set_entry_point("chatbot")
 runnable = graph.compile()
 ```
 
-`add_node()` takes an function or runnable, with the input to the runnable is the entire current state.
+`add_node()` takes an **function or runnable**, with the input to the runnable is the entire current state.
 
 Graph may include `ToolNode` to call function or tool which can be called via conditions on edge. Conditional edge helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
 
-LangGraph comes with built-in persistence, allowing you to save the state of the graph at point and resume from there.
+Once the graph is compiled, the application can interact with the graph via stream or invoke methods.
+
+LangGraph comes with built-in persistence, allowing developer to save the state of the graph at point and resume from there.
 
 ```python
 memory = SqliteSaver.from_conn_string(":memory:")
@@ -43,30 +45,41 @@ app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
 
 Graphs such as StateGraph's naturally can be composed. Creating subgraphs lets you build things like multi-agent teams, where each team can track its own separate state.
 
+See [other checkpointer ways to persist state](https://langchain-ai.github.io/langgraph/reference/checkpoints/#implementations), [AsyncSqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/#asyncsqlitesaver) is an asynchronous checkpoint saver that stores checkpoints in a SQLite database or [SqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/#sqlitesaver) for synchronous storage is SQLlite..
+
+```python
+memory = AsyncSqliteSaver.from_conn_string("checkpoints.sqlite")
+```
 
 ## Use cases
 
-The interesting use cases are:
+The interesting use cases for LangGraph are:
 
 - workflow with cycles and conditional output
-- planning agent for plan and execute  
+- planning agent for plan and execute pattern
 - using reflection and self critique
 - multi agent collaboration, with or without supervisor
 - human in the loop (by adding an "interrupt" before a node is executed.)
 
-## Reason Act (ReAct) implementation
+### Reason Act (ReAct) implementation
 
 See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and a raw code using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py)
 and the [one using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py)
 
 An interesting prompt to use in the ReAct implementation [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
 
+### 
+
 ## Code 
 
 See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) in my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
 
+See the [owl agent framework open source project](https://athenadecisionsystems.github.io/athena-owl-core/) to manage assistant, agents, tools, prompts..
 
+## Code FAQ
 
+???- question "prompt variables to be integrated in LangGraph"
+        
 
 ## Deeper dive
 
