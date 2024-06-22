@@ -19,6 +19,7 @@ nav:
     - Anomaly detection: anomaly.md
     - Deep Learning: 
       - Introduction: ml/deep-learning.md
+      - NLP: ml/nlp.md
       - Distributed Data Parallel: coding/ddp.md
       - Hybrid AI: neuro-symbolic/index.md
     - Generative AI: 

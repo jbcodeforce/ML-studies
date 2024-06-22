@@ -44,7 +44,7 @@ The [LangChain documentation](https://python.langchain.com/docs/get_started/quic
 | Backend | Type of chains |
 | --- | --- |
 | [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples, RAG, chatbot, agent  |
-| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to Ollama (running Llama 2 locally|
+| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to Ollama (running Llama 2 locally |
 | [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/anthropic) | |
 | [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/mistral) | |
 | [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/watsonX) | | 
@@ -80,7 +80,7 @@ Each code needs to define only the needed LangChain modules to keep the executab
 
 ### Chain 
 
-Chains are runnable, observable and composable.
+Chains are [runnable](#runnable), observable and composable. The LangChain framework uses the Runnable class to encapsulate operations that can be run synchronously or asynchronously. 
 
 * [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with any LLM.
 
@@ -102,7 +102,7 @@ Chains are runnable, observable and composable.
 
 * [LLMRouterChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.router.llm_router.LLMRouterChain.html#langchain.chains.router.llm_router.LLMRouterChain) is a chain that outputs the name of a destination chain and the inputs to it.
 
-* [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains.
+* [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains. It looks similar to Unix shell pipe: input for one runnable comes from the output of predecessor (This is why prompt below is a runnable). 
 
     ```python
     # a chain definition using Langchain expression language
@@ -110,6 +110,41 @@ Chains are runnable, observable and composable.
     ```    
 
 * Chain can be executed asynchronously in its own Thread using the `ainvoke` method.
+
+### Runnable
+
+[Runnable interface](https://python.langchain.com/v0.1/docs/expression_language/interface/) is a protocol to define custom chains and invoke them. Each Runnable exposes methods to get input, output and config schemas. Each implements synchronous and async invoke methods and batch. Runnable can run in parallel or in sequence.
+
+To pass data to a Runnable there is the `RunnablePassthrough` class. This is used in conjunction with RunnableParallel to assign data to key in a map.
+
+```python
+from langchain.schema.runnable import RunnableParallel, RunnablePassthrough
+
+runnable = RunnableParallel(
+   passed = RunnablePassthrough(),
+   extra= RunnablePassthrough.assign(mult= lambda x:x["num"] * 3),
+   modified=lambda x:x["num"] +1   
+)
+
+print(runnable.invoke({"num": 6}))
+{'passed': {'num': 6}, 'extra': {'num': 6, 'mult': 18}, 'modified': 7}
+```
+
+*  [RunnableLambda](https://github.com/langchain-ai/langchain/blob/master/libs/core/langchain_core/runnables/base.py#L3572) is a type of Runnable that wraps a callable function. 
+
+```python
+sequence = RunnableLambda(lambda x: x + 1) | {
+    'mul_2': RunnableLambda(lambda x: x * 2),
+    'mul_5': RunnableLambda(lambda x: x * 5)
+}
+sequence.invoke(1)
+```
+
+The [RunnablePassthrough.assign](https://github.com/langchain-ai/langchain/blob/master/libs/core/langchain_core/runnables/passthrough.py) method is used to create a Runnable that passes the input through while adding some keys to the output.
+
+We can use `Runnable.bind()` to pass arguments as constants accessible within a runnable sequence (a chain) where argument is not part of the output of preceding runnables in the sequence.
+
+See some code [RunnableExamples](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/ollama-mistral/RunnableExamples.py)
 
 ### Memory 
 

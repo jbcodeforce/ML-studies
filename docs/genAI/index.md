@@ -13,7 +13,7 @@ Gen AI applies well to different category of use cases: improve customer experie
 
 **GPT-3 (Generative Pre-trained Transformer 3)** breaks the NLP boundaries with training on 175B parameters. It is built on **Transformer** which uses self-**attention** mechanism to weigh the significance of different words in a sentence to understand the context in a sequence of data. 
 
-The **attention** mechanism computes the similarity between tokens (the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space, the higher the attention scores they will obtain and the higher the attention they will give to each other.
+The **attention** mechanism computes the similarity between tokens (from the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space, the higher the attention scores they will obtain and the higher the attention they will give to each other.
 
 The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
@@ -36,7 +36,7 @@ At **inference** time, the input text is tokenized into individual tokens which 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
 
 
-A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
+A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations of the token semantic), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
 
 Three types of transformer:
 
@@ -209,11 +209,16 @@ A single large model is unlikely to solve every business problem effectively. To
 
 A LLM is part of the evolution of NLP as it is a trained deep learning model that understands and generates text in a human like fashion. But they are doing stupid mistakes.
 
-To process a text input with a transformer model, the text is **tokenized** into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning. Below is a simple representation of the embedding in the 3 dimension space:
+### NLP processing
+
+To process a text input with a transformer model, the text is **tokenized** into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning: for example a word dog will have 512 potential numerical attributes used to describe what is a dog: height, legs, head form...). Below is a simple representation of the embedding in the 3 dimension space:
 
 ![](./images/vector-embedding.png)
 
 *See the web site [projector.tensorflow.org/](https://projector.tensorflow.org/)*
+
+???- info "Embedding"
+    See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/): 
 
 Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
 

@@ -9,7 +9,8 @@ from langchain.agents.format_scratchpad.openai_tools import (
 from langchain.agents.output_parsers.openai_tools import OpenAIToolsAgentOutputParser
 from langchain.agents import AgentExecutor
 from langchain_core.messages import AIMessage, HumanMessage
-
+from dotenv import load_dotenv
+load_dotenv()
 
 MEMORY_KEY = "chat_history"
 
@@ -61,4 +62,5 @@ if __name__ == "__main__":
             AIMessage(content=result["output"]),
         ]
     )
-    print(list(agent_executor.stream({"input": "is that a real word?", "chat_history": chat_history})))
+    print(list(agent_executor.stream({"input": "is that a real word?", 
+                                      "chat_history": chat_history})))
