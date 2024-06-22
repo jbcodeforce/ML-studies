@@ -8,6 +8,8 @@ nav:
     - Concepts: 
       - Core concepts: concepts/index.md
       - Math summary: concepts/maths.md
+    - Architecture:
+      - Solution Design: architecture/sol-design.md
     - Data management:
       - Introduction: data/index.md
       - Feature Engineering: data/features.md
@@ -26,12 +28,12 @@ nav:
       - Introduction: genAI/index.md
       - Review: genAI/review.md
       - Prompt Engineering: genAI/prompt-eng.md
-      - Reference Architecture: genAI/ref-arch.md
+      - Solution Design: architecture/sol-design.md
       - RAG: genAI/rag.md
       - Agents: genAI/agentic.md
       - Anthropic: genAI/anthropic.md
       - OpenAI: genAI/openai.md
-      - Mistral: genAI/mixtral.md
+      - Mistral: genAI/mistral.md
       - WatsonX.ai:  techno/watsonx.md
   - Techno:
     - Coding getting started: coding/index.md

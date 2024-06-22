@@ -17,8 +17,11 @@ Model can be fine tuned.
 
 Function calling is supported by Mistral Small, Large, 8x22B.
 
-Mistral delivers docker image for the model. To run locally with [skypilot]()
+Mistral delivers docker image for the model. To run locally with [skypilot](https://skypilot.readthedocs.io/) or [Ollama](https://ollama.com/) and [docker compose](https://github.com/jbcodeforce/ML-studies/blob/master/e2e-demos/ollama-mistral/docker-compose.yaml).
 
+
+???- info "SkyPilot"
+    [skypilot](https://skypilot.readthedocs.io/) delivers a CLI to deploy batch job on cluster deployed on AWS or GCP. Cluster of EC2 machines are created dynamically, as well as security group, security key,... The concept of task is used to run ML job by requesting specific resources like TPU, GPU, disk... The resources are created in the user's cloud account. It  allows easy movement of data between task VMs and cloud object stores.
 ---
 
 ## Mixture of Experts

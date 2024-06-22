@@ -49,6 +49,10 @@ Models with encoder-decoder and decoder-only architectures are **generative** mo
 
 The process is text -> tokens (a token may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Sub-word tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
 
+#### HuggingFace Transformer
+
+[HuggingFace Transformer](https://github.com/huggingface/transformers) provides thousands of pre-trained models to perform tasks on text, images and audio.
+
 ### Pre-training process
 
 The goal of pr-training is to teach the model the structure, patterns and semantics of the human language. The pre-training process for GPT-3 involves collecting and preprocessing vast amounts of diverse text data, training a Transformer-based model to predict the next token in a sequence, and optimizing the model using powerful computational resources.
