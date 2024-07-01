@@ -21,7 +21,7 @@ All the code access env variables, like OPENAI_API_KEY, with dotenv module, be s
 | openAI_chat_lc.py | Use the Langchain user guide, FAISS and use chat history |
 | openAI_retrieval_lc.py | Add Retriever to get better data, by crawling a LangChain product documentation from the web using BeautifulSoup then FAISS vector store. It uses `langchain.chains.combine_documents. create_stuff_documents_chain` |
 | simple_client_OpenAI_api | use openai api directly . no langchain |
-| streamin_ouput.py | testing the model streaming api |
+| streaming_ouput.py | testing the model streaming api |
 | text_summarization.py | Summarization of text from tecton.ai blog |
 | web_server_wt_streaming | different examples of streaming with fastapi and chain or agent |
 | work_struct_output_for_tool |  tool calling with structured response and custom parser |

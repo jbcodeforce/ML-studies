@@ -1,6 +1,9 @@
 
 from taipy.gui import Gui, State, notify
-from prompt_builder_grapth import send_user_msg
+import sys,os
+module_path = "."
+sys.path.append(os.path.abspath(module_path))
+from prompt_builder_graph import send_user_msg
 
 context = "Hi"
 conversation = {
@@ -35,6 +38,7 @@ def send_message(state: State) -> None:
     Args:
         - state: The current state.
     """
+    global current_user_message
     # Add the user's message to the context
     state.context += state.current_user_message
     # Send the user's message to the API and get the response
@@ -47,6 +51,7 @@ def send_message(state: State) -> None:
     state.conversation = conv
     # Clear the input field
     state.current_user_message = ""
+    current_user_message=""
 
 
 def style_conv(state: State, idx: int, row: int) -> str:

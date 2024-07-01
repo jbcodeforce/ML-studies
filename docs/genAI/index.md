@@ -30,11 +30,10 @@ At **inference** time, the input text is tokenized into individual tokens which 
 
 
 ???- info "Difference between ML and LLM"
-    * **Foundational Models** can perform many tasks because twatsonhey contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
+    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
     * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
-
 
 A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations of the token semantic), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
 
@@ -55,24 +54,24 @@ The process is text -> tokens (a token may be less than a word, and on average a
 
 ### Pre-training process
 
-The goal of pr-training is to teach the model the structure, patterns and semantics of the human language. The pre-training process for GPT-3 involves collecting and preprocessing vast amounts of diverse text data, training a Transformer-based model to predict the next token in a sequence, and optimizing the model using powerful computational resources.
+The goal of pre-training is to teach the model the structure, patterns and semantics of the human language. The pre-training process for GPT-3 involves collecting and preprocessing vast amounts of diverse text data, training a Transformer-based model to predict the next token in a sequence, and optimizing the model using powerful computational resources.
 
 **Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and with high quality data.
 
-The process looks like:
+The process looks like in the figure below:
 
 ![](./diagrams/pre-training.drawio.png)
 
-For the data collection, it is import to get diverse source of data, including web site, books, curated datasets to address wide range of topics, writing styles and linguistic nuances. Data preparation is still key, but complex as to remove low-quality text, harmful content...
+For the **data collection**, it is import to get diverse source of data, including web sites, books, curated datasets to address wide range of topics, writing styles and linguistic nuances. Data preparation is still key, but complex as to remove low-quality text, harmful content...
 As part of this preparation, text can be converted to lowercase to reduce variability. Tokenization helps to handle rare words and different languages.
 
 The primary objective during pre-training is to predict the next token in a sequence. This is a form of unsupervised learning where the model learns from the context provided by preceding tokens. 
 
-The training phase includes the forward pass where input tokens go through the transformer layers. The loss calculation is computing the difference between predicted token and actual next token. Finally the backward pass apply gradients computation to minimize the loss, and tune the model parameters.
+The training phase includes the forward pass where input tokens go through the transformer layers. The loss calculation is computing the difference between predicted token and actual next token. Finally the backward pass applies gradients computation to minimize the loss, and tune the model parameters.
 
 The entire dataset is split into **batches**, and the model is trained over multiple **epochs**.
 
-The optimization phase includes tuning hyperparameters like learning rate and batch size. To be able to scale we need to run training on distributed computers.
+The optimization phase includes tuning hyper parameters like learning rate and batch size. To be able to scale we need to run training on distributed computers.
 
 A portion of the data is set aside as a validation set to monitor the model's performance and prevent overfitting.
 
@@ -93,6 +92,8 @@ Some ways to use Generative AI in business applications:
 ### Model fine-tuning
 
 The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good source of information for model quality assessments relative to certain use cases.
+
+See this detailed article on [developing a LLM](https://medium.com/towards-artificial-intelligence/build-your-own-large-language-model-llm-from-scratch-using-pytorch-9e9945c24858) and this one on [fine tuning](https://medium.com/@tuanatran/fine-tuning-large-language-model-with-hugging-face-pytorch-adce80dce2ad)
 
 ## Use cases
 

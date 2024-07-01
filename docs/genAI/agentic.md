@@ -4,24 +4,24 @@
 
 ## Introduction
 
-The reference architecture for an agent looks like what Lilian Weng illustrated in the following figure (light adaptation):
+The agentic reference architecture was introduced by Lilian Weng in the following figure (light adaptation):
 
 ![](./diagrams/agent-ref-arch.drawio.png)
 
-The planning phase includes techniques like Chain of Thought ("think step by step"), Tree of thoughts (explores multiple reasoning paths) or LLM+P (used external long-horizon planner).
+The **planning** phase includes techniques like Chain of Thought ("think step by step"), Tree of thoughts (explores multiple reasoning paths) or LLM+P (used external long-horizon planner).
 
-Short term memory is the context, and limited by the LLM context window size. Long term memory is the vector store supporting the maximum inner product search, it is also used to self improve agents. Entity memory is a third type of memory to keep information of the subjects of the interactions or work to be done. Short term memory helps exchanging data between agents too. 
+**Short term memory** is the context, and limited by the LLM context window size. **Long term memory** is the vector store supporting the maximum inner product search, it is also used to self improve agents. Entity memory is a third type of memory to keep information of the subjects of the interactions or work to be done. Short term memory helps exchanging data between agents too. 
 
 Tools are used to call external services or other LLMs. Neuro-symbolic architecture can be built with expert system modules combined with general-purpose LLM. LLM routes to the best tool.
 
-There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
+There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, or Required Model Params.
 
 ## Use cases
 
-* Agents to plan an article, write this article and review for better edition. [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py)
-* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
-* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing lead analysis.
-* Crew to tailor job application with multiple agents [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
+* Agents to plan an article, write this article and review for better edition. See the [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py) code.
+* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry for the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
+* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing sale lead analysis.
+* Crew to tailor a job application with multiple agents: [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
 
 ### Small Specialist Agents
 
@@ -31,9 +31,9 @@ Small Specialist Agents (SSAs) is an agentic approach to perform planning and re
 
 ## Challenges
 
-Existing demonstration of agent in actions are very specific use cases and are giving too much freedom to Agents without enough controls. This not ready for production usages. LLMs in the agent are loosing their efficiency overtime. 
+Existing demonstrations of agent in action are for very specific use cases and are giving too much freedom to Agents without enough controls. This is not ready for production usages. LLMs in the agent are loosing their efficiency over time. 
 
-Developers need to address the level of freedom to give to the LLMs
+Developers need to address the level of freedom given to the LLMs.
 
 | Type | Decide output | Decide steps to take | Determine step sequences |
 | --- | --- | --- | --- |
@@ -44,13 +44,13 @@ Developers need to address the level of freedom to give to the LLMs
 | State Machine | LLM | LLM with cycle | Code |
 | Agent (Autonomous) | LLM | LLM | LLM |
 
-LangGraph will help better support the Router, State Machine and chain implementations.
+[LangGraph](../coding/langgraph.md) helps to better support the Router, State Machine and chain implementations.
 
 ## Guidelines
 
-Agents perform better if we define a role to play, instruct them with prompt to help them to focus on a goal, add tools to access external systems, combine them with other agents to cooperate.  and chain content between agents. 
+Agents perform better if we define a role to play, instruct them with prompt to help them to focus on a goal, add tools to access external systems, combine them with other agents to cooperate and chain content between agents. 
 
-Focus is becoming important as the context windows are becoming larger. With too many information LLM can lose the important points and goals. Try to think about multiple agents to do better work together.
+Focus is becoming important as the context windows are becoming larger. With too many information LLM can lose the important points and goals. Try to think about multiple agents to split the work and generate better results together.
 
 Too much tools adds confusion for the agents, as they have hard time to select tool, or distinguish what is a tool, a context or an history. Be sure to give them tools for what they need to do. 
 

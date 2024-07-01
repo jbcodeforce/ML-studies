@@ -15,7 +15,7 @@ Single and multi-agent flows are described and represented as graphs.
 
 ## [Concepts](https://langchain-ai.github.io/langgraph/concepts/)
 
-[States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph.  Nodes represent units of work.  It can be either a function or a runnable. Each node updates this internal state with its return value after it executes.
+[States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph.  Nodes represent units of work.  It can be either a function or a runnable. Each node updates this internal state and returns it after execution.
 
 Graph definitions are immutable so are compiled once defined:
 
@@ -32,7 +32,7 @@ runnable = graph.compile()
 
 `add_node()` takes an **function or runnable**, with the input to the runnable is the entire current state.
 
-Graph may include `ToolNode` to call function or tool which can be called via conditions on edge. Conditional edge helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
+Graph may include `ToolNode` to call function or tool which can be called via conditions on edge. **Conditional edge** helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
 
 Once the graph is compiled, the application can interact with the graph via stream or invoke methods.
 
@@ -63,12 +63,12 @@ The interesting use cases for LangGraph are:
 
 ### Reason Act (ReAct) implementation
 
-See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and a raw code using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py)
-and the [one using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py)
+See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and the raw code using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py)
+or the [implementation of ReAct using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py).
 
 An interesting prompt to use in the ReAct implementation [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
 
-### 
+## 
 
 ## Code 
 

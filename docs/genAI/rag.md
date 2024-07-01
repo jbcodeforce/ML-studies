@@ -94,7 +94,7 @@ Embeddings are the numerical representation of the document chunks, and should h
 Naive RAG has very important limitations which has generated some adoption challenges:
 
 * It is hard to do a reliable, scalable RAG on a large knowledge corpus
-* Single-shot prompt
+* Limited to single-shot prompt
 * No query understanding, just a sematic search
 * No query decomposition for planning
 * No tool use, to query an external data source to enrich the context
@@ -103,7 +103,7 @@ Naive RAG has very important limitations which has generated some adoption chall
 
 See also the [retriever considerations section](#retriever-considerations) for more challenges.
 
-Those challenges can be addressed with adding agent before RAG. 
+Those challenges can be addressed by adding agent before RAG. 
 
 ###  RAG assessment scoping questions
 
