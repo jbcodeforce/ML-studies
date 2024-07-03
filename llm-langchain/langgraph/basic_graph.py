@@ -69,6 +69,7 @@ with gr.Blocks() as demo:
         bot, chatbot, chatbot
     )
     clear.click(lambda: None, None, chatbot, queue=False)
-    
+
+print("http://localhost:7860")    
 demo.queue()
 demo.launch()

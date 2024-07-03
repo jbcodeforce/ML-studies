@@ -62,6 +62,15 @@ Each code needs to define only the needed LangChain modules to keep the executab
 * LangChain uses [Prompt templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/) to control LLM behavior.
 
     * Two common prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
+
+    ```python
+    from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "Answer the user's questions based on the below context:\n\n{context}"),
+        MessagesPlaceholder(variable_name="chat_history"),
+        ("user", "{input}"),
+    ])
+    ```
     * We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt using [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat).
     * LangChain offers a [prompt hub](https://smith.langchain.com/hub) to get predefined prompts easily loadable:
 
@@ -320,12 +329,12 @@ For **Q&A** the pipeline will most likely integrate with existing documents as i
 
 * [Basic query with unknown content to generate hallucination: 1st_openAI_lc.py ](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/1st_openAI_lc.py)
 * [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
-* Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information later and get model outputs based on different scenarios. [text_generation/ResponseToUnhappyCustomer](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
+* Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information and get model outputs based on different scenarios. See the [text_generation/ResponseToUnhappyCustomer.py code.](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
 
 
 ### Summarization chain
 
-Always assess the size of the content to send, as the approach can be different: for big doc we need to split the doc in chunks.
+Always assess the size of the content to send, as the approach can be different: for big document, we need to split the doc in chunks.
 
 * Small text summary with OpenAI. 
 * Small text to summarize, with [bedrock client](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/utils/bedrock.py) and the invoke_model on the client see the code in [llm-langchain/summarization/SmallTextSummarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/summarization/SmallTextSummarization.py)
@@ -363,36 +372,43 @@ We can use LLM and a special chain ([QAGenerateChain](https://api.python.langcha
 
 ## Agent
 
-[Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
-
-There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
-
-### Core concepts
-
-LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: **AgentAction**, with tool and tool_input and **AgentFinish**.
+[Agent](https://python.langchain.com/v0.2/docs/concepts/#agents) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. [LangGraph](./langgraph.md) is an extension of LangChain specifically aimed at creating highly controllable and customizable agents.
 
 **Chains** let create a pre-defined sequence of tool usage(s), while **Agents** let the model uses tools in a loop, so that it can decide how many times to use its defined tools.
 
-```python
-from langchain.agents import create_tool_calling_agent
-from langchain.agents import AgentExecutor
-from langchain.tools.retriever import create_retriever_tool
-from langchain_community.tools.tavily_search import TavilySearchResults
 
-...
-tools = [retriever_tool, search, llm_math, wikipedia]
+???+ warning "AgentExecutor is deprecated"
+    Use LangGraph to implement agent.
 
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    This content is then from v0.1
 
-```
+    There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
 
-* To create agents use the constructor methods like `create_react_agent, create_json_agent, create_structured_chat_agent`, [create_tool_calling_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.tool_calling_agent.base.create_tool_calling_agent.html#langchain-agents-tool-calling-agent-base-create-tool-calling-agent) etc
-* The **Agent** loops on user input until it returns AgentFinish action. If the Agent returns an AgentAction, then use that to call a tool and get an Observation. Agent has input and output and intermediate steps. AgentAction is a response that consists of action and action_input. 
-* See the existing predefined [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
-* [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
 
-* **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
+    LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: **AgentAction**, with tool and tool_input and **AgentFinish**.
+
+
+
+    ```python
+    from langchain.agents import create_tool_calling_agent
+    from langchain.agents import AgentExecutor
+    from langchain.tools.retriever import create_retriever_tool
+    from langchain_community.tools.tavily_search import TavilySearchResults
+
+    ...
+    tools = [retriever_tool, search, llm_math, wikipedia]
+
+    agent = create_tool_calling_agent(llm, tools, prompt)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+    ```
+
+    * To create agents use one of the constructor methods such as: `create_react_agent, create_json_agent, create_structured_chat_agent`, [create_tool_calling_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.tool_calling_agent.base.create_tool_calling_agent.html#langchain-agents-tool-calling-agent-base-create-tool-calling-agent) etc. Those methods return a Runnable.
+    * The **Agent** loops on user input until it returns `AgentFinish` action. If the Agent returns an `AgentAction`, then use that to call a tool and get an `Observation`. Agent has input and output and `intermediate steps`. AgentAction is a response that consists of action and action_input. 
+    * See the existing predefined [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
+    * [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
+
+    * **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
 
 
 ### Tool Calling

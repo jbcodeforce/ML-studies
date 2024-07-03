@@ -7,9 +7,12 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langchain_core.messages import ToolMessage, HumanMessage
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from dotenv import load_dotenv
 import langchain
 import os
+load_dotenv("../../.env")
+
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
@@ -26,11 +29,15 @@ def search(query: str):
     return [" it is sunny in Santa Clara"]
 
 
-load_dotenv("../../.env")
+sys_prompt =  ChatPromptTemplate.from_messages([
+    ("system", "Answer the user's questions and use tools when you cannot get an answer on recent data."),
+    MessagesPlaceholder(variable_name="chat_history"),
+    ("user", "{input}"),
+])
 langchain.debug=True
 tools = [search]
 tool_executor = ToolExecutor(tools)
-model = define_model()
+model = sys_prompt | define_model()
 model.bind_tools(tools)
 
 # Define the function that determines whether to continue or not
@@ -105,8 +112,8 @@ workflow.add_edge("action", "agent")
 
 memory = SqliteSaver.from_conn_string(":memory:")
 # compiles it into a LangChain Runnable
-# app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
-app = workflow.compile(interrupt_before=["action"])
+app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
+#app = workflow.compile(interrupt_before=["action"])
 # Mock the conversation
 thread = {"configurable": {"thread_id": "2"}}
 inputs = [HumanMessage(content="hi! I'm bob")]
