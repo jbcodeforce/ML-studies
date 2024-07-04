@@ -8,6 +8,8 @@ nav:
     - Concepts: 
       - Core concepts: concepts/index.md
       - Math summary: concepts/maths.md
+    - Architecture:
+      - Solution Design: architecture/sol-design.md
     - Data management:
       - Introduction: data/index.md
       - Feature Engineering: data/features.md
@@ -19,17 +21,19 @@ nav:
     - Anomaly detection: anomaly.md
     - Deep Learning: 
       - Introduction: ml/deep-learning.md
+      - NLP: ml/nlp.md
       - Distributed Data Parallel: coding/ddp.md
       - Hybrid AI: neuro-symbolic/index.md
     - Generative AI: 
       - Introduction: genAI/index.md
+      - Review: genAI/review.md
       - Prompt Engineering: genAI/prompt-eng.md
-      - Reference Architecture: genAI/ref-arch.md
+      - Solution Design: architecture/sol-design.md
       - RAG: genAI/rag.md
-      - Agentic: genAI/agentic.md
+      - Agents: genAI/agentic.md
       - Anthropic: genAI/anthropic.md
       - OpenAI: genAI/openai.md
-      - Mixtral: genAI/mixtral.md
+      - Mistral: genAI/mistral.md
       - WatsonX.ai:  techno/watsonx.md
   - Techno:
     - Coding getting started: coding/index.md
@@ -38,7 +42,8 @@ nav:
     - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
     - LangChain: coding/langchain.md
-    - LlamaIndex: coding/llama_index.md
+    - LangGraph: coding/langgraph.md
+    - LlamaIndex: coding/llama-index.md
     - OpenSearch: techno/opensearch.md
     - Pandas: coding/pandas.md
     - Python studies:  https://jbcodeforce.github.io/python-code/

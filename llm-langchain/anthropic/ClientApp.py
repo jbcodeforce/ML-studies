@@ -1,6 +1,7 @@
 from langchain_anthropic import ChatAnthropic
 from langchain_core.prompts import ChatPromptTemplate
-import os,sys
+import os,sys, asyncio
+
 import argparse
 from dotenv import load_dotenv
 
@@ -13,21 +14,32 @@ except KeyError:
 
 print("------ Welcome to simple Anthropic Claude text improvement client")
 
-parser = argparse.ArgumentParser(description='Simple text improvement with Claude ')
-parser.add_argument('text', type=str, help='The text to improve')
-args = parser.parse_args()
 
-chat = ChatAnthropic(temperature=0, anthropic_api_key=api_key, model_name="claude-3-opus-20240229")
+def get_args():
+    parser = argparse.ArgumentParser(description='Simple text improvement with Claude ')
+    parser.add_argument('text', type=str, help='The text to improve')
+    args = parser.parse_args()
+    return args.text
 
-system = (
-    "You are a helpful technical writer that improve the following content:"
-)
-human = args.text
-prompt = ChatPromptTemplate.from_messages([("system", system), ("human", "")])
+def build_chain():
+    chat = ChatAnthropic(temperature=0, model_name="claude-3-opus-20240229")
 
-chain = prompt | chat
+    system = (
+        "You are a helpful technical writer that improve the following content:"
+    )
+    human = "{text}"
+    prompt = ChatPromptTemplate.from_messages([("system", system), ("human", human)])
+    return prompt | chat
 
-async for chunk in chain.astream({"human": human}):
-    print(chunk.content, end="|", flush=True)
+async def processMessage(chain, txt):
+    for chunk in chain.stream({"text": txt}):
+        print(chunk.content, end="", flush=True)
+    
 
+
+if __name__ == "__main__":
+    txt = get_args()
+    chain = build_chain()
+    asyncio.run(processMessage(chain,txt))
+    
 

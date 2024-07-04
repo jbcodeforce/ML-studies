@@ -22,7 +22,7 @@ def load_docs(fn: str):
     nodes = splitter.get_nodes_from_documents(docs)
     Settings.llm = OpenAI(model="gpt-3.5-turbo")
     Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002")
-    print("--- Build two indexes one for the summary, one for the vector (for semantic query based on simililarity)")
+    print("--- Build two indexes one for the summary, one for the vector (for semantic query based on similarity)")
     summary_index =SummaryIndex(nodes)
     vector_index = VectorStoreIndex(nodes)
     return summary_index,vector_index

@@ -44,7 +44,7 @@ The [LangChain documentation](https://python.langchain.com/docs/get_started/quic
 | Backend | Type of chains |
 | --- | --- |
 | [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples, RAG, chatbot, agent  |
-| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to Ollama (running Llama 2 locally|
+| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to Ollama (running Llama 2 locally |
 | [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/anthropic) | |
 | [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/mistral) | |
 | [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/watsonX) | | 
@@ -62,6 +62,15 @@ Each code needs to define only the needed LangChain modules to keep the executab
 * LangChain uses [Prompt templates](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/) to control LLM behavior.
 
     * Two common prompt templates: [string prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.base.StringPromptTemplate.html) templates and [chat prompt](https://api.python.langchain.com/en/latest/prompts/langchain.prompts.chat.ChatPromptTemplate.html) templates.
+
+    ```python
+    from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
+    prompt = ChatPromptTemplate.from_messages([
+        ("system", "Answer the user's questions based on the below context:\n\n{context}"),
+        MessagesPlaceholder(variable_name="chat_history"),
+        ("user", "{input}"),
+    ])
+    ```
     * We can build custom prompt by extending existing default templates. An example is a 'few-shot-examples' in a chat prompt using [FewShotChatMessagePromptTemplate](https://python.langchain.com/docs/modules/model_io/prompts/prompt_templates/few_shot_examples_chat).
     * LangChain offers a [prompt hub](https://smith.langchain.com/hub) to get predefined prompts easily loadable:
 
@@ -80,7 +89,7 @@ Each code needs to define only the needed LangChain modules to keep the executab
 
 ### Chain 
 
-Chains are runnable, observable and composable.
+Chains are [runnable](#runnable), observable and composable. The LangChain framework uses the Runnable class to encapsulate operations that can be run synchronously or asynchronously. 
 
 * [LLMChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.llm.LLMChain.html) class is the basic chain to integrate with any LLM.
 
@@ -102,7 +111,7 @@ Chains are runnable, observable and composable.
 
 * [LLMRouterChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.router.llm_router.LLMRouterChain.html#langchain.chains.router.llm_router.LLMRouterChain) is a chain that outputs the name of a destination chain and the inputs to it.
 
-* [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains.
+* [LangChain Expression Language](https://python.langchain.com/docs/expression_language/) is a declarative way to define chains. It looks similar to Unix shell pipe: input for one runnable comes from the output of predecessor (This is why prompt below is a runnable). 
 
     ```python
     # a chain definition using Langchain expression language
@@ -110,6 +119,41 @@ Chains are runnable, observable and composable.
     ```    
 
 * Chain can be executed asynchronously in its own Thread using the `ainvoke` method.
+
+### Runnable
+
+[Runnable interface](https://python.langchain.com/v0.1/docs/expression_language/interface/) is a protocol to define custom chains and invoke them. Each Runnable exposes methods to get input, output and config schemas. Each implements synchronous and async invoke methods and batch. Runnable can run in parallel or in sequence.
+
+To pass data to a Runnable there is the `RunnablePassthrough` class. This is used in conjunction with RunnableParallel to assign data to key in a map.
+
+```python
+from langchain.schema.runnable import RunnableParallel, RunnablePassthrough
+
+runnable = RunnableParallel(
+   passed = RunnablePassthrough(),
+   extra= RunnablePassthrough.assign(mult= lambda x:x["num"] * 3),
+   modified=lambda x:x["num"] +1   
+)
+
+print(runnable.invoke({"num": 6}))
+{'passed': {'num': 6}, 'extra': {'num': 6, 'mult': 18}, 'modified': 7}
+```
+
+*  [RunnableLambda](https://github.com/langchain-ai/langchain/blob/master/libs/core/langchain_core/runnables/base.py#L3572) is a type of Runnable that wraps a callable function. 
+
+```python
+sequence = RunnableLambda(lambda x: x + 1) | {
+    'mul_2': RunnableLambda(lambda x: x * 2),
+    'mul_5': RunnableLambda(lambda x: x * 5)
+}
+sequence.invoke(1)
+```
+
+The [RunnablePassthrough.assign](https://github.com/langchain-ai/langchain/blob/master/libs/core/langchain_core/runnables/passthrough.py) method is used to create a Runnable that passes the input through while adding some keys to the output.
+
+We can use `Runnable.bind()` to pass arguments as constants accessible within a runnable sequence (a chain) where argument is not part of the output of preceding runnables in the sequence.
+
+See some code [RunnableExamples](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/ollama-mistral/RunnableExamples.py)
 
 ### Memory 
 
@@ -225,7 +269,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 
 
 ???- info "Getting started with Feast"
-    Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. See [my summary on Feast](../data/features.md#feast-open-source)
+    Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. 
 
 ???- info "LLM and FeatureForm"
     See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
@@ -285,12 +329,12 @@ For **Q&A** the pipeline will most likely integrate with existing documents as i
 
 * [Basic query with unknown content to generate hallucination: 1st_openAI_lc.py ](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/1st_openAI_lc.py)
 * [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
-* Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information later and get model outputs based on different scenarios. [text_generation/ResponseToUnhappyCustomer](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
+* Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information and get model outputs based on different scenarios. See the [text_generation/ResponseToUnhappyCustomer.py code.](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
 
 
 ### Summarization chain
 
-Always assess the size of the content to send, as the approach can be different: for big doc we need to split the doc in chunks.
+Always assess the size of the content to send, as the approach can be different: for big document, we need to split the doc in chunks.
 
 * Small text summary with OpenAI. 
 * Small text to summarize, with [bedrock client](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/utils/bedrock.py) and the invoke_model on the client see the code in [llm-langchain/summarization/SmallTextSummarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/summarization/SmallTextSummarization.py)
@@ -328,61 +372,80 @@ We can use LLM and a special chain ([QAGenerateChain](https://api.python.langcha
 
 ## Agent
 
-[Agent](https://python.langchain.com/docs/get_started/quickstart#agent) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
-
-There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
-
-### Core concepts
-
-LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: **AgentAction**, with tool and tool_input and **AgentFinish**.
+[Agent](https://python.langchain.com/v0.2/docs/concepts/#agents) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. [LangGraph](./langgraph.md) is an extension of LangChain specifically aimed at creating highly controllable and customizable agents.
 
 **Chains** let create a pre-defined sequence of tool usage(s), while **Agents** let the model uses tools in a loop, so that it can decide how many times to use its defined tools.
 
-```python
-from langchain.agents import create_tool_calling_agent
-from langchain.agents import AgentExecutor
-from langchain.tools.retriever import create_retriever_tool
-from langchain_community.tools.tavily_search import TavilySearchResults
 
-...
-tools = [retriever_tool, search, llm_math, wikipedia]
+???+ warning "AgentExecutor is deprecated"
+    Use LangGraph to implement agent.
 
-agent = create_tool_calling_agent(llm, tools, prompt)
-agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    This content is then from v0.1
 
-```
+    There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
 
-* To create agents use the constructor methods like `create_react_agent, create_json_agent, create_structured_chat_agent`, [create_tool_calling_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.tool_calling_agent.base.create_tool_calling_agent.html#langchain-agents-tool-calling-agent-base-create-tool-calling-agent) etc
-* The **Agent** loops on user input until it returns AgentFinish action. If the Agent returns an AgentAction, then use that to call a tool and get an Observation. Agent has input and output and intermediate steps. AgentAction is a response that consists of action and action_input. 
-* See the existing predefined [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
-* [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
 
-* **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
+    LangChain uses a specific [Schema model](https://python.langchain.com/docs/modules/agents/concepts/#schema) to define: **AgentAction**, with tool and tool_input and **AgentFinish**.
+
+
+
+    ```python
+    from langchain.agents import create_tool_calling_agent
+    from langchain.agents import AgentExecutor
+    from langchain.tools.retriever import create_retriever_tool
+    from langchain_community.tools.tavily_search import TavilySearchResults
+
+    ...
+    tools = [retriever_tool, search, llm_math, wikipedia]
+
+    agent = create_tool_calling_agent(llm, tools, prompt)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+
+    ```
+
+    * To create agents use one of the constructor methods such as: `create_react_agent, create_json_agent, create_structured_chat_agent`, [create_tool_calling_agent](https://api.python.langchain.com/en/latest/agents/langchain.agents.tool_calling_agent.base.create_tool_calling_agent.html#langchain-agents-tool-calling-agent-base-create-tool-calling-agent) etc. Those methods return a Runnable.
+    * The **Agent** loops on user input until it returns `AgentFinish` action. If the Agent returns an `AgentAction`, then use that to call a tool and get an `Observation`. Agent has input and output and `intermediate steps`. AgentAction is a response that consists of action and action_input. 
+    * See the existing predefined [agent types](https://python.langchain.com/docs/modules/agents/agent_types/).
+    * [AgentExecutor](https://api.python.langchain.com/en/latest/agents/langchain.agents.agent.AgentExecutor.html) is the runtime for an agent.
+
+    * **Tools** are functions that an agent can invoke. It defines the input schema for the tool and the function to run. Parameters of the tool should be sensibly named and described.
 
 
 ### Tool Calling
 
-With Tool Calling we can define function or tool to be referenced as part of the LLM response, and LLM will prepare the arguments for the function. It is used to generate tool invocations, not to execute it.
+With Tool Calling we can define function or tool to be referenced as part of the LLM response, and LLM will prepare the arguments for the function. It is used to generate tool invocations, not to execute it. 
 
-Tool calling allows a model to detect when one or more tools should be called and responds with the inputs that should be passed to those tools. The inputs match a defined schema. 
+Tool calling allows a model to detect when one or more tools should be called and responds with the inputs that should be passed to those tools. The inputs match a defined schema. Below is an example structured answer from OpenAI LLM: "tool_calls" is the key to get the list of function names and arguments the orchestrator needs to call.
+
+```json
+    "tool_calls": [
+            {
+            "name": "tavily_search_results_json",
+            "args": {
+                "query": "weather in San Francisco"
+            },
+            "id": "call_Vg6JRaaz8d06OXbG5Gv7Ea5J"
+            }
+
+```
 
 Prompt defines placeholders to get tools parameters. The following [langchain prompt](https://smith.langchain.com/hub/hwchase17/openai-tools-agent) for OpenAI uses `agent_scratchpad` variable, which is a `MessagesPlaceholder`. Intermediate agent actions and tool output messages, will be passed in here. 
 
-LangChain has a lot of [predefined tool definitions already](https://python.langchain.com/docs/integrations/tools/).
+LangChain has a lot of [predefined tool definitions to be reused](https://python.langchain.com/docs/integrations/tools/).
 
-We can use tool calling in chain (to use tools in sequence) or [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
+We can use tool calling in chain (to use tools in sequence) or in [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
 
-LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool in as part of each call to the model, so that the model can invoke the tool when appropriate.
+LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool, as part of each call to the model, so that the application can invoke the tool when appropriate.
 
 See also [the load tools api with a list of predefined tools](https://api.python.langchain.com/en/latest/agents/langchain.agents.load_tools.load_tools.html#langchain.agents.load_tools.load_tools).
 
-Below is the classical application flow when using tool calling. The function wraps a remote microservice.
+Below is the classical application flow using tool calling. The exposed function wraps a remote microservice.
 
 ![](./diagrams/tool_calling.drawio.png)
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
-Many LLM providers support tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
+Many LLM providers support for tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
 
 ### Interesting tools
 
@@ -407,6 +470,23 @@ tools = [retriever_tool, search]
 
 [PythonREPLTool](https://api.python.langchain.com/en/latest/tools/langchain_experimental.tools.python.tool.PythonREPLTool.html#langchain_experimental.tools.python.tool.PythonREPLTool) is a tool for running python code in REPL (look like a jupiter notebook).
 
+#### A base model
+
+It is possible to bind a BaseModel class as below, where a LLM is used to create prompt, so the prompt instruction entity is a json used as tool. (Tool definition are structured system prompt for the LLMs as they just understand text)
+
+```python
+class PromptInstructions(BaseModel):
+    """Instructions on how to prompt the LLM."""
+    objective: str
+    variables: List[str]
+    constraints: List[str]
+    requirements: List[str]
+
+llm_with_tool = llm.bind_tools([PromptInstructions])
+```
+
+[See the LangGraph sample: prompt_builder_graph.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/langgraph/prompt_builder_graph.py).
+
 #### Our own tools
 
 [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. 
@@ -419,9 +499,9 @@ When doing agent we need to manage exception and implement handle_tool_error.
 
 To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
 
-It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time. It uses a vector store to create embeddings for each tool description.
+It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time, without having to pass all the tool definitions within the context window. It uses a vector store to create embeddings for each tool description.
 
-### How to
+### How Tos
 
 ???- question "How to trace the agent execution?"
     ```
@@ -454,7 +534,7 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 
 ???- question "How to support streaming the LLM's output?"
-    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) vis needed to make the app more responsive for end-users. All Runnable objects implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
+    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) is needed to make the app more responsive for end-users. All [Runnable objects](https://python.langchain.com/v0.1/docs/expression_language/interface/) implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
 
 ???- question "Example of Intended Model"
     to be done
@@ -470,56 +550,4 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)
 
-LCEL supports streaming the LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results. define schemas.
-
-## LangGraph
-
-LangGraph is a library for building stateful, **multi-actor** applications, and by adding cycles to LLM app. It is not a DAG. [States](https://python.langchain.com/docs/langgraph/#stategraph) may be a collection of messages or custom states as defined by a TypedDict schema. States are passed between nodes of the graph.  Nodes represent units of work.  It can be either a function or a runnable. Each node updates this internal state with its return value after it executes.
-
-Graph definitions are immutable so are compiled once defined:
-
-```python
-graph = MessageGraph()
-
-graph.add_node("chatbot", chatbot_func)
-graph.add_edge("chatbot", END)
-
-graph.set_entry_point("chatbot")
-
-runnable = graph.compile()
-```
-
-`add_node()` takes an function or runnable, with the input to the runnable is the entire current state.
-
-Graph may include `ToolNode` to call function or tool which can be called via conditions on edge. Conditional edge helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
-
-LangGraph comes with built-in persistence, allowing you to save the state of the graph at point and resume from there.
-
-    ```python
-    memory = SqliteSaver.from_conn_string(":memory:")
-    app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
-    ```
-
-Graphs such as StateGraph's naturally can be composed. Creating subgraphs lets you build things like multi-agent teams, where each team can track its own separate state.
-
-
-### Use cases
-
-The interesting use cases are:
-
-- workflow with cycles and conditional output
-- planning agent for plan and execute  
-- using reflection and self critique
-- multi agent collaboration, with or without supervisor
-- human in the loop (by adding an "interrupt" before a node is executed.)
-
-### Code 
-
-See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) my [own samples](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
-
-* [LangGraph product reference documentation.](https://langchain-ai.github.io/langgraph/reference/prebuilt/)
-
-## LangChain Deeper dive
-
-
-
+LCEL supports streaming the LLM results, use async communication, run in parallel, retries and fallbacks, access intermediate results.

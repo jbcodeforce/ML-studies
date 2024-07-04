@@ -39,9 +39,9 @@ Feature store can be added to a LLM prompt, so developer can extract powerful in
 
 Tecton is the hosted SaaS feature platform with proprietary enhancements. It includes a fork of the Feast feature store.
 
-### Value propopositions
+### Value propositions
 
-* Feature reuse via central respository, feature metadata, searchable.
+* Feature reuse via central repository, feature metadata, searchable.
 * The ML systems built is coupled with data sources, so any change in data infrastructure impact those systems. Decoupling via a Feature store brings stability with a single data access layer. 
 * Facilitate deployment of ML feature into production, with a centralized registry and a service layer to server the feature.
 * Avoid data leakage by providing point-in-time correct feature retrieval when exporting feature datasets for model training
@@ -50,11 +50,11 @@ Tecton is the hosted SaaS feature platform with proprietary enhancements. It inc
 
 ## [FeatureForm](https://www.featureform.com/product)
 
-Featureform is another [open-source Feature Store](https://github.com/featureform/featureform) that transforms existing infrastructure into a feature store, it is an abstraction on top of infrastructure. It can work on top of Spark.
+FeatureForm is another [open-source Feature Store](https://github.com/featureform/featureform) that transforms existing infrastructure into a feature store, it is an abstraction on top of infrastructure. It can work on top of Spark.
 
-A data scientist working in a notebook can push transformation, feature, and training set definitions to a centralized, local repository. Register a PySpark transformations and let Featureform orchestrate the data infrastructure from Spark to Redis, and monitor both the infrastructure and the data.
+A data scientist working in a notebook can push transformation, feature, and training set definitions to a centralized, local repository. Register a PySpark transformations and let FeatureForm orchestrate the data infrastructure from Spark to Redis, and monitor both the infrastructure and the data.
 
-It supports Native embeddings and vector databases as both for inference and training stores. Featureform on Kubernetes can be used to connect to your existing cloud infrastructure and can also be run locally on Minikube. 
+It supports Native embeddings and vector databases as both for inference and training stores. FeatureForm on Kubernetes can be used to connect to your existing cloud infrastructure and can also be run locally on Minikube. 
 
 The figure below presents the FeatureForm components:
 

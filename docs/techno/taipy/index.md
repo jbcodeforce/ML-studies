@@ -16,6 +16,8 @@ It generates web pages from a Flask Server. The main class is `Gui`.
 * Pages are created in different modules, the variables that they can bind to visual elements may have a scope limited to their origin module.
 * For Single Page Application we need to associate one page to "/"
 
+## CLI
+
 ## Code 
 
 * [1st UI](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/1st_ui.py)

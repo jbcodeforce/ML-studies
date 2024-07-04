@@ -16,6 +16,14 @@ The mission to bring AI to all developers, pushing for more open platforms and s
 
 Low-code no-code platform with new AI agents builder.
 
+## [fireworks.ai](https://fireworks.ai)
+
+[An inference platform to server multi-modal AI models](https://readme.fireworks.ai/docs/quickstart) with fine tuning capability too (using LoRA). Here are the [supported models](https://readme.fireworks.ai/docs/fine-tuning-models#supported-base-models).
+
+FireAttention is a custom CUDA kernel, optimized for Multi-Query Attention models (Mixtral is one of them).
+
+[Serving Open Source Models- Blog](https://blog.fireworks.ai/fireattention-serving-open-source-models-4x-faster-than-vllm-by-quantizing-with-no-tradeoffs-a29a85ad28d0), with mixtral model 4x time speed improvement than other OSS. FP8 shrinks model size 2x, it allows for more efficient deployment. Combined with memory bandwidth and FLOPs speed-ups this results in 2x improvement of the effective requests/second. 
+
 ## [WorkHelix](https://www.workhelix.com/)
 
 Help assessing a company’s Generative AI opportunity. The software constantly scans 450M+ publicly available data points across 3,000+ jobs and 70,000 work activities to answer questions such as how big of a productivity boost can Generative AI bring to the organization?.

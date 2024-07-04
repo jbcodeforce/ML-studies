@@ -1,7 +1,7 @@
 from langchain_openai import ChatOpenAI
-from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.chains import create_history_aware_retriever
-from langchain_core.prompts import MessagesPlaceholder
+
 from dotenv import load_dotenv
 
 from langchain_openai import OpenAIEmbeddings

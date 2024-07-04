@@ -1,19 +1,15 @@
 Interview Questions:
-1. Can you share some examples of real-world business problems you have solved using data-driven optimization and machine learning modeling?
-2. What kind of ML models have you built from scratch for new applications? Can you explain the process you followed and the challenges you faced?
-3. As an expert in NLP, how have you used this skill in your previous roles? Can you provide specific examples?
-4. Can you explain your experience with SQL and handling large-scale data? Can you give an example of a project where you had to manage a large volume of data?
-5. Your resume mentions that you are comfortable with Python, Java, and Node.js. Can you share how you have used these languages in your work? 
-6. Can you talk about your experience in the healthcare industry? If you haven't worked in this industry before, how do you plan to apply your skills and knowledge to it?
-7. You have a Master's Degree in Computer Science from Nice University, France. How has your educational background helped you in your career? 
-8. How have you measured and optimized the direct business impact of your work in your previous roles?
+
+1. Can you talk more about your experience designing and implementing event-driven architectures and streaming technologies? 
+2. As the leader of an open-source project focused on the adoption of generative AI for production deployment, what were some challenges you faced and how did you overcome them?
+3. Can you share more about your experience in managing software development projects? Specifically, can you share an instance where your leadership led to the successful completion of a project?
+4. You have a Masters degree in Computer Science and several professional certifications. How do these academic achievements aid you in your professional career?
+5. Can you provide some examples of your contributions to patents and publications?
 
 Talking Points:
-1. Discuss the candidate's experience as a Principal Consultant at Athena Decision Systems and AWS Principal Solution Architect at Amazon.
-2. Discuss the candidate's proficiency in Python, Java, and Node.js and how it applies to the position.
-3. Discuss the candidate's experience with Generative AI and how it could be applied in the role of NLP Scientist/Engineer at Machinify.
-4. Discuss the candidate's desire to learn about the healthcare industry and how this interest could be beneficial to the role. 
-5. Discuss the candidate's experience in handling large-scale data using SQL, Databricks, and Iceberg lakehouse for data governance.
-6. Discuss the candidate's experience building ML models from scratch for new applications.
-7. Discuss the candidate's certifications and how they demonstrate his commitment to continued learning and expertise in his field.
-8. Discuss the awards the candidate has received and what they mean for his capabilities in the role.
+
+1. Discuss Jerome's extensive experience in designing and implementing event-driven architectures and streaming technologies, and how this aligns with the job requirements.
+2. Talk about Jerome's leadership in the open-source project focused on generative AI for production deployment. Highlight his innovative approach and dedication to making AI accessible for production deployment.
+3. Highlight Jerome's extensive experience in managing software development projects. Discuss how his leadership skills and technical expertise combine to drive project success.
+4. Talk about Jerome's academic achievements, including his Masters degree in Computer Science and professional certifications. Discuss how these credentials demonstrate his dedication to continued learning and expertise in his field.
+5. Discuss Jerome's contributions to patents and publications. Highlight his innovative thinking and dedication to advancing the field of AI and ML.

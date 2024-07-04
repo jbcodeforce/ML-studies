@@ -2,39 +2,76 @@
 
 [Agent](https://lilianweng.github.io/posts/2023-06-23-agent/) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
 
-The reference architecture for an agent looks like what Lilian Weng illustrated in the following figure (light adaptation):
+## Introduction
+
+The agentic reference architecture was introduced by Lilian Weng in the following figure (light adaptation):
 
 ![](./diagrams/agent-ref-arch.drawio.png)
 
-The planning phase includes techniques like Chain of Thought ("think step by step"), Tree of thoughts (explores multiple reasoning paths) or LLM+P (used external long-horizon planner).
+The **planning** phase includes techniques like Chain of Thought ("think step by step"), Tree of thoughts (explores multiple reasoning paths) or LLM+P (used external long-horizon planner).
 
-Short term memory is the context, and limited by the LLM context window size. Long term memory is the vector store supporting the maximum inner product search, it is also used to self improve agents. Entity memory is a third type of memory to keep information of the subjects of the interactions or work to be done. Short term memory helps exchanging data between agents too. 
+**Short term memory** is the context, and limited by the LLM context window size. **Long term memory** is the vector store supporting the maximum inner product search, it is also used to self improve agents. Entity memory is a third type of memory to keep information of the subjects of the interactions or work to be done. Short term memory helps exchanging data between agents too. 
 
 Tools are used to call external services or other LLMs. Neuro-symbolic architecture can be built with expert system modules combined with general-purpose LLM. LLM routes to the best tool.
 
-There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, Required Model Params.
+There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, or Required Model Params.
 
+## Use cases
+
+* Agents to plan an article, write this article and review for better edition. See the [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py) code.
+* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry for the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
+* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing sale lead analysis.
+* Crew to tailor a job application with multiple agents: [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
+
+### Small Specialist Agents
+
+Small Specialist Agents (SSAs) is an agentic approach to perform planning and reasoning to enhance AI capabilities for complex problem using domain-specific knowledge. It may implement the OODA loop: Observe, Orient, Decide, and Act, with Hierarchical Task Planning to cut bigger tasks in smaller ones. Planning can use up to date data to define future actions. Agentic AI can respond swiftly and effectively to changing environments. SSAs predict maintenance needs, adjust operational parameters to prevent downtime, and ensure that energy production meets demand without excess waste. In healthcare, SSAs may analyzing genetic data, medical histories, and real-time responses to various treatments.
+
+[See OpenSSA project](https://github.com/aitomatic/openssa)
+
+## Challenges
+
+Existing demonstrations of agent in action are for very specific use cases and are giving too much freedom to Agents without enough controls. This is not ready for production usages. LLMs in the agent are loosing their efficiency over time. 
+
+Developers need to address the level of freedom given to the LLMs.
+
+| Type | Decide output | Decide steps to take | Determine step sequences |
+| --- | --- | --- | --- |
+| Code| Code | Code | Code |
+| LLM Call | On step of LLM | Code | Code |
+| Chain | Multiple calls to LLM | Code | Code |
+| Router | LLM | LLM without cycle | Code |
+| State Machine | LLM | LLM with cycle | Code |
+| Agent (Autonomous) | LLM | LLM | LLM |
+
+[LangGraph](../coding/langgraph.md) helps to better support the Router, State Machine and chain implementations.
 
 ## Guidelines
 
-Agents perform better if we define a role to play, instruct them with prompt to help them to focus on a goal, add tools to access external systems, combine them with other agents to cooperate.  and chain content between agents. 
+Agents perform better if we define a role to play, instruct them with prompt to help them to focus on a goal, add tools to access external systems, combine them with other agents to cooperate and chain content between agents. 
 
-Focus is becoming important as the context windows are becoming larger. With too many information LLM can lose the important points and goals. Try to think about multiple agents to do better work together.
+Focus is becoming important as the context windows are becoming larger. With too many information LLM can lose the important points and goals. Try to think about multiple agents to split the work and generate better results together.
 
 Too much tools adds confusion for the agents, as they have hard time to select tool, or distinguish what is a tool, a context or an history. Be sure to give them tools for what they need to do. 
 
 For task definition, think about process, actors and tasks. Have a clear definition for each task, with expectation and context. Task may use tools, should be able to run asynchronously, output in different format like json, xml, ...
 
-## Use cases
-
-* Agents to plan an article, write this article and review for better edition. [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py)
-* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
-* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing lead analysis.
-* Crew to tailor job application with multiple agents [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
-
 ## Design Patterns
 
-## CrewAI
+## Technologies
+
+### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
+
+In Agents, a language model is used as a reasoning engine to determine which actions
+to take and in which order. 
+
+[LangChain agents package API doc.](https://api.python.langchain.com/en/latest/_modules/langchain_core/agents.html)
+
+### LangGraph
+
+LangGraph supports well the implementation of Agents. See [this samples repository](https://github.com/langchain-ai/langgraph)
+
+### CrewAI
 
 [crewAI](https://www.crewai.com/) is a framework to develop application using multiple-agent. It uses the concepts of Agent, Task and Crew to organize the work between agents. The concepts are common to any Agentic AI solutions.
 
@@ -63,7 +100,7 @@ CrewAI has tools to scrape website, search internet ([Serper](https://serper.dev
 
 See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai)
 
-### Some guidelines
+#### Some guidelines
 
 * Adapt the task and agent granularity
 * Task can be executed in different ways, parallel, sequential,... so test and iterate
@@ -75,9 +112,13 @@ See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/
 * CrewAI offers a cross-agent caching mechanism. It is also compatible with LangChain tools.
 * Think as a manager: define the goal and what is the process to follow. What are the people I need to hire to get the job done. Use keyword and specific attributes for the role, agent needs to play.
 
-## AutoGen
+### AutoGen
 
 [Microsoft AutoGen](https://microsoft.github.io/autogen/) is a multi-agent conversation framework to help developers build LLM workflows. The first abstraction is a ConversableAgent
+
+### OpenSSA
+
+[Small Specialist Agents for Problem-Solving](https://github.com/aitomatic/openssa)
 
 ## References
 

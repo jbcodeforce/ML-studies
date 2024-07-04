@@ -48,7 +48,13 @@ My code studies are in [pytorch](https://github.com/jbcodeforce/ML-studies/tree/
 
 Tensor is an important concept for deep learning. It is the numerical representation of data, a n dimension matrix.
 
-Tensors are a specialized data structure, similar to NumPy’s `ndarrays`, except that tensors can run on GPUs. Tensor attributes describe their shape, datatype, and the device on which they are stored.
+Tensors are a specialized data structure, similar to NumPy’s `ndarrays`, except that tensors can run on GPUs. 
+
+```python
+matrix1 = torch.tensor([[1, 1, 1], [1, 1, 2]], device=device, dtype=torch.float16)
+```
+
+Tensor attributes describe their shape, datatype, and the device on which they are stored.
 
 ```python
 import torch, numpy as np
@@ -66,7 +72,9 @@ y= torch.from_numpy(y).type(torch.float)
 X[:5],y[:5]
 ```
 
-Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other. [See the set of basic operations on tensor](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/torch-tensor-basic.ipynb).
+Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other. [See the set of basic operations on tensor](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb).
+
+See the basic ML workflow using Pytorch to work on data and do a linear regression [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb).
 
 ### Constructs
 
@@ -83,9 +91,9 @@ PyTorch has two important modules we can use to create neural network: `torch.nn
 
 ### GPU
 
-On Linux or Windows with nvidia GPU, we need to use the Cuda (Compute Unified Device Architecture) library. See [AWS deep learning container](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/what-is-dlc.html). For Mac it is `mps`
+On Linux or Windows with nvidia GPU, we need to use the Cuda (Compute Unified Device Architecture) library. See [AWS deep learning container](https://docs.aws.amazon.com/deep-learning-containers/latest/devguide/what-is-dlc.html). For Mac, use `mps`.
 
-Here is sample code to set the mps to access GPU (mps for Mac) for tensor computation
+Here is sample code to set `mps` to access GPU (on Mac) for tensor computation:
 
 ```python
 has_mps = torch.backends.mps.is_built()
@@ -115,15 +123,15 @@ See [Algebra using Pytorch python code.](https://github.com/jbcodeforce/ML-studi
 | **Stochastic Gradient Descent** (SGD) optimizer |	Classification, regression, many others. |	torch.optim.SGD() |
 | **Adam Optimizer** | Classification, regression, many others. | torch.optim.Adam() |
 | **Binary cross entropy loss** | Binary classification	| torch.nn. BCELossWithLogits or torch.nn.BCELoss | 
-| **Cross entropy loss** |	Mutli-class classification | torch.nn.CrossEntropyLoss |
+| **Cross entropy loss** |	Multi-class classification | torch.nn.CrossEntropyLoss |
 | **Mean absolute error** (MAE) or L1 Loss | Regression | torch.nn.L1Loss |
-| **Mean squared error** (MSE) or L2 Loss | Regression| torch.nn.MSELoss|
+| **Mean squared error** (MSE) or L2 Loss | Regression | torch.nn.MSELoss|
 
 The [binary cross-entropy / log loss](https://towardsdatascience.com/understanding-binary-cross-entropy-log-loss-a-visual-explanation-a3ac6025181a) is used to compute how good are the predicted probabilities. The function uses a  negative log probability for a label to be one of the expected class: {0,1}, so when a class is not 1 the loss function result is big.
 
 ### Neural network
 
-A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. This is the most flexible way [to declare a NN](https://github.com/jbcodeforce/ML-studies/blob/4271cbd2fa3094cf672e038ee7559997e9d90443/pytorch/classification/nn-classifier.py#L17). As an alternate the following code uses the Sequential method using non linear layers (nn.ReLu()).
+A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. The back propagation is done using SGD. This is the most flexible way [to declare a NN](https://github.com/jbcodeforce/ML-studies/blob/4271cbd2fa3094cf672e038ee7559997e9d90443/pytorch/classification/nn-classifier.py#L17). As an alternate the following code uses the Sequential method using the non linear (nn.ReLu()) function between layers.
 
 ```python
 model = nn.Sequential(
@@ -135,11 +143,15 @@ model = nn.Sequential(
 ).to(device)
 ```
 
-Neural network has an input layer equal to the number of input features, and output equal to the number of response (1 output for binary classification). For activation function between hidden layers, ReLU is often used when we want non-linearity. The output layer will not use a transfer function for a regression neural network, or use the logistic function for binary classification (just two classes) or log softmax for two or more classes.
+Neural network has an input layer with # of parameters equal to the number of input features, and the number of output equal to the number of expected responses (1 output for binary classification). The first layer above, is a linear transformation to the incoming data (x): 
+
+![\Large corr(x,y)](https://latex.codecogs.com/svg.latex?y=xA^T+b) 
+
+50 is the number of parameters to the first hidden layer. For activation function between hidden layers, ReLU (max(0,x)) is often used when we want non-linearity. The output layer will not use a transfer function for a regression neural network, or use the logistic function for binary classification (just two classes) or log SoftMax for two or more classes.
 
 The hyper-parameters to tune are:
 
-* **The number of neuron in hidden layer**: In general, more hidden neurons means more capability to fit complex problems. But too many, will lead to overfitting. Too few, may lead to underfitting the problem and will sacrifice accuracy.
+* **The number of neuron in hidden layer**: In general, more hidden neurons means more capability to fit complex problems. But too many, will lead to over fitting. Too few, may lead to under fitting the problem and will sacrifice accuracy.
 
 * **The number of layers**: more layers allow the neural network to perform more of its feature engineering and data preprocessing.
 * The **activation function** between hidden layers and for the output layer.
@@ -152,7 +164,7 @@ With Softmax, the outputs are normalized probabilities that sum up to one.
 
 Some code samples:
 
-* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifications.ipynb)
+* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifications.ipynb) to identify plots on 2 circles.
 * [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/multiclass-classifier.ipynb)
 * Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/nn-classifier.py).
 * Computer vision and the CNN [A notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/computer_vision.ipynb) and [Python code](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py)

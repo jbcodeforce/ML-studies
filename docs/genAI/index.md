@@ -1,33 +1,41 @@
 # Generative AI
 
+???- info "Updates"
+    Created Aug 2023 - Updated 06/2024
+
 ## Introduction
 
-Generative AI is a new deep learning model to create new content (text, image, music, videos..) from existing ones and the requesting query. It is powered by Large Language Model (LLM), pre-trained on huge amount of unlabeled data, using from 7B up to 500B of parameters.
+Generative AI is a combination of neural network models to create new content (text, image, music, videos..) from a requesting query. Models are pre-trained on vast amounts of unlabeled data, using from 7B up to 500B of parameters.
 
-The LLM underlying architecture is called a **Transformer** which uses self-**attention** mechanisms to weight the significance of different words to understand the context in a sequence of data. The attention mechanism computes the similarity between tokens (the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space the higher the attention scores they will obtain and the higher the attention they will give to each other.
+Gen AI applies well to different category of use cases: improve customer experiences, improve employee's productivity, help around creativity, and help optimizing business process ([See Use Case section](#use-cases)). 
+
+### Transformer Architecture
+
+**GPT-3 (Generative Pre-trained Transformer 3)** breaks the NLP boundaries with training on 175B parameters. It is built on **Transformer** which uses self-**attention** mechanism to weigh the significance of different words in a sentence to understand the context in a sequence of data. 
+
+The **attention** mechanism computes the similarity between tokens (from the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space, the higher the attention scores they will obtain and the higher the attention they will give to each other.
 
 The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
 
-This training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific tasks or content. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data like the words in this sentence to develop some understanding of the real world.
+The second part of the GPT-3 architecture are the **layers** of transformers stacked on top of each other. Within each layer, there are feed-forward neural networks to process the data.
 
-Those models are commonly referred to as foundation models (FMs).
+The training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific *tasks* or *content*. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data, like the words in a sentence, to develop some understanding of the real world.
 
-The unlabeled data used for pre-training is usually obtained by crawling the Web and contains information from public sources.
-The text is then broken down into chunks called tokens which are fed into the model. After processing the model returns result tokens which are then turned back into readable text.
+The models are commonly referred to as **foundation models** (FMs).
+
+The unlabeled data used for pre-training is usually obtained by crawling the web and public sources.
+
+At **inference** time, the input text is tokenized into individual tokens which are fed into the model. After processing using the transformer mechanism, the model returns result tokens which are then turned back into readable text.
 
 
 ???- info "Difference between ML and LLM"
-    * **Foundational Models** can perform many tasks because twatsonhey contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
+    * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
     * **Regular models** are trained for one **specific task**, like image classification or speech recognition. ML models require lots of **labeled data** relevant to their task.
 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
 
-A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once during the learning cycle, and therefore can be parallelized.
-
-The process is text -> tokens (a token may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Sub-word tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
-
-**Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and with high quality data.
+A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations of the token semantic), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
 
 Three types of transformer:
 
@@ -38,40 +46,66 @@ translate an input string in one language to another) as a text-to-text conversi
 
 Models with encoder-decoder and decoder-only architectures are **generative** models.
 
-### Challenges
+The process is text -> tokens (a token may be less than a word, and on average a 5 chars) -> vector. Vectors of similar word are close in the multi-dimensional space. A vector, in NLP, has a lot of dimensions, representing its characteristics in the world of meaning. The best tokenization method for a given dataset and task is not always clear, and different methods have their own strengths and weaknesses. Sub-word tokenization combines the benefits of character and word tokenization by breaking down rare words into smaller units while keeping frequent words as unique entities.
 
-A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies should rely on their own data sets tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training, retraining model and even inference are expensive.
+#### HuggingFace Transformer
 
-For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  They produce incorrect and contradictory answers. 
+[HuggingFace Transformer](https://github.com/huggingface/transformers) provides thousands of pre-trained models to perform tasks on text, images and audio.
 
-With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task.
+### Pre-training process
 
-For large enterprise, adopting LLM at scale means running hundreds, even thousands, of models at any time. With high frequency of innovation, lead customers to replace their models quicker than expected, reinforcing the need to train and deploy new models in production quickly and seamlessly.
+The goal of pre-training is to teach the model the structure, patterns and semantics of the human language. The pre-training process for GPT-3 involves collecting and preprocessing vast amounts of diverse text data, training a Transformer-based model to predict the next token in a sequence, and optimizing the model using powerful computational resources.
 
-There is difficulty to determine which source documents are leading to the given answers.
+**Corpus** = a collection of texts, and a vocabulary is the set of unique tokens found within the corpus. Corpus needs to be large and with high quality data.
+
+The process looks like in the figure below:
+
+![](./diagrams/pre-training.drawio.png)
+
+For the **data collection**, it is import to get diverse source of data, including web sites, books, curated datasets to address wide range of topics, writing styles and linguistic nuances. Data preparation is still key, but complex as to remove low-quality text, harmful content...
+As part of this preparation, text can be converted to lowercase to reduce variability. Tokenization helps to handle rare words and different languages.
+
+The primary objective during pre-training is to predict the next token in a sequence. This is a form of unsupervised learning where the model learns from the context provided by preceding tokens. 
+
+The training phase includes the forward pass where input tokens go through the transformer layers. The loss calculation is computing the difference between predicted token and actual next token. Finally the backward pass applies gradients computation to minimize the loss, and tune the model parameters.
+
+The entire dataset is split into **batches**, and the model is trained over multiple **epochs**.
+
+The optimization phase includes tuning hyper parameters like learning rate and batch size. To be able to scale we need to run training on distributed computers.
+
+A portion of the data is set aside as a validation set to monitor the model's performance and prevent overfitting.
+
+**Perplexity** is a common metric used to evaluate language models, measuring how well the model predicts a sample
+
 
 ### Generic development approach
 
-Some ways to use Generative AI:
+Some ways to use Generative AI in business applications:
 
-* Build foundation model from scratch
-* Reuse existing foundation models available as open-source (hundred of model on [Hugging Face hub](https://huggingface.co/models)) or proprietary, add the custom corpus on top of it, to fine tune the model for better accuracy.
-* Use generative AI services or APIs offered by foundation model vendors. There is no control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) to get better answers, or [RAG techniques](./rag.md).
+* Build foundation model from scratch: very expensive and time consuming, with highly skilled ML scientists.
+* Reuse existing foundation models available as open-source (hundred of model on [Hugging Face hub](https://huggingface.co/models)), then add own corpus on top of it, to fine tune the model for better accuracy.
+* Use generative AI services or APIs offered by foundation model vendors. There is no control over the data, cost and customization. Use [prompt engineering](./prompt-eng.md/#prompting-techniques) or [RAG techniques](./rag.md) to get better answers, .
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.
+
+### Model fine-tuning
+
+The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good source of information for model quality assessments relative to certain use cases.
+
+See this detailed article on [developing a LLM](https://medium.com/towards-artificial-intelligence/build-your-own-large-language-model-llm-from-scratch-using-pytorch-9e9945c24858) and this one on [fine tuning](https://medium.com/@tuanatran/fine-tuning-large-language-model-with-hugging-face-pytorch-adce80dce2ad)
 
 ## Use cases
 
 We can group the Generative AI use cases in different categories:
 
-???+ info "Improve customer experiences"
+???- info "Improve customer experiences"
     * Chatbot functionality with context, with better user's experiences. Reduce operational costs using automated response.
     * Documentation summarization: See model like Jurassic-2 Jumbo from [AI21 studio](https://www.ai21.com/studio), claude-v2 works well too.
     * Personalization
 
 
-???+ info "Improve employee productivity"
+???- info "Improve employee productivity"
     * Code generation
     * Translation, reports, summarization...
     * Search via Q&A Agent for specific subject, based on Corporate document processing. LLM helps understanding the text and the questions. The LLM is enriched, trained on proprietary corpus:
@@ -82,13 +116,13 @@ We can group the Generative AI use cases in different categories:
     * Personalized learning path generation
     * Low-code development with GenAI agents
 
-???+ info "Creativity"
+???- info "Creativity"
     * Auto-generation of marketing material
     * Personalized emails
     * Sales scripts for customer's industry or segment
     * Speeding the ideation phase of a product development
 
-???+ info "Business process optimization"
+???- info "Business process optimization"
     * Automatically extracting and summarizing data from documents: combine OCR with prompt to extract data and build json doc to be structured for downstream processing: Gen AI based intelligent document processing may looks like this:
 
     ![](./diagrams/idp-genai.drawio.png)
@@ -100,10 +134,7 @@ We can group the Generative AI use cases in different categories:
 
 * [Generative Adversarial Networks](https://towardsai.net/p/l/gans-for-synthetic-data-generation) are used to limit the risk of adversarial manipulation in deep learning image recognition. It attempts to generate fake data that looks real by learning the features from the real data.
 
-It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training, knowledge graph and neuro symbolic AI.
-
-The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good source of information for model quality assessement relative to certain use cases.
-
+It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training, knowledge graph and neuro-symbolic AI solutions.
 
 ### Industries
 
@@ -154,36 +185,45 @@ These following industry-specific use cases present the potential applications o
 
 ### Classical concerns and challenges
 
-* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs? Size of the model is linked to the compute power you have and can pay for on the Cloud providers. 
+A single large model is unlikely to solve every business problem effectively. To differentiate their generative AI applications and achieve optimal performance, companies should rely on their **own data sets** tailored to their unique use case. Cost of training and inference, privacy and intellectual property are top concerns. FM can be "fine-tuned" for a specific task, by using a small number of labeled examples, specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training, retraining model and even inference are expensive.
+
+* For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  Models produce incorrect and contradictory answers. With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task. Always try to assess when to use ML.
+* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs? The size of the model is linked to the compute power developers have and how much they can pay (availability of the hardware is also an issue). 
+* There is difficulty to determine which source documents are leading to the given answers.
 * We need to optimize for training cost, and inference cost. And then assess how to amortization of the training cost to integrate to what can be billed to end-users.
-* How to leverage open model like Mistral?
-* How to verify accuracy on unstructured data as query and documents? 
-* AI Models are becoming stronger when connected to data, enterprise data, and fine tuning. It is important to adopt a Gen AI strategy that is linked to the data strategy too. Model will be deployed where data is. 
-* When moving to more stateful Gen AI based solutions, to make model more specialized or more tuned for a dedicated use cases, when model will need self improvement, the solution will need to keep states. Those states will be persisted in Lake House technology.
-* Current main stakeholder for Gen AI, is the developer, moving to business end users will be challenging as some of their jobs are at risk.
-* How to stop doing a lot of prompt engineering and start doing model fine tuning? Always address what we should evaluate the solution on. Gen AI can elp pn building prompt with the use of [meta prompting](./prompt-eng.md/#automatic-prompt-engineering). 
+* Current models comparison is based on Multi-task Language Understanding on MMLU](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu) benchmark. But CIOs care less about standard results, they want models that work well on their data.
+* For large enterprise, adopting LLM at scale means running hundreds, even thousands, of models at any time. With high frequency of innovation, lead customers to replace their models quicker than expected, reinforcing the need to train and deploy new models in production quickly and seamlessly.
+* Cost being a major issue in short term, model may become smaller and access to powerful distributed smaller hardware will help to do inference locally (smartphone with TPU).
 * Protect Intellectual Property: never pass confidential information to Gen AI SaaS based API
 * Protect the brand, avoid bias, discrimination, aligned to company values: any business decision should not be done by uncontrolled Gen AI.
-* Response accuracy, fairness, toxicity, and privacy
-* No move private data to public internet
-* Hallucination where the models make up inaccurate responses that are not consistent with the training data.
-* Cost: not just to train the models, but also for inference with running the models, with low latency and high-throughput.
-* How to integrate those capabilities in enterprise business processes and decisions? How does human in the loop step can be added to the process?
-* Simple to integrate with existing apps and data.
+
+
+**Classical questions** to address before starting a Gen AI solutions:
+
+* How to leverage open model like Mistral, LLama, DBRX?
+* How to verify accuracy on unstructured data as query and documents? 
+* AI Models are becoming stronger when connected to data, enterprise data, and fine tuning. It is important to adopt a Gen AI strategy that is linked to the data strategy too. Model will be deployed where data is. 
+* When transitioning to more stateful Gen AI-based solutions to make the model more specialized or better tuned for dedicated use cases, the model will require self-improvement capabilities. To support this, the solution will need to maintain states, which will be persisted using Lake House technology
+* Current main stakeholder for Gen AI, is the developer, moving to business users will be challenging as some of their jobs are at risk, they may reject the technology at a all.
+* How to stop doing a lot of prompt engineering and start doing model fine tuning? Always address what we should evaluate the solution on. Gen AI can help to build prompt with the use of [meta prompting](./prompt-eng.md/#automatic-prompt-engineering) techniques. 
+* How to measure hallucination where the models make up inaccurate responses that are not consistent with the training data.
+* How to integrate AI capability in the enterprise business processes and decisions? How does human in the loop step can be added to the process?
 * Whenever we want to teach an LLM to use a tool, we need enough annotated tool calls to fine tune the LLM. We can use in-context learning to create a model that annotates tool calls for the input query. Incorrect calls can be filtered by executing the tools and filtering the outputs based on the ground truth answer.
 
 ## Concepts
 
-A LLM is part of the evolution of NLP as it is a trained deep learning model that understand and generates text in a human like fashion. Deep learning allows a neural network to learn hierarchies of information in a way similar of the human brain.
-From 2017, many NLP models are based on `transformers`. Which is a neural-network that takes into account an entire sentence or paragraph at once, instead of one word at a time. It better understands the context of a word.
+A LLM is part of the evolution of NLP as it is a trained deep learning model that understands and generates text in a human like fashion. But they are doing stupid mistakes.
 
-To process a text input with a transformer model, we first need to **tokenize** it into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning.
+### NLP processing
 
-Below is a simple representation of the embedding in the 3 dimension space:
+To process a text input with a transformer model, the text is **tokenized** into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning: for example a word dog will have 512 potential numerical attributes used to describe what is a dog: height, legs, head form...). Below is a simple representation of the embedding in the 3 dimension space:
 
 ![](./images/vector-embedding.png)
 
 *See the web site [projector.tensorflow.org/](https://projector.tensorflow.org/)*
+
+???- info "Embedding"
+    See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/): 
 
 Next, the encoder in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph.
 
@@ -219,7 +259,6 @@ The techniques to customize LLM applications from simplest to more complex are:
 | --- | --- |
 | **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Ex. Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
 | **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
-| **Attention** | A math filter for focusing on the important parts of data inputs. |
 | **BARD** | AI chat service from Google - powered by the LaMDA model. Similar to ChatGPT. |
 | **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
 | **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an auto regressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
@@ -233,7 +272,7 @@ The techniques to customize LLM applications from simplest to more complex are:
 | **Few shot Learning** | or *few-shot prompting* is a prompting technique that allows a model to process examples before attempting a task. |
 | **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
 | **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
-| **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this include creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
+| **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this, includes creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
 | **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
 | **GPT** | OpenAI's generalized pre-trained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multi-modal. |
 | **Hallucinations** | LLMs may give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be inaccurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
@@ -313,7 +352,20 @@ Queries return results based on vector similarity scores, revealing hidden seman
 
 [FAISS](https://faiss.ai/index.html) from Facebook is a library for efficient similarity search and clustering of dense vectors. Faiss can compute vector Euclidien distance using GPU or CPU.
 
-[ChromaDB](https://github.com/chroma-core/chroma) an open source embedding database which supports Queries, filtering, density estimation.
+[ChromaDB](https://github.com/chroma-core/chroma) is an open source embedding database which supports Queries, filtering, density estimation and similarity search. It can persist on local disk or use a server deployment. It uses collection for storing the documents, metadatas, embeddings, and ids. Chroma DB by default uses a sentence transformer model to calculate embeddings.
+
+(Code using ChromaDB [end to end solution with qa-retrieval](https://github.com/jbcodeforce/ML-studies/blob/master/e2e-demos/qa_retrieval/Main.py)) or [code langchain/rag folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/rag) specially [build_agent_domain_rag.py]()https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/rag/build_agent_domain_rag.py
+
+Docker compose to start chromadb
+
+```yaml
+  chroma:
+    image: ghcr.io/chroma-core/chroma:latest
+    volumes:
+      - ./chromadb/.chroma/index
+    ports:
+      - 8005:8000
+```
 
 Traditional open source index or database such as OpenSearch, Postgresql support now vector store and similarity search. 
 
@@ -373,7 +425,8 @@ Some useful articles:
 * Model deployed will not use data sent to improve itself.
 * Right to use an image/photo to train a model is a problem.
 
-## More interesting readings
+
+## Deeper dive
 
 * [Vulnerabilities of LLM](https://owasp.org/www-project-top-10-for-large-language-model-applications/descriptions/).
 * [GANs for Synthetic Data Generation.](https://towardsai.net/p/l/gans-for-synthetic-data-generation)

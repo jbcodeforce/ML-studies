@@ -37,7 +37,7 @@ Many recent LLMs are fine-tuned with a powerful technique called **instruction t
 
 ## Tuning parameters
 
-The classical [Temperature, Top-P](./index.md/#common-llm-inference-parameter-definitions) and max length parameters need to be tuned to get more relevant responses. The Stop sequence, frequency penalty (penalty on next token already present in the response), presence penalty (to limit repeating phrases) are also used in the prompt.
+The classical [Temperature, Top-P](./index.md/#common-llm-inference-parameters) and max length parameters need to be tuned to get more relevant responses. The Stop sequence, frequency penalty (penalty on next token already present in the response), presence penalty (to limit repeating phrases) are also used in the prompt.
 
 ## Prompting techniques
 
