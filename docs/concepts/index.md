@@ -6,7 +6,7 @@
 
 ## Bias
 
-**Bias** measures how far off the predictions are from the correct values in general. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via [regularization](#regulaziation). 
+**Bias** measures how far off the predictions are from the correct values in general. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via [regularization](#regularization). 
 
 ## Common Performance Metrics used
 

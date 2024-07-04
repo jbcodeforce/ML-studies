@@ -84,7 +84,7 @@ Some ways to use Generative AI in business applications:
 
 * Build foundation model from scratch: very expensive and time consuming, with highly skilled ML scientists.
 * Reuse existing foundation models available as open-source (hundred of model on [Hugging Face hub](https://huggingface.co/models)), then add own corpus on top of it, to fine tune the model for better accuracy.
-* Use generative AI services or APIs offered by foundation model vendors. There is no control over the data, cost and customization. Use [prompt engineering](#prompt-engineering) or [RAG techniques](./rag.md) to get better answers, .
+* Use generative AI services or APIs offered by foundation model vendors. There is no control over the data, cost and customization. Use [prompt engineering](./prompt-eng.md/#prompting-techniques) or [RAG techniques](./rag.md) to get better answers, .
 
 ???- "Hugging Face"
     [Hugging Face](https://huggingface.co/) is an open-source provider of natural language processing (NLP), which makes it easy to add state of the art ML models to applications. We can deploy and fine-tune pre-trained models reducing the time it takes to set up and use these NLP models from weeks to minutes.

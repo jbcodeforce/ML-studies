@@ -90,13 +90,13 @@ But the 5 important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/
     Supervised means; build a model from labeled training data. With unsupervised, we do not know upfront the outcome variable. [read more >> ](./ml/index.md/#supervised-learning)
 
 ???- question "Explain the bias-variance tradeoff"
-    Bias measures how far off the predictions are from the correct values in general. Variance measures the consistency (or variability) of the model prediction. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via [regularization](./concepts/index.md/#regulaziation). [Read more  on variance >> ](./concepts/index.md/#variance). Perform [cross-validation]() with hyperparameter tuning.
+    Bias measures how far off the predictions are from the correct values in general. Variance measures the consistency (or variability) of the model prediction. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via [regularization](./concepts/index.md/#regularization). [Read more  on variance >> ](./concepts/index.md/#variance). Perform [cross-validation]() with hyperparameter tuning.
 
 ???- question "Provide examples of regularization techniques"
-    The regularization techniques are L1 regularization (Lasso), L2 regularization (Ridge), and elastic net regularization.  [See regularization section](./concepts/index.md/#regulaziation).
+    The regularization techniques are L1 regularization (Lasso), L2 regularization (Ridge), and elastic net regularization.  [See regularization section](./concepts/index.md/#regularization).
 
 ???- question "Overfitting / underfitting"
-    Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./concepts.md/#fitting)
+    Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./concepts/index.md/#fitting)
 
 ???- question "What are the steps involved in the machine learning pipeline?"
 

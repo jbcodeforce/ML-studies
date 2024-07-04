@@ -1,5 +1,8 @@
 # LangGraph
 
+!!!- info "Updates"
+    Created 04/2024 - Update 07/04/2024
+
 [LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, **multi-actor** applications, and being able to add cycles to LLM app. It is not a DAG. 
 
 Single and multi-agent flows are described and represented as graphs.
@@ -69,7 +72,7 @@ memory = AsyncSqliteSaver.from_conn_string("checkpoints.sqlite")
 
 #### Invocation and chat history
 
-The MessageState keeps an array of messages. So the input is a dict with "messages" and then a HumanMessage. As graphs are stateful, it is important to pass a thread_id.
+The MessageState keeps an array of messages. So the input is a dict with the "messages" key and then a HumanMessage. As graphs are stateful, it is important to pass a thread_id.
 
 ```python
 app.invoke(
@@ -89,7 +92,7 @@ The execution trace to LLM presents the following content:
 }
 ```
 
-The LLM is generating some statement that tool calling is needed by matching ti the tool named specified during LLM creation.
+The LLM is generating some statements that tool calling is needed by matching to the tool name specified (e.g. `tavily_search_results_json`) during LLM creation.
 
 ```json
 "generations": [
@@ -110,7 +113,7 @@ The LLM is generating some statement that tool calling is needed by matching ti 
 ```
 
 
-Graph cycles the steps until there are no more `tool_calls` on AIMessage: 1/ If AIMessage has tool_calls, "tools" node executes, 2/ the "agent" node executes again and returns AIMessage. Execution progresses to the special `END` value and outputs the final state
+Graph cycles the steps until there are no more `tool_calls` within the AIMessage: 1/ If AIMessage has tool_calls, "tools" node executes, 2/ the "agent" node executes again and returns AIMessage. Execution progresses to the special `END` value and outputs the final state
 
 Adding a "chat memory" to the graph with LangGraph's checkpointer to retain the chat context between interactions.
 

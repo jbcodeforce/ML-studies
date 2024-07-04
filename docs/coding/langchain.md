@@ -269,7 +269,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
 
 
 ???- info "Getting started with Feast"
-    Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. See [my summary on Feast](../data/features.md#feast-open-source)
+    Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. 
 
 ???- info "LLM and FeatureForm"
     See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
@@ -413,27 +413,39 @@ We can use LLM and a special chain ([QAGenerateChain](https://api.python.langcha
 
 ### Tool Calling
 
-With Tool Calling we can define function or tool to be referenced as part of the LLM response, and LLM will prepare the arguments for the function. It is used to generate tool invocations, not to execute it.
+With Tool Calling we can define function or tool to be referenced as part of the LLM response, and LLM will prepare the arguments for the function. It is used to generate tool invocations, not to execute it. 
 
-Tool calling allows a model to detect when one or more tools should be called and responds with the inputs that should be passed to those tools. The inputs match a defined schema. 
+Tool calling allows a model to detect when one or more tools should be called and responds with the inputs that should be passed to those tools. The inputs match a defined schema. Below is an example structured answer from OpenAI LLM: "tool_calls" is the key to get the list of function names and arguments the orchestrator needs to call.
+
+```json
+    "tool_calls": [
+            {
+            "name": "tavily_search_results_json",
+            "args": {
+                "query": "weather in San Francisco"
+            },
+            "id": "call_Vg6JRaaz8d06OXbG5Gv7Ea5J"
+            }
+
+```
 
 Prompt defines placeholders to get tools parameters. The following [langchain prompt](https://smith.langchain.com/hub/hwchase17/openai-tools-agent) for OpenAI uses `agent_scratchpad` variable, which is a `MessagesPlaceholder`. Intermediate agent actions and tool output messages, will be passed in here. 
 
-LangChain has a lot of [predefined tool definitions done to be reused](https://python.langchain.com/docs/integrations/tools/).
+LangChain has a lot of [predefined tool definitions to be reused](https://python.langchain.com/docs/integrations/tools/).
 
-We can use tool calling in chain (to use tools in sequence) or [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
+We can use tool calling in chain (to use tools in sequence) or in [agent](https://python.langchain.com/docs/modules/agents/agent_types/tool_calling/) (to use tools in loop).
 
-LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool, as part of each call to the model, so that the model can invoke the tool when appropriate.
+LangChain offers an API to the LLM called `bind_tools` to pass the definition of the tool, as part of each call to the model, so that the application can invoke the tool when appropriate.
 
 See also [the load tools api with a list of predefined tools](https://api.python.langchain.com/en/latest/agents/langchain.agents.load_tools.load_tools.html#langchain.agents.load_tools.load_tools).
 
-Below is the classical application flow using tool calling. The function wraps a remote microservice.
+Below is the classical application flow using tool calling. The exposed function wraps a remote microservice.
 
 ![](./diagrams/tool_calling.drawio.png)
 
 When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
 
-Many LLM providers support tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
+Many LLM providers support for tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
 
 ### Interesting tools
 
@@ -458,6 +470,23 @@ tools = [retriever_tool, search]
 
 [PythonREPLTool](https://api.python.langchain.com/en/latest/tools/langchain_experimental.tools.python.tool.PythonREPLTool.html#langchain_experimental.tools.python.tool.PythonREPLTool) is a tool for running python code in REPL (look like a jupiter notebook).
 
+#### A base model
+
+It is possible to bind a BaseModel class as below, where a LLM is used to create prompt, so the prompt instruction entity is a json used as tool. (Tool definition are structured system prompt for the LLMs as they just understand text)
+
+```python
+class PromptInstructions(BaseModel):
+    """Instructions on how to prompt the LLM."""
+    objective: str
+    variables: List[str]
+    constraints: List[str]
+    requirements: List[str]
+
+llm_with_tool = llm.bind_tools([PromptInstructions])
+```
+
+[See the LangGraph sample: prompt_builder_graph.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/langgraph/prompt_builder_graph.py).
+
 #### Our own tools
 
 [Define custom tool](https://python.langchain.com/docs/modules/tools/custom_tools/) using the `@tool` annotation on a function to expose it as a tool. It uses the function name as the tool name and the function’s docstring as the tool’s description. 
@@ -472,7 +501,7 @@ To map the tools to OpenAI function call there is a module called: `from langcha
 
 It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time, without having to pass all the tool definitions within the context window. It uses a vector store to create embeddings for each tool description.
 
-### How to
+### How Tos
 
 ???- question "How to trace the agent execution?"
     ```

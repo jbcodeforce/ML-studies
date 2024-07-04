@@ -8,7 +8,7 @@ Ace AI discussions and story telling.
 Cover the high-level workings of models like GPT-3, including transformers, pre-training, fine-tuning, etc.
 
 * [x] [General LLM intro](./index.md/#introduction)
-* [x] [Transformer and GPT-3 summary](./index.md/#transformer)
+* [x] [Transformer and GPT-3 summary](./index.md/#transformer-architecture)
 * [x] [How LLM pre-training is done](./index.md/#pre-training-process)
 * [ ] [How to fine tune existing model](./index.md/#model-fine-tuning)
 
