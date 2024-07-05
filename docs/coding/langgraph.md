@@ -147,7 +147,19 @@ or the [implementation of ReAct using LangGraph](https://github.com/jbcodeforce/
 
 An interesting prompt to use in the ReAct implementation [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
 
-## 
+## Adaptive RAG
+
+The code [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/adaptive_rag.py) is implementing the following graph as documented in [this sample from product documentation](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/). 
+
+![](./diagrams/adaptive_rag.drawio.png)
+
+The documents processing and vector store creation is done in separate function outside of the graph.
+
+Some interesting patterns from this sample:
+
+* One Agent to route the query, with dedicated prompt 
+* retriever from vector store with an agent to grade the retrieved documents
+* graph state includes questions, retrieved documents 
 
 ## Code 
 
