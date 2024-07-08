@@ -8,7 +8,7 @@ from typing_extensions import TypedDict
 from pprint import pprint
 from langchain_core.pydantic_v1 import BaseModel, Field
 
-from langgraph.graph import StateGraph, START, END
+from langgraph.graph import StateGraph, END
 
 from langchain_community.document_loaders import WebBaseLoader
 from langchain_community.vectorstores import Chroma
@@ -84,9 +84,6 @@ def get_or_build_generation_agent():
     if not _generation_agent:
         prompt = hub.pull("rlm/rag-prompt")
         llm = ChatOpenAI(model=LLM_MODEL, temperature=0)
-        # Post-processing
-        def format_docs(docs):
-            return "\n\n".join(doc.page_content for doc in docs)
         _generation_agent= prompt | llm | StrOutputParser()
     return _generation_agent
 
@@ -134,15 +131,13 @@ def get_or_build_answer_grader():
         answer_prompt  = ChatPromptTemplate.from_messages(
                 [
                     ("system", system),
-                    (
-                        "human",
-                        "Here is the initial question: \n\n {question} \n Formulate an improved question.",
+                    ( "human", "User question: \n\n {question} \n\n LLM generation: {generation}",
                     ),
                 ]
             )
         llm = ChatOpenAI(model=LLM_MODEL, temperature=0)
         structured_llm_grader = llm.with_structured_output(GradeAnswer)
-        _answer_grader = answer_prompt  | structured_llm_grader | StrOutputParser()
+        _answer_grader = answer_prompt  | structured_llm_grader 
     return _answer_grader
 
 
@@ -176,8 +171,8 @@ class GradeHallucinations(BaseModel):
 
 _hallucination_grader= None
 def get_or_build_hallucination_grader():
-    global _retrieval_grader
-    if not _retrieval_grader:
+    global _hallucination_grader
+    if not _hallucination_grader:
         system = """You are a grader assessing whether an LLM generation is grounded in / supported by a set of retrieved facts. \n 
      Give a binary score 'yes' or 'no'. 'Yes' means that the answer is grounded in / supported by the set of facts.."""
         hallucination_prompt  = ChatPromptTemplate.from_messages(
@@ -315,8 +310,7 @@ def define_graph():
     workflow.add_node("grade_documents", grade_documents)
     workflow.add_node("transform_query", transform_query) 
     
-    workflow.add_conditional_edges(
-        START,
+    workflow.set_conditional_entry_point(
         route_question,
         {
             "web_search": "web_search",
@@ -382,7 +376,7 @@ if __name__ == "__main__":
     if not os.path.isdir(DOMAIN_VS_PATH):
         build_rag_content()
     else:
-        _vs=Chroma(persist_directory=DOMAIN_VS_PATH,embedding_function=_embd)
+        _vs=Chroma(persist_directory=DOMAIN_VS_PATH,collection_name="agentic_corpus", embedding_function=_embd)
     print(_vs)
     app=define_graph()
     #process_unrelated_question(app)

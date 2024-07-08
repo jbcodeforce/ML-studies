@@ -363,8 +363,8 @@ The process of transfer learning usually freezes some base layers of a pre-train
 
 * [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
 * [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb)
-* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer_vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer_vision/use_fashion_cnn.py)
-* [Pizza, steak, sushi image classifier]()
+* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/use_fashion_cnn.py)
+* [Pizza, steak, sushi image classifier](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/classify_food.py)
 
 ## Resources
 

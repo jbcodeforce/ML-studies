@@ -22,3 +22,4 @@ pytorch/computer-vision/data/
 **/.env
 **/.taipy/
 techno/crew-ai/db/
+**/agent_domain_store/

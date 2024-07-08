@@ -4,6 +4,7 @@ langsmith
 langchain-community
 langchain-experimental
 langchain-mistralai
+langgraph
 anthropic
 faiss-cpu>=1.7,<2
 pypdf>=3.8,<4
