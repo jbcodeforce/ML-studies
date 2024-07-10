@@ -1,4 +1,5 @@
 """
+An agentic approach of RAG using tool callings
 Load a pdf document, split it using sentence splitter 
 """
 import sys
@@ -64,4 +65,4 @@ if __name__ == "__main__":
     response = engine.query(
         "How do agents share information with other agents?"
     )
-    print(str(response))
+    print(str(response))    
