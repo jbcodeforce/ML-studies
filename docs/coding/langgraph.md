@@ -129,6 +129,9 @@ tool_node = ToolNode(tools)
 
 **Conditional edge** between nodes, helps to build more flexible workflow: based on the output of a node, one of several paths may be taken.
 
+#### Tool calling with Mistral
+
+See [this product documentation](https://docs.mistral.ai/capabilities/function_calling/) adapted to langgraph in [this code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/mistral/mistral_tool_calling_lg.py)
 
 ## Use cases
 
@@ -163,13 +166,14 @@ Some interesting patterns from this sample:
 
 ## Code 
 
-See [code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) in my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
+See [Langgraph code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) with interesting patterns, but with some code not following the last updates in the APIs and my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
 
 See the [owl agent framework open source project](https://athenadecisionsystems.github.io/athena-owl-core/) to manage assistant, agents, tools, prompts..
 
 ## Code FAQ
 
 ???- question "prompt variables to be integrated in LangGraph"
+    The graph state should include variables used in the prompts used in the agents.
         
 
 ## Deeper dive

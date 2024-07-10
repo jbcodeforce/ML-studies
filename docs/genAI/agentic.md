@@ -31,7 +31,17 @@ Small Specialist Agents (SSAs) is an agentic approach to perform planning and re
 
 ## Challenges
 
-Existing demonstrations of agent in action are for very specific use cases and are giving too much freedom to Agents without enough controls. This is not ready for production usages. LLMs in the agent are loosing their efficiency over time. 
+The current adoption of Agents since mid 2023 has highlighted the following challenges:
+
+* Existing demonstrations of agent in action are for very specific use cases and are giving too much freedom to Agents without enough controls.
+* The cost of running open-loop agent is high.
+* Pure LLM plannification, reason and act is not optimized and the path to reach a response may be long. Tasks may be defined more than once.
+* Get good results for reasoning is achieved on the last (mid 2024), most expensive, LLM.
+* New model released recently demonstrates that existing agent workflow implementations become unstable. 
+* This is not ready for production usages as responses can reach a hole in the workflow or continuous iterations (reaching a max number of iterations)
+* Big prompt for agent with a lot of tools (Multi-Action-Agent) deliver poor results in tool selection. 
+* Even with larger context window, they are still issue with the "in-the-middle" problem, where context instructions in the middle of the system prompt is ignored  by the LLM during generation.
+* Even same LLMs used in the agent are loosing their efficiency over time. 
 
 Developers need to address the level of freedom given to the LLMs.
 
@@ -44,11 +54,13 @@ Developers need to address the level of freedom given to the LLMs.
 | State Machine | LLM | LLM with cycle | Code |
 | Agent (Autonomous) | LLM | LLM | LLM |
 
+Multiple agents, with more dedicated prompt, smaller list of tools, event Single Action Agent, and orchestration seems to be a viable solution for agentic solutions. This new approach adds complexity in designing, implementing and then tuning the solution, but authorize the usage of smaller LLM, and specific prompts. Current research looks after integrating agent with reinforcement learning as tools to do trial and error learning.
+
 [LangGraph](../coding/langgraph.md) helps to better support the Router, State Machine and chain implementations.
 
 ## Guidelines
 
-Agents perform better if we define a role to play, instruct them with prompt to help them to focus on a goal, add tools to access external systems, combine them with other agents to cooperate and chain content between agents. 
+Agents perform better if we define a role to play, instruct them with a specific prompt to help them to focus on a goal, add tools to access external systems, combine them with other agents to cooperate and chain content between agents. 
 
 Focus is becoming important as the context windows are becoming larger. With too many information LLM can lose the important points and goals. Try to think about multiple agents to split the work and generate better results together.
 

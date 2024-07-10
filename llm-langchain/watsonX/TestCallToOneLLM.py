@@ -106,3 +106,4 @@ if response.status_code != 200:
 	raise Exception("Non-200 response: " + str(response.text))
 
 data = response.json()
+print(data)

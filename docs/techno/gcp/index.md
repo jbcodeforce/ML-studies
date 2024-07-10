@@ -1,8 +1,17 @@
-# AI at Google Cloud
+# Google AI platform
 
 Google offers a set of managed services to develop ML models and use Generative AI models. The [model garden](https://cloud.google.com/model-garden) exposes a catalog of Google or 3nd party models.
 
-## Cloud Engine
+## Most important products
+
+* [Vertex AI](https://cloud.google.com/vertex-ai?hl=en)
+* [Gemini LLM]() Prompt and test in Vertex AI with Gemini, using text, images, video, or code. Gemini is multimodal, it accepts text, image, video, audio and document data as input and produces text output.
+* [Gemma]()  , a family of lightweight, state-of-the-art open models
+* [Search Generative Experience (Search lab)](https://search.google/ways-to-search/search-labs/)
+* [Google Cloud run]() Serverless platform to deploy any web app
+* [Colab](https://colab.research.google.com/) A new notebook experience with enterprise-grade privacy and security.
+
+### Cloud Engine
 
 Run virtual machines on Google infrastructure. 
 
@@ -15,15 +24,14 @@ sudo apt update && sudo apt -y install apache2
 ```
 
 
-## Cloud Workstation
+### Cloud Workstation
 
 [Cloud Workstation](https://cloud.google.com/workstations) is a fully managed dev env. It supports any code editors and applications that can be run in a container. And it supports Gemini Code Assist. [Pricing](https://cloud.google.com/workstations/pricing) is based of per-hour usage, management fees, control plane and network fees.
 
-## Cloud Shell
+### Cloud Shell
 
 Manage infrastructure and develop our applications from any browser with Cloud Shell. Free for all users, but has a weekly quotas of 50h.
 
-To run Gcloud cli locally [see install instructions.](https://cloud.google.com/sdk/docs/install)
 
 ## Vertex AI
 
@@ -43,12 +51,12 @@ Interesting features:
 ???- info "Grounding"
         [Grounding](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview) is the ability to connect model output to verifiable sources of information. It reduces model hallucinations, links model responses to specific information, and it enhances the trustworthiness. LLM response is based on Google Search to get public knowledge as facts. Grounding can be done with enterprise data using Vertex AI Search.
 
-## Colab
 
-A new notebook experience with enterprise-grade privacy and security.
+## Hands-on
 
-## Gemini models
+* [Install gcloud](https://cloud.google.com/sdk/docs/install)
+* Use Gemini inside VSCode
 
-Gemini i a multi-modal (text, audio, image, video) model, Imagen (image generation), Codey are dedicated Gen AI models.
+## Deeper dive
 
-## 
+* [GCP architecture](https://cloud.google.com/architecture/framework) and [ML specific](https://cloud.google.com/architecture/framework/system-design/ai-ml)

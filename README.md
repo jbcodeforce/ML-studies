@@ -1,7 +1,5 @@
 # [Machine Learning Studies - Basics](https://jbcodeforce.github.io/ML-studies/)
 
-Read this ML study content in [book format](https://jbcodeforce.github.io/ML-studies/).
-
 ## Building this booklet locally
 
 The content of this repository is written with markdown files, packaged with [MkDocs](https://www.mkdocs.org/) and can be built into a book-readable format by MkDocs build processes.

@@ -56,7 +56,7 @@ nav:
       - Streamlit: techno/streamlit.md
       - TaiPy: techno/taipy/index.md
       - NiceGUI: techno/nicegui.md
-    - GCP: techno/gcp.md
+    - GCP: techno/gcp/index.md
     - WatsonX: techno/watsonx.md
   - Solutions:
     - Introduction: solutions/index.md
