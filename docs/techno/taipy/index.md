@@ -1,15 +1,18 @@
 # Taipy
 
-[TapPy](https://docs.taipy.io/) a Python open-source library designed for easy development of data-driven web applications.
+[TapPy](https://docs.taipy.io/) a Python open-source library designed for easy development of data-driven web applications. It supports defining scenario for data pipeline and integrate with UI elements to do the data presentations and interactions.
 
 It generates web pages from a Flask Server. The main class is `Gui`.
 
-* Support multiple pages
-* Keep state of application variables with dynamic binding
+* Support multiple pages which are defined in markdown, html or python
+* Offer various visual elements that can interact with the Python variables and environment
+* Every callback, including submit_scenario(), receives a State object as its first parameter. 
+* Keep State of user connection and variables for dynamic binding.
 * User interactions are event driven
-* Pages may be defined by Html or markdown template, or built by code. Page has name for navigation
+* Page has name for navigation
 * Include a CLI to create app or run them.
 * Blocks let you organize controls (or blocks) in pages
+* Scenarios are global variables available to everyone connected.
 
 ## Some how to
 

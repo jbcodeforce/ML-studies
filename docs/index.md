@@ -120,11 +120,13 @@ Content is based of the following different sources:
 * [Collective intelligence - Toby Segaran's book](https://www.amazon.com/Programming-Collective-Intelligence-Building-Applications/dp/0596529325/ref=sr_1_2?crid=1UBVCJKMM17Q6&keywords=collective+intelligence&qid=1553021611&s=books&sprefix=collective+inte%2Cstripbooks%2C236&sr=1-2).
 * [Stanford Machine learning training - Andrew Ng](https://www.coursera.org/learn/machine-learning).
 * [Machine Learning University](https://mlu.corp.amazon.com/course-catalog/)
+* [arxiv.org](https://arxiv.org) academic paper on science subjects
 * [Dive into deep learning book](https://d2l.ai)
 * [Amazon Sagemaker Python SDK](https://sagemaker.readthedocs.io/en/stable/)
 * [Kaggle](http://kaggle.com)
 * [Papers with code - trends](https://paperswithcode.com/)
 * Introduction to Data Sciences - University of Washington.
 * [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)
-* [poe.com](https://poe.com)
+* [poe.com](https://poe.com) to search content using LLM
 * [Made with ML from Goku Mohandas.](https://madewithml.com/)
+* [Vision Transformer github from lucidrains](https://github.com/lucidrains/)

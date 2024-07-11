@@ -456,6 +456,8 @@ Some useful articles:
 * [RAG with OpenSearch Service](https://catalog.workshops.aws/semantic-search/en-US/module-7-retrieval-augmented-generation).
 * [Running LLM on local laptop using llama.cpp](https://github.com/ggerganov/llama.cpp)
 * [BertNet knowledge graphs from llm](https://openreview.net/pdf?id=ntIq8Wm79G-)
+* [Git repo explaining the transformer from Alammar.](https://jalammar.github.io/illustrated-transformer/)
+* [Attention Is All You Need - research paper](https://arxiv.org/abs/1706.03762)
 * [On the role of LLM in planning - tutorial](https://www.youtube.com/watch?v=KTagKkWT2n4)
 
 [>>> Prompt Engineering](./prompt-eng.md) 
