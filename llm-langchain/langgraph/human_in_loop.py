@@ -32,7 +32,7 @@ def search(query: str):
 sys_prompt =  ChatPromptTemplate.from_messages([
     ("system", "Answer the user's questions and use tools when you cannot get an answer on recent data."),
     MessagesPlaceholder(variable_name="chat_history"),
-    ("user", "{input}"),
+    ("user"),
 ])
 langchain.debug=True
 tools = [search]

@@ -73,6 +73,7 @@ theme:
   features:
       - content.code.annotate
       - content.tooltips
+      - content.code.copy
       - search.highlight
       - navigation.instant
       - navigation.instant.progress

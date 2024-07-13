@@ -24,8 +24,8 @@ def get_weather(city: Literal["sf", "nyc"]):
         raise AssertionError("Unknown city")
 
 
-def print_stream(stream):
-    for s in stream:
+def print_stream(graph, inputs, config):
+    for s in graph.stream(inputs, config, stream_mode="values"):
         message = s["messages"][-1]
         if isinstance(message, tuple):
             print(message)
@@ -35,7 +35,16 @@ def print_stream(stream):
 tools = [get_weather]
 model = ChatOpenAI(temperature=0)
 memory = MemorySaver()
-graph = create_react_agent(model, tools=tools, checkpointer=memory)
-
+graph = create_react_agent(model, tools=tools, interrupt_before=["tools"],  checkpointer=memory)
+thread = {"configurable": {"thread_id": "2"}}
 inputs = {"messages": [("user", "what is the weather in sf")]}
-print_stream(graph.stream(inputs, stream_mode="values"))
+print_stream(graph, inputs, thread)
+snapshot = graph.get_state(thread)
+print(">>> Flow interrupted, next step is: ", snapshot.next)
+print_stream(graph, None, thread)
+inputs2 = {"messages": [("user", "Cool, so then should I go biking today?")]}
+print_stream(graph, inputs2, thread)
+
+
+# user input is None
+

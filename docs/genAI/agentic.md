@@ -130,7 +130,7 @@ See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/
 
 ### OpenSSA
 
-[Small Specialist Agents for Problem-Solving](https://github.com/aitomatic/openssa)
+[Small Specialist Agents for Problem-Solving](https://github.com/aitomatic/openssa) 
 
 ## References
 
