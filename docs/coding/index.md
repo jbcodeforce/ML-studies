@@ -167,7 +167,7 @@ Via conda or pip, install `pytorch torchvision torchaudio`.
 
 Example of getting started code in deep-neural-net folder. 
 
-[Summary of the library](./pytorch.md)
+[Summary of the library and deeper studies](./pytorch.md)
 
 ## Code samples
 

@@ -8,6 +8,26 @@
 
 ![\Large corr(x,y)](https://latex.codecogs.com/svg.latex?corr(x,y)=\frac{cov(x,y)}{\sqrt {\sum_{i}^{} (x_{i} - u_{x})^2} * \sqrt {\sum_{i}^{} (y_{i} - u_{y})^2 }) 
 
+## Probability
+
+* the probability of two independent events happening at the same time: 
+
+![](https://latex.codecogs.com/svg.latex?P(A \wedge B) = P(A) * P(B))
+
+* the probability of two dependent events happening at the same time:
+
+![](https://latex.codecogs.com/svg.latex?P(A|B) = P(B|A) * P(A))
+
+* the probability of disjoint events A and B (they are mutually exclusive) is:
+
+![](https://latex.codecogs.com/svg.latex?P(A \vee B) = P(A) + P(B))
+
+* if A and B are not mutually exclusive:
+
+![](https://latex.codecogs.com/svg.latex?P(A \vee B) = P(A) + P(B) - P(A \wedge B))
+
+*What is the probability that a card chosen from a standard deck will be a Jack or a heart?* becomes P(Jack or Heart) = P(Jack) + P(heart) - P( jack of Hearts) = 16/52
+
 ## Bayesian
 
 In machine learning, there are two main approaches: the **Bayesian** approach and the **frequentist** approach. The Bayesian approach is based on probability theory and uses Bayes' theorem to update probabilities based on new data. The frequentist approach, on the other hand, is based on statistical inference and uses methods such as hypothesis testing and confidence intervals to make decisions.

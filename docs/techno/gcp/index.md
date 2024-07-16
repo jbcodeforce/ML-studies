@@ -6,11 +6,11 @@ Google offers a set of managed services to develop ML models and use Generative 
 
 * [Vertex AI](https://cloud.google.com/vertex-ai?hl=en)
 * [Gemini LLM]() Prompt and test in Vertex AI with Gemini, using text, images, video, or code. Gemini is multimodal, it accepts text, image, video, audio and document data as input and produces text output.
-* [Gemma]()  , a family of lightweight, state-of-the-art open models
+* [Gemma](https://blog.google/technology/developers/google-gemma-2/), a family of lightweight, state-of-the-art open models from 9B or 27 billion parameters. Based on Gemini embeddings. Uses a 256 k tokenizers. It supports  text-to-text, decoder-only large language models, with open weights for both pre-trained variants and instruction-tuned variants. Should be able to run on small device. [Available on Hugging Face](https://huggingface.co/google/gemma-2-9b), [kaggle]().
 * [Search Generative Experience (Search lab)](https://search.google/ways-to-search/search-labs/)
 * [Google Cloud run]() Serverless platform to deploy any web app
 * [Colab](https://colab.research.google.com/) A new notebook experience with enterprise-grade privacy and security.
-
+* [TPU]() designed ships specifically for matrix operations common in machine learning
 ### Cloud Engine
 
 Run virtual machines on Google infrastructure. 
@@ -22,6 +22,12 @@ Install Apache HTTP server:
 ```sh
 sudo apt update && sudo apt -y install apache2
 ```
+
+### Colab
+
+Creating a Jupyter notebook in Google Drive will start colab.
+
+Simple [introduction video]()
 
 
 ### Cloud Workstation
@@ -48,8 +54,8 @@ Interesting features:
 * offers multiple request augmentation methods that give the model access to external APIs and real-time information: Grounding, RAG amd function calling.
 * checks both the prompt and response for how much the prompt or response belongs to a safety category
 
-???- info "Grounding"
-        [Grounding](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview) is the ability to connect model output to verifiable sources of information. It reduces model hallucinations, links model responses to specific information, and it enhances the trustworthiness. LLM response is based on Google Search to get public knowledge as facts. Grounding can be done with enterprise data using Vertex AI Search.
+???+ info "Grounding"
+     [Grounding](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview) is the ability to connect model output to verifiable sources of information. It reduces model hallucinations, links model responses to specific information, and it enhances the trustworthiness. LLM responses are based on Google Search to get public knowledge as facts. Grounding can be done with enterprise data using Vertex AI Search.
 
 
 ## Hands-on
@@ -60,3 +66,4 @@ Interesting features:
 ## Deeper dive
 
 * [GCP architecture](https://cloud.google.com/architecture/framework) and [ML specific](https://cloud.google.com/architecture/framework/system-design/ai-ml)
+* [LLM comparator](https://github.com/pair-code/llm-comparator)
