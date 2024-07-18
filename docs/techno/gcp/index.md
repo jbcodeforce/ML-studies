@@ -10,7 +10,8 @@ Google offers a set of managed services to develop ML models and use Generative 
 * [Search Generative Experience (Search lab)](https://search.google/ways-to-search/search-labs/)
 * [Google Cloud run]() Serverless platform to deploy any web app
 * [Colab](https://colab.research.google.com/) A new notebook experience with enterprise-grade privacy and security.
-* [TPU]() designed ships specifically for matrix operations common in machine learning
+* [TPU](https://cloud.google.com/tpu?hl=en) designed ships specifically for matrix operations common in machine learning. Can be used in worker node of GKE.
+
 ### Cloud Engine
 
 Run virtual machines on Google infrastructure. 
@@ -25,9 +26,9 @@ sudo apt update && sudo apt -y install apache2
 
 ### Colab
 
-Creating a Jupyter notebook in Google Drive will start colab.
+Creating a Jupyter notebook in Google Drive will start colab. It can execute any python code and gets a VM as kernel
 
-Simple [introduction video]()
+Simple [introduction video](). 
 
 
 ### Cloud Workstation

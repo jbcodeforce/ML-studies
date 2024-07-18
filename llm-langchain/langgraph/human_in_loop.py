@@ -10,7 +10,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from dotenv import load_dotenv
 import langchain
-import os
+
 load_dotenv("../../.env")
 
 
@@ -22,9 +22,9 @@ def define_model():
     return ChatOpenAI(temperature=0)
 
 @tool
-def search(query: str):
+def search(query_about_weather: str):
     """
-    Call to search the web when you need weather information.
+    Search the web when you need weather information.
     """
     return [" it is sunny in Santa Clara"]
 
@@ -37,14 +37,17 @@ sys_prompt =  ChatPromptTemplate.from_messages([
 langchain.debug=True
 tools = [search]
 tool_executor = ToolExecutor(tools)
-model = sys_prompt | define_model()
-model.bind_tools(tools)
+llm = define_model()
+llm.bind_tools(tools)
+model = sys_prompt | llm
+
 
 # Define the function that determines whether to continue or not
 def should_continue(state):
     messages = state["messages"]
     last_message = messages[-1]
     # If there is no function call, then we finish
+    print(last_message)
     if not last_message.tool_calls:
         return "end"
     # Otherwise if there is, we continue
@@ -124,7 +127,7 @@ inputs = [HumanMessage(content="What did I tell you my name was?")]
 for event in app.stream({"messages": inputs}, thread, stream_mode="values"):
     event["messages"][-1].pretty_print()
 
-inputs = [HumanMessage(content="what's the weather in santa clara (CA) now? use your tools if you do not know")]
+inputs = [HumanMessage(content="what's the weather in santa clara (CA) now?")]
 for event in app.stream({"messages": inputs}, thread, stream_mode="values"):
     event["messages"][-1].pretty_print()
 
