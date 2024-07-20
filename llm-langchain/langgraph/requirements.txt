@@ -1,4 +1,5 @@
 langgraph
 langchain-ibm
 langchain_openai
+langchain_mistralai
 taipy

@@ -1,7 +1,7 @@
 # AI and Machine Learning studies
 
 !!! info "Update"
-    Created 2017 - Updated 6/13/2024
+    Created 2017 - Updated 7/19/2024
 
 Welcome to this repository for machine learning using Python and other cutting-edge technologies! Here, you will find a treasure trove of notes, code samples, and Jupyter notebooks, carefully curated from various reputable sources such as IBM labs, AWS, Kaggle, Coursera, Udemy courses, books, and insightful websites.
 

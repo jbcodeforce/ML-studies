@@ -1,6 +1,8 @@
 
 from taipy.gui import Gui, State, notify
 import sys,os
+from dotenv import load_dotenv
+load_dotenv()
 module_path = "."
 sys.path.append(os.path.abspath(module_path))
 from prompt_builder_graph import send_user_msg

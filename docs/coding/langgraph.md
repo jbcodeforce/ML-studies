@@ -1,7 +1,7 @@
 # LangGraph
 
 !!!- info "Updates"
-    Created 04/2024 - Update 07/04/2024
+    Created 04/2024 - Update 07/19/2024
 
 [LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, **multi-actor** applications, and being able to add cycles to LLM app. It is not a DAG. 
 
@@ -25,7 +25,7 @@ Single and multi-agent flows are described and represented as graphs.
 
 `Graph` defines the organization of the node workflow. Graphs are immutable so are compiled once defined:
 
-```python
+```python title="A simple call LLM graph"
 graph = MessageGraph()
 
 graph.add_node("chatbot", chatbot_func)  # (1)
@@ -46,6 +46,18 @@ def call_tool(state):  # (1)
 
 1. The State of the graph, in this case, includes a list of messages
 
+**Conditional edge** between nodes, helps to build more flexible workflow: based on the output of a node, one of several paths may be taken. Conditional edge use function to decide where to route according to the last message content.
+
+```py
+workflow.add_conditional_edges(
+                "agent",
+                self.should_continue,
+                {
+                    "continue": "action",
+                    "end": END,
+                },
+            )
+```
 
 ### Agents
 
@@ -63,7 +75,7 @@ Graphs helps implementing Agents as AgentExecutor is a deprecated API. They most
 
 Graphs such as StateGraph's naturally can be composed. Creating subgraphs lets developers build things like multi-agent teams, where each team can track its own separate state.
 
-LangGraph comes with built-in persistence, allowing developer to save the state of the graph at point and resume from there.
+LangGraph comes with built-in persistence, allowing developers to save the state of the graph at a given point and resume from there.
 
 ```python
 memory = SqliteSaver.from_conn_string(":memory:")
@@ -79,27 +91,32 @@ for event in app.stream({"messages": inputs}, thread, stream_mode="values"):  # 
 
 1. Call the graph using streaming do event are yielded.
 
-See [other checkpointer ways to persist state](https://langchain-ai.github.io/langgraph/reference/checkpoints/#implementations), [AsyncSqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/#asyncsqlitesaver) is an asynchronous checkpoint saver that stores checkpoints in a SQLite database or [SqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/#sqlitesaver) for synchronous storage is SQLlite..
+See [other checkpointer ways to persist state](https://langchain-ai.github.io/langgraph/reference/checkpoints/#implementations), [AsyncSqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/#asyncsqlitesaver) is an asynchronous checkpoint saver that stores checkpoints in a SQLite database or [SqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/#sqlitesaver) for synchronous storage is SQLlite.
 
 ```python
 memory = AsyncSqliteSaver.from_conn_string("checkpoints.sqlite")
 ```
 
+* See [first basic program](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraph.py) to call Tavily tool for searching recent information about the weather in San Francisco using OpenAI LLM. (it is based on the [tutorial](https://langchain-ai.github.io/langgraph/#example)). It does not use any prompt, and the call_method function invokes OpenAI model directly.
+* See [A hello world graph without any LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/graph_without_llm.py) as an interesting base code to do stateful graph.
 
-* See [first basic program](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraph.py) to call Tavily tool for searching recent information about the weather in San Francisco. (it is based on the [tutorial](https://langchain-ai.github.io/langgraph/#example)). It does not use any prompt, and the call_method function invoke OpenAI model directly.
 
 #### Invocation and chat history
 
-The MessageState keeps an array of messages. So the input is a dict with the "messages" key and then a HumanMessage. As graphs are stateful, it is important to pass a thread_id, which should be unique per user's chat conversation.
+The LangGraph's `MessageState` keeps an array of messages. So the input is a dict with the "messages" key and then a HumanMessage, ToolMessage or AIMessage. As graphs are stateful, it is important to pass a thread_id, which should be unique per user's chat conversation.
 
 ```python
 app.invoke(
     {"messages": [HumanMessage(content="what is the weather in sf")]},
-    config={"configurable": {"thread_id": 42}}
+    config={"configurable": {"thread_id": 42}}, debug=True
 )
 ```
 
-This thread_id can be saved with the unique user identifier in a documents database so a conversation can be continued after some time.
+Some code using chat_history:
+
+* [Close Question with a node creating a close question and then process the outcome with llm](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/close_question.py).
+
+![](./diagrams/close_q.drawio.png)
 
 The LLM execution trace presents the following content:
 
@@ -112,7 +129,7 @@ The LLM execution trace presents the following content:
 }
 ```
 
-The LLM is generating some statements that tool calling is needed by matching to the tool name specified (e.g. `tavily_search_results_json`) during LLM creation (with the args coming from the function signature or for a schema definition as part of the tool definition).
+The LLM is generating some statements that tool calling is needed by matching to the tool name specified (e.g. `tavily_search_results_json`) during LLM creation (with the args coming from the function signature or for a schema definition as part of the tool definition). Below is an example of OpenAI tool_calls response. Most LLMs support this schema:
 
 ```json
 "generations": [
@@ -132,7 +149,6 @@ The LLM is generating some statements that tool calling is needed by matching to
             }
 ```
 
-
 Graph cycles the steps until there are no more `tool_calls` within the AIMessage: 1/ If AIMessage has tool_calls, "tools" node executes the matching function, 2/ the "agent" node executes again and returns AIMessage. Execution progresses to the special `END` value and outputs the final state
 
 Adding a "chat memory" to the graph with LangGraph's checkpointer to retain the chat context between interactions.
@@ -147,11 +163,9 @@ tools = [TavilySearchResults(max_results=1)]
 tool_node = ToolNode(tools)
 ```
 
-**Conditional edge** between nodes, helps to build more flexible workflow: based on the output of a node, one of several paths may be taken. Conditional edge use function to decide where to route according to the last message content.
-
 #### Tool calling with Mistral
 
-See [this product documentation](https://docs.mistral.ai/capabilities/function_calling/) adapted to langgraph in [this code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/mistral/mistral_tool_calling_lg.py)
+See [this product documentation](https://docs.mistral.ai/capabilities/function_calling/) adapted to langgraph in [this code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/mistral/mistral_tool_calling_lg.py) and [this new LangGraph API with ToolNode, and ChatMistral with bind_tools](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/mistral_lg_tool.py).
 
 ## Use cases
 
@@ -167,9 +181,9 @@ The interesting use cases for LangGraph are:
 ### Reasoning and Acting (ReAct) implementation
 
 See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and the raw code implementation using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py). LangGraph uses a [prebuilt implementation of ReAct](https://langchain-ai.github.io/langgraph/reference/prebuilt/#create_react_agent) that can be tested by [PreBuilt_ReAct_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/PreBuilt_ReAct_lg.py) 
-or the [implementation of ReAct using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py).
+or the [implementation of ReAct pattern using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py).
 
-An interesting prompt to use in the ReAct implementation [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
+An interesting prompt to use in the ReAct implementation is [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
 
 It is possible to interrupt before or after a node.
 
@@ -180,6 +194,7 @@ print_stream(graph, inputs, thread)
 snapshot = graph.get_state(thread)  # got where it was stopped
 ```
 
+See [The most simple ReAct with Mistral Model](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/mistral_lg_tool.py)
 
 ### Adaptive RAG
 
@@ -197,7 +212,13 @@ Some interesting patterns from this sample:
 
 ### Human in the loop
 
-[]()
+The human is the loop can be implemented in different ways:
+
+* Add a confirmation before invoking a tool, using the the interrupt_before the names of the tool.
+* Implementing node with close questions
+
+
+See [Taipy UI with a langgraph graph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/chatbot_graph_ui.py)
 
 ## Other Code 
 
@@ -235,6 +256,13 @@ See the [owl agent framework open source project](https://athenadecisionsystems.
     ```
 
     See [stream_agent_node.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/stream_agent_node.py) and the one with a simple UI [with websocket and langgraph](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo/main_lg.py)
+
+
+???- question "How to do close question?"
+
+
+???- question "How to do classification of intent?"
+    Use a system prompt with possible classification values, and one agent in one node of the graph. Then in the conditional edge function, test to the different value to branch in different paths.
 
 ## Deeper dive
 
