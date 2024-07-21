@@ -3,7 +3,15 @@
 !!! info "Update"
     Created 2017 - Updated 7/19/2024
 
-Welcome to this repository for machine learning using Python and other cutting-edge technologies! Here, you will find a treasure trove of notes, code samples, and Jupyter notebooks, carefully curated from various reputable sources such as IBM labs, AWS, Kaggle, Coursera, Udemy courses, books, and insightful websites.
+Welcome to this repository for machine learning using Python and other cutting-edge technologies! Here, you will find a treasure trove of notes, code samples, and Jupyter notebooks, carefully curated from various reputable sources such as IBM labs, Google, AWS, Kaggle, Coursera, Udemy courses, books, and insightful websites.
+
+## Three AI flavors
+
+With the deployment of Generative AI, AI term needs to be more specifics, and all three flavors are useful to address a business problem:
+
+1. Symbolic AI: Expert System AI and knowledge graph to represent the human knowledge with rules and relationship semantic. 
+1. Analytical AI: the machine learned model from data, analytical algorithms, used to solve analytical tasks such as classification, clustering, predictive scoring, or evaluation. The first neuron-network were used to support better classification on unstructured data like image, and text.
+1. Generative AI: create new content from human existing large corpus of unstructured data. Use deep learning, NLP, image recognition, voice recognition...
 
 ## The AI/ML Market
 
@@ -58,7 +66,7 @@ Statistics does not apply well to large-scale inference problems that big data b
 The curse of big data is the fact that when we search for patterns in very, very large data sets with billions or trillions of data points and thousands of metrics,  we are bound to identify coincidences that have no predictive power.
 
 
-### Map - Reduce
+### Big data processing with Map - Reduce
 
 One of the classical approach to run analytics on big data is to use the map-reduce algorithm, which can be summarized as:
 
@@ -78,6 +86,7 @@ One of the classical approach to run analytics on big data is to use the map-red
 
 Hadoop used to be the map-reduce platform, now [Apache Spark](https://spark.apache.org/) is used for that or [Apache Flink](https://flink.apache.org/).
 
+[Read my own  Sparck studies](https://jbcodeforce.github.io/spark-studies/).
 
 ### What skills needed to grow as data scientist
 
@@ -99,8 +108,18 @@ But the 5 important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/
     Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./concepts/index.md/#fitting)
 
 ???- question "What are the steps involved in the machine learning pipeline?"
+    A typical machine learning pipeline involves several steps, which can be summarized as:
+
+    1. Define the problem
+    1. Collect and Prepare Data: Gather, clean and preprocess it to make it suitable for machine learning. This can include tasks such as data wrangling, feature engineering, and data splitting.
+    1. Select a Model 
+    1. Train the Model: Use the training data to train the model, adjust the model's parameters to minimize the prediction errors.
+    1. Evaluate the Model on test data using metrics such as accuracy, precision, recall, and F1 score.
+    1. Optimize the Model by tuning hyperparameters, adding or removing features, or trying different models.
+    1. Deploy the Model and monitor the model performance to maintain high-quality predictions over time.
 
 ???- question "Compare and contrast classification and regression algorithms"
+    **Classification** algorithms are used to predict categorical labels or class labels. **Regression** algorithms are used to predict continuous values.
 
 ???- question "What are the evaluation metrics commonly used?"
     Accuracy, Precision  and recall, F1-Score, MSE, Root MSE, R-squared, Area Under the ROC Curve, MAP,... See [this section](./concepts/index.md/#common-performance-metrics-used)
@@ -109,8 +128,16 @@ But the 5 important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/
     Split your data into training and validation sets. Use techniques like k-fold cross-validation to assess the model's performance across different hyperparameter values. Iterate through different regularization strengths and evaluate the model's performance metrics (e.g., accuracy, mean squared error) to find the optimal balance between bias and variance.
 
 ???- question "How does feature selection impact machine learning models? Discuss different feature selection methods."
+    Feature selection helps 1/ **reducing overfitting**, which occurs when there is noise in the training data, 2/ improve the **interpretability** of the model by identifying the most important features that contribute to the prediction, 3/ reduce the computational **cost of training** and using the model, 4/ improve the **accuracy** of the model by reducing the noise in the data.
 
-???- question "Explain the concept of ensemble learning."
+    **Different feature selection methods:**
+
+    * **Filter** methods involve selecting features based on their statistical properties, such as correlation with the target variable or variance. These methods are computationally efficient and can be used as a preprocessing step before training the model.
+    * **Wrapper** methods involve selecting features based on their impact on the performance of the model. These methods use a search algorithm to find the subset of features that maximizes the performance of the model. Wrapper methods can be computationally expensive, but they can often lead to better performance than filter methods.
+    * **Embedded** methods learn which features are important while training the model. Examples of embedded methods include LASSO (Least Absolute Shrinkage and Selection Operator) and Ridge Regression.
+    * **Ensemble** methods involve combining multiple feature selection methods to select a subset of features. These methods can be more robust than individual methods and can lead to better performance. Examples of ensemble methods include recursive feature elimination and random forests.
+
+
 
 ## Books and other sources
 

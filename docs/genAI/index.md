@@ -136,7 +136,7 @@ We can group the Generative AI use cases in different categories:
 
 It would be difficult to find any business use-case where a base FM can be used effectively. Added techniques are needed to be useful in enterprise, like RAG, fine tuning, new training, knowledge graph and neuro-symbolic AI solutions.
 
-### Industries
+ ### Industries
 
 These following industry-specific use cases present the potential applications of Generative AI:
 
@@ -156,6 +156,7 @@ These following industry-specific use cases present the potential applications o
 
 1. Cross industry:
 
+    * Improve chatbot user's experience, with open responses more empathic to the user.
     * Sentiment analysis: Gauge customer sentiment towards products, services, or brands
     * Assist with proofreading tasks
     * Update and maintain databases

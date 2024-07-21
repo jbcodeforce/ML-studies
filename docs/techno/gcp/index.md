@@ -58,6 +58,7 @@ Interesting features:
 ???+ info "Grounding"
      [Grounding](https://cloud.google.com/vertex-ai/generative-ai/docs/grounding/overview) is the ability to connect model output to verifiable sources of information. It reduces model hallucinations, links model responses to specific information, and it enhances the trustworthiness. LLM responses are based on Google Search to get public knowledge as facts. Grounding can be done with enterprise data using Vertex AI Search.
 
+## Document AI
 
 ## Hands-on
 
