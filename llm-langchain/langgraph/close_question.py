@@ -39,6 +39,7 @@ class UserData(TypedDict):
     last_name: str
     risk_factor: float = .5
 
+# ==== tool used ====
 def get_user_data(user_id : str) -> UserData:
     return UserData(user_id, "Bob", "TheBuilder", risk_factor=.8)
 
@@ -49,6 +50,7 @@ get_user_data_tool = Tool(
 )
 
 tools = [get_user_data_tool]
+
 llm = ChatMistralAI(model="mistral-small-latest")
 llm.bind_tools(tools)
 text = """you are an assistant to gather information about the user and then leverage tools"""
@@ -78,6 +80,7 @@ class ControlledConversationAssistant():
         workflow.add_node("agent", self.run_agent)
         workflow.add_node("action", self.execute_tools)
         workflow.add_edge("action", "agent")
+        # First is to ask a question to the user
         workflow.add_node("first_agent", self.build_close_question)
         workflow.set_entry_point("first_agent")
         workflow.add_edge("first_agent", END)

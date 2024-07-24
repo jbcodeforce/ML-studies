@@ -114,7 +114,7 @@ app.invoke(
 
 Some code using chat_history:
 
-* [Close Question with a node creating a close question and then process the outcome with llm](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/close_question.py).
+* [Close Question with a node creating a close question and then processes the outcome with llm](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/close_question.py).
 
 ![](./diagrams/close_q.drawio.png)
 
