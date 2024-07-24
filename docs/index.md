@@ -5,6 +5,14 @@
 
 Welcome to this repository for machine learning using Python and other cutting-edge technologies! Here, you will find a treasure trove of notes, code samples, and Jupyter notebooks, carefully curated from various reputable sources such as IBM labs, Google, AWS, Kaggle, Coursera, Udemy courses, books, and insightful websites.
 
+This becoming, almost, like a virtual book :smile: 
+
+<figure markdown="span">
+  ![Book cover](./diagrams/ai_book_cover.drawio.png)
+  <figcaption>A Body of Knowledge about AI driven solutions</figcaption>
+</figure>
+
+
 ## Three AI flavors
 
 With the deployment of Generative AI, AI term needs to be more specifics, and all three flavors are useful to address a business problem:
@@ -27,6 +35,13 @@ The stakeholders interested by AI/ML are CTOs, CPOs, Data Scientists, business a
 * Deep learning can adapt to change in the environment and address new scenarios.
 * Discover insights within large data set.
 * Deep learning may not be suitable if we need explanations on what was done by the system, or when the error rate is unacceptable.
+
+## Why Hybrid Cloud?
+
+AI needs data, Big data. Big data need elastic storage and distributed, elastic computing resources. Cloud adoption is really driven by the elastic resources, pay as you go, serverless as much as possible. 
+
+Private data can stay on-premises servers close to the applications creating those data or reading the data. Analytics data pre-processing can anonymize data and remove PII data, before uploading to cloud storage. Cloud Storages are used to store large datasets required for training machine learning models, taking advantage of the storage's scalability and performance.
+
 
 ## Data Science major concepts
 
@@ -154,6 +169,7 @@ Content is based of the following different sources:
 * [Papers with code - trends](https://paperswithcode.com/)
 * Introduction to Data Sciences - University of Washington.
 * [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)
+* [Medium articles on generative AI, ML Analytics...](www.medium.com)
 * [poe.com](https://poe.com) to search content using LLM
 * [Made with ML from Goku Mohandas.](https://madewithml.com/)
 * [Vision Transformer github from lucidrains](https://github.com/lucidrains/)

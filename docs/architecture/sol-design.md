@@ -68,3 +68,9 @@ The basic RAG high level architecture
 
 ## 4- Stateful Agentic application
 
+
+## 5- Purchase Order Processing
+
+![](./diagrams/doc-processing-gcp.drawio.png)
+
+An neuro-symbolic solution to partially automate purchase order processing and manufactured product configuration. [See dedicated note.](./po-processing.md)

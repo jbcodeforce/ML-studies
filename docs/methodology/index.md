@@ -1,5 +1,15 @@
 # Implementation solution methodology
 
+???- info "Version"
+    Created 02/2024 - Updated July 2024
+
+## Introduction
+
+### What is agentic applications
+
+Explain the purpose of the guide, its intended audience (developers, designers, project managers, etc.), and the scope of the methodology it outlines. 
+
+TBW
 The adoption of LLM in an enterprise ecosystem should not be an afterthought process. Leaders should go over the hype, and really address what those technologies can help them with. Interesting to see that companies who offer hosted LLMs in the cloud are not encouraging their own employees to use those LLMs internally. With text generation and text enhancement, all employees will bring the same quality of results and it will be difficult to measure them.
 
 Currently AI systems are helping to take million of business decisions every days using the classical expert systems, combined or not with ML predictive scoring. Any business process activities involving human task, may be able to leverage better automation by adopting AI agent to help them doing their task quicker with better results and accuracy. Actually LLM has poor accuracy results to be trustable for any business. But there is way to improve this.
@@ -8,7 +18,7 @@ The classical LLM use cases of summarization, text improvement, and idea generat
 
 The current tendency to imagine LLM being an orchestrator of functions or services and therefore being embeddable into a business process, may not be acceptable in many use cases. Process automation needs consistency, high level of accuracy and coded business logic to manage orchestration and compensation flows when exceptions occur. 
 
-Neverless chatbot or Q&A interface may be integrated in any business application where a human needs to process data. We can list the following capabilities the project methodology should be help developers to address:
+Nevertheless chatbot or Q&A interface may be integrated in any business application where a human needs to process data. We can list the following capabilities the project methodology should be help developers to address:
 
 * Helping users in the context of where they are in the current business application or workflow. Current Chatbot with coded conversation flow are the cheapest solution to implement helpful assistant. But with its strong NLP capability LLM will be more flexible and user friendly. The knowledge corpus can come from RAG or fine tuned model.
 * Summarizing the information gathered so far in the context of different customer interactions.
@@ -232,3 +242,56 @@ Considerations
 
 This is the category of application that consumes pre-trained models to generate text, image, videos, audio or code.
 
+----------------------------------------
+
+Building a guide for a methodology to develop agentic applications involves providing a structured framework that developers and designers can follow to create applications that exhibit autonomous and proactive behavior. Here's a suggested structure for your guide: 
+
+## Introduction: 
+
+- Provide an overview of the concept of agentic applications, defining what they are, their characteristics, and their potential benefits to users. 
+
+- Explain the purpose of the guide, its intended audience (developers, designers, project managers, etc.), and the scope of the methodology it outlines. 
+
+## Theoretical Foundation: 
+
+- Dive into the theoretical underpinnings of agentic computing, discussing relevant concepts such as artificial intelligence, agency, autonomy, and proactive behavior. 
+
+- Reference existing research and studies in the field to provide a solid academic foundation for the methodology. 
+
+## Methodology Overview: 
+
+- Present a high-level overview of the steps or phases involved in the methodology. 
+
+- Explain how each step contributes to the development of agentic applications and how they build upon each other. 
+
+## Step-by-Step Process: 
+
+- Define the first step, which could be understanding the problem domain and requirements gathering. Discuss techniques for identifying opportunities for agentic behavior and gathering user needs and expectations. 
+
+- Detail the design phase, covering aspects like defining the application's personality, determining the level of autonomy required, and designing interactions that showcase agentic behavior effectively. 
+
+- Move to the development phase, providing guidance on choosing the right technologies, frameworks, and tools to implement agentic behavior. Discuss best practices, design patterns, and potential challenges and how to overcome them. 
+
+- Address the testing and evaluation phase, offering strategies for validating the agentic behavior of the application. Discuss user testing methodologies, metrics for evaluating agentic performance, and techniques for refining the application based on feedback. 
+
+- Include a section on deployment and maintenance, covering considerations for releasing agentic applications into production and ensuring their long-term evolution and improvement. 
+
+## Case Studies: 
+
+- Provide real-world examples of agentic applications and how they were successfully developed using the methodology. 
+
+- Detail the specific challenges faced, the solutions implemented, and the outcomes achieved, offering practical insights to readers. 
+
+## Best Practices and Recommendations: 
+
+- Offer a summary of key takeaways, best practices, and recommendations for developing agentic applications effectively. 
+
+- Include tips on common pitfalls to avoid and how to ensure the agentic behavior aligns with user expectations and ethical guidelines. 
+
+## Conclusion and Next Steps: 
+
+- Wrap up the guide by reiterating the key points and summarizing the benefits of following the methodology. 
+
+- Provide suggestions for further reading and resources for those who want to delve deeper into specific aspects of agentic application development. 
+
+Remember to keep the language concise and clear throughout the guide, ensuring that it is accessible to your intended audience. Use visuals, diagrams, and examples to illustrate concepts and make the guide more engaging. This structure should provide a solid framework for developers and designers to understand and implement agentic behavior in their applications effectively.

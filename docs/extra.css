@@ -3,7 +3,7 @@
 }
 
 :root > * {
-  --md-primary-fg-color:        #432ebb;
+  --md-primary-fg-color:        #0080F0;   #432ebb
   --md-primary-fg-color--light: #ddb7ec;
   --md-primary-fg-color--dark:  #90030C;
 }

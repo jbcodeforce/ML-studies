@@ -13,7 +13,7 @@
 During hyperparameter tuning, several performance metrics can be used to evaluate the model's performance. 
 
 * **Accuracy**: measures the proportion of correct predictions over the total number of predictions. It is commonly used for classification problems when the classes are balanced.
-* **Precision and Recall**: Precision represents the ratio of true positive predictions to the total predicted positives, indicating the model's ability to correctly identify positive instances. **Recall** measures the ratio of true positive predictions to the total actual positives, indicating the model's ability to find all positive instances. Precision and recall are useful for imbalanced classification problems where the focus is on correctly identifying the positive class.
+* **Precision and Recall**: Precision represents the ratio of true positive predictions to the total predicted positives, indicating the model's ability to **correctly identify** positive instances. **Recall** measures the ratio of true positive predictions to the total actual positives, indicating the model's ability to **find all positive** instances. Precision and recall are useful for imbalanced classification problems where the focus is on correctly identifying the positive class.
 
 * **F1 Score:** The F1 score is the harmonic mean of precision and recall. It provides a single metric that balances precision and recall, which is especially useful when both metrics are important.
 

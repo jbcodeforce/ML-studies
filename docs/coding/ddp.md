@@ -1,4 +1,4 @@
-# DDP and 
+# DDP  
 
 ## Distributed Data Parallel with PyTorch
 
