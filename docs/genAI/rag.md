@@ -43,7 +43,7 @@ The Retrieval Augmented Generation may be seen as a three stages process:
 
 1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/build_agent_domain_rag.py#L17-L43) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
 
-1. **Retrieval**: retrieves the relevant data (splits) from the indexes using similarity search, then passes the resulting chunks to the LLM as part of the context. The similarity search uses the embeddings to vectorize the query, perform the search and get the resulting indexes.
+1. **Retrieval**: retrieves the relevant data (splits) from the indexes using similarity search, then passes the resulting chunks to the LLM as part of the context window. The similarity search uses the embeddings to vectorize the query, perform the search and get the resulting indexes.
 1. **Generation**: LLM generates the response in plain natural language.
 
 This process is supported by different tools for documents ingestion, splitting, embedding, indexing, retrieval and integration with the real time conversation flow. From the simple query text, the process needs to do query construction, translation, and LLM calling. The following diagram illustrates a classical a natural conversation application with RAG architecture:
@@ -87,7 +87,7 @@ RAG systems work well because LLMs has the in-context learning capability, which
 
 #### Embeddings
 
-Embeddings are the numerical representation of the document chunks, and should help to represent sematic concepts. They are key part of the NLP processing and used in Gen AI models. [See dedicated Embedding chapter](../ml/nlp.md/#embedding)
+Embeddings are the numerical representation of the document chunks, and should help to represent semantic concepts. They are key part of the NLP processing and used in Gen AI models. [See dedicated Embedding chapter](../ml/nlp.md/#embedding)
 
 ## Challenges
 
@@ -95,7 +95,7 @@ Naive RAG has very important limitations which has generated some adoption chall
 
 * It is hard to do a reliable, scalable RAG on a large knowledge corpus
 * Limited to single-shot prompt
-* No query understanding, just a sematic search
+* No query understanding, just a semantic search
 * No query decomposition for planning
 * No tool use, to query an external data source to enrich the context
 * No reflection and error correction to improve the quality of the response.
