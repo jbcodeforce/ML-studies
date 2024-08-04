@@ -3,14 +3,14 @@
 
 ## Embedding
 
-An embedding is a mathematical representation of a set of data points in a lower-dimensional space that captures their underlying relationships and patterns. There are different types: image, word, graph, video embeddings.
+An embedding is a mathematical representation of a set of data points in a lower-dimensional space that captures their underlying relationships and patterns. There are different embedding types: image, word, graph, video embeddings.
 
-The vector numbers intend to capture the attributes of the object and the semantic and syntactic relationships between words. Dense embeddings were introduced by Google’s [**Word2vec**](https://arxiv.org/abs/1301.3781) (Mikolov et al) in 2014 and used in GPT model. The transformation of word to vector, gives the capability to compute arithmetics with words, like **similarity** computation. Vectors which are closer together, mean they represent semantically similar concepts. 
+The vector numbers intent to capture the attributes of the object and the semantic and syntactic relationships between words. Dense embeddings were introduced by Google’s [**Word2vec**](https://arxiv.org/abs/1301.3781) (Mikolov et al) in 2014 and used in GPT model. The transformation of word to vector, gives the capability to compute arithmetics with words, like **similarity** computation. Vectors which are closer together, mean they represent semantically similar concepts. 
 The technique works by training a neural network on a large corpus of text data, to predict the context in which a given word appears. Principal Component Analysis (PCA) and Singular Value Decomposition (SVD), auto-encoder, are dimensionality reduction techniques. 
 
 See [this basic code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/RAG/embeddings_hf.py) which uses `SentenceTransformer all-MiniLM-L6-v2` model to encode sentences of 100 tokens, construct from a markdown file.
 
-Embeddings are created using a pre-trained LLM, and the documents are used to fine-tune the LLM. The fine-tuning process is done using a small subset of the documents, and the LLM is trained to predict the next word in the document. 
+Embeddings are created using a pre-trained LLM, and a set of documents used to fine-tune the model. The fine-tuning process is done using a small subset of the documents, and the LLM is trained to predict the next word in the document. 
 
 The fine-tuned LLM is then used to generate the embeddings. The embedding size is usually between 200 to 1000 dimensions. 
 
