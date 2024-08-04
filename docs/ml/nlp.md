@@ -24,7 +24,15 @@ Embedding can improve data quality, reduce the need for manual data labeling, an
 
 See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/)
 
-### 
+### Use cases
+
+* LLM for token embedding
+* Image embedding to represent images in the vector space.
+* Audio and video embedding 
+* RAG with sentence embedding and similarity search.
+* Product recommendations, via similarity search
+* Anomaly detection 
+
 
 ## BERT
 
