@@ -12,3 +12,4 @@ sqlalchemy>1,<2
 python-dotenv
 sentence-transformers
 faiss-cpu
+cohere

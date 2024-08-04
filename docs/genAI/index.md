@@ -5,29 +5,39 @@
 
 ## Introduction
 
-Generative AI is a combination of neural network models to create new content (text, image, music, videos..) from a requesting query. Models are pre-trained on vast amounts of unlabeled data, using from 7B up to 500B of parameters.
+Generative AI is a combination of neural network models to create new content (text, image, music, videos..) from a requesting query. Models are pre-trained on vast amounts of unlabeled data, using from 7B up to 500B of parameters. Current Gen AI models are based on the Transformer architecture.
 
-Gen AI applies well to different category of use cases: improve customer experiences, improve employee's productivity, help around creativity, and help optimizing business process ([See Use Case section](#use-cases)). 
+Gen AI applies well to different category of use cases: improve customer experiences, improve employee's productivity, help around creativity, and help optimizing business process ([See also the Use Case section](#use-cases)). 
 
 ### Transformer Architecture
 
-**GPT-3 (Generative Pre-trained Transformer 3)** breaks the NLP boundaries with training on 175B parameters. It is built on **Transformer** which uses self-**attention** mechanism to weigh the significance of different words in a sentence to understand the context in a sequence of data. 
+Transformer is a neural network used to generate the next word in the sentence using the best probability. This is what most chat application use to propose the next word sugestion we can select. If we just select the most likely words we got paragraph with no real meaning. The context of the text is lost at each word. Adding the self-**attention** mechanism to the transformer, it helps to weight the significance of different words by taking into account the previously seen context. 
 
-The **attention** mechanism computes the similarity between tokens (from the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space, the higher the attention scores they will obtain and the higher the attention they will give to each other.
+The **attention** mechanism computes the similarity between tokens (from the embeddings of words) in a sequence. That way, the model builds an intuition of what the text is saying. The closer two words are in a vector space, the higher the attention scores they will obtain and the higher the attention they will give to each other (Recall the example of "bank of the river" vs  "money in the bank"). 
+
+The transformer architecture looks like:
+
+![](./diagrams/transform-arch.drawio.png)
+
+* The tokenization step takes every word, prefix, suffix, and punctuation signs and assign a matching token
+* Embedding to transform token to numerical vector
+* Positional encoding consists of adding a sequence of predefined vectors to the embedding vectors of the words. This ensures we get a unique vector for every sentence, and sentences with the same words in different order will be assigned different vectors
+* The attention component is added at every block of the feedforward network. It uses multi-head attention where several different embeddings are used to modify the vectors and add context to them. 
+* There is a large number of transformer blocks in the network. The architecture has the **layers** of transformers stacked on top of each other. Within each layer, there are feed-forward neural networks to process the data.
+* The last step of a transformer is a softmax layer, which turns these scores into probabilities (that add to 1). The model returns result tokens which are then turned back into readable text.
 
 The models are trained on vast amounts (Terabytes) of text data like books, articles, websites etc. 
 This helps the model learn grammar, facts, reasoning abilities and even some level of common sense from the content. 
 
-The second part of the GPT-3 architecture are the **layers** of transformers stacked on top of each other. Within each layer, there are feed-forward neural networks to process the data.
+**GPT-3 (Generative Pre-trained Transformer 3)** breaks the NLP boundaries with training on 175B parameters. 
 
-The training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific *tasks* or *content*. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data, like the words in a sentence, to develop some understanding of the real world.
+The training has two stages: **Pre-training** where the model attempts to predict the next word in a sentence using its own corpus, and **fine tuning** where the model can be tuned for specific *tasks* or *content*. During the pre-training process, the model automatically takes context into account from all the training data, and tracks relationships in sequential data, like the words in a sentence, to develop some understanding of the real world. 
 
 The models are commonly referred to as **foundation models** (FMs).
 
 The unlabeled data used for pre-training is usually obtained by crawling the web and public sources.
 
-At **inference** time, the input text is tokenized into individual tokens which are fed into the model. After processing using the transformer mechanism, the model returns result tokens which are then turned back into readable text.
-
+At **inference** time, the input text is tokenized into individual tokens which are fed into the model. 
 
 ???- info "Difference between ML and LLM"
     * **Foundational Models** can perform many tasks because they contain a large number of parameters that make them capable of learning complex concepts. Through their pre-training exposure to **internet-scale** unstructured data in all its various forms and myriad of patterns, FMs learn to apply their knowledge within a wide range of contexts.
@@ -35,11 +45,11 @@ At **inference** time, the input text is tokenized into individual tokens which 
 
 The largest pre-trained model in 2019 (BERT) was 330M parameters while the state-of-the-art LLM in 2023 is 540B parameters.
 
-A transformer-based model has an encoder component that converts the input text into embeddings (mathematical representations of the token semantic), and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
+A transformer-based model has an encoder component that converts the input text into embeddings, and a decoder component that consumes these embeddings to emit some output text. Transformers process the entire input all at once, during the learning cycle, and therefore can be parallelized.
 
 Three types of transformer:
 
-1. **Encoded only**: generate no human readable content, used when applications need to efficiently query to find similar items.
+1. **Encoded only**: generate no human readable content, used when applications need to efficiently query content to find similar items.
 1. **Encoder-decoder** model is trained to treat every natural language processing (NLP) problem (e.g.,
 translate an input string in one language to another) as a text-to-text conversion problem.
 1. **Decoder-only** model is for text generation.

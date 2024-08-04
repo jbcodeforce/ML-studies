@@ -34,6 +34,7 @@ nav:
       - Anthropic: genAI/anthropic.md
       - OpenAI: genAI/openai.md
       - Mistral: genAI/mistral.md
+      - Cohere: genAI/cohere.md
       - WatsonX.ai:  techno/watsonx.md
   - Techno:
     - Coding getting started: coding/index.md
