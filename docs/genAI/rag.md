@@ -26,13 +26,15 @@ mindmap
 
 LLMs have a knowledge cut-off time, where data coming after this time are not known by the models.  Pre-training is a one-off exercise. When enterprises need to get their private knowledge integrated to LLM, they can do fine tuning or present semantic search results as part of the input context window. RAG addresses this problem, as it is the act of supplementing generative text models with data outside of what it was trained on. 
 
+
+
 While model increases in token pre-training size, they also increase the size of the context window, as illustrated in the figure below:
 
 ![](./diagrams/llm_size_window.drawio.png)
 
 **Figure 2: Bigger Context Window**
 
-When the context window is big enough, application can send more contextual data, that leads to better results. RAG is the technique to add information to this context window to get better results. RAG  helps reducing hallucinations.
+When the context window is big enough, application can send more contextual data, that leads to better results. This technique can be used to provide more up-to-date or more use-case-specific information via the context window to enhance its accuracy for specific use cases. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results.
 
 ## Basic RAG architecture
 

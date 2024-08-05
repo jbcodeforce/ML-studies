@@ -1,7 +1,6 @@
 # AI discussions
 
-The goal of this section is to get a set of links and content to know to support deep discussions around Gen AI, organized by interviewer category of subjects.
-
+The goal of this section is to get a set of content to support deeper discussions around Gen AI, during chit-chat or interviews.
 
 ## 1. 𝗘𝘅𝗽𝗹𝗮𝗶𝗻 𝗟𝗟𝗠 𝗳𝘂𝗻𝗱𝗮𝗺𝗲𝗻𝘁𝗮𝗹𝘀
 
@@ -10,10 +9,11 @@ Cover the high-level workings of models like GPT-3, including transformers, pre-
 * [x] [General LLM introduction](./index.md/#introduction)
 * [x] [Transformer and GPT-3 summary](./index.md/#transformer-architecture)
 * [x] [How LLM pre-training is done](./index.md/#pre-training-process)
-* [ ] [How to fine tune existing model](./index.md/#model-fine-tuning)
-* [ ] [How RAG works](./rag.md)
+* [x] [How to fine tune existing model](./index.md/#model-fine-tuning)
+* [x] [How RAG works](./rag.md)
 
-* [OpenAI API Code review from openai_api.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/openai_api.py). See [readme](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) to run the code.
+???- code "Some code samples"
+    * [OpenAI API Code review from openai_api.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/openai_api.py). See [readme](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) to run the code.
 
 ## 𝟮. 𝗗𝗶𝘀𝗰𝘂𝘀𝘀 𝗽𝗿𝗼𝗺𝗽𝘁 𝗲𝗻𝗴𝗶𝗻𝗲𝗲𝗿𝗶𝗻𝗴
 

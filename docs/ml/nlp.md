@@ -36,7 +36,7 @@ See the [Encord's guide to embeddings in machine learning](https://encord.com/bl
 
 ## BERT
 
-
+Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. 
 
 ## Named Entity Recognition
 

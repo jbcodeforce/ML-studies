@@ -1,7 +1,7 @@
 # Generative AI
 
 ???- info "Updates"
-    Created Aug 2023 - Updated 06/2024
+    Created Aug 2023 - Updated 08/2024
 
 ## Introduction
 
@@ -22,7 +22,7 @@ The transformer architecture looks like:
 * The tokenization step takes every word, prefix, suffix, and punctuation signs and assign a matching token
 * Embedding to transform token to numerical vector
 * Positional encoding consists of adding a sequence of predefined vectors to the embedding vectors of the words. This ensures we get a unique vector for every sentence, and sentences with the same words in different order will be assigned different vectors
-* The attention component is added at every block of the feedforward network. It uses multi-head attention where several different embeddings are used to modify the vectors and add context to them. 
+* The [attention](https://docs.cohere.com/docs/the-attention-mechanism) component is added at every block of the feedforward network. It uses multi-head attention where several different embeddings are used to modify the vectors and add context to them. 
 * There is a large number of transformer blocks in the network. The architecture has the **layers** of transformers stacked on top of each other. Within each layer, there are feed-forward neural networks to process the data.
 * The last step of a transformer is a softmax layer, which turns these scores into probabilities (that add to 1). The model returns result tokens which are then turned back into readable text.
 
@@ -103,7 +103,7 @@ Some ways to use Generative AI in business applications:
 
 The [Huggingface LLM leader board](https://huggingface.co/spaces/HuggingFaceH4/open_llm_leaderboard) is a good source of information for model quality assessments relative to certain use cases.
 
-See this detailed article on [developing a LLM](https://medium.com/towards-artificial-intelligence/build-your-own-large-language-model-llm-from-scratch-using-pytorch-9e9945c24858) and this one on [fine tuning](https://medium.com/@tuanatran/fine-tuning-large-language-model-with-hugging-face-pytorch-adce80dce2ad)
+See this detailed article on [developing a LLM](https://medium.com/towards-artificial-intelligence/build-your-own-large-language-model-llm-from-scratch-using-pytorch-9e9945c24858) and this one on [fine tuning](https://medium.com/@tuanatran/fine-tuning-large-language-model-with-hugging-face-pytorch-adce80dce2ad).
 
 ## Use cases
 
@@ -196,51 +196,47 @@ These following industry-specific use cases present the potential applications o
 
 ### Classical concerns and challenges
 
-LLM's are amazing tools for doing natural language processing.   But they come with challenges due to the underlying training and inference technology, due to the fact they are trained only occasionally and are thus always out of date, and due to the fact that natural language generation is not grounded in any model of reality or reasoning but instead uses probabilistic techniques based on correlations of a huge number of strings of tokens (words). Which means hallucination and approximate retrieval are core of their architecture: the completion they are generating is in the same distribution as the text they have been trained on. Prompt engineering does not change hallucination as the decision to assess the response is a factual completion depends of the knowledge of the prompter and requires to continuously assess all the responses.
-
+LLM's are amazing tools for doing natural language processing.   But they come with challenges due to the underlying training and inference technology, due to the fact that they are trained only occasionally and are thus always out of date, and also due to the fact that natural language generation is not grounded in any model of reality or reasoning but instead uses probabilistic techniques based on correlations of a huge number of strings of tokens (words). Which means hallucination and approximate retrieval are core of their architecture: the completion they are generating is in the same distribution as the text they have been trained on. Prompt engineering does not change hallucination as the decision to assess the response is a factual completion depends of the knowledge of the prompter and requires to continuously assess all the responses.
 
 * **Accuracy**: The accuracy of LLM's is not acceptable to any enterprise that must follow regulations and policies and respect contractual agreements with suppliers and customers. Because they cannot truly reason or take into account regulations and policies precisely, models often produce incorrect and contradictory answers when asked for decisions or actions to undertake. A single large language model is unlikely to solve every business problem effectively.  With classical ML, probabilistic output is expected. Symbolic approaches like business rules that precisely express policies produce reliable results at the cost of coding the policies mostly manually.
 
-* **Specificity**: A single large model is unlikely to solve every business problem effectively because it is trained on generally-available information rather than enterprise-specific information. To differentiate their generative AI applications and achieve optimal performance, companies should rely on their **own data sets** tailored to their unique use case.   Even then, enterprise data changes constantly, so techniques such as RAG and tool calling are needed to leverage the most up-to-date and relevant information for a specific query.
+* **Specificity**: A single large model is unlikely to solve every business problem effectively because it is trained on generally-available information rather than enterprise-specific information. To differentiate their generative AI applications and achieve optimal performance, enterprises should rely on their **own data sets** tailored to their unique use case.   Even then, enterprise data changes constantly, so techniques such as RAG and tool calling are needed to leverage the most up-to-date and relevant information for a specific query.
 
-* **Cost and Risk** of training and inference, as well as privacy and intellectual property are top concerns. LLM's can be "fine-tuned" for a specific task by using a small number of labeled examples specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training and retraining models, hosting them, and doing inference with them are expensive. Cloud providers see this opportunity to sell more virtual servers equipped with GPU's at a higher price. 
+* **Cost and Risk** of training and inference, as well as privacy and intellectual property are top concerns. LLM's can be "fine-tuned" for a specific task by using a small number of labeled examples specific to the company's industry or use case. Fine-tuned models can deliver more accurate and relevant outputs. But training and retraining models, hosting them, and doing inference with them are expensive. Cloud providers see this opportunity to sell more virtual servers with GPU's at a higher price. 
 
 * **Skills**: developing a new LLM may not make sense today, but fine tuning an existing model may in some circumstances. There are relatively few developers with expertise in model tuning, understanding their architecture and limitations, integrating them in applications, and in tuning their hyper parameters. Reinforcement learning to fine-tune existing LLM requires a huge number of trials, and data quality is still a very difficult and poorly-mastered topic.
 
-* **Reliability and reasoning**: Generative AI models do not reason and do not plan accurately. New versions of LLMs attempt to improve this, but by design the transformer algorithm is probabilistic and greedy for text generation and does not inherently do any kind of structured symbolic reasoning or manage ontologies of concepts (knowledge graphs). LLM are very big system-1 with their knowledge based from digital representation of humanity created content.
+* **Reliability and reasoning**: Generative AI models do not reason and do not plan accurately. New versions of LLMs attempt to improve in this domain, but by design the transformer architecture is probabilistic and greedy for text generation and does not inherently do any kind of structured symbolic reasoning or manage ontologies of concepts (knowledge graphs). LLM is a very big system-1 with their knowledge based from digital representation of humanity created content.
 
-
-* For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  Models produce incorrect and contradictory answers. With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task. Always try to assess when to use ML.
-* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs? The size of the model is linked to the compute power developers have and how much they can pay (availability of the hardware is also an issue). 
-* There is difficulty to determine which source documents are leading to the given answers.
-* Developers need to optimize for training cost, and inference cost. And then assess how to amortize the training cost to better assess what may be billed to end-users.
-* Current models comparison is based on Multi-task Language Understanding on MMLU](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu) benchmark. But CIOs care less about standard results, they want models that work well on their data.
+* For generative AI, the input is very ambiguous, but also the output: there is no determinist output.  Models produce incorrect and contradictory answers. With classical ML, output is well expected. Trained sentiment analysis algorithms on labelled data will perform better than any LLM for that task. Always try to assess when to use ML versus using an existing LLM.
+* There are a lot of models available today, each with unique strengths and characteristics. How to get the ones best suited for business needs? The size of the model is linked to the compute power developers have and how much they can pay (availability of the hardware is also an issue). Effectice mechanisms need to be set up to assess the LLM's responses for each different use cases.
+* There is difficulty to determine which source documents are leading to the given answers. Model that links results to source, via citations help to assess for any hallucinations.
+* Developers need to optimize for training and inference cost, then assess how to amortize the training cost to better evaluate what may be billed to end-users.
+* Current models comparison is based on Multi-task Language Understanding on [MMLU](https://paperswithcode.com/sota/multi-task-language-understanding-on-mmlu) benchmark. But CIOs care less about standard results, they want models that work well on their data.
 * For large enterprise, adopting LLM at scale means running hundreds, even thousands, of models at any time. A high frequency of innovation, leads customers to replace their models quicker than expected, reinforcing the need to train and deploy new models in production quickly and seamlessly.
 * Cost being a major issue in short term, model may become smaller and access to powerful distributed smaller hardware will help to do inference locally (smartphone with TPU).
 
 ### Some fallacies
 
-* LLMs can't do planning in autonomous modes. They may support planning activities done by planner software and human to translate formats, elaborate the problem specifications
+* LLMs can't do planning in autonomous modes. They may support planning activities done by planner software and human to translate formats, or to elaborate the problem specifications.
 * Chain of Though, ReAct, Fine tuning do not help for planning as they do not generalize well
 * There is no self-verification as LLM has no mean to do self verification
-
 
 ### Interesting legal considerations
 
 * Think not created by a human could not be copyrighted.
 * Model deployed will not use data sent to improve itself.
-* Right to use an image/photo to train a model is a problem.
+* The right to use an image/photo to train a model is a problem.
 * Protect Intellectual Property: never pass confidential information to Gen AI SaaS based API.
 * Protect the brand, avoid bias, discrimination, aligned to company values: any business decision should not be done by uncontrolled Gen AI.
-
 
 ### Discovery assessment
 
 **Classical questions** to address before starting a Gen AI solutions:
 
 * How to leverage open model like Mistral, LLama, DBRX?
-* How to verify accuracy on unstructured data as query and documents? 
-* AI Models are becoming stronger when connected to data, enterprise data, and fine tuning. It is important to adopt a Gen AI strategy that is linked to the data strategy too. Model will be deployed where data is. 
+* How to verify accuracy on unstructured data such as queries and document shunks? 
+* AI Models are becoming stronger when connected to data, enterprise data, and fine tuning. It is important to adopt a Gen AI strategy that is linked to the data strategy too. 
 * When transitioning to more stateful Gen AI-based solutions to make the model more specialized or better tuned for dedicated use cases, the model will require self-improvement capabilities. To support this, the solution will need to maintain states, which will be persisted using Lake House technology
 * Current main stakeholder for Gen AI, is the developer, moving to business users will be challenging as some of their jobs are at risk, they may reject the technology at a all.
 * How to stop doing a lot of prompt engineering and start doing model fine tuning? Always address what we should evaluate the solution on. Gen AI can help to build prompt with the use of [meta prompting](./prompt-eng.md/#automatic-prompt-engineering) techniques. 
@@ -251,18 +247,18 @@ LLM's are amazing tools for doing natural language processing.   But they come w
 
 ## Concepts
 
-A LLM is part of the evolution of NLP as it is a trained deep learning model that understands and generates text in a human like fashion. But they are doing stupid mistakes.
+A LLM is part of the evolution of NLP as it is a trained deep learning model that understands and generates text in a human like fashion.
 
 ### NLP processing
 
-To process a text input with a transformer model, the text is **tokenized** into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning: for example a word dog will have 512 potential numerical attributes used to describe what is a dog: height, legs, head form...). Below is a simple representation of the embedding in the 3 dimension space:
+To process an input text with a transformer model, the text is **tokenized** into a sequence of words or part of words. These tokens are then **encoded** as numbers and converted into **embeddings**, which are vector-space representations of the tokens that preserve their meaning: for example a word dog will have 512 potential numerical attributes used to describe what is a dog. Below is a simple representation of the embedding in the 3 dimension space:
 
 ![](./images/vector-embedding.png)
 
 *See the web site [projector.tensorflow.org/](https://projector.tensorflow.org/)*
 
 ???- info "Embedding"
-    See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/)
+    See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/) and [this section](../ml/nlp.md/#embedding)
     
     
 The encoder, in the transformer, transforms the embeddings of all the tokens into a **context vector**. Using this vector, the transformer decoder generates output based on clues. The decoder can produce the subsequent word. We can reuse the same decoder, but this time the clue will be the previously produced next-word. This process can be repeated to create an entire paragraph. This process is called **auto-regressive generation**.
@@ -295,12 +291,11 @@ The techniques to customize LLM applications from simplest to more complex are:
 
 | Term | Definition |
 | --- | --- |
-| **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Ex. Auto GPT](https://github.com/Significant-Gravitas/AutoGPT) | 
+| **Agent** | Agents give AI apps a fundamentally new set of capabilities: to solve complex problems, to act on the outside world, and to learn from experience post-deployment. [Ex. Auto GPT](https://github.com/Significant-Gravitas/AutoGPT), [LangGraph](../coding/langgraph.md) | 
 | **AI21 Labs**	| AI21 Studio provides API access to Jurassic-2 large language models. Their models power text generation and comprehension features in thousands of live applications. AI21 is building state of the art language models with a focus on understanding meaning. |
-| **BARD** | AI chat service from Google - powered by the LaMDA model. Similar to ChatGPT. |
-| **BERT** | Bidirectional Encoder Representations from Transformers (BERT) is a family of masked-language models published in 2018 by researchers at Google. It is much smaller than current LLMs, so if the task can be accomplished by BERT it can be very helpful for developers - however it usually does not perform as well as other foundation models because it is not large enough. |
+| **BARD** | AI chat service from Google - powered by the LaMDA model. Similar to ChatGPT. Evolved to Gemini|
 | **BLOOM**	| [BLOOM](https://huggingface.co/bigscience/bloom) is an auto regressive Large Language Model (LLM), trained to continue text from a prompt on vast amounts of text data using industrial-scale computational resources. As such, it is able to output coherent text in 46 languages and 13 programming languages that is hardly distinguishable from text written by humans. BLOOM can also be instructed to perform text tasks it hasn't been explicitly trained for, by casting them as text generation tasks. It is a popular open source instructor based model. Developers who want an open source alternative to GPT might look at this. |
-| **co:here** |	[Co:here](https://cohere.com/) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
+| **co:here** |	[Co:here](./cohere.md) platform can be used to generate or analyze text to do things like write copy, moderate content, classify data and extract information, all at a massive scale. |
 | Model **compression** | Technique to reduce the size of the model in memory, it includes *quantization* (approximating a neural network by using smaller precision 8-bit integers instead of 32-bit floating point numbers) and *distillation* (transferring of knowledge from a larger teacher model to a smaller student model).|
 | **Data Distributed Training**	| A distributed training algorithm which can speed up ML training by distributing batches of data between forward and backward passes in a model. This can be very helpful when we have large datasets but does not solve the problem of not being able to fit a model on one machine |
 | **DeepSpeed** | DeepSpeed is an open source deep learning optimization library for PyTorch. The library is designed to reduce computing power and memory usage and to train large distributed models with better parallelism on existing computer hardware. DeepSpeed is optimized for low latency, high throughput training. It can be used to help both inference and training of large models which don't fit on a single GPU. |
@@ -309,17 +304,14 @@ The techniques to customize LLM applications from simplest to more complex are:
 | **Fine Tuning** | Foundation model further trained to specific tasks. Example: training BLOOM to summarize chat history where we have examples of these text examples. |
 | **FLAN** | FLAN(Fine-tuned LAnguage Net): is a LLM with Instruction Fine-Tuning. It is a popular open source instructor based model which scientists can train. Persons who want an open source alternative to GPT might look at this. |
 | **Generative adversarial network (GAN)** | A deep learning architecture where two networks compete in a zero sum game. When one network wins, the other loses and vice versa. Common applications of this, includes creating new datasets, image generation, and data augmentation. This is a common design paradigm for generative models. |
-| **Generative question and answering** | The new and improved retrieval augmented generation (RAG) |
 | **GPT** | OpenAI's generalized pre-trained transformer foundation model family. GPT 1 and 2 are open source while 3 and 4 are proprietary. GPT1,2,3 are text-to-text while gpt4 is multi-modal. |
 | **Hallucinations** | LLMs may give answers which are incorrect or seemingly made up. Hallucinations are mainly a data problem, LLMs suffer from knowledge cut-off where they only know up to the point their training data stops. They also are trained on wide varieties of data some of which can be inaccurate or incomplete. To minimize it, use Top-P, Top-K, Temperature and RAG models. |
 | **Jurassic**	| This is AI21 lab's foundation text to text model. It has instructor and non-instructor based versions and is available on AWS marketplace. This is very appealing for customers because they can get 1) extremely high model quality/accuracy and 2) deploy the model to a dedicated endpoint for dedicated compute. |
 | **LaMDA**	| Language model was trained on dialogue from Google. Very similar to ChatGPT but produced by Google. It is a proprietary model. |
-| [LangChain](../coding/langchain.md) | LangChain provides a standard interface for chains, lots of integrations with other tools, and end-to-end chains for common applications. The core idea of the library is that we can “chain” together different components to create more advanced use cases around LLMs. For example, LangChain assists with retrieval augmented generation. A common flow for LangChain would be 1) get input from user 2) search relevant data 3) engineer the prompt based on the data retrieved 4) prompt a zero shot instructor model 5) return the output to the user. |
 | **Model compilation** | Model compilation is the act of tracing a model computational graph in order to deploy to lower level hardware and code. This is a necessary step to run on specialized hardware. |
 | **Model Distribution** | When a model's size prohibits it from being stored on one GPU. This occurs when models start to be in the 10's of billions of parameter range. This has a few consequences 1) it costs a lot to train and host these models 2) specialized libraries are required to help. |
 | **MultiModal Models**	| Multi-modal learning attempts to model the combination of different modalities of data, often arising in real-world applications. An example of multi-modal data is data that combines text (typically represented as discrete word count vectors) with imaging data consisting of pixel intensities and annotation tags. |
 | **Pre-training** | Unsupervised learning method which is used to steer foundation models to domain specific information. Example: pre-training FLAN with Medical documents to understand medical context previously missing from the model. |
-| **RAG** |  It is a technique for providing additional, targeted information to the model through the prompt. While using any search to find data for the prompt could be considered RAG, it often refers to the specific technique of creating embeddings from a corpus of documents, storing those embeddings in a vector database, searching that database with a user query, and then providing those results to the LLM for completion. This gives the LLM the ability to do a semantic search over a knowledge base and to use the results of that search in formulating the answer. This technique can be used to provide more up-to-date or more use-case-specific information to the model to enhance its accuracy for specific use cases. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results. |
 | **Reinforcement learning with human feedback (RLHF)** | The secret sauce to making chat based foundation models. The process involves using human feedback with LLM chat interactions to inform a reinforcement learning procedure to help train an LLM to "talk to humans" instead of only prompts. There are two huge benefits 1/ this substantially reduces the amount of prompt engineering required and 2/ this allow the LLM to take into account chat context as well as the information it has available to it. |
 | **Single shot learning** | *Zero-shot learning* (ZSL) is a problem setup in ML where, at test time, a learner observes samples from classes which were not observed during training, and needs to predict the class that they belong to | 
 | **Stability.ai** | Stability AI is open source generative AI company currently developing breakthrough AI models applied to imaging, language, code, audio, video, 3D content, design, biotech. With AWS they provide the world’s fifth-largest supercomputer – the Ezra-1 UltraCluster – supplying the necessary power to generate these advancements. Stability AI’s premium imaging application DreamStudio, alongside externally built products like Lensa, Wonder and NightCafe, have amassed over 40 million users. |

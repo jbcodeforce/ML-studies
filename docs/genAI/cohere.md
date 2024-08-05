@@ -18,19 +18,21 @@
 
 ### Command-R
 
-A LLM to support enterprise deployments using: 
+A LLM optimized for long-context task, and to support enterprise deployments using: 
 
 * Advanced Retrieval Augmented Generation with citation to reduce hallucinations
 * 128K context length
 * Multilingual coverage in 10 key languages to support global business operations
-* Tool Use to automate sophisticated business processes
+* Tool Use to automate sophisticated business processes using single-step tool or multi-step tool like an agent
 
 ### Embed
 
-Embed improves the accuracy of search, classification, clustering, and RAG results.
+Embeddings can be used for estimating semantic similarity between two texts, choosing a sentence which is most likely to follow another sentence, or categorizing user feedback. Embed improves the accuracy of search, classification, clustering, and RAG results.
+Cohere embedding associates each word with a vector of length 4096. It supports more than 100 languages.
 
 ### Rerank
 
+Rerank models sort text inputs by semantic relevance to a specified query. They are often used to sort search results returned from an existing search solution. 
 Rerank is used to inject the intelligence of a language model into an existing search system.
 
 ## References

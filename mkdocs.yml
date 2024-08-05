@@ -8,6 +8,7 @@ nav:
     - Concepts: 
       - Core concepts: concepts/index.md
       - Math summary: concepts/maths.md
+      - Data scientist skill: concepts/skill.md
     - Architecture:
       - Solution Design: architecture/sol-design.md
     - Data management:
@@ -26,7 +27,7 @@ nav:
       - Hybrid AI: neuro-symbolic/index.md
     - Generative AI: 
       - Introduction: genAI/index.md
-      - Review: genAI/review.md
+      - Skill set: genAI/review.md
       - Prompt Engineering: genAI/prompt-eng.md
       - Solution Design: architecture/sol-design.md
       - RAG: genAI/rag.md
