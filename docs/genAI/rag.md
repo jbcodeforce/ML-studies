@@ -154,6 +154,17 @@ One chunk strategy is to construct chunk from document elements: the document is
 
 * The [Unstructured.io API Services](https://unstructured-io.github.io/unstructured/api.html) complemented with a python library can be used for ingesting and digesting unstructured documents of various type (See also deeplearning.ai tutorial).
 
+Code with text splitting:
+
+| Code | Cover |
+| --- | --- |
+| [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/build_agent_domain_rag.py#L17-L43) | LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever. |
+| [Content manager in owl agent framework](https://github.com/jbcodeforce/athena-owl-core/blob/main/owl-agent-backend/src/athena/itg/store/content_mgr.py) | integrate pdf,docs, html, text, markdown parsers |
+
+Langchain [examples for text processing](https://python.langchain.com/v0.2/docs/integrations/document_loaders/)
+
+ChromaDB document processing [example]()
+
 ???- info "Extract from pdf"
     There are different techniques to get content from unstructured file like a pdf. The first is to use object detection to draw and label bounding boxes around the layout elements on a document image (Document Layout Detection). OCR is used to extract text from bounding box. Some pdf as text the extraction can be done without OCR. The second technique use vision transformers.
 

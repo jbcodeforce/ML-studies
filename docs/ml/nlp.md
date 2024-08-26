@@ -3,9 +3,11 @@
 
 ## Embedding
 
-An embedding is a mathematical representation of a set of data points in a lower-dimensional space that captures their underlying relationships and patterns. There are different embedding types: image, word, graph, video embeddings.
+An embedding is a mathematical representation of a set of data points in a lower-dimensional space that captures their underlying relationships and patterns. There are different embedding types: image, word, sentence, graph, video embeddings. [CLIP](https://openai.com/index/clip/), from OpenAI, is an embedding for both text and image in the same vector spaces, so enabling text to image generation.
 
 The vector numbers intent to capture the attributes of the object and the semantic and syntactic relationships between words. Dense embeddings were introduced by Google’s [**Word2vec**](https://arxiv.org/abs/1301.3781) (Mikolov et al) in 2014 and used in GPT model. The transformation of word to vector, gives the capability to compute arithmetics with words, like **similarity** computation. Vectors which are closer together, mean they represent semantically similar concepts. 
+
+**Sentence embedding** vectorize a complete sentence to do semantic similarity of sentences. 
 The technique works by training a neural network on a large corpus of text data, to predict the context in which a given word appears. Principal Component Analysis (PCA) and Singular Value Decomposition (SVD), auto-encoder, are dimensionality reduction techniques. 
 
 See [this basic code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/RAG/embeddings_hf.py) which uses `SentenceTransformer all-MiniLM-L6-v2` model to encode sentences of 100 tokens, construct from a markdown file.
@@ -20,9 +22,9 @@ Embeddings are used to compare the query with the document chunks. The cosine si
 
 The cosine similarity is a measure of the similarity between two non-zero vectors of an inner product space. It is defined to equal the cosine of the angle between them, which is also the same as the inner product of the same vectors normalized to both have length 1. 
 
-Embedding can improve data quality, reduce the need for manual data labeling, and enable more efficient computation.
+Embedding can improve data quality, reduce the need for manual data labeling, and enable more efficient computation. It is used for similarity search, RAG and recommendations engine by using product description embeddding and simililarity searches.
 
-See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/)
+See the [Encord's guide to embeddings in machine learning](https://encord.com/blog/embeddings-machine-learning/) and * [Deeplearning.ai - embedding models courses](https://learn.deeplearning.ai/courses/embedding-models-from-architecture-to-implementation/lesson/1/introduction)
 
 ### Use cases
 
@@ -48,3 +50,4 @@ Some techniques uses Gen AI model to do NER with a good prompt.
 ## Deeper Dive
 
 * [PyTorch based NLP tutorial](https://github.com/graykode/nlp-tutorial)
+* [Deeplearning.ai - embedding models](https://learn.deeplearning.ai/courses/embedding-models-from-architecture-to-implementation/lesson/1/introduction)

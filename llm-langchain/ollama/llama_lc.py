@@ -10,7 +10,7 @@ parser.add_argument('text', type=str, help='The text to improve')
 args = parser.parse_args()
 
 
-llm = ChatOllama(model="llama3")
+llm = ChatOllama(model="llama3.1", base_url='http://localhost:11434',)
 
 prompt = ChatPromptTemplate.from_messages([
     ("system", "You are a earth environment expert."),

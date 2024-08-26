@@ -48,3 +48,7 @@ The [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/tech
 Demonstrate tool usage with fault tolerance and caching for a sale rep and sale leader working together on leads generation
 
 The tools used are DirectoryReadTool, FileReadTool, SerperDevTool (to perform a semantic search for a specified query from a text's content across the internet). 
+
+### Resume tuning for a job application
+
+The [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py) is using multiple agents to analyse a job posting, do personal profiling, and resume tuning from a source resume to taylor it for the job. Use web scrapping and search tools.

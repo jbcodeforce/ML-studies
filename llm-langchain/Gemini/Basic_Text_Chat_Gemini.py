@@ -35,7 +35,7 @@ def run_continue_chat(chain_with_llm):
     Parameters:
     - llm the langchain chain to call
     """
-    print("\t 2/Starting iterative question and answer\n\n")
+    print("\t Starting iterative question and answer\n\n")
     finish=False
     chat_history = []
     while not finish:

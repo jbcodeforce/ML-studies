@@ -6,7 +6,7 @@ This code demonstrate creating a vector store from a blog and keep content relat
 """
 import bs4
 from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.vectorstores import Chroma
+from langchain_chroma.Chroma import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings
 from dotenv import load_dotenv

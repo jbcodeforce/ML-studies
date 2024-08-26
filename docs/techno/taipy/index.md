@@ -4,15 +4,15 @@
 
 It generates web pages from a Flask Server. The main class is `Gui`.
 
-* Support multiple pages which are defined in markdown, html or python
-* Offer various visual elements that can interact with the Python variables and environment
-* Every callback, including submit_scenario(), receives a State object as its first parameter. 
+* Support multiple pages which are defined in markdown, html or python code. (See [md_ui.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/md_ui.py))
+* Offer various visual elements that can interact with the Python variables and environment.
 * Keep State of user connection and variables for dynamic binding.
 * User interactions are event driven
 * Page has name for navigation
-* Include a CLI to create app or run them.
-* Blocks let you organize controls (or blocks) in pages
+* Include a CLI to create apps or run them.
+* Blocks let developers organize controls (or blocks) in pages
 * Scenarios are global variables available to everyone connected.
+* Every callback, including submit_scenario(), receives a State object as its first parameter. 
 
 ## Some how to
 
