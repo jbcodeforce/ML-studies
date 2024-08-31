@@ -6,7 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain_openai import OpenAIEmbeddings
 from langchain.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from langchain_community.vectorstores import Chroma
+from langchain_chroma.vectorstores import Chroma
 
 DOMAIN_VS_PATH="./agent_domain_store"
 

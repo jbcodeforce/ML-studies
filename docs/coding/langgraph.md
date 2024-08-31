@@ -1,7 +1,7 @@
 # LangGraph
 
 !!!- info "Updates"
-    Created 04/2024 - Update 07/19/2024
+    Created 04/2024 - Update 08/27/2024
 
 [LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, **multi-actor** applications, and being able to add cycles to LLM app. It is not a DAG. 
 
@@ -9,12 +9,12 @@ Single and multi-agent flows are described and represented as graphs.
 
 ## Value propositions 
 
-* build stateful, multi-actor applications with LLMs
-* coordinate multiple chains or actors across multiple steps of computation in a cyclic manner
-* build plan of the actions to take
-* take the actions
-* observe the effects
-* support persistence to save state after each step in the graph. This allows human in the loop pattern
+* Build stateful, multi-actor applications with LLMs
+* Coordinate multiple chains or actors across multiple steps of computation in a cyclic manner
+* Build plan of the actions to take
+* Take the actions
+* Observe the effects
+* Support persistence to save state after each step in the graph. This allows human in the loop pattern
 * Support Streaming agent tokens and node transitions
 
 ## [Concepts](https://langchain-ai.github.io/langgraph/concepts/)
