@@ -22,13 +22,14 @@ Before going into product comparison we need to review the major use cases for w
 By providing managed services, pre-trained models, and easy deployment options, these platforms will enable developers to integrate AI capabilities more seamlessly, driving innovation and digital transformation.
 
 Explore the different use cases and industry applications for Bedrock and Watsonx.ai, such as:
-Customer service chatbots
-Predictive maintenance
-Supply chain optimization
-Healthcare and life sciences
-Financial services and banking
 
-challenges with the cloud-native designs of Bedrock and WatsonX.AI will lead to more scalable, flexible, and resilient AI systems. But pay attention to quota and service limit
+* Customer service chatbots
+* Predictive maintenance
+* Supply chain optimization
+* Healthcare and life sciences
+* Financial services and banking
+
+The challenges with the cloud-native designs of Bedrock and WatsonX.AI will lead to more scalable, flexible, and resilient AI systems. But pay attention to quota and service limits.
 
 ## Amazon Bedrock: An Overview
 

@@ -9,16 +9,16 @@ The following items come from different sources, and grouped in question and ans
 The five important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/ Data visualization, 5/ Machine learning (including deep learning).
 
 ???- question "Explain supervised vs unsupervised"
-    Supervised means; build a model from labeled training data. With unsupervised, developers do not know upfront the outcome variable. [read more in this section >> ](./ml/index.md/#supervised-learning)
+    Supervised means; build a model from labeled training data. With unsupervised, developers do not know upfront the outcome variable. [read more in this section >> ](../ml/index.md#supervised-learning)
 
 ???- question "Explain the bias-variance tradeoff"
-    Bias measures how far off the predictions are from the correct values in general. Variance measures the consistency (or variability) of the model prediction. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via [regularization](./concepts/index.md/#regularization). [Read more  on variance >> ](./concepts/index.md/#variance). Perform [cross-validation]() with hyperparameter tuning.
+    Bias measures how far off the predictions are from the correct values in general. Variance measures the consistency (or variability) of the model prediction. One way of finding a good bias-variance tradeoff is to tune the complexity of the model via [regularization](./index.md/#regularization). [Read more  on variance >> ](./index.md#variance). Perform [cross-validation]() with hyperparameter tuning.
 
 ???- question "Provide examples of regularization techniques"
-    The regularization techniques are L1 regularization (Lasso), L2 regularization (Ridge), and elastic net regularization.  [See regularization section](./concepts/index.md/#regularization).
+    The regularization techniques are L1 regularization (Lasso), L2 regularization (Ridge), and elastic net regularization.  [See regularization section](./index.md#regularization).
 
 ???- question "Overfitting / underfitting"
-    Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./concepts/index.md/#fitting)
+    Overfitting is a common problem in machine learning, where a model performs well on training data but does not generalize well to unseen data. [Read more in fitting section](./index.md#fitting)
 
 ???- question "What are the steps involved in the machine learning pipeline?"
     A typical machine learning pipeline involves several steps, which can be summarized as:
@@ -35,7 +35,7 @@ The five important categories are: 1/ Mathematics, 2/ Statistics, 3/ Python, 4/ 
     **Classification** algorithms are used to predict categorical labels or class labels. **Regression** algorithms are used to predict continuous values.
 
 ???- question "What are the evaluation metrics commonly used?"
-    Accuracy, Precision  and recall, F1-Score, MSE, Root MSE, R-squared, Area Under the ROC Curve, MAP,... See [this section](./concepts/index.md/#common-performance-metrics-used)
+    Accuracy, Precision  and recall, F1-Score, MSE, Root MSE, R-squared, Area Under the ROC Curve, MAP,... See [this section](./index.md/#common-performance-metrics-used)
 
 ???- question "What is cross-validation, and why is it important in machine learning?"
     Split your data into training and validation sets. Use techniques like k-fold cross-validation to assess the model's performance across different hyperparameter values. Iterate through different regularization strengths and evaluate the model's performance metrics (e.g., accuracy, mean squared error) to find the optimal balance between bias and variance.

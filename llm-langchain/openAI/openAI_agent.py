@@ -20,7 +20,7 @@ vectorstore=None
 if os.path.isdir(CHROMA_DB_FOLDER):
     vectorstore=Chroma(persist_directory=CHROMA_DB_FOLDER,embedding_function=embeddings)
 else:
-    print("Need to run openAI_retrieval to create the vectorDB")
+    print("Need to run python openAI_retrieval_lc.py to create the vectorDB")
     sys.exit(1)
 
 

@@ -123,7 +123,7 @@ Content is based of the following different sources:
 * [Papers with code - trends](https://paperswithcode.com/)
 * Introduction to Data Sciences - University of Washington.
 * [Jeff Heaton - Applications of Deep Neural Networks.](https://github.com/jeffheaton/t81_558_deep_learning)
-* [Medium articles on generative AI, ML Analytics...](www.medium.com)
+* [Medium articles on generative AI, ML Analytics...](https://www.medium.com)
 * [poe.com](https://poe.com) to search content using LLM
 * [Made with ML from Goku Mohandas.](https://madewithml.com/)
 * [Vision Transformer github from lucidrains](https://github.com/lucidrains/)
