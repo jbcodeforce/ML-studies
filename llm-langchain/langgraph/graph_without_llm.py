@@ -20,7 +20,7 @@ def input_first(state: GraphState) -> Dict[str, str]:
 def input_second(state: GraphState) -> Dict[str, str]:
     print("""start input_second()""")
     if state.get("first_word") == "error":
-        {"second_word": "error"}
+        return {"second_word": "error"}
     return {"second_word": "world"}
 
 

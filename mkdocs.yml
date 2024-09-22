@@ -38,20 +38,12 @@ nav:
       - Cohere: genAI/cohere.md
       - WatsonX.ai:  techno/watsonx.md
   - Techno:
-    - Coding getting started: coding/index.md
     - Airflow: techno/airflow.md
-    - Data Visualization: coding/visualization.md
     - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
-    - LangChain: coding/langchain.md
-    - LangGraph: coding/langgraph.md
-    - LlamaIndex: coding/llama-index.md
     - OpenSearch: techno/opensearch.md
-    - Pandas: coding/pandas.md
     - Python studies:  https://jbcodeforce.github.io/python-code/
-    - PyTorch: coding/pytorch.md
     - SageMaker: https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker
-    - Scikit-learn: coding/sklearn.md
     - Spark studies: https://jbcodeforce.github.io/spark-studies/
     - UI:
       - Gradio: techno/gradio/index.md
@@ -60,6 +52,16 @@ nav:
       - NiceGUI: techno/nicegui.md
     - GCP: techno/gcp/index.md
     - WatsonX: techno/watsonx.md
+  - Coding:
+    - Coding getting started: coding/index.md
+    - Data Visualization: coding/visualization.md
+    - Haystack.ai: coding/haystack.md
+    - LangChain: coding/langchain.md
+    - LangGraph: coding/langgraph.md
+    - LlamaIndex: coding/llama-index.md
+    - Pandas: coding/pandas.md
+    - PyTorch: coding/pytorch.md
+    - Scikit-learn: coding/sklearn.md
   - Solutions:
     - Introduction: solutions/index.md
     - Key AI startups: techno/players_to_look.md

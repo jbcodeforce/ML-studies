@@ -1,7 +1,7 @@
 # LangGraph
 
 !!!- info "Updates"
-    Created 04/2024 - Update 08/27/2024
+    Created 04/2024 - Update 09/21/2024
 
 [LangGraph](https://python.langchain.com/docs/langgraph) is a library for building stateful, **multi-actor** applications, and being able to add cycles to LLM app. It is not a DAG. 
 
@@ -38,10 +38,13 @@ runnable = graph.compile()
 
 1. chatbot_func is a function to call a LLM.  `add_node()` takes a **function or runnable**, with the input is the entire current state:
 
+See [FirstGraphOnlyLLM.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/langgraph/FirstGraphOnlyLLM.py)
+
 ```python
 def call_tool(state):  # (1)
     messages = state["messages"]
     last_message = messages[-1]
+    #...
 ```
 
 1. The State of the graph, in this case, includes a list of messages
@@ -71,14 +74,16 @@ Graphs helps implementing Agents as AgentExecutor is a deprecated API. They most
     app = workflow.compile(checkpointer=checkpointer)
     ```
 
-1. invoke the graph as part of an API, an integrated ChatBot, ...
+1. Invoke the graph as part of an API, an integrated ChatBot, using a dict including the parameter of the State...
 
 Graphs such as StateGraph's naturally can be composed. Creating subgraphs lets developers build things like multi-agent teams, where each team can track its own separate state.
 
-LangGraph comes with built-in persistence, allowing developers to save the state of the graph at a given point and resume from there.
+LangGraph comes with built-in persistence, allowing developers to save the state of the graph at a given point and resume from there [MemorySaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/?h=sqlite+saver#memorysaver), [Postgresql](https://langchain-ai.github.io/langgraph/reference/checkpoints/?h=sqlite+saver#postgressaver), [SqliteSaver](https://langchain-ai.github.io/langgraph/reference/checkpoints/?h=sqlite+saver#sqlitesaver).
 
 ```python
-memory = SqliteSaver.from_conn_string(":memory:")
+from langgraph.checkpoint.memory import MemorySaver
+
+memory = MemorySaver()
 app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
 ```
 
@@ -97,8 +102,8 @@ See [other checkpointer ways to persist state](https://langchain-ai.github.io/la
 memory = AsyncSqliteSaver.from_conn_string("checkpoints.sqlite")
 ```
 
-* See [first basic program](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraph.py) to call Tavily tool for searching recent information about the weather in San Francisco using OpenAI LLM. (it is based on the [tutorial](https://langchain-ai.github.io/langgraph/#example)). It does not use any prompt, and the call_method function invokes OpenAI model directly.
-* See [A hello world graph without any LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/graph_without_llm.py) as an interesting base code to do stateful graph.
+* See [first basic program](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraphOnlyLLM.py) or the [one with tool](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraphWithTool.py) to call Tavily tool for searching recent information about the weather in San Francisco using OpenAI LLM. (it is based on the [tutorial](https://langchain-ai.github.io/langgraph/#example)). It does not use any prompt, and the call_method function invokes OpenAI model directly.
+
 
 
 #### Invocation and chat history
@@ -108,11 +113,15 @@ The LangGraph's `MessageState` keeps an array of messages. So the input is a dic
 ```python
 app.invoke(
     {"messages": [HumanMessage(content="what is the weather in sf")]},
-    config={"configurable": {"thread_id": 42}}, debug=True
+    config={"configurable": {"thread_id": "42"}}, debug=True
 )
 ```
 
 Some code using chat_history:
+
+* A simple version with tool and memory using prebuilt LangGraph constructs [FirstGraphWithToolAndMemory.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraphWithToolAndMemory.py)
+
+
 
 * [Close Question with a node creating a close question and then processes the outcome with llm](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/close_question.py).
 
@@ -155,11 +164,11 @@ Adding a "chat memory" to the graph with LangGraph's checkpointer to retain the 
 
 ### Tool Calling
 
-Graph may include `ToolNode` to call function or tool which can be called via conditions on edge. The following declaration uses the predefined langchain tool definition of TavilySearch. The `TavilySearchResults` has function name, argument schema and tool definition so the prompt sent to LLM has information about the tool like: "name": "tavily_search_results_json"
+The Graph must include `ToolNode` to call the slected function or tool which can be called via conditions on edge. The following declaration uses the predefined langchain tool definition of TavilySearch. The `TavilySearchResults` has function name, argument schema and tool definition so the prompt sent to LLM has information about the tool like: "name": "tavily_search_results_json"
 
 ```python
 from langchain_community.tools.tavily_search import TavilySearchResults
-tools = [TavilySearchResults(max_results=1)]
+tools = [TavilySearchResults(max_results=2)]
 tool_node = ToolNode(tools)
 ```
 
@@ -214,11 +223,10 @@ Some interesting patterns from this sample:
 
 The human is the loop can be implemented in different ways:
 
-* Add a confirmation before invoking a tool, using the the interrupt_before the names of the tool.
-* Implementing node with close questions
+* Add a confirmation before invoking a tool, using the the interrupt_before the names of the tool. [See human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/human_in_loop.py)
+* Implementing a human node before which the graph will always stop [ask_human_graph.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ask_human_graph.py)
 
-
-See [Taipy UI with a langgraph graph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/chatbot_graph_ui.py)
+See [prompt_builder_graph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/prompt_builder_graph.py) which is also integrated with Taipy UI in [Taipy UI with a langgraph graph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/chatbot_graph_ui.py)
 
 ## Other Code 
 

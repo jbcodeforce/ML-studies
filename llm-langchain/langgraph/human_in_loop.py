@@ -1,25 +1,25 @@
 from typing import Annotated
 from typing_extensions  import TypedDict
+
+from langchain_community.tools.tavily_search import TavilySearchResults
+
+from langchain_anthropic import ChatAnthropic
 from langgraph.graph.message import add_messages
-from langgraph.graph import StateGraph, END
-from langgraph.prebuilt import ToolExecutor, ToolInvocation
-from langgraph.checkpoint.sqlite import SqliteSaver
-from langchain_core.messages import ToolMessage, HumanMessage
+from langgraph.graph import StateGraph
+from langgraph.prebuilt import ToolNode,  tools_condition
+from langgraph.checkpoint.memory import MemorySaver
 from langchain_core.tools import tool
 from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from dotenv import load_dotenv
-import langchain
 
+from langchain_core.messages import AIMessage, ToolMessage
 load_dotenv("../../.env")
 
 
 class State(TypedDict):
     messages: Annotated[list, add_messages]
 
-
-def define_model():
-    return ChatOpenAI(temperature=0)
 
 @tool
 def search(query_about_weather: str):
@@ -29,108 +29,85 @@ def search(query_about_weather: str):
     return [" it is sunny in Santa Clara"]
 
 
-sys_prompt =  ChatPromptTemplate.from_messages([
-    ("system", "Answer the user's questions and use tools when you cannot get an answer on recent data."),
-    MessagesPlaceholder(variable_name="chat_history"),
-    ("user"),
-])
-langchain.debug=True
-tools = [search]
-tool_executor = ToolExecutor(tools)
-llm = define_model()
-llm.bind_tools(tools)
-model = sys_prompt | llm
+def define_model_with_tools(tools):
+    sys_prompt =  ChatPromptTemplate.from_messages([
+            ("system", "Answer the user's questions and use tools when you cannot get an answer on recent data."),
+            MessagesPlaceholder(variable_name="chat_history"),
+            ("user"),
+        ])
+
+    #llm = ChatOpenAI(temperature=0, model="gpt-4o")
+    llm = ChatAnthropic(model="claude-3-haiku-20240307")
+    llm_with_tools = llm.bind_tools(tools)
+    return llm_with_tools 
+
+  
+
+def define_graph():
+    tavily = TavilySearchResults(max_results=2)
+    tools = [tavily]
+    model=define_model_with_tools(tools)
+
+    def call_model(state: State):
+        messages = state["messages"]
+        response = model.invoke(messages)
+        # We return a list, because this will get added to the existing list
+        return {"messages": [response]}
 
 
-# Define the function that determines whether to continue or not
-def should_continue(state):
-    messages = state["messages"]
-    last_message = messages[-1]
-    # If there is no function call, then we finish
-    print(last_message)
-    if not last_message.tool_calls:
-        return "end"
-    # Otherwise if there is, we continue
-    else:
-        return "continue"
+    tool_node = ToolNode(tools=tools)
+    workflow = StateGraph(State)
+    workflow.add_node("agent", call_model)
+    workflow.add_node("tools", tool_node)
+    workflow.add_conditional_edges(
+        "agent",
+        tools_condition,
+    )
+
+    # We now add a normal edge from `tools` to `agent`.
+    # This means that after `tools` is called, `agent` node is called next.
+    workflow.add_edge("tools", 'agent')
+    workflow.set_entry_point("agent")
+
+    # Initialize memory to persist state between graph runs
+    checkpointer = MemorySaver()
+    app = workflow.compile(checkpointer=checkpointer, interrupt_before=["tools"])
+    return app
+
+if __name__ == "__main__":
+    app=define_graph()
+    config = {"configurable": {"thread_id": "2"}}
+    user_input = "I'm learning LangGraph. Could you do some research on it for me?"
+    for event in app.stream({"messages": [("user", user_input)]}, config):
+        if "messages" in event:
+            event["messages"][-1].pretty_print()
+
+    snapshot = app.get_state(config)
+    print(f"Next step is: {snapshot.next}")
+    # interrupted at the tools level
+    existing_message = snapshot.values["messages"][-1]
+    print(f" tools calls is {existing_message.tool_calls}")
+    existing_message.pretty_print()
+    # The simplest thing the human can do is just let the graph continue executing.
+    #     events = app.stream(None, config, stream_mode="values")
+    # OR give the answer
+    answer = (
+    "LangGraph is a library for building stateful, multi-actor applications with LLMs."
+    )
+    new_messages = [
+        # The LLM API expects some ToolMessage to match its tool call. We'll satisfy that here.
+        ToolMessage(content=answer, tool_call_id=existing_message.tool_calls[0]["id"]),
+        # And then directly "put words in the LLM's mouth" by populating its response.
+        AIMessage(content=answer),
+    ]
+    new_messages[-1].pretty_print()
+    app.update_state(
+        # Which state to update
+        config,
+        # The updated values to provide. The messages in our `State` are "append-only", meaning this will be appended
+        # to the existing state. We will review how to update existing messages in the next section!
+        {"messages": new_messages},
+    )
+    print("\n\nLast 2 messages;")
+    print(app.get_state(config).values["messages"][-2:])
     
-# Define the function that calls the model
-def call_model(state):
-    messages = state["messages"]
-    response = model.invoke(messages)
-    # We return a list, because this will get added to the existing list
-    return {"messages": [response]}
-
-# Define the function to execute tools
-def call_tool(state):
-    messages = state["messages"]
-    # Based on the continue condition
-    # we know the last message involves a function call
-    last_message = messages[-1]
-    # We construct an ToolInvocation from the function_call
-    tool_call = last_message.tool_calls[0]
-    action = ToolInvocation(
-        tool=tool_call["name"],
-        tool_input=tool_call["args"],
-    )
-    # We call the tool_executor and get back a response
-    response = tool_executor.invoke(action)
-    # We use the response to create a ToolMessage
-    tool_message = ToolMessage(
-        content=str(response), name=action.tool, tool_call_id=tool_call["id"]
-    )
-    # We return a list, because this will get added to the existing list
-    return {"messages": [tool_message]}
-
-# Define a new graph
-workflow = StateGraph(State)
-
-# Define the two nodes we will cycle between
-workflow.add_node("agent", call_model)
-workflow.add_node("action", call_tool)
-workflow.set_entry_point("agent")
-
-workflow.add_conditional_edges(
-    # First, we define the start node. We use `agent`.
-    # This means these are the edges taken after the `agent` node is called.
-    "agent",
-    # Next, we pass in the function that will determine which node is called next.
-    should_continue,
-    # Finally we pass in a mapping.
-    # The keys are strings, and the values are other nodes.
-    # END is a special node marking that the graph should finish.
-    # What will happen is we will call `should_continue`, and then the output of that
-    # will be matched against the keys in this mapping.
-    # Based on which one it matches, that node will then be called.
-    {
-        # If `tools`, then we call the tool node.
-        "continue": "action",
-        # Otherwise we finish.
-        "end": END,
-    },
-)
-
-# This means that after `tools` is called, `agent` node is called next.
-workflow.add_edge("action", "agent")
-
-memory = SqliteSaver.from_conn_string(":memory:")
-# compiles it into a LangChain Runnable
-app = workflow.compile(checkpointer=memory, interrupt_before=["action"])
-#app = workflow.compile(interrupt_before=["action"])
-# Mock the conversation
-thread = {"configurable": {"thread_id": "2"}}
-inputs = [HumanMessage(content="hi! I'm bob")]
-for event in app.stream({"messages": inputs}, thread, stream_mode="values"):
-    event["messages"][-1].pretty_print()
-
-inputs = [HumanMessage(content="What did I tell you my name was?")]
-for event in app.stream({"messages": inputs}, thread, stream_mode="values"):
-    event["messages"][-1].pretty_print()
-
-inputs = [HumanMessage(content="what's the weather in santa clara (CA) now?")]
-for event in app.stream({"messages": inputs}, thread, stream_mode="values"):
-    event["messages"][-1].pretty_print()
-
-# Finish to trigger the end condition
-for event in app.stream(None, thread, stream_mode="values"):
-    event["messages"][-1].pretty_print()

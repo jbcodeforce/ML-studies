@@ -11,7 +11,7 @@ from langchain_core.pydantic_v1 import BaseModel, Field
 from langgraph.graph import StateGraph, END
 
 from langchain_community.document_loaders import WebBaseLoader
-from langchain_community.vectorstores import Chroma
+from langchain_chroma  import Chroma
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate

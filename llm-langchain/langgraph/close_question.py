@@ -4,7 +4,7 @@ and from the response call a tool. then generate the response
 from dotenv import load_dotenv
 load_dotenv()
 import operator
-from typing import Annotated, TypedDict, Union
+from typing import Annotated, TypedDict, Union, Optional
 
 from langchain_core.agents import AgentAction, AgentFinish
 from langchain_core.messages import BaseMessage, AIMessage, HumanMessage
@@ -16,7 +16,8 @@ from langchain_mistralai.chat_models import ChatMistralAI
 from langchain_community.tools.tavily_search import TavilySearchResults
 from langgraph.graph import END, StateGraph, START
 from langgraph.prebuilt.tool_executor import ToolExecutor
-from langgraph.checkpoint.sqlite import SqliteSaver
+
+from langgraph.checkpoint.memory import MemorySaver
 
 class CloseQuestion(TypedDict):
     question: str
@@ -67,14 +68,13 @@ class AgentState(TypedDict):
     chat_history: list[BaseMessage]
     agent_outcome: Union[AgentAction, AgentFinish, None]
     intermediate_steps: Annotated[list[tuple[AgentAction, str]], operator.add]
-    user_id: str = None
-    close_question: str = None
+    user_id: Optional[str] = ""
+    close_question: str = ""
 
 class ControlledConversationAssistant():
 
     def __init__(self):
         self.tool_executor = ToolExecutor(tools)
-        self.memory = SqliteSaver.from_conn_string(":memory:")
         workflow = StateGraph(AgentState)
         # Define the two nodes we will cycle between
         workflow.add_node("agent", self.run_agent)
@@ -101,7 +101,7 @@ class ControlledConversationAssistant():
                     "end": END,
                 },
             )
-        self.graph = workflow.compile(checkpointer=self.memory)  # 
+        self.graph = workflow.compile(checkpointer=MemorySaver())  # 
        
 
     def build_close_question(self,state):
@@ -152,6 +152,6 @@ if __name__ == '__main__':
     print(f"\n\t\t{rep['chat_history'][-1].content}")
     print("[Human]: my user_id=4567")
     m=HumanMessage(content="my user_id=4567")
-    rep= graph.invoke({"chat_history": [m]},  config, debug = True)
+    rep= graph.invoke({"chat_history": [m], "user_id": "4567"},  config, debug = True)
     print(f"\n\t\t{rep['chat_history'][-1].content}")
     print(rep['chat_history'])
