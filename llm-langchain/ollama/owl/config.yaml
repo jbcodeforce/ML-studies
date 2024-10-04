@@ -1,0 +1,6 @@
+owl_env_path: /app/.env
+owl_agents_path: /app/config/agents.yaml
+owl_tools_path: /app/config/tools.yaml
+owl_prompts_path: /app/config/prompts.yaml
+owl_agent_content_file_path: /app/data/file_content
+owl_agent_vs_path: /app/data/chromadb
