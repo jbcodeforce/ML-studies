@@ -1,11 +1,15 @@
 # Retrieval Augmented Generation (RAG)
 
+???- info inline "Updates"
+    12/2024
+
 #### What is covered in this section
 
 ```mermaid
 mindmap
   root((RAG))
-    Understand the Goals
+    Context
+      Goals
       Reduce Hallucinations
       Integrate corporate knowledge
     Reference Architecture

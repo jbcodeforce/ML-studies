@@ -55,6 +55,3 @@ Explain supervised fine-tuning, parameter efficient fine tuning, few-shot learni
 
 - From tokenization to embeddings to deployment, showcase your ability to operationalize models at scale, and monitoring model inference.
 
-## 𝟴. 𝗔𝘀𝗸 𝘁𝗵𝗼𝘂𝗴𝗵𝘁𝗳𝘂𝗹 𝗾𝘂𝗲𝘀𝘁𝗶𝗼𝗻𝘀
-
-Inquire about model safety, bias, transparency, generalization, etc. to show strategic thinking.

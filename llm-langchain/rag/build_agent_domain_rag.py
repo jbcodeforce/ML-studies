@@ -16,7 +16,7 @@ DOMAIN_VS_PATH="./agent_domain_store"
 
 def load_multi_agent_blog():
     """
-    Load a blog from the internet, parse it ia beautiful soup taking into account only the post content and headers
+    Load a blog from the internet, parse it with beautiful soup taking into account only the post content and headers
     return the documents
     """
     loader = WebBaseLoader(
