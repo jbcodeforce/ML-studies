@@ -21,5 +21,5 @@ In some cases you might not want to alter your Python setup and rather go with a
 ### Pushing the book to GitHub Pages
 
 1. Ensure that all your local changes to the `master` branch have been committed and pushed to the remote repository. `git push origin code`
-1. Run `mkdocs gh-deploy --remote-branch main` from the root directory.
+1. Run `mkdocs gh-deploy` from the root directory.
 
