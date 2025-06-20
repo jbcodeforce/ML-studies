@@ -7,7 +7,7 @@ OLLAMA_URL="http://localhost:11434/api/generate"
 
 def chat_using_langchain(message: str):
     llm = ChatOllama(model="mistral")
-    prompt = ChatPromptTemplate.from_template("You are an expert in AI company researcher")
+    prompt = ChatPromptTemplate.from_template("You are a researcher, an expert in AI company.")
 
     chain = prompt | llm | StrOutputParser()
     topic={"topic": message}

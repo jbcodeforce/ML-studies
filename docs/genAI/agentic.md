@@ -16,6 +16,8 @@ Tools are used to call external services or other LLMs. Neuro-symbolic architect
 
 There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, or Required Model Params.
 
+I believe AI agent applications at scale will not only be triggered by users, but by systems using asynchronous events. ([Flink](https://jbcodeforce.github.io/flink-studies/)'s event capabilities in real-time distributed event processing, state management and exact-once consistency fault tolerance make it well-suited as a framework for building such system-triggered agents)
+
 ## Use cases
 
 * Agents to plan an article, write this article and review for better edition. See the [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py) code.

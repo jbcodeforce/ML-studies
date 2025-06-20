@@ -1,0 +1,22 @@
+.apply_button {
+    margin-top: 158px;
+}
+
+.taipy-button {
+    width: 60%
+}
+
+strong,
+b {
+    font-weight: bold;
+    color: var(--color-primary);
+}
+
+.login-button {
+    width: 20% !important;
+}
+
+.MuiAvatar-img {
+    width: 70%;
+    height: 70%;
+}

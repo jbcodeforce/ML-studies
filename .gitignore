@@ -24,3 +24,4 @@ pytorch/computer-vision/data/
 techno/crew-ai/db/
 **/agent_domain_store/
 **/agent_vstore
+**/taipy/user_data/
