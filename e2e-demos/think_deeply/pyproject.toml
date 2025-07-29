@@ -1,0 +1,16 @@
+[project]
+name = "think_deeply"
+version = "0.1.0"
+description = "A chat and a prompt to work deeply on a subject"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.12.14",
+    "huggingface>=0.0.1",
+    "ollama>=0.5.1",
+    "openai>=1.97.1",
+    "pillow>=11.3.0",
+    "rich>=14.1.0",
+    "torch>=2.7.1",
+    "transformers[serving,torch]>=4.54.0",
+]
