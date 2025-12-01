@@ -25,18 +25,20 @@ nav:
       - NLP: ml/nlp.md
       - Distributed Data Parallel: coding/ddp.md
       - Hybrid AI: neuro-symbolic/index.md
-    - Generative AI: 
-      - Introduction: genAI/index.md
-      - Skill set: genAI/review.md
-      - Prompt Engineering: genAI/prompt-eng.md
-      - Solution Design: architecture/sol-design.md
-      - RAG: genAI/rag.md
-      - Agents: genAI/agentic.md
-      - Anthropic: genAI/anthropic.md
-      - OpenAI: genAI/openai.md
-      - Mistral: genAI/mistral.md
-      - Cohere: genAI/cohere.md
-      - WatsonX.ai:  techno/watsonx.md
+  - Generative AI: 
+    - Introduction: genAI/index.md
+    - Skill set: genAI/review.md
+    - Prompt Engineering: genAI/prompt-eng.md
+    - Solution Design: architecture/sol-design.md
+    - RAG: genAI/rag.md
+    - Agents: genAI/agentic.md
+    - Anthropic: genAI/anthropic.md
+    - OpenAI: genAI/openai.md
+    - MCP: genAI/mcp.md
+    - Mistral: genAI/mistral.md
+    - Cohere: genAI/cohere.md
+    - WatsonX.ai:  techno/watsonx.md
+  
   - Techno:
     - Airflow: techno/airflow.md
     - Feature Store: techno/feature_store.md/

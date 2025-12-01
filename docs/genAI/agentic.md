@@ -1,35 +1,42 @@
 # Agentic AI
 
-[Agent](https://lilianweng.github.io/posts/2023-06-23-agent/) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. With chain, developer code the sequence of tasks, with agent the LLM decides. 
+[Agent](https://lilianweng.github.io/posts/2023-06-23-agent/) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. 
 
 ## Introduction
 
-The agentic reference architecture was introduced by Lilian Weng in the following figure (light adaptation):
+The agentic reference architecture was introduced by Lilian Weng which can be summarized in the following figure (light adaptation):
 
 ![](./diagrams/agent-ref-arch.drawio.png)
 
 The **planning** phase includes techniques like Chain of Thought ("think step by step"), Tree of thoughts (explores multiple reasoning paths) or LLM+P (used external long-horizon planner).
 
-**Short term memory** is the context, and limited by the LLM context window size. **Long term memory** is the vector store supporting the maximum inner product search, it is also used to self improve agents. Entity memory is a third type of memory to keep information of the subjects of the interactions or work to be done. Short term memory helps exchanging data between agents too. 
+**Short term memory** is the context, and limited by the LLM context window size. **Long term memory** is the vector store supporting the maximum inner product search, it is also used to self improve agents. **Entity memory** is a third type of memory to keep information of the subjects of the interactions or work to be done. Short term memory helps exchanging data between agents too. 
 
 Tools are used to call external services or other LLMs. Neuro-symbolic architecture can be built with expert system modules combined with general-purpose LLM. LLM routes to the best tool.
 
-There are [different types](https://python.langchain.com/docs/modules/agents/agent_types/) of agent: Intended Model, Supports Chat, Supports Multi-Input Tools, Supports Parallel Function Calling, or Required Model Params.
-
 I believe AI agent applications at scale will not only be triggered by users, but by systems using asynchronous events. ([Flink](https://jbcodeforce.github.io/flink-studies/)'s event capabilities in real-time distributed event processing, state management and exact-once consistency fault tolerance make it well-suited as a framework for building such system-triggered agents)
 
-## Use cases
+## Agentic Frameworks
 
-* Agents to plan an article, write this article and review for better edition. See the [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py) code.
-* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry for the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
-* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing sale lead analysis.
-* Crew to tailor a job application with multiple agents: [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
+There are some well established python libraries to build agentic, like Langgraph, Langchain. CrewAI, AutoGen, Lamaindex...
+
+End 2025, OpenAI SDK is supported by a lot of different LLM vendors, so using this lower level api works fine.
+
+After 2 years of playing with agentic implementations, I prefer a pure Python implementation is the best to avoid blackbox, what the hell is goind on.
 
 ### Small Specialist Agents
 
 Small Specialist Agents (SSAs) is an agentic approach to perform planning and reasoning to enhance AI capabilities for complex problem using domain-specific knowledge. It may implement the OODA loop: Observe, Orient, Decide, and Act, with Hierarchical Task Planning to cut bigger tasks in smaller ones. Planning can use up to date data to define future actions. Agentic AI can respond swiftly and effectively to changing environments. SSAs predict maintenance needs, adjust operational parameters to prevent downtime, and ensure that energy production meets demand without excess waste. In healthcare, SSAs may analyzing genetic data, medical histories, and real-time responses to various treatments.
 
 [See OpenSSA project](https://github.com/aitomatic/openssa)
+
+## Use cases
+
+* Agents to plan an article, write this article and review for better edition. See the CrewAI [research-agent.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/crew-ai/research-agent.py) code.
+* Support Representative, the [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry for the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools.
+* Customer outreach campaign: [customer_outreach.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/customer_outreach.py) uses tools to do google searches with two agents doing sale lead analysis.
+* Crew to tailor a job application with multiple agents: [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py)
+
 
 ## Challenges
 
@@ -72,12 +79,13 @@ For task definition, think about process, actors and tasks. Have a clear definit
 
 ## Design Patterns
 
+### The Reflect Pattern
+
 ## Technologies
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 
-In Agents, a language model is used as a reasoning engine to determine which actions
-to take and in which order. 
+In Agents, a language model is used as a reasoning engine to determine which actions to take and in which order. 
 
 [LangChain agents package API doc.](https://api.python.langchain.com/en/latest/_modules/langchain_core/agents.html)
 

@@ -1,0 +1,9 @@
+services:
+  chroma-db:
+    image: ghcr.io/chroma-core/chroma:latest
+    hostname: chroma-db
+    container_name: chroma-db
+    volumes:
+      - ./chromadb:/.chroma/index
+    ports:
+      - 8005:8000

@@ -1,0 +1,7 @@
+Given a set of relevant quotes (delimited by <quotes></quotes>) extracted from a document and the original document (delimited by ####), please compose an answer to the question. Ensure that the answer is accurate, has a friendly tone, and sounds helpful.
+####
+{{document}}
+####
+<quotes>
+{{quotes}}
+</quotes>

@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  postgres:
+    container_name: ff-postgres
+    hostname: ffpostgres
+    image: featureformcom/postgres
+    ports:
+      - 5432:5432
+  redis:
+    container_name: ff-redis
+    image: redis
+    hostname: redis
+    ports:
+      - 6379:6379
+  featureform:
+    container_name: featureform
+    image:  featureformcom/featureform
+    hostname: featureform
+    ports:
+      - 7878:7878
+      - 8082:80
+    environment:
+      - ETCD_ARCH="ETCD_UNSUPPORTED_ARCH=arm64"
+  pythonenv:
+    image: jbcodeforce/python:1.0.1
+    container_name: mypython
+    stdin_open: true 
+    tty: true
+    ports:
+      - 5002:5000
+      - 8888:8888
+    volumes:
+      - .:/app
+      - $HOME/.aws:/root/.aws

@@ -1,0 +1,7 @@
+langgraph
+langchain-ibm
+langchain_openai
+langchain-chroma
+langchain_mistralai
+taipy
+gradio

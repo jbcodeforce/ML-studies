@@ -1,0 +1,9 @@
+torch>=1.11.0
+torchmetrics
+matplotlib
+numpy
+scikit-learn
+torchvision
+mlxtend
+torchinfo
+requests
