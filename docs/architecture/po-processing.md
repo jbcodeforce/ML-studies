@@ -1,12 +1,12 @@
 # Purchase Order Processing with AI and Hybrid Cloud
 
-This example is a, scope reduced, purchase order processing for a manufacturing company working in complex pipes, pumps and valves, product production. The existing solution includes a web application and a product configurator, based on rule based software. The idea is to improve the process by automating content extraction and interpretation from the unstructured document 
+This example is a, scope reduced, purchase order processing for a manufacturing company producing complex pipes, pumps and valves, products. The existing solution includes a web application and a product configurator, based on rule based software. The idea is to improve the process by automating content extraction and interpretation from the unstructured submitted documents 
 
 ![](./diagrams/doc-processing-gcp.drawio.png){ width=900 }
 
 The application flow looks like:
 
-1. POs are uploaded to cloud storage in buckets organized with some business dimension, like geography, or customer name. 
+1. POs are uploaded to cloud storage in buckets organized with some business dimensions, like geography, or customer name. 
 
     * **Google Cloud Storage** is a highly scalable and durable object storage service. 11 9s availability.
     * It offers different storage classes to meet various performance and cost requirements.

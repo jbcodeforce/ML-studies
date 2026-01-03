@@ -1,0 +1,15 @@
+[project]
+name = "gradio-studies"
+version = "0.1.0"
+description = "Gradio UI experiments for ML demos"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "gradio>=4.0.0",
+    "plotly>=5.18.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+

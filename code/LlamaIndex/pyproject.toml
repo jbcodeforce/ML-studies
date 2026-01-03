@@ -1,0 +1,32 @@
+[project]
+name = "llamaindex-studies"
+version = "0.1.0"
+description = "LlamaIndex RAG experiments and query engines"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "llama-index>=0.10.0",
+    "llama-index-core>=0.10.0",
+    "llama-index-llms-openai>=0.1.0",
+    "llama-index-embeddings-openai>=0.1.0",
+]
+
+[project.optional-dependencies]
+# Additional LLM providers
+anthropic = [
+    "llama-index-llms-anthropic>=0.1.0",
+]
+
+# Vector stores
+chromadb = [
+    "llama-index-vector-stores-chroma>=0.1.0",
+    "chromadb>=0.4.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0.0",
+]
+

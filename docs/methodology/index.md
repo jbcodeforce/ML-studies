@@ -1,4 +1,4 @@
-# Implementation solution methodology
+# Agentic AI Implementation Solution Methodology
 
 ???- info "Version"
     Created 02/2024 - Updated July 2024
@@ -7,7 +7,6 @@
 
 ### What is agentic applications
 
-Explain the purpose of the guide, its intended audience (developers, designers, project managers, etc.), and the scope of the methodology it outlines. 
 
 TBW
 The adoption of LLM in an enterprise ecosystem should not be an afterthought process. Leaders should go over the hype, and really address what those technologies can help them with. Interesting to see that companies who offer hosted LLMs in the cloud are not encouraging their own employees to use those LLMs internally. With text generation and text enhancement, all employees will bring the same quality of results and it will be difficult to measure them.

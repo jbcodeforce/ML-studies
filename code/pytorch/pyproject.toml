@@ -1,0 +1,36 @@
+[project]
+name = "pytorch-studies"
+version = "0.1.0"
+description = "PyTorch deep learning experiments - classification, computer vision, distributed training"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "torchmetrics>=1.0.0",
+    "torchinfo>=1.8.0",
+    "matplotlib>=3.7.0",
+    "numpy>=1.24.0",
+    "scikit-learn>=1.3.0",
+    "mlxtend>=0.23.0",
+    "requests>=2.31.0",
+]
+
+[project.optional-dependencies]
+# Distributed Data Parallel training
+ddp = [
+    "torch>=2.0.0",
+]
+
+# Jupyter notebook support
+notebook = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0.0",
+]
+

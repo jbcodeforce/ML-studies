@@ -1,0 +1,26 @@
+[project]
+name = "haystack-studies"
+version = "0.1.0"
+description = "Haystack framework experiments for NLP pipelines"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "haystack-ai>=2.0.0",
+]
+
+[project.optional-dependencies]
+# OpenAI integration
+openai = [
+    "haystack-ai[openai]>=2.0.0",
+]
+
+# Chroma integration
+chroma = [
+    "haystack-ai[chroma]>=2.0.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+

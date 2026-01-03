@@ -18,11 +18,11 @@ I believe AI agent applications at scale will not only be triggered by users, bu
 
 ## Agentic Frameworks
 
-There are some well established python libraries to build agentic, like Langgraph, Langchain. CrewAI, AutoGen, Lamaindex...
+There are some well established python libraries to build agentic, like Langgraph, Langchain, Pydantic AI, CrewAI, AutoGen, Lamaindex...
 
 End 2025, OpenAI SDK is supported by a lot of different LLM vendors, so using this lower level api works fine.
 
-After 2 years of playing with agentic implementations, I prefer a pure Python implementation is the best to avoid blackbox, what the hell is goind on.
+After 2 years of playing with agentic implementations, I prefer a pure Python implementation to avoid blackbox library like langchain.
 
 ### Small Specialist Agents
 

@@ -1,7 +1,0 @@
-
-langchain
-langchain-community
-pypdf>=3.8,<4
-sqlalchemy>1,<2
-python-dotenv
-sentence-transformers

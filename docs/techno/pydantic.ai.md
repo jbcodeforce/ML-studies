@@ -1,6 +1,6 @@
 # Pydantic AI
 
-A [Agent framework](https://ai.pydantic.dev/) by the Pydantic team,  to bring that FastAPI feeling to GenAI app development.
+A [Agent framework](https://ai.pydantic.dev/) by the Pydantic team, to bring that FastAPI feeling to GenAI app development.
 
 ## Value propositions
 
@@ -13,6 +13,7 @@ A [Agent framework](https://ai.pydantic.dev/) by the Pydantic team,  to bring th
 ## Sources
 
 * [Example repository]()
+
 ## Code studies and demos
 
 * [GenAI-apps-demos/pydantic-ai folder]()

@@ -1,5 +1,8 @@
 # Deep learning
 
+!!!- info "Update"
+    Created 2021 - Updated 1/2026
+
 Deep learning is a machine learning techniques which uses neural networks with more than one layer.
 
 ## Neural Network
@@ -8,11 +11,11 @@ A Neural Network is a programming approach, based on the biological inspired neu
 
 The basic structure of a neural network includes an input layer (called "feature vector"), where the data is fed into the model, hidden layers that perform the computational processing, and an output layer that generates the final result. (See YouTube video: ["Neural Network the ground up"](https://www.youtube.com/watch?v=aircAruvnKk)).
 
-A classical learning example of neural network usage, is to classify images, like the hand written digits of the NIST dataset ([shallow_net_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/neuralnetwork/shallow_net_demo.ipynb)).
+A classical learning example of neural network usage, is to classify images, like the hand written digits of the NIST dataset ([shallow_net_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/shallow_net_demo.ipynb)). For deeper networks, see [Deep_net_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/Deep_net_keras.ipynb) and [intermediate_nn_keras_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/intermediate_nn_keras_demo.ipynb).
 
 A simple neuron holds a function that returns a number between 0 and 1. For example in simple image classification, neuron may hold the grey value of a pixel of a 28x28 pixels image (784 neurons). The number is called **activation**. At the output layer, the number in the neuron represents the percent of one output being the expected response. Neurons are connected together and each connection is weighted.
 
-Convolutional neural networks (CNNs) ([lenet_in_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/neuralnetwork/lenet_in_keras.ipynb)) allows input size to change without retraining. For the grey digit classification, the CNN defines a neuron as a unique image pattern of 3x3. The output of the regression neural network is numeric, and the classification output is a class.
+Convolutional neural networks (CNNs) ([lenet_in_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/lenet_in_keras.ipynb)) allows input size to change without retraining. For the grey digit classification, the CNN defines a neuron as a unique image pattern of 3x3. The output of the regression neural network is numeric, and the classification output is a class.
 
 The value of the neuron 'j' in the next layer is computed by the classical logistic equation taking into account previous layer neurons (`a`) (from 1 to n (i being the index on the number of input)) and the weight of the connection (`a(i)` to `neuron(j)`):
 
@@ -39,7 +42,7 @@ There are four types of neurons in a neural network:
 1. Output Neurons - Each output neuron calculates one part of the output.
 1. Bias Neurons - Work similar to the y-intercept of a linear equation. It introduces a 1 as input.
 
-Neurons is also named nodes, units or summations. See [the sigmoid play notebook to understand the effect of bias and weights](https://github.com/jbcodeforce/ML-studies/tree/master/deep-neural-net/sigmoid-play.ipynb) 
+Neurons is also named nodes, units or summations. See [the sigmoid play notebook to understand the effect of bias and weights](https://github.com/jbcodeforce/ML-studies/tree/master/examples/deep-neural-net/sigmoid-play.ipynb) 
 
 Training refers to the process that determines good weight values.
 
@@ -48,6 +51,13 @@ It is possible to use different Activation functions,(or transfer functions), su
 ReLU activation function is popular in deep learning because the gradiant descend function needs to take the derivative of the activation function. With sigmoid function, the derivative quickly saturates to zero as it moves from zero, which is not the case for ReLU.
 
 The two most used Python frameworks for deep learning are [TensorFlow/Keras](https://www.tensorflow.org/) (Google) or [PyTorch](../coding/pytorch.md) (Facebook).
+
+For hands-on introduction to these frameworks, see:
+
+- [Keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras.ipynb) - Keras basics with MNIST classification
+- [Tensorflow.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Tensorflow.ipynb) - TensorFlow 2.x introduction
+- [torch-tensor-basic.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/get_started/torch-tensor-basic.ipynb) - PyTorch tensor operations
+- [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/get_started/workflow-basic.ipynb) - PyTorch ML workflow
 
 ## Classification neural network architecture
 
@@ -77,7 +87,40 @@ model_0 = nn.Sequential(
 model_0
 ```
 
-We can use a subclass of pyTorch `nn.Module` to define the NN. See demonstration in [classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifier.ipynb) notebook, to search for the circle classes in the sklearn circles dataset, or a multi classes classification in [multiclass-classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/multiclass-classifier.ipynb).
+We can use a subclass of pyTorch `nn.Module` to define the NN. See demonstration in [classifications.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/classification/classifications.ipynb) notebook, to search for the circle classes in the sklearn circles dataset, or a multi classes classification in [multiclass-classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/classification/multiclass-classifier.ipynb).
+
+## Recurrent Neural Networks (RNN)
+
+Recurrent Neural Networks are designed to process sequential data where the order of inputs matters. Unlike feedforward networks, RNNs maintain a hidden state that captures information about previous inputs in the sequence.
+
+### Long Short-Term Memory (LSTM)
+
+Standard RNNs suffer from the vanishing gradient problem, making it difficult to learn long-range dependencies. LSTM networks address this with a gating mechanism that controls information flow:
+
+- **Forget gate**: decides what information to discard from the cell state
+- **Input gate**: decides which values to update
+- **Output gate**: decides what to output based on the cell state
+
+```python
+from tensorflow.keras.layers import LSTM, Dense, Embedding
+from tensorflow.keras.models import Sequential
+
+model = Sequential([
+    Embedding(vocab_size, embedding_dim, input_length=max_length),
+    LSTM(128, return_sequences=True),
+    LSTM(64),
+    Dense(1, activation='sigmoid')
+])
+```
+
+### Use Cases
+
+- **Sentiment analysis**: classifying text as positive/negative based on word sequences
+- **Time series prediction**: forecasting stock prices, weather, sensor data
+- **Language modeling**: predicting the next word in a sequence
+- **Speech recognition**: converting audio sequences to text
+
+See the [Keras-RNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras-RNN.ipynb) notebook for a sentiment analysis example using LSTM on movie reviews from the IMDB dataset.
 
 ## Learning
 
@@ -90,6 +133,69 @@ Transfer learning combine a first neural network as input to a second NN.
 1. When the training loss is way lower than the test loss, it means "overfitting" and so loosing time.
 1. When both losses are identical, time will be wasted if we try to regularize the model.
 1. To optimize deep learning we need to maximize the compute-bound processing by reducing time spent on memory transfer and other things. Bandwidth cost is by moving the data from CPU to GPU, from one node to another, or even from CUDA global memory to CUDA shared memory.
+
+### Regularization Techniques
+
+Regularization helps prevent overfitting by adding constraints to the model during training.
+
+**L1 Regularization (Lasso)**: Adds the absolute value of weights to the loss function. Produces sparse models by driving some weights to zero.
+
+![](https://latex.codecogs.com/svg.latex?Loss_{L1}=Loss+\lambda\sum_{i}|w_i|)
+
+**L2 Regularization (Ridge/Weight Decay)**: Adds the squared magnitude of weights to the loss function. Penalizes large weights without forcing them to zero.
+
+![](https://latex.codecogs.com/svg.latex?Loss_{L2}=Loss+\lambda\sum_{i}w_i^2)
+
+In PyTorch, L2 regularization is implemented via the `weight_decay` parameter in optimizers:
+
+```python
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001, weight_decay=1e-4)
+```
+
+**Dropout**: Randomly sets a fraction of input units to zero during training, which prevents neurons from co-adapting. Typical dropout rates are 0.2-0.5.
+
+```python
+nn.Dropout(p=0.5)  # 50% of neurons dropped
+```
+
+**Batch Normalization**: Normalizes layer inputs to have zero mean and unit variance. This stabilizes training, allows higher learning rates, and provides slight regularization.
+
+```python
+nn.BatchNorm2d(num_features)  # For conv layers
+nn.BatchNorm1d(num_features)  # For linear layers
+```
+
+### Data Augmentation
+
+Data augmentation artificially increases training set diversity by applying random transformations to input data. This improves model generalization without collecting more data.
+
+For image data, [torchvision.transforms](https://pytorch.org/vision/stable/transforms.html) provides common augmentations:
+
+```python
+from torchvision import transforms
+
+train_transform = transforms.Compose([
+    transforms.Resize((224, 224)),
+    transforms.RandomHorizontalFlip(p=0.5),
+    transforms.RandomRotation(degrees=15),
+    transforms.ColorJitter(brightness=0.2, contrast=0.2),
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+])
+```
+
+Research shows that random transforms like `TrivialAugmentWide` and `RandAugment` generally outperform hand-picked transforms:
+
+```python
+from torchvision.transforms import v2
+train_transform = v2.Compose([
+    v2.Resize((224, 224)),
+    v2.TrivialAugmentWide(num_magnitude_bins=31),
+    v2.ToTensor()
+])
+```
+
+Data augmentation is applied only to training data, not validation or test sets.
 
 ## Computer Image
 
@@ -127,7 +233,13 @@ See this [CNN explainer tool.](https://poloclub.github.io/cnn-explainer/)
 
 Simple image dataset using the [Fashion NIST](https://github.com/zalandoresearch/fashion-mnist).
 
-The non-linear classifier and one CNN is in [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py).
+Code examples for CNN implementations:
+
+- [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/fashion_cnn.py) - PyTorch CNN for Fashion MNIST
+- [tiny_vgg.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/tiny_vgg.py) - TinyVGG architecture implementation
+- [computer_vision.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/computer_vision.ipynb) - Computer vision notebook walkthrough
+- [Keras-CNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras-CNN.ipynb) - CNN with Keras for MNIST digit classification
+- [AlexnetJb.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/AlexnetJb.ipynb) - AlexNet implementation
 
 [MIT - Convolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
 
@@ -185,13 +297,50 @@ model.classifier = torch.nn.Sequential(
 
 Dropout layers randomly remove connections between two neural network layers with a probability of p.  This practice is meant to help regularize (prevent overfitting) a model by making sure the connections that remain learn features to compensate for the removal of the other connections.
 
-See [PyTorch transfer learning for image classification code.](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/transfer_learning.py)
+See [PyTorch transfer learning for image classification code.](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/transfer_learning.py)
+
+## Distributed Training
+
+Training large models requires distributing computation across multiple GPUs or machines. PyTorch provides Distributed Data Parallel (DDP) for this purpose.
+
+DDP replicates the model across GPUs, splits data batches, and synchronizes gradients after each backward pass using the Ring AllReduce algorithm. This allows training to scale efficiently while maintaining model consistency.
+
+```python
+from torch.nn.parallel import DistributedDataParallel as DDP
+from torch.distributed import init_process_group
+
+# Setup process group
+init_process_group(backend="nccl", rank=rank, world_size=world_size)
+
+# Wrap model with DDP
+model = DDP(model, device_ids=[gpu_id])
+```
+
+For multi-GPU training with fault tolerance, use `torchrun`:
+
+```bash
+torchrun --standalone --nproc_per_node=gpu multi_gpu_torchrun.py 50 10
+```
+
+See the [Distributed Data Parallel documentation](../coding/ddp.md) for detailed coverage and the following code examples:
+
+- [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp/multi_gpu_ddp.py) - Basic DDP implementation
+- [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp/multi_gpu_torchrun.py) - Training with torchrun
+- [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp/multinode.py) - Multi-machine training
+
+## Practical Projects
+
+For a hands-on project applying deep learning concepts, see [DeepLearningProject-Solution.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/DeepLearningProject-Solution.ipynb) which builds a Multi-Layer Perceptron to classify mammogram masses as benign or malignant.
 
 ## Sources of information
 
-* Big source of online book [Dive into Deep Learning from Amazons](https://d2l.ai).
-* [Udemy PyTorch for deep learning](https://www.learnpytorch.io/)
-* [Horace He- Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)
-* [MIT - CNConvolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
+* [Dive into Deep Learning](https://d2l.ai) - Comprehensive online book from Amazon
+* [Learn PyTorch for deep learning](https://www.learnpytorch.io/) - Zero to mastery course
+* [Horace He - Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)
+* [MIT - Convolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
+* [Jeff Heaton - Applications of Deep Neural Networks](https://github.com/jeffheaton/t81_558_deep_learning) - WashU course materials
+* [PyTorch documentation](https://pytorch.org/docs/stable/index.html)
+* [TensorFlow/Keras documentation](https://www.tensorflow.org/tutorials)
+* [Papers with Code](https://paperswithcode.com/) - State-of-the-art papers with implementations
 
 
