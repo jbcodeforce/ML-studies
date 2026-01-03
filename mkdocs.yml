@@ -33,7 +33,7 @@ nav:
     - Prompt Engineering: genAI/prompt-eng.md
     - Solution Design: architecture/sol-design.md
     - RAG: genAI/rag.md
-    - Agents: genAI/agentic.md
+    - Agentic AI: genAI/agentic.md
     - Anthropic: genAI/anthropic.md
     - OpenAI: genAI/openai.md
     - MCP: genAI/mcp.md

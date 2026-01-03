@@ -334,6 +334,7 @@ For a hands-on project applying deep learning concepts, see [DeepLearningProject
 
 ## Sources of information
 
+* [HuggingFace deep reinforcement ](https://huggingface.co/learn/deep-rl-course/en/unit0/introduction)
 * [Dive into Deep Learning](https://d2l.ai) - Comprehensive online book from Amazon
 * [Learn PyTorch for deep learning](https://www.learnpytorch.io/) - Zero to mastery course
 * [Horace He - Making Deep Learning Go Brrrr From First Principles](https://horace.io/brrr_intro.html)
