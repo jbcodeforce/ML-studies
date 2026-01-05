@@ -1,5 +1,0 @@
-langchain-openai
-beautifulsoup4
-langchainhub
-chromadb
-openai

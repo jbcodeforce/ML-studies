@@ -24,3 +24,4 @@ techno/crew-ai/db/
 **/agent_domain_store/
 **/agent_vstore
 **/taipy/user_data/
+**/export_env.sh

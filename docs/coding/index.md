@@ -7,22 +7,53 @@
 
     12/2023: Clean Jupyter
 
+    01/2026: Migrate to uv for package management
+
 ## Environments
 
-To avoid impacting the laptop (Mac) python core installation, use virtual environment:
+### uv (Recommended)
+
+[uv](https://docs.astral.sh/uv/) is a fast Python package and project manager written in Rust. It replaces pip, pip-tools, pipx, poetry, pyenv, virtualenv, and more.
+
+**Installation:**
 
 ```sh
-python3 -m venv .venv
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# or via Homebrew
+brew install uv
+```
+
+**Project setup for examples and demo as subfolder within this project:**
+
+```sh
+# Initialize a new project with pyproject.toml
+uv init
+
+# Create virtual environment and install dependencies
+uv sync
+
+# Add a dependency
+uv add numpy pandas torch
+
+# Run a script
+uv run python script.py
+
+# Run Jupyter
+uv run jupyter lab
+```
+
+**Quick environment for existing projects:**
+
+```sh
+# Create venv and install from pyproject.toml or requirements.txt
+uv venv
 source .venv/bin/activate
+uv pip install -r requirements.txt
 ```
 
-Then in each main folder there is a `requirements.txt` to get the necessary modules.
-
-There are a lot of other solutions we can use, like the Amazon [scikit-learn image](https://raw.githubusercontent.com/aws/sagemaker-scikit-learn-container/master/docker/1.2-1/base/Dockerfile.cpu). The SageMaker team uses this repository to build its official [Scikit-learn image](https://github.com/aws/sagemaker-scikit-learn-container).  we can build an image via:
-
-```sh
-docker build -t sklearn-base:1.2-1 -f https://raw.githubusercontent.com/aws/sagemaker-scikit-learn-container/master/docker/1.2-1/base/Dockerfile.cpu .
-```
+Each project folder contains a `pyproject.toml` for dependency management.
 
 ### VSCode
 
@@ -45,68 +76,21 @@ docker run --rm -v $(pwd):/home -it gcr.io/kaggle-images/python /bin/bash
 docker run -v $(pwd):/home --runtime nvidia --rm -it gcr.io/kaggle-gpu-images/python /bin/bash
 ```
 
-### Conda
-
-Conda provides package, dependency, and environment management for many languages. 
-
-On Mac M1 we need ARM64 architecture. 
-
-1. Install miniconda: [projects/miniconda](https://docs.conda.io/projects/miniconda/en/latest/)
-1. To create a conda environment named "torch", in miniconda3 folder do: `conda env create -f torch-conda-nightly.yml -n torch`
-1. Activate conda environment: 
-
-    ```sh
-    conda activate torch
-    ```
-
-1. Register environment: `python -m ipykernel install --user --name pytorch --display-name "Python 3.9 (pytorch)"`
-1. Install the following: `conda install pytorch pandas scikit-learn`
-1. Start Jupiter: `jupiter notebook`
-1. Execute the notebook in to test [test-env.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/deep-neural-net/test-env.ipynb)
-
-
-[Install Conda on Windows.](https://conda.io/projects/conda/en/latest/user-guide/install/windows.html)
-
-### Run Jupyter notebooks
-
-* We can use jupyter lab (see [installation options](https://jupyter.org/install.html)) or conda and miniconda.
-
-    ```sh
-    conda install -y jupyter
-    ```
-    
-### JupyterLab
-
-The following works as of April 2023:
-
-```sh
-pip3 install jupyterlab
-# build the assets
-jupyter-lab build
-# The path is something like
-# /opt/homebrew/Cellar/python@3.10/3.10.9/Frameworks/Python.framework/Versions/3.10/share/jupyter/lab
-# Start the server
-jupyter-lab
-```
-
-Once started, in VScode select a remote Python kernel and Jupiter extension to run the notebook inside it. 
-
 ## Important Python Libraries
 
 ### [numpy](https://numpy.org/)
 
-* Array computing in Python. [Getting started](https://numpy.org/devdocs/user/quickstart.html)
+* Array computing in Python. [Numpy official quickstar.t](https://numpy.org/devdocs/user/quickstart.html)
 * NumPy dimensions are called axes.
+    ```python
+    import numpy as np
+    a = np.array([2, 3, 4])
+    b = np.ones((2, 3, 4), dtype=np.int16)
+    c = np.zeros((3, 4))
+    ```
 
-```python
-import numpy as np
-a = np.array([2, 3, 4])
-b = np.ones((2, 3, 4), dtype=np.int16)
-c = np.zeros((3, 4))
-```
 * Create a sequence of number: `np.arange(10, 30, 5)`
 * Matrix product: using .dot or @
-
     ```python
     A = np.array([[1, 1], [0, 1]])
     B = np.array([[2, 0], [3, 4]])
@@ -116,29 +100,27 @@ c = np.zeros((3, 4))
 
 ### [scipy](https://scipy.org/)
 
-SciPy is a collection of mathematical algorithms and convenience functions built on NumPy .
+SciPy is a collection of mathematical algorithms and convenience functions built on top of NumPy. See [product documentation](https://docs.scipy.org/doc/scipy/tutorial/index.html#user-guide).
 
 * Get a normal distribution function: use the probability density function (pdf)
-
-```python
-from scipy.stats import norm
-x = np.arange(-3, 3, 0.01)
-y=norm.pdf(x)
-```
+    ```python
+    from scipy.stats import norm
+    x = np.arange(-3, 3, 0.01)
+    y=norm.pdf(x)
+    ```
 
 ### [MatPlotLib](https://matplotlib.org/stable/users/index.html)
 
-Persent figure among multiple axes, from our data.
+Persent figure among multiple axes, from the data for human analysis.
 
 
 * Classic import
+    ```
+    import matplotlib.pyplot as plt
+    import numpy as np
 
-```
-import matplotlib.pyplot as plt
-import numpy as np
-
-import matplotlib as mpl
-```
+    import matplotlib as mpl
+    ```
 
 * See [Notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/MatPlotLib.ipynb)
 
@@ -169,10 +151,119 @@ Example of getting started code in deep-neural-net folder.
 
 [Summary of the library and deeper studies](./pytorch.md)
 
-## Code samples
+## Code Samples
 
-| Link | Description |
+Code is organized in three main folders: `examples/` for library-specific samples, `e2e-demos/` for end-to-end applications, and `notebooks/` for Jupyter notebooks.
+
+### Machine Learning Classifiers
+
+Located in `examples/ml-python/classifiers/`:
+
+| Code | Description |
 | --- | --- |
-| [Perceptron](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/TestPerceptron.py) |  To classify the iris flowers. Use identity activation function |
-| [Adaline](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/TestAdaline.py) | ADAptive LInear NEuron with weights updated based on a linear activation function |
-| [Fischer](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/TestBatteryClassifier.py) | Fisher classification for sentences |
+| [TestPerceptron.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/classifiers/TestPerceptron.py) | Perceptron classifier for iris flowers using identity activation |
+| [TestAdaline.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/classifiers/TestAdaline.py) | ADAptive LInear NEuron with linear activation function |
+| [SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/classifiers/SVM-IRIS.py) | Support Vector Machine on iris dataset |
+| [DecisionTreeIRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/classifiers/DecisionTreeIRIS.py) | Decision tree classification |
+| [demo_lasso_ridge.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/demo_lasso_ridge.py) | L1/L2 regularization comparison |
+
+### PyTorch Deep Learning
+
+Located in `examples/pytorch/`:
+
+| Code | Description |
+| --- | --- |
+| [get_started/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/get_started) | Tensor basics, workflow notebooks |
+| [classification/classifier.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/classification/classifier.ipynb) | Binary classification with neural networks |
+| [classification/multiclass-classifier.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/classification/multiclass-classifier.ipynb) | Multi-class classification |
+| [computer-vision/fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/computer-vision/fashion_cnn.py) | CNN on Fashion MNIST |
+| [computer-vision/transfer_learning.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/computer-vision/transfer_learning.py) | Transfer learning with EfficientNet |
+| [ddp/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp) | Distributed Data Parallel training |
+
+### LangChain and LLM Integration
+
+Located in `examples/llm-langchain/`:
+
+| Code | Description |
+| --- | --- |
+| [openai/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai) | OpenAI API integration, agents, streaming |
+| [anthropic/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/anthropic) | Claude integration |
+| [bedrock/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/bedrock) | AWS Bedrock with CoT prompts |
+| [mistral/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/mistral) | Mistral AI tool calling |
+| [gemini/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/gemini) | Google Gemini chat |
+| [cohere/](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/cohere) | Cohere integration |
+
+### RAG Implementations
+
+Located in `examples/llm-langchain/rag/`:
+
+| Code | Description |
+| --- | --- |
+| [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/rag/build_agent_domain_rag.py) | Build RAG with ChromaDB and OpenAI |
+| [multiple_queries_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/rag/multiple_queries_rag.py) | Multi-query RAG pattern |
+| [rag_fusion.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/rag/rag_fusion.py) | RAG fusion with reciprocal rank |
+| [rag_hyde.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/rag/rag_hyde.py) | Hypothetical Document Embedding |
+
+### LangGraph Agent Patterns
+
+Located in `examples/llm-langchain/langgraph/`:
+
+| Code | Description |
+| --- | --- |
+| [first_graph_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/langgraph/first_graph_with_tool.py) | Basic graph with tool calling |
+| [react_lg.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/langgraph/react_lg.py) | ReAct pattern implementation |
+| [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/langgraph/adaptive_rag.py) | Adaptive RAG with routing |
+| [human_in_loop.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/langgraph/human_in_loop.py) | Human-in-the-loop pattern |
+| [ask_human_graph.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/langgraph/ask_human_graph.py) | Human approval workflow |
+| [stream_agent_node.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-langchain/langgraph/stream_agent_node.py) | Streaming agent output |
+
+### Ollama Local LLM
+
+Located in `examples/llm-ollama/`:
+
+| Code | Description |
+| --- | --- |
+| [chat_with_mistral.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-ollama/chat_with_mistral.py) | Chat with local Mistral |
+| [async_chat_with_mistral.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-ollama/async_chat_with_mistral.py) | Async chat streaming |
+| [chat_with_ollama_openai_api.py](https://github.com/jbcodeforce/ML-studies/blob/master/examples/llm-ollama/chat_with_ollama_openai_api.py) | Ollama with OpenAI-compatible API |
+
+### End-to-End Demos
+
+Located in `e2e-demos/`:
+
+| Demo | Description |
+| --- | --- |
+| [qa_retrieval/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/qa_retrieval) | Q&A with RAG and ChromaDB |
+| [chat_with_pdf/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/chat_with_pdf) | PDF document chat application |
+| [streaming-demo/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo) | WebSocket streaming with LangGraph |
+| [resume_tuning/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/resume_tuning) | Resume optimization with LLM |
+| [think_deeply/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/think_deeply) | Deep reasoning with LLM |
+| [gemini_cmd/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/gemini_cmd) | Gemini CLI integration |
+
+### UI Frameworks
+
+Located in `techno/`:
+
+| Framework | Code |
+| --- | --- |
+| CrewAI | [techno/crew-ai/](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai) - Multi-agent examples |
+| Streamlit | [techno/streamlit/](https://github.com/jbcodeforce/ML-studies/tree/master/techno/streamlit) - Dashboard apps |
+| Gradio | [techno/gradio/](https://github.com/jbcodeforce/ML-studies/tree/master/techno/gradio) - ML interfaces |
+| NiceGUI | [techno/nicegui/](https://github.com/jbcodeforce/ML-studies/tree/master/techno/nicegui) - Python web UI |
+| Taipy | [techno/taipy/](https://github.com/jbcodeforce/ML-studies/tree/master/techno/taipy) - Data apps |
+
+### Jupyter Notebooks
+
+Located in `notebooks/`:
+
+| Notebook | Topic |
+| --- | --- |
+| [ConditionalProbabilityExercise.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/ConditionalProbabilityExercise.ipynb) | Probability and Bayes |
+| [Distributions.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) | Statistical distributions |
+| [LinearRegression.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/LinearRegression.ipynb) | Linear regression basics |
+| [KNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/KNN.ipynb) | K-Nearest Neighbors |
+| [DecisionTree.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/DecisionTree.ipynb) | Decision tree classifier |
+| [KMeans.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/KMeans.ipynb) | K-Means clustering |
+| [PCA.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/PCA.ipynb) | Principal Component Analysis |
+| [Keras-CNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras-CNN.ipynb) | CNN with Keras |
+| [Keras-RNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras-RNN.ipynb) | RNN with Keras |

@@ -1,9 +1,9 @@
 # AI and Machine Learning Studies
 
 !!! info "Update"
-    Created 2017 - Updated 8/05/2024
+    Created 2017 - Updated 12/2025
 
-Welcome to this repository for machine learning using Python and other cutting-edge technologies! Here, you will find a treasure trove of notes, code samples, and Jupyter notebooks, carefully curated from various reputable sources such as IBM labs, Google, AWS, Kaggle, Coursera, Udemy courses, books, and insightful websites.
+Welcome to this repository for machine learning, deep learning and Generative AI using Python and other cutting-edge technologies! Here, you will find notes, code samples, and Jupyter notebooks, carefully curated from various reputable sources such as IBM labs, Google, AWS, Kaggle, Coursera, Udemy courses, books, and insightful websites.
 
 This becoming, almost, like a virtual book :smile: 
 
@@ -35,6 +35,10 @@ AI/ML by 2030 will be a $B300 market. Every company is using AI/ML already or co
 * Discover analytic insights within large data set.
 
 The stakeholders interested by AI/ML are CTOs, CPOs, Data Scientists, business analysts who want to derive decision from data and improve their business processes.
+
+## A Learning Roadmap
+
+To follow a [guided training roadmap, see this dedicated chapter](./guide_for_ai.md) or use the different top level menus.
 
 ## Why Hybrid Cloud?
 

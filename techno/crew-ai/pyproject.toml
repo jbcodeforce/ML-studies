@@ -1,0 +1,17 @@
+[project]
+name = "crewai-studies"
+version = "0.1.0"
+description = "CrewAI multi-agent experiments"
+readme = "readme.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "crewai>=0.30.0",
+    "crewai-tools>=0.4.0",
+    "langchain-community>=0.3.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+

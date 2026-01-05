@@ -32,23 +32,78 @@
 
 In machine learning, there are two main approaches: the **Bayesian** approach and the **frequentist** approach. The Bayesian approach is based on probability theory and uses Bayes' theorem to update probabilities based on new data. The frequentist approach, on the other hand, is based on statistical inference and uses methods such as hypothesis testing and confidence intervals to make decisions.
 
-**Bayes theorem**:
+### Bayes theorem
 
-The theorem works by taking into account the probability of events on their own as well as two events occurring in conjunction with each other. It helps to assess what causes events to occur and why. It then helps to predict future.
+Bayes' theorem provides a way to update probabilities based on new evidence. Understanding it involves three levels:
 
-The Bayes formula for the probability of having event A occuring knowing B occured:
+1. **Knowing the formula** - being able to plug in numbers
+2. **Understanding why it's true** - grasping the derivation
+3. **Recognizing when to apply it** - identifying real-world situations
 
-![](https://latex.codecogs.com/svg.latex?P(A|B) = P(B|A) P(A) / P(B))
+#### The formula
 
-The numerator is the probability of event B given event A multiplied by the probability of event A occurring on its own. Denominator is probability of event B occuring on its own.
+The Bayes formula for the probability of hypothesis H given evidence E:
+
+![](https://latex.codecogs.com/svg.latex?P(H|E)=\frac{P(E|H)\cdot%20P(H)}{P(E)})
+
+Where:
+
+* **P(H)** - the **prior**: probability of the hypothesis before seeing evidence
+* **P(E|H)** - the **likelihood**: probability of the evidence assuming the hypothesis is true
+* **P(E)** - the **evidence**: total probability of seeing the evidence under all hypotheses
+
+    ![](https://latex.codecogs.com/svg.latex?P(E)=P(H)\cdot%20P(E|H)+P(not H)\cdot%20P(E|not H))
+
+* **P(H|E)** - the **posterior**: updated probability of the hypothesis after seeing evidence
+
+Another view of this formula:
 
 ![](./images/bayen.png){ width=500 }
 
-The Bayesian approach is often used in situations where there is uncertainty and the data is complex, while the frequentist approach is often used in situations where there is a large amount of data and the relationships between the variables are well-defined.
+#### The Steve example
 
-Bayesian analysis allows you to compare false negative and false positive rates against the likelihood of obtaining a true negative or true positive result.
+Consider Steve, described as "meek and tidy soul, with a need for order and a passion for detail." Is Steve more likely a librarian or a farmer?
+
+The intuitive answer might be librarian, but Bayes' theorem requires considering:
+
+* **Prior probability**: There are roughly 20 farmers for every librarian in the population -> P(H) = 1 /( 1 + 20) = 1/21
+* **Likelihood**: What fraction of librarians vs farmers fit Steve's description?
+
+Even if 40% of librarians (4 librarians for 10 of them), this is P(E|H), and only 10% of farmers match the character description (20 of the 200 farmers), the prior matters:
+
+* Librarians matching: 1 × 0.40 = 0.40
+* Farmers matching: 20 × 0.10 = 2.00
+
+Steve is about 5x more likely to be a farmer than a librarian.
+
+The P(Librarian given description) = 4 /(4 + 20) = 16.7%
+
+* Rationality is not about knowing facts, it's about recognizing which facts are relevant.
+* Seeing evidence restricts the space of possibilities
+
+#### Visual representation
+
+A geometric interpretation uses a unit square representing the sample space:
+
+![](./images/bayes.drawio.png)
+
+1. Divide the square into regions representing each hypothesis (proportional to prior probabilities)
+2. Within each region, shade the area where the evidence holds (proportional to likelihood)
+3. The posterior is the ratio of shaded hypothesis area to total shaded area
+
+This visualization shows how restricting to cases where evidence holds (conditioning) changes the probability.
+
+#### Key takeaways
+
+* Always consider base rates (priors) before updating beliefs
+* New evidence updates but does not replace prior knowledge
+* Context and representative sampling affect the validity of conclusions
+
+The Bayesian approach handles uncertainty and complex data well. Frequentist methods are more common when data is abundant and variable relationships are well-defined.
 
 [See the conditional probability notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/ConditionalProbabilityExercise.ipynb) exercise to simulate the probability of buying thing knowing the age and previous buying data: `totals` contains the total number of people in each age group and `purchases` contains the total number of things purchased by people in each age group.
+
+[See this video from 3Blue1Brown](https://www.youtube.com/watch?v=HZGCoVF3YvM) for a geometric interpretation of Bayes' theorem.
 
 ## Data distributions
 

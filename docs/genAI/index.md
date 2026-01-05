@@ -422,7 +422,7 @@ It is possible to run LLama2 on local machine with [ollama](https://ollama.com/)
 * [Perplexity Labs](https://labs.perplexity.ai/), a part of Perplexity AI, provides a user-friendly platform for developers to explore and experiment with large language models, including Llama 3
 * [https://huggingface.co/chat/](https://huggingface.co/chat/)
 * [Replicate](https://replicate.com/) to run, fine-tune open-source models, and expose them as APIs. They also lead [Cog](https://github.com/replicate/cog) an open-source tool for packaging machine learning models.
-* [Vercel](https://vercel.com/) serverless, hosting platform for web app and AI app. The led vite for next.js project. See a [langchain nextjs template](https://github.com/langchain-ai/langchain-nextjs-template/tree/main) to easily deploy to Vercel.
+* [Vercel](https://vercel.com/) serverless, hosting platform for web app and AI app. See a [langchain nextjs template](https://github.com/langchain-ai/langchain-nextjs-template/tree/main) to easily deploy to Vercel.
 
 ### [Mistral - Mixture of Experts](https://mistral.ai/news/mixtral-of-experts/)
 
@@ -431,7 +431,7 @@ A french company who has developed the **Mixtral 8x7B** model, a high-quality sp
 
 ### [Google Gemini](https://gemini.google.com/)
 
-Is the public Generative multimodal AI from Google DeepMind team with the support of 3 different sizes, the smallest being able to run on Mobile. Its [reasoning capabilities](https://blog.google/technology/ai/google-gemini-ai/#capabilities) can help make sense of complex written and visual information.
+Gemini is the public Generative multimodal AI from Google DeepMind team with the support of 3 different sizes, the smallest being able to run on Mobile. Its [reasoning capabilities](https://blog.google/technology/ai/google-gemini-ai/#capabilities) can help make sense of complex written and visual information.
 
 ### Amazon SageMaker
 
@@ -445,7 +445,13 @@ Some useful articles:
 * [SageMaker my own personal study.](https://jbcodeforce.github.io/yarfba/ai-ml/sagemaker/).
 
 
+### Local inference and training
 
+#### Ollama
+
+#### vLLM
+
+#### shimmy
 
 
 ## Deeper dive

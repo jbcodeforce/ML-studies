@@ -1,0 +1,114 @@
+[project]
+name = "llm-langchain-studies"
+version = "0.1.0"
+description = "LangChain and LangGraph experiments with multiple LLM providers"
+readme = "Readme.md"
+requires-python = ">=3.11"
+
+# Core dependencies - always installed
+dependencies = [
+    "python-dotenv>=1.0.0",
+    "langchain>=0.3.0",
+    "langchain-community>=0.3.0",
+    "langsmith>=0.1.0",
+]
+
+[project.optional-dependencies]
+# LangGraph for agent development
+langgraph = [
+    "langgraph>=0.2.0",
+    "langchain-chroma>=0.1.0",
+    "gradio>=4.0.0",
+    "taipy>=4.0.0",
+]
+
+# OpenAI provider
+openai = [
+    "langchain-openai>=0.2.0",
+    "openai>=1.0.0",
+    "langchainhub>=0.1.0",
+    "chromadb>=0.4.0",
+    "beautifulsoup4>=4.12.0",
+]
+
+# Anthropic provider
+anthropic = [
+    "langchain-anthropic>=0.2.0",
+    "anthropic>=0.30.0",
+]
+
+# AWS Bedrock provider
+bedrock = [
+    "boto3>=1.28.0",
+    "botocore>=1.31.0",
+    "awscli>=1.29.0",
+    "transformers>=4.24.0,<5",
+    "bs4>=0.0.1",
+    "unstructured>=0.10.0",
+    "langchain-experimental>=0.3.0",
+]
+
+# Mistral provider
+mistral = [
+    "mistralai>=1.0.0",
+    "langchain-mistralai>=0.2.0",
+]
+
+# Cohere provider
+cohere = [
+    "cohere>=5.0.0",
+    "langchain-cohere>=0.3.0",
+]
+
+# Google Gemini provider
+gemini = [
+    "google-generativeai>=0.5.0",
+    "langchain-google-genai>=2.0.0",
+]
+
+# IBM WatsonX provider
+watsonx = [
+    "ibm-watsonx-ai>=1.0.0",
+    "langchain-ibm>=0.3.0",
+]
+
+# RAG and vector stores
+rag = [
+    "chromadb>=0.4.0",
+    "faiss-cpu>=1.7.0,<2",
+    "sentence-transformers>=2.2.0",
+    "pypdf>=3.8.0,<4",
+    "datasets>=2.0.0",
+    "cassandra-driver>=3.28.0",
+]
+
+# Q&A and document processing
+qa = [
+    "chromadb>=0.4.0",
+    "faiss-cpu>=1.7.0,<2",
+    "opensearch-py>=2.0.0",
+]
+
+# Feature stores
+featurestores = [
+    "feast>=0.30.0",
+    "featureform>=1.0.0",
+]
+
+# All providers combined
+all-providers = [
+    "llm-langchain-studies[openai,anthropic,bedrock,mistral,cohere,gemini,watsonx]",
+]
+
+# Full installation with everything
+all = [
+    "llm-langchain-studies[all-providers,langgraph,rag,qa,featurestores]",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "ipython>=8.0.0",
+]
+
