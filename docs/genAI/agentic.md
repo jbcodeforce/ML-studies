@@ -53,6 +53,15 @@ The approach is to create the goal for the agent, try to code it as function, an
 Design agentic solution with production in mind: be sure to have logs, version management, release management, automated deployment, monitoring and documentation.
 
 
+### Event-driven AI Agent
+
+[Apache Flink Agent](https://nightlies.apache.org/flink/flink-agents-docs-latest/docs/get-started/overview/) is an open-source framework for building event-driven streaming agents.
+
+There will be multiple patterns supported by Flink. 
+
+1. Workflow streaming agents: a directed workflow of modular steps, called actions, connected by events.To orchestrate complex, multi-stage tasks in a transparent, extensible. This is an implementation of the [SAGA choreography pattern](https://jbcodeforce.github.io/eda-studies/patterns/saga/#services-choreography). [See the appache Flink Agent git repo](https://github.com/apache/flink-agents.git) and python [example of workflow](https://github.com/apache/flink-agents/blob/main/python/flink_agents/examples/quickstart/workflow_single_agent_example.py)
+1. ReAct: to combine reasoning and action, where the user's prompt specify the goal, then agent, with tools and LLM, decide how to achieve the goal. A [steaming ReAct agent example in python](https://github.com/apache/flink-agents/blob/main/python/flink_agents/examples/quickstart/react_agent_example.py) demonstrates how to do this with Flink Agents. [See my own implementation with Kafka and OSS Flink](https://github.com/jbcodeforce/flink-studies/tree/master/e2e-demos/agentic-demo)
+
 ### Small Specialist Agents
 
 Small Specialist Agents (SSAs) is an agentic approach to perform planning and reasoning to enhance AI capabilities for complex problem using domain-specific knowledge. It may implement the OODA loop: Observe, Orient, Decide, and Act, with Hierarchical Task Planning to cut bigger tasks in smaller ones. Planning can use up to date data to define future actions. Agentic AI can respond swiftly and effectively to changing environments. SSAs predict maintenance needs, adjust operational parameters to prevent downtime, and ensure that energy production meets demand without excess waste. In healthcare, SSAs may analyzing genetic data, medical histories, and real-time responses to various treatments.
@@ -86,6 +95,7 @@ Small Specialist Agents (SSAs) is an agentic approach to perform planning and re
 
 * **Resume Tuning**: Multi-agent pipeline for tailoring resumes to job postings. See [resume_tuning demo](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/resume_tuning).
 * **Streaming Demo**: Real-time streaming with human-in-the-loop. See [streaming-demo](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo).
+* [My AI Assistant](https://github.com/jbcodeforce/MyAIAssistant) An intelligent personal productivity and knowledge management tool that integrates task management with a semantic knowledge base using LLM, GraphRAG.
 
 ## Challenges
 
