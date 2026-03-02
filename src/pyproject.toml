@@ -56,6 +56,11 @@ dev-dependencies = [
     "ruff>=0.4.0",
 ]
 
+[tool.uv.workspace]
+members = [
+    "agentic/agno",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

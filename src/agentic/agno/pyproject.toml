@@ -1,0 +1,28 @@
+[project]
+name = "agno-studies"
+version = "0.1.0"
+description = "Agno agent studies (Ollama, MLX, local LLMs)"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "agno>=2.5.5",
+    "chromadb>=1.5.2",
+    "ddgs>=9.10.0",
+    "fastapi>=0.134.0",
+    "google-genai>=1.65.0",
+    "ollama>=0.6.1",
+    "openai>=1.0.0",
+    "sqlalchemy>=2.0.47",
+    "uvicorn>=0.41.0",
+    "yfinance>=1.2.0",
+]
+
+[project.scripts]
+agno-mlx = "first_mlx_agent_with_tool:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+include = ["first_mlx_agent_with_tool.py"]

@@ -1,0 +1,5 @@
+chat:
+  quick_prompts:
+    finance-agent:
+      - "What's the current price of AAPL?"
+      - "analyze NVDIA"
