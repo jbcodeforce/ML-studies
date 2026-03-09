@@ -370,8 +370,13 @@ See [financial_analysis.py](https://github.com/jbcodeforce/ML-studies/tree/maste
 
 [IBM's Bob IDE](https://www.ibm.com/products/bob)
 
+### [Agno](https://www.agno.com/)
+
+ Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno).
+
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 
+SDK was interesting in 2024. But to abstract and some unnecessary constructs.
 In Agents, a language model is used as a reasoning engine to determine which actions to take and in which order. 
 
 [LangChain agents package API doc.](https://api.python.langchain.com/en/latest/_modules/langchain_core/agents.html)
@@ -503,6 +508,8 @@ See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/
 
 | Framework | Best For | Multi-Agent | Streaming | Learning Curve |
 |-----------|----------|-------------|-----------|----------------|
+| Agno      | Stateful, Team, Workflow, Agent, integration, MCP | Yes | Yes | Low. By far the best |
+| Paperclip | | | | |  
 | LangGraph | Stateful workflows, cycles | Yes (subgraphs) | Yes | Medium |
 | CrewAI | Role-based collaboration | Yes (crews) | Limited | Low |
 | Pydantic AI | Type-safe agents | No | Yes | Low |
@@ -513,15 +520,17 @@ See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/
 
 | Category | Examples |
 |----------|----------|
-| **LangGraph** | [langgraph folder](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph) |
+| **Agno** | [Agentic/agno folder](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno) |
+| **LangGraph** | [langgraph folder](https://github.com/jbcodeforce/ML-studies/tree/master/src/llm-langchain/langgraph) |
 | **CrewAI** | [crew-ai folder](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai) |
-| **OpenAI Agents** | [openai folder](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai) |
+| **OpenAI Agents** | [openai folder](https://github.com/jbcodeforce/ML-studies/tree/master/src/llm-langchain/openai) |
 | **E2E Demos** | [e2e-demos folder](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos) |
 
 ## References
 
 * [LLM Powered Autonomous Agents - Lilian Wang](https://lilianweng.github.io/posts/2023-06-23-agent/)
 * [Prompt engineering with external APIs](https://lilianweng.github.io/posts/2023-03-15-prompt-engineering/#external-apis)
+* [Agno Agents documentation](https://docs.agno.com/agents/overview)
 * [Crew-ai tutorial on deeplearning.ai](https://learn.deeplearning.ai/courses/multi-ai-agent-systems-with-crewai)
 * [AI Agents in LangGraph - deeplearning.ai](https://learn.deeplearning.ai/courses/ai-agents-in-langgraph)
 * [ReAct pattern implementation](https://til.simonwillison.net/llms/python-react-pattern)

@@ -7,6 +7,14 @@ Agno agent experiments with local LLMs (Ollama, MLX).
 - **[AGNO_REFERENCE.md](AGNO_REFERENCE.md)** – Links to the Agno API docs and GitHub source so you can open the reference or jump to the implementation (e.g. `agno.agent`, `agno.models.ollama`, `agno.tools`).
 - In **Cursor**: add `https://docs.agno.com/llms-full.txt` under Settings → Indexing & Docs so the AI can use the Agno API when coding.
 
+## Core Concepts
+
+* [Agents]()
+* [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
+* [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
+* [memory](https://docs.agno.com/memory/overview) for  user preferences
+* [state] is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
+
 ## MLX agent
 
 The agent in `first_mlx_agent_with_tool` uses an OpenAI-compatible API. Start an MLX server (e.g. [mlx-llm-server](https://pypi.org/project/mlx-llm-server/) or [mlx-openai-server](https://github.com/cubist38/mlx-openai-server)) then run:
@@ -60,3 +68,58 @@ To run:
 ```sh
 uv run python ollama_self_learning_agent_with_tool.py.py
 ```
+
+## How to from cookbook
+
+### Use user preferences
+
+* [Works with Memory manager](https://docs.agno.com/memory/working-with-memories/overview) to keep user preference, with instructions that should include:
+    ```markdown
+    ## Memory
+
+    You have memory of user preferences (automatically provided in context). Use this to:
+    - Tailor recommendations to their interests
+    - Consider their risk tolerance
+    - Reference their investment goals
+    ```
+    And add this to the agent:
+    ```python
+        db=agent_db,
+        memory_manager=memory_manager,
+        enable_agentic_memory=True,
+        add_datetime_to_context=True,
+        add_history_to_context=True,
+        num_history_runs=3,
+    ```
+
+* Use ` add_history_to_context=True` to keep multi-turn conversations. [see history doc.](https://docs.agno.com/database/chat-history)
+    ```python
+    # Get user-assistant message pairs
+    chat_history = agent.get_chat_history(session_id="chat_123")
+
+    # Get all messages from the session
+    messages = agent.get_session_messages(session_id="chat_123")
+
+    # Get the last run output with metrics
+    last_run = agent.get_last_run_output()
+    ```
+
+* Human in a loop before executing tool: [example](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/human_in_the_loop.py)
+    ```python
+    @tool(requires_confirmation=True)
+    def save_learning(title: str, learning: str) -> str:
+        ...
+    
+        Agent(
+            ...
+            tools= [save_learnings]
+            knowledge=learnings_kb,
+            search_knowledge=True,
+        )
+    ```
+
+## Agno cookbook relevant examples
+
+* [Agentic Search over Knowledge](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_search_over_knowledge.py), which is implemented with flink knowledge in [ollama_knowledge](./ollama_knowledge.py). This example use db for Agent to keep session: run is with `uv run ollama_knowledge.py ` 
+* [State management](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_with_state_management.py)
+* [Typed input-output](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_with_typed_input_output.py)
