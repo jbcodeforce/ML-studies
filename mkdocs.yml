@@ -43,6 +43,7 @@ nav:
   
   - Techno:
     - Airflow: techno/airflow.md
+    - Claude: techno/claude/index.md
     - Feature Store: techno/feature_store.md/
     - Kaggle: kaggle.md
     - OpenSearch: techno/opensearch.md

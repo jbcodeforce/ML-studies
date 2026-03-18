@@ -160,7 +160,7 @@ finance_agent = Agent(
 
 if __name__ == "__main__":
     console = Console()
-    console.print("Chat with mistral until entering an empty question")
+    console.print("Chat with mistral until entering an empty question or bye")
     done = False
     agent = finance_agent
     while not done:
