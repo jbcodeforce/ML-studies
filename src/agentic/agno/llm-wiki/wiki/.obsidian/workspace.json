@@ -1,0 +1,203 @@
+{
+  "main": {
+    "id": "da12006a3dd66c7e",
+    "type": "split",
+    "children": [
+      {
+        "id": "c1edcd8b83c85a4d",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "482d1e97c93cc24b",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "anomaly-detection.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "anomaly-detection"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "cd4db3fe82911b44",
+    "type": "split",
+    "children": [
+      {
+        "id": "3f14f1b16ff904a4",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "33183c542541f982",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "04198c9f800aed26",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "3a9a98b5750da0ba",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ac2809ffca05d697",
+    "type": "split",
+    "children": [
+      {
+        "id": "803415ff15040f0e",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "efde3a2deafd0f09",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "anomaly-detection.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for anomaly-detection"
+            }
+          },
+          {
+            "id": "7ce56d3633fcfdd2",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "anomaly-detection.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from anomaly-detection"
+            }
+          },
+          {
+            "id": "c4c7e7b67baa7eaa",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "944db91019bdb0dd",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "4ecc89751b972ca8",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "anomaly-detection.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of anomaly-detection"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "482d1e97c93cc24b",
+  "lastOpenFiles": [
+    "ai-solution-designs.md",
+    "index.md",
+    "anomaly-detection.md",
+    "lg_drools_kg.md",
+    "rag-architecture.md",
+    "aws-api-gateway.md",
+    "amazon-route-53.md",
+    "google-document-ai.md",
+    "google-cloud-functions.md",
+    "google-pub-sub.md",
+    "google-cloud-storage.md",
+    "po-processing.md",
+    "box-plots.md",
+    "gaussian-distribution.md"
+  ]
+}

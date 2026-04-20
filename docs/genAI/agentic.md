@@ -358,6 +358,18 @@ crew = Crew(
 
 See [financial_analysis.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/financial_analysis.py) for a 4-agent trading system with hierarchical coordination.
 
+### Wiki LLM pattern
+
+For years, the "gold standard" for Large Language Models (LLMs) has been a simple equation: feed them as much high-quality text as possible, specifically, the human-curated treasure trove of Wikipedia and hope they learn the truth. 
+
+RAG is essentially a digital librarian: you ask a question, the system searches a database, finds a relevant paragraph, and reads it back to you. It’s useful, but it’s passive. It doesn't "understand" the connections between documents; it just finds matches.
+
+"Wiki LLM" from Andrej Karpathy, defines the concep of using the LLM to act as an active librarian. In this pattern, the LLM maintains a structured, evolving "Idea File" or "Knowledge Graph." As it ingests new information, it doesn't just store it, but cross-references it, updates existing entries, and corrects contradictions. This is what researchers call **"Compiled Knowledge."
+
+The Wiki Pattern is designed for deep research. It allows an AI agent to build a synthetic brain that grows more intelligent and interconnected the more data it ingunes. 
+
+[See demonstration with Agno agent](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno/llm-wiki)
+
 ## Technologies
 
 ### Claude Code

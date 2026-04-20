@@ -21,7 +21,7 @@ from agno.models.ollama import Ollama
 
 
 DEFAULT_LLM_BASE_URL = "http://127.0.0.1:11434"
-DEFAULT_LLM_MODEL = "mistral:7b-instruct"
+DEFAULT_LLM_MODEL = "gemma4:26b"
 DEFAULT_LLM_TEMPERATURE = 0.4
 
 _model = Ollama(
@@ -178,12 +178,12 @@ async def stream_run_events() -> None:
 # Run Workflow
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-
-    # Async Streaming
-    
+    print("Use Hacker News and the web to research the topic and write a blog post")
+    # Async Streaming   
+    query=input("Enter a query: ")
     asyncio.run(
         blog_post_workflow.aprint_response(
-            input="AI agent frameworks 2025",
+            input=query,
             markdown=True,
             stream=True,
         )

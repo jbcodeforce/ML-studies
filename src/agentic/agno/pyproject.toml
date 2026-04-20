@@ -12,6 +12,7 @@ dependencies = [
     "google-genai>=1.65.0",
     "ollama>=0.6.1",
     "openai>=1.0.0",
+    "rich>=14.3.3",
     "sqlalchemy>=2.0.47",
     "uvicorn>=0.41.0",
     "yfinance>=1.2.0",
