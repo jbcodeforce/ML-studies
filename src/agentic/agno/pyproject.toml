@@ -6,12 +6,14 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "agno>=2.5.5",
+    "arxiv>=3.0.0",
     "chromadb>=1.5.2",
     "ddgs>=9.10.0",
     "fastapi>=0.134.0",
     "google-genai>=1.65.0",
     "ollama>=0.6.1",
     "openai>=1.0.0",
+    "pypdf>=6.10.2",
     "rich>=14.3.3",
     "sqlalchemy>=2.0.47",
     "uvicorn>=0.41.0",

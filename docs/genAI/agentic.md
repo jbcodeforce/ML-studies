@@ -378,13 +378,35 @@ The Wiki Pattern is designed for deep research. It allows an AI agent to build a
 
 ### Cursor and AI IDEs
 
-[Cursor AI](https://cursor.com/features) is a amazing IDE with agents capability to develop software. I use it on daily basis.
+[Cursor AI](https://cursor.com/features) is a amazing IDE with agents capability to develop software. I use it on daily basis. 
+
+To setup Cursor to use local llm:
+* Extends the context window of the model downloaded by creating a Modelfile
+    ```
+    FROM gemma4:26b
+    PARAMETER num_ctx 65536
+    # other values: 262544,  131272, 32768
+    ```
+* `ollama create gemma4-coding:latest -f Modelfile`
+* start ollama
+* Go to grok.com to get a authokent and a url
+* Cursor > Settings > Cursor Settings > Models, scroll down to find a link to create custom model. 
+* Enter the model name: qwen36-agent:latest, and in the API Key section, select openAI api, set a random key and specify the URL to be ollama: `http://address-of-grock/v1` 
+* 
 
 [IBM's Bob IDE](https://www.ibm.com/products/bob)
 
 ### [Agno](https://www.agno.com/)
 
- Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno).
+Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno).
+
+**The Core Concepts**
+
+* [Agents](https://docs.agno.com/agents/overview) are a stateful control loop around a stateless LLM. 
+* [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
+* [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
+* [memory](https://docs.agno.com/memory/overview) for  user preferences
+* [state]() is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 

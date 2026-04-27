@@ -3,7 +3,7 @@ Agno agent backed by an Ollama with tool calling. Implement the self learning
 agent pattern that can save insights to a knowledge base.
 It uses human in the loop to approve or reject the learnings.
 
-Start the Ollama server first ollama serve
+Start the Ollama server first with: `ollama serve`
 
 Agent demonstrates:
 * use of system prompt via instructions variable

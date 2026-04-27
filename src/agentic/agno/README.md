@@ -1,19 +1,45 @@
 # Agno agentic studies
 
-Agno agent experiments with local LLMs (Ollama, MLX).
+Agno agent experiments with local LLMs (Ollama, or MLX).
 
 ## Navigate to Agno source and API
 
-- **[AGNO_REFERENCE.md](AGNO_REFERENCE.md)** – Links to the Agno API docs and GitHub source so you can open the reference or jump to the implementation (e.g. `agno.agent`, `agno.models.ollama`, `agno.tools`).
-- In **Cursor**: add `https://docs.agno.com/llms-full.txt` under Settings → Indexing & Docs so the AI can use the Agno API when coding.
+To jump to agno source with **F12** (or Cmd+Click):
+
+1. **Interpreter** – The venv with `agno` is at `src/.venv`. The project sets this via `.vscode/settings.json` and `pyrightconfig.json` (venvPath + venv). If you still get “no definition found”:
+   - Open Command Palette → **Python: Select Interpreter**.
+   - Pick the one under **ML-studies/src/.venv** (e.g. `Python 3.12.x ('.venv': venv)` with path ending in `ML-studies/src/.venv`).
+2. **Sync** – Run `uv sync` from `ML-studies/src` or from `src/agentic/agno` so `agno` is installed in that venv.
+3. **Reload** – Reload the window (Command Palette → **Developer: Reload Window**) after changing the interpreter or config.
+4. **Multi-root** – If the workspace has several roots (e.g. MyAIAssistant + ML-studies), ensure the interpreter you select is the one from **ML-studies/src/.venv**, not another project’s venv.
+
+In **Cursor**: add `https://docs.agno.com/llms-full.txt` under Settings → Indexing & Docs so the AI can use the Agno API when coding.
+
+### GitHub source (libs/agno/agno)
+
+Source tree: [agno-agi/agno – libs/agno/agno](https://github.com/agno-agi/agno/tree/main/libs/agno/agno)
+
+| Import | Source (GitHub) |
+|--------|-----------------|
+| `agno.agent` | [agent/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/agent) |
+| `agno.models.ollama` | [models/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/models) |
+| `agno.models.openai.like` | [models/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/models) |
+| `agno.tools` | [tools/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/tools) |
+| `agno.tools.duckduckgo` | [tools/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/tools) |
+| `agno.tools.yfinance` | [tools/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/tools) |
+| `agno.db.sqlite` | [db/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/db) |
+| `agno.knowledge` | [knowledge/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/knowledge) |
+| `agno.utils` | [utils/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/utils) |
+| `agno.vectordb.chroma` | [vectordb/](https://github.com/agno-agi/agno/tree/main/libs/agno/agno/vectordb) |
 
 ## Core Concepts
 
-* [Agents]()
+* [Agents](https://docs.agno.com/agents/overview) are a stateful control loop around a stateless LLM. 
 * [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
 * [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
 * [memory](https://docs.agno.com/memory/overview) for  user preferences
 * [state] is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
+
 
 ## MLX agent
 
@@ -69,7 +95,7 @@ To run:
 uv run python ollama_self_learning_agent_with_tool.py.py
 ```
 
-## How to from cookbook
+## How to from Agno cookbook
 
 ### Use user preferences
 
