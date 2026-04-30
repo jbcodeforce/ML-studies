@@ -34,6 +34,7 @@ nav:
     - Solution Design: architecture/sol-design.md
     - RAG: genAI/rag.md
     - Agentic AI: genAI/agentic.md
+    - Agno: genAI/agno.md
     - Anthropic: genAI/anthropic.md
     - OpenAI: genAI/openai.md
     - MCP: genAI/mcp.md
@@ -83,13 +84,13 @@ theme:
       - content.code.annotate
       - content.code.copy
       - content.tooltips
-      - content.code.copy
+      - content.tabs.link
+      - search.suggest
       - search.highlight
       - navigation.instant
       - navigation.instant.progress
       - navigation.tabs
       - navigation.tabs.sticky
-      - navigation.instant
       - navigation.tracking
       # - navigation.sections
       #- navigation.expand
@@ -121,9 +122,17 @@ markdown_extensions:
   - toc:
       permalink: true
       toc_depth: 3
-  - pymdownx.tabbed
-  - pymdownx.highlight
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
   - pymdownx.inlinehilite
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.tilde
   - pymdownx.snippets
   - pymdownx.details
   - pymdownx.tasklist:

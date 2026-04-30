@@ -398,15 +398,7 @@ To setup Cursor to use local llm:
 
 ### [Agno](https://www.agno.com/)
 
-Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno).
-
-**The Core Concepts**
-
-* [Agents](https://docs.agno.com/agents/overview) are a stateful control loop around a stateless LLM. 
-* [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
-* [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
-* [memory](https://docs.agno.com/memory/overview) for  user preferences
-* [state]() is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
+Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno). See [dedicated chapter](./agno.md)
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 
