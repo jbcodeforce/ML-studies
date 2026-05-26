@@ -45,6 +45,8 @@ Source tree: [agno-agi/agno – libs/agno/agno](https://github.com/agno-agi/agno
 
 The agent in `first_mlx_agent_with_tool` uses an OpenAI-compatible API. Start an MLX server (e.g. [mlx-llm-server](https://pypi.org/project/mlx-llm-server/) or [mlx-openai-server](https://github.com/cubist38/mlx-openai-server)) then run:
 
+MLX being slow, 05/2026, [oMLX](https://github.com/jundot/omlx) is a prefered choice: see [olmx_deep_researcher.py](./olmx_deep_researcher.py), [startoLMX.sh](./startoLMX.sh), and [cursor_omlx.md](./cursor_omlx.md) for Cursor IDE setup.
+
 ```bash
 # Terminal 1: start MLX server (example with mlx-llm-server)
 pip install mlx-llm-server
@@ -149,3 +151,8 @@ uv run python ollama_self_learning_agent_with_tool.py.py
 * [Agentic Search over Knowledge](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_search_over_knowledge.py), which is implemented with flink knowledge in [ollama_knowledge](./ollama_knowledge.py). This example use db for Agent to keep session: run is with `uv run ollama_knowledge.py ` 
 * [State management](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_with_state_management.py)
 * [Typed input-output](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_with_typed_input_output.py)
+
+
+## For Cursor Configuration with Local llm and grok
+
+See openai url as: https://amperage-earthly-reacquire.ngrok-free.dev/v1 using ngrok.com. 

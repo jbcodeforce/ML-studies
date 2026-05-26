@@ -1,9 +1,11 @@
 # Retrieval Augmented Generation (RAG)
 
-???- info inline "Updates"
-    12/2024
+???- info  "Updates"
+    12/2024 creation
 
-#### What is covered in this section
+
+## What is covered in this section
+
 
 ```mermaid
 mindmap
@@ -24,7 +26,9 @@ mindmap
       Retriever
       LangChain/LangGraph
 ```
+
 **Figure 1: RAG subject areas**
+
 
 ## Context
 

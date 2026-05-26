@@ -1,6 +1,6 @@
 # Agno studies
 
-[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno).
+[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno). It is a minimalist, production-ready that emphasizes dterministic behavior transparency and simplicity.
 
 **The Core Concepts**
 
@@ -13,10 +13,25 @@
 ## Agent
 
 === "Ollama"
-    ```
+    ```python
     from agno.agent import Agent
     from agno.models.ollama import Ollama
     agent = Agent(model=Ollama(id="gemma4:26b"), markdown=True)
+    ```
+
+=== "OpenAI"
+    Also used for any OpenAI compatible LLM (base_url finishes with '/v1')
+    ```python
+    from agno.models.openai import OpenAIResponses
+    api_key = os.getenv("OPENAI_API_KEY")
+    base_url = os.getenv("OPENAI_BASE_URL")
+    agent = OpenAIResponses(id=model_id, api_key=api_key.strip(), base_url=base_url)
+    ```
+
+=== "Anthropic"
+    ```python
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    Claude(id=mid, api_key=api_key.strip())
     ```
 
 ## Knowledge
@@ -132,7 +147,8 @@ In production, knowledge needs to be managed over time:
     ```
 - Re-index when content changes
 
-### Different search mechanism
+### Different search mechanisms
+
 Knowledge supports three search types. Each has different strengths:
 
 - Vector: Semantic similarity search. Finds conceptually related content
@@ -241,6 +257,7 @@ agent = Agent(
 ```
 
 ### Sharing vector store
+
 When multiple Knowledge instances share the same vector database, use isolate_vector_search to ensure each instance only searches its own data.
 
 This is essential for multi-tenant applications where different users or departments should only access their own documents.

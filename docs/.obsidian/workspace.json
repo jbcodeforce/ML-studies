@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "genAI/ref-arch.md",
+                "file": "Clippings/Prompt Engineering Guide.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "ref-arch"
+              "title": "Prompt Engineering Guide"
             }
           }
         ]
@@ -183,8 +183,12 @@
       "bases:Create new base": false
     }
   },
-  "active": "01656dd6ea6bbebb",
+  "active": "a182c47832669590",
   "lastOpenFiles": [
+    "Clippings/Why Context Engineering?.md",
+    "Clippings/Prompt Engineering Guide.md",
+    "genAI/ref-arch.md",
+    "Clippings",
     "Untitled",
     "genAI/rag.md",
     "assets/logo_old.drawio.png"
