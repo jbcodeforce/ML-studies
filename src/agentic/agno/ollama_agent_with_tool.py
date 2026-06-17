@@ -20,11 +20,10 @@ Example prompts to try:
 - "Show me the key metrics for the FAANG stocks"
 """
 
-import json
-from datetime import datetime, timezone
 from agno.agent import Agent
 from agno.models.ollama import Ollama
 from agno.tools import tool
+from agno.models.openai.like import OpenAILike
 from agno.db.sqlite import SqliteDb
 
 from agno.tools.duckduckgo import DuckDuckGoTools

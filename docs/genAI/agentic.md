@@ -381,6 +381,7 @@ The Wiki Pattern is designed for deep research. It allows an AI agent to build a
 [Cursor AI](https://cursor.com/features) is a amazing IDE with agents capability to develop software. I use it on daily basis. 
 
 To setup Cursor to use local llm:
+
 * Extends the context window of the model downloaded by creating a Modelfile
     ```
     FROM gemma4:26b
@@ -388,13 +389,24 @@ To setup Cursor to use local llm:
     # other values: 262544,  131272, 32768
     ```
 * `ollama create gemma4-coding:latest -f Modelfile`
-* start ollama
+* start ollama or oLMX
 * Go to grok.com to get a authokent and a url
 * Cursor > Settings > Cursor Settings > Models, scroll down to find a link to create custom model. 
 * Enter the model name: qwen36-agent:latest, and in the API Key section, select openAI api, set a random key and specify the URL to be ollama: `http://address-of-grock/v1` 
-* 
 
-[IBM's Bob IDE](https://www.ibm.com/products/bob)
+???- question "how to use claude skill with cursor"
+    Agent skills require a SKILL.md file (which contains metadata and instructions) and live in a dedicated skills folder. To make a Claude skill available in your Cursor environment, place or symlink the skill directory into your repository's .cursor/skills/ folder.
+    
+    ```sh
+    # Copy a Claude Code skill to your local Cursor workspace
+    cp -r ~/.claude/skills/your-skill-name .cursor/skills/
+    # OR create a symlink for automatic syncing
+    ln -s ~/.claude/skills/your-skill-name .cursor/skills/your-skill-name
+    ```
+
+    Once in Cursor, you can manually invoke the skill in your chat panel by typing the forward slash /. When the command palette pops up, you will see your available skills and commands to trigger them
+
+### [IBM's Bob IDE](https://www.ibm.com/products/bob)
 
 ### [Agno](https://www.agno.com/)
 

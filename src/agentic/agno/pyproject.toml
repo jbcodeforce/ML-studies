@@ -29,3 +29,11 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build]
 include = ["first_mlx_agent_with_tool.py"]
+
+[dependency-groups]
+dev = ["pytest>=8.0.0"]
+
+[tool.pytest.ini_options]
+markers = [
+    "integration: tests that call Yahoo Finance via yfinance (network required)",
+]

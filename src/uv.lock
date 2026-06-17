@@ -58,6 +58,11 @@ dependencies = [
     { name = "yfinance" },
 ]
 
+[package.dev-dependencies]
+dev = [
+    { name = "pytest" },
+]
+
 [package.metadata]
 requires-dist = [
     { name = "agno", specifier = ">=2.5.5" },
@@ -74,6 +79,9 @@ requires-dist = [
     { name = "uvicorn", specifier = ">=0.41.0" },
     { name = "yfinance", specifier = ">=1.2.0" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "pytest", specifier = ">=8.0.0" }]
 
 [[package]]
 name = "aiohappyeyeballs"

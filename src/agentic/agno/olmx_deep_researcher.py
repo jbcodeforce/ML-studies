@@ -10,6 +10,7 @@ from agno.tools.websearch import WebSearchTools
 from rich.console import Console
 from rich.prompt import Prompt
 from agno.media import File
+
 DEFAULT_LLM_BASE_URL = "http://127.0.0.1:7999/v1"
 # oMLX model id matches the directory name under OMLX_MODEL_DIR (see GET /v1/models)
 DEFAULT_LLM_MODEL = "Codestral-22B-v0.1-4bit"

@@ -1,6 +1,6 @@
 # Agno agentic studies
 
-Agno agent experiments with local LLMs (Ollama, or MLX).
+Agno agent experiments with local LLMs (Ollama, or oMLX).
 
 ## Navigate to Agno source and API
 
@@ -36,14 +36,22 @@ Source tree: [agno-agi/agno – libs/agno/agno](https://github.com/agno-agi/agno
 
 * [Agents](https://docs.agno.com/agents/overview) are a stateful control loop around a stateless LLM. 
 * [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
-* [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
-* [memory](https://docs.agno.com/memory/overview) for  user preferences
-* [state] is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
+* [Storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
+* [Memory](https://docs.agno.com/memory/overview) for  user preferences
+* [State] is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
+
+## Development approach
+
+* Declare and unit test all the tools to be used
+* Prepare some queries  to validate
+* Use the same integration pattern with backend LLM, externalize URL, API keys, model reference.
+* Fine tune the instructions
+* Integrate agent in Workflow and/r Team
 
 
 ## MLX agent
 
-The agent in `first_mlx_agent_with_tool` uses an OpenAI-compatible API. Start an MLX server (e.g. [mlx-llm-server](https://pypi.org/project/mlx-llm-server/) or [mlx-openai-server](https://github.com/cubist38/mlx-openai-server)) then run:
+The agent in `first_mlx_agent_with_tool` uses an OpenAI-compatible API. Start an MLX server (e.g. [mlx-llm-server](https://pypi.org/project/mlx-llm-server/) or [mlx-openai-server](https://github.com/cubist38/mlx-openai-server)).
 
 MLX being slow, 05/2026, [oMLX](https://github.com/jundot/omlx) is a prefered choice: see [olmx_deep_researcher.py](./olmx_deep_researcher.py), [startoLMX.sh](./startoLMX.sh), and [cursor_omlx.md](./cursor_omlx.md) for Cursor IDE setup.
 
@@ -156,3 +164,51 @@ uv run python ollama_self_learning_agent_with_tool.py.py
 ## For Cursor Configuration with Local llm and grok
 
 See openai url as: https://amperage-earthly-reacquire.ngrok-free.dev/v1 using ngrok.com. 
+
+
+## List of samples in this folder
+
+### Root-level scripts
+
+| Source | Intent |
+|--------|--------|
+| [`first_mlx_agent_with_tool.py`](./first_mlx_agent_with_tool.py) | Finance agent backed by an MLX LLM via an OpenAI-compatible server. Demonstrates instructions, tools (DuckDuckGo, YFinance), SQLite session storage, structured output (`BaseModel`), streaming, and datetime context. Entry point: `uv run python first_mlx_agent_with_tool.py` or `agno-mlx`. |
+| [`ollama_agent_with_tool.py`](./ollama_agent_with_tool.py) | Same finance-agent pattern as above, using Ollama with native tool calling. Baseline for comparing Ollama vs MLX/oMLX tool support. |
+| [`ollama_self_learning_agent_with_tool.py`](./ollama_self_learning_agent_with_tool.py) | Self-learning agent: saves insights to a knowledge base with human-in-the-loop confirmation before persisting learnings. Extends the Ollama finance agent with memory and knowledge patterns from the Agno cookbook. |
+| [`ollama_knowledge.py`](./ollama_knowledge.py) | Agentic search over a Flink knowledge base (Chroma vector store + SqliteDb contents). Implements the [agent search over knowledge](https://github.com/agno-agi/agno/blob/main/cookbook/00_quickstart/agent_search_over_knowledge.py) cookbook pattern. |
+| [`first_agent_os.py`](./first_agent_os.py) | Exposes the finance agent through Agno AgentOS (FastAPI) so it can be used from [os.agno.com](https://os.agno.com/). Uses [`config.yaml`](./config.yaml) for quick prompts. |
+| [`deep_researcher.py`](./deep_researcher.py) | Single-file deep researcher: reads a research paper (file upload), summarizes it, and proposes a learning path. Uses Ollama via OpenAI-compatible API. |
+| [`olmx_deep_researcher.py`](./olmx_deep_researcher.py) | Same deep-researcher pattern as `deep_researcher.py`, targeting a local oMLX server (`:7999`). |
+| [`olmx_learning.py`](./olmx_learning.py) | LearningMachine demo: oMLX/Codestral for chat, Ollama for background extraction of user profile and memories. Documents the split when local models lack reliable tool calling. |
+| [`startoLMX.sh`](./startoLMX.sh) | Starts oMLX on `http://127.0.0.1:7999/v1` with models from `~/.lmstudio/models`. |
+| [`cursor_omlx.md`](./cursor_omlx.md) | Cursor IDE configuration for routing chat/completions to local oMLX. |
+
+### [`deep_researcher/`](./deep_researcher/)
+
+Step-by-step build of a multi-agent investment research system based on [Agno deep research](https://docs.agno.com/use-cases/deep-research/overview). Modular layout with dedicated agent definitions and tests.
+
+| Source | Intent |
+|--------|--------|
+| [`deep_research_agents.py`](./deep_researcher/deep_research_agents.py) | Agent definitions: market analyst (DuckDuckGo + YFinance), financial analyst, technical analyst, risk officer, memo writer, committee chair. |
+| [`main.py`](./deep_researcher/main.py) | Workflow entry point: wires agents into a `Parallel` + `Step` pipeline for investment memo generation. |
+| [`tests/`](./deep_researcher/tests/) | Integration tests for YFinance, DuckDuckGo, agent wiring, and workflow execution. |
+
+### [`llm-wiki/`](./llm-wiki/)
+
+Karpathy-style personal wiki: immutable sources, curated markdown pages, SqliteDb sessions, and Chroma embeddings. See [`llm-wiki/README.md`](./llm-wiki/README.md).
+
+| Source | Intent |
+|--------|--------|
+| [`wiki_cli.py`](./llm-wiki/wiki_cli.py) | CLI entry point: `chat`, `ask`, `ingest`, `reindex`, `index-folder`. |
+| [`llm_wiki/agent.py`](./llm-wiki/llm_wiki/agent.py) | Wiki agent factory with knowledge retrieval over `wiki/` and indexed corpus. |
+| [`llm_wiki/indexing.py`](./llm-wiki/llm_wiki/indexing.py) | Embed and index markdown into Chroma. |
+| [`llm_wiki/tools.py`](./llm-wiki/llm_wiki/tools.py) | Agent tools for reading and writing wiki pages. |
+| [`wiki/`](./llm-wiki/wiki/) | Curated markdown knowledge base (pages, `index.md`, `log.md`). |
+
+### [`workflows/`](./workflows/)
+
+Agno workflow examples running locally. See [`workflows/README.md`](./workflows/README.md).
+
+| Source | Intent |
+|--------|--------|
+| [`daily_ai_news_search_summary.py`](./workflows/daily_ai_news_search_summary.py) | Four-step workflow: prepare search input, research team (HackerNews + web search), prepare writer input, summary writer. Demonstrates `Step` events, session/run IDs, team composition, and SQLite workflow persistence. |
