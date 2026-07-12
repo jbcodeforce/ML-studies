@@ -1,3 +1,12 @@
+---
+title: "AI deployment solution designs"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # AI deployment solution designs
 
 This section presents examples of solution design using Gen AI, Hybrid AI, Agentic AI, with links to external demonstrations when available

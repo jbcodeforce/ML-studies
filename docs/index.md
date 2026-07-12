@@ -1,3 +1,12 @@
+---
+title: "AI and Machine Learning Studies"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # AI and Machine Learning Studies
 
 !!! info "Update"
@@ -109,7 +118,7 @@ One of the classical approach to run analytics on big data is to use the map-red
 
 Hadoop used to be the map-reduce platform, now [Apache Spark](https://spark.apache.org/) is used for that or [Apache Flink](https://flink.apache.org/).
 
-[Read my own  Sparck studies](https://jbcodeforce.github.io/spark-studies/) and [Flink](https://jbcodeforce.github.io/flink-studies/).
+[Read my own  Sparck studies](https://jbcodeforce.github.io/spark-studies/) and [Flink studies](https://jbcodeforce.github.io/flink-studies/).
 
 
 ## Books and other sources

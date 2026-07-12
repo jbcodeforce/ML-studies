@@ -1,3 +1,12 @@
+---
+title: "[Pytorch library](https://pytorch.org/)"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # [Pytorch library](https://pytorch.org/)
 
 The [most popular](https://paperswithcode.com/trends) Python ML and deep learning library to implement ML workflow and deep learning solution. It is open-source project. It helps to run code on GPU/TPU. PyTorch is also a low-level math library as NumPy, but built for deep learning. It compiles these compute graphs into highly efficient C++/CUDA code.
@@ -72,9 +81,9 @@ y= torch.from_numpy(y).type(torch.float)
 X[:5],y[:5]
 ```
 
-Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other. [See the set of basic operations on tensor](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb).
+Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other. [See the set of basic operations on tensor](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/torch-tensor-basic.ipynb).
 
-See the basic ML workflow using Pytorch to work on data and do a linear regression [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb).
+See the basic ML workflow using Pytorch to work on data and do a linear regression [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/workflow-basic.ipynb).
 
 ### Constructs
 
@@ -112,7 +121,7 @@ See [Tim Dettmers's guide](https://timdettmers.com/2023/01/30/which-gpu-for-deep
 
 ### Basic Algebra with Pytorch
 
-See [Algebra using Pytorch python code.](https://github.com/jbcodeforce/ML-studies/blob/master/pytorch/get_started/AlgebraPyTorch.py)
+See [Algebra using Pytorch python code.](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/get_started/algebra_pytorch.py)
 
 ### [Loss functions](https://pytorch.org/docs/stable/nn.html#loss-functions)
 
@@ -131,7 +140,7 @@ The [binary cross-entropy / log loss](https://towardsdatascience.com/understandi
 
 ### Neural network
 
-A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. The back propagation is done using SGD. This is the most flexible way [to declare a NN](https://github.com/jbcodeforce/ML-studies/blob/4271cbd2fa3094cf672e038ee7559997e9d90443/pytorch/classification/nn-classifier.py#L17). As an alternate the following code uses the Sequential method using the non linear (nn.ReLu()) function between layers.
+A [PyTorch neural network](https://pytorch.org/docs/stable/generated/torch.nn.Module.html) declaration is a class that extends `nn.Module`. The constructor includes the neural network structure, and the class must implement the `forward(x)` function to pass the input to the network and get the output. The back propagation is done using SGD. This is the most flexible way [to declare a NN](https://github.com/jbcodeforce/ML-studies/blob/4271cbd2fa3094cf672e038ee7559997e9d90443/code/classification/nn-classifier.py#L17). As an alternate the following code uses the Sequential method using the non linear (nn.ReLu()) function between layers.
 
 ```python
 model = nn.Sequential(
@@ -164,10 +173,10 @@ With Softmax, the outputs are normalized probabilities that sum up to one.
 
 Some code samples:
 
-* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifications.ipynb) to identify plots on 2 circles.
-* [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/multiclass-classifier.ipynb)
-* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/nn-classifier.py).
-* Computer vision and the CNN [A notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/computer_vision.ipynb) and [Python code](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py)
+* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/classifications.ipynb) to identify plots on 2 circles.
+* [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/multiclass-classifier.ipynb)
+* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/nn-classifier.py).
+* Computer vision and the CNN [A notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/computer_vision.ipynb) and [Python code](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/fashion_cnn.py)
 
 ```Output
 {'model_name': 'FashionMNISTModel', 'model_loss': 0.41334256529808044, 'model_acc': tensor(0.8498, device='mps:0')}
@@ -219,7 +228,7 @@ with torch.inference_mode():
     y_preds = model(X_test)
 ```
 
-See [train_step function in engine.py](https://github.com/jbcodeforce/ML-studies/blob/e895a9af9d1d36fe3e5a540d8d0fb3224f71646d/pytorch/computer-vision/engine.py#L5)
+See [train_step function in engine.py](https://github.com/jbcodeforce/ML-studies/blob/e895a9af9d1d36fe3e5a540d8d0fb3224f71646d/code/computer-vision/engine.py#L5)
 
 ### PyTorch testing loop
 
@@ -243,7 +252,7 @@ with torch.inference_mode():
 
 ```
 
-See [test_step function in engine.py](https://github.com/jbcodeforce/ML-studies/blob/e895a9af9d1d36fe3e5a540d8d0fb3224f71646d/pytorch/computer-vision/engine.py#L46)
+See [test_step function in engine.py](https://github.com/jbcodeforce/ML-studies/blob/e895a9af9d1d36fe3e5a540d8d0fb3224f71646d/code/computer-vision/engine.py#L46)
 
 ### Improving a model
 
@@ -275,7 +284,7 @@ Classification model can be measured using the at least the following metrics (s
 
 PyTorch includes many existing functions to load in various custom datasets in the [TorchVision](https://pytorch.org/vision/stable/index.html), [TorchText](https://pytorch.org/text/stable/index.html), [TorchAudio](https://pytorch.org/audio/stable/index.html) and [TorchRec](https://pytorch.org/torchrec/) domain libraries.
 
-See [prepare_image_dataset.py](https://github.com/jbcodeforce/ML-studies/blob/master/pytorch/computer-vision/prepare_image_dataset.py) to get food images from [PyTorch vision](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/).
+See [prepare_image_dataset.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/computer-vision/prepare_image_dataset.py) to get food images from [PyTorch vision](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/).
 
 ### Data augmentation
 
@@ -361,10 +370,10 @@ The process of transfer learning usually freezes some base layers of a pre-train
 
 ## Code samples
 
-* [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
-* [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb)
-* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/use_fashion_cnn.py)
-* [Pizza, steak, sushi image classifier](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/classify_food.py)
+* [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
+* [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/workflow-basic.ipynb)
+* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/use_fashion_cnn.py)
+* [Pizza, steak, sushi image classifier](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/classify_food.py)
 
 ## Resources
 

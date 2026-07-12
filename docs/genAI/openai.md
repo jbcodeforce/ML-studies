@@ -1,3 +1,12 @@
+---
+title: "[OpenAI](https://platform.openai.com/docs/overview)"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # [OpenAI](https://platform.openai.com/docs/overview)
 
 The offering includes [ChatGPT URL](https://chat.openai.com), different GPT models (GPT-4, DALL.E, TTS, Whisper, Embeddings), a SDK, and a set of APIs.

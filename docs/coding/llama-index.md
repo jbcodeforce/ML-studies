@@ -1,3 +1,12 @@
+---
+title: "LlamaIndex library"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # LlamaIndex library
 
 [LlamaIndex](https://docs.llamaindex.ai/en/stable/) is a framework for building context-augmented LLM applications, like Q&A, chatbot, Document understanding and extraction, and agentic apps.
@@ -8,4 +17,4 @@ LlamaParse is an interesting document parsing solution. [LlamaHub](https://llama
 
 ## Getting Started
 
-* Routing queries example using RAG [router_engine.py](https://github.com/jbcodeforce/ML-studies/tree/master/LlamaIndex/router_engine.py).
+* Routing queries example using RAG [router_engine.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/code/LLM/llamaindex/router_engine.py).

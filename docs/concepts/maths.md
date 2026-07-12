@@ -1,3 +1,12 @@
+---
+title: "Mathematical foundations"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Mathematical foundations
 
 ## Covariance
@@ -101,13 +110,13 @@ This visualization shows how restricting to cases where evidence holds (conditio
 
 The Bayesian approach handles uncertainty and complex data well. Frequentist methods are more common when data is abundant and variable relationships are well-defined.
 
-[See the conditional probability notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/ConditionalProbabilityExercise.ipynb) exercise to simulate the probability of buying thing knowing the age and previous buying data: `totals` contains the total number of people in each age group and `purchases` contains the total number of things purchased by people in each age group.
+[See the conditional probability notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/statistics/ConditionalProbabilityExercise.ipynb) exercise to simulate the probability of buying thing knowing the age and previous buying data: `totals` contains the total number of people in each age group and `purchases` contains the total number of things purchased by people in each age group.
 
 [See this video from 3Blue1Brown](https://www.youtube.com/watch?v=HZGCoVF3YvM) for a geometric interpretation of Bayes' theorem.
 
 ## Data distributions
 
-[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb) some python code on different data distributions like Uniform, Gaussian, Poisson. It can be executed in VScode using the pytorch kernel.
+[See this notebook presenting](https://github.com/jbcodeforce/ML-studies/blob/master/code/statistics/Distributions.ipynb) some python code on different data distributions like Uniform, Gaussian, Poisson. It can be executed in VScode using the pytorch kernel.
 
 ## Normalization
 

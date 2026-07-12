@@ -1,3 +1,12 @@
+---
+title: "Nice GUI"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Nice GUI
 
 [Nice GUI](https://nicegui.io/documentation) is another open-source python library to build UI with better support of states between pages.

@@ -1,3 +1,12 @@
+---
+title: "Model Context Protocol"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Model Context Protocol
 
 MCP (Model Context Protocol) is a protocol, defined by anthropic, that allows AI assistants like Claude or Cursor to call external tools and services.

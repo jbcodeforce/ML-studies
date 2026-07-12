@@ -1,3 +1,12 @@
+---
+title: "Purchase Order Processing with AI and Hybrid Cloud"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Purchase Order Processing with AI and Hybrid Cloud
 
 This example is a, scope reduced, purchase order processing for a manufacturing company producing complex pipes, pumps and valves, products. The existing solution includes a web application and a product configurator, based on rule based software. The idea is to improve the process by automating content extraction and interpretation from the unstructured submitted documents 

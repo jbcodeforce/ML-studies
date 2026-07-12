@@ -1,3 +1,12 @@
+---
+title: "Data Management"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Data Management
 
 Data is a fundamental element of every business and crucial for any AI/ML project. Data is our record of current state of the business, the history of what has happened, and is the base which enables us to predict what may happen in the future.

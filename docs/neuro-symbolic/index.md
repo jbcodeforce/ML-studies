@@ -1,3 +1,12 @@
+---
+title: "Hybrid AI"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Hybrid AI
 
 Hybrid AI or Neuro Symbolic AI combines elements of neuron networks and symbolic reasoning to develop intelligent systems. Neural networks excel at pattern recognition and learning from data, while  traditional AI like rule engines focuses on logic, reasoning, and symbolic representations.

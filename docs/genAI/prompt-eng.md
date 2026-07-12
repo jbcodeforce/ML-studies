@@ -1,3 +1,12 @@
+---
+title: "Prompt engineering"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Prompt engineering
 
 ???- info "Update"
@@ -50,7 +59,7 @@ The classical [Temperature, Top-P](./index.md/#common-llm-inference-parameters) 
 
 ### Chain of Thought
 
-Chain-of-thought ([CoT](https://www.promptingguide.ai/techniques/cot)) prompting using intermediate steps.  It is used to address more complex arithmetic, commonsense, and symbolic reasoning tasks. The zero-shot CoT seems to get good results by adding "Let's think step by step" sentence. (see the test code [under llm-langchain/bedrock folder](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/TestBedrockCoT.py): `python TestBedrockCoT.py -p cot3.txt -m  ai21.j2-mid`)
+Chain-of-thought ([CoT](https://www.promptingguide.ai/techniques/cot)) prompting using intermediate steps.  It is used to address more complex arithmetic, commonsense, and symbolic reasoning tasks. The zero-shot CoT seems to get good results by adding "Let's think step by step" sentence. (see the test code [under code/LLM/langchain/bedrock folder](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/bedrock/TestBedrockCoT.py): `python TestBedrockCoT.py -p cot3.txt -m  ai21.j2-mid`)
 
 * Examples:
 
@@ -65,7 +74,7 @@ See also the article from Anthropic: ["ask Claude to think step by step"](https:
 
 * **Self consistency** prompt uses sample multiple, diverse reasoning paths through few-shot CoT, and use the generations to select the most consistent answer.
 
-* To test CoT with Bedrock LLMs. See the code in [TestBedrockCot](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/) with `python TestBedrockCoT.py -p cot1.txt -m anthropic.claude-v2`  should gives good answer. While `python TestBedrockCoT.py -p cot2.txt -m  ai21.j2-mid` returns bad answers.
+* To test CoT with Bedrock LLMs. See the code in [TestBedrockCot](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/) with `python TestBedrockCoT.py -p cot1.txt -m anthropic.claude-v2`  should gives good answer. While `python TestBedrockCoT.py -p cot2.txt -m  ai21.j2-mid` returns bad answers.
 
 ### [Prompt chaining](https://www.promptingguide.ai/techniques/prompt_chaining)
 
@@ -92,7 +101,7 @@ Another approach to automate the prompt creation and selection using LLMs as inf
 
 * **Directional Stimulus Prompting**: "Summarize the above article briefly in 2-3 sentences based on the hint. Hint:...."
 
-* **Program-Aided Language Models**: use LLMs to read natural language problems and generate programs as the intermediate reasoning steps. See example of such prompt in this python code [TestPALwithClaude.py](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestPALwithClaude.py)
+* **Program-Aided Language Models**: use LLMs to read natural language problems and generate programs as the intermediate reasoning steps. See example of such prompt in this python code [TestPALwithClaude.py](ttps://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/TestPALwithClaude.py)
 
 * **ReAct Prompting** uses LLMs to generate both reasoning traces and task-specific actions.
 
@@ -110,7 +119,7 @@ Another approach to automate the prompt creation and selection using LLMs as inf
 
 * Use Bedrock interface for [text playground](https://us-west-2.console.aws.amazon.com/bedrock/home?region=us-west-2#/text-playground) one of the integrated model.
 * [A repository with Bedrock content](https://github.com/aws-samples/amazon-bedrock-workshop.git) with [text generation](https://github.com/aws-samples/amazon-bedrock-workshop/tree/main/01_Generation) notebooks.
-* In this repository the [llm-langchain/bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock) includes  Python bedrock client codes with prompt samples.
+* In this repository the [code/LLM/langchain/bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock) includes  Python bedrock client codes with prompt samples.
 
 ???- Info "How to use Bedrock client"
     The basic instruction to use the code of this repository to interact with an LLM deployed in Bedrock
@@ -125,5 +134,5 @@ Another approach to automate the prompt creation and selection using LLMs as inf
     * Be sure to have  AWS_SESSION_TOKEN set up
     * Run any of the python code. `python TestClaudeOnBedrock.py`
 
-* A [notebook with Mixtral LLM](https://github.com/dair-ai/Prompt-Engineering-Guide/blob/main/notebooks/pe-mixtral-introduction.ipynb)
+* A [notebook with Mixtral LLM](https://github.com/dair-ai/Prompt-Engineering-Guide/blob/main/code/pe-mixtral-introduction.ipynb)
 

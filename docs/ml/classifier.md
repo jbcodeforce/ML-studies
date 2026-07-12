@@ -1,3 +1,12 @@
+---
+title: "Classifiers"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Classifiers
 
 **Classification** problem is when we are trying to predict one of a small number of discrete-valued outputs. The class labels are defined as multiple classes or binary classification task, where the machine learning algorithm learns a set of rules in order to distinguish between the possible classes.
@@ -70,13 +79,13 @@ It is important to note that the convergence of the perceptron is only guarantee
 
 ![](./images/perceptron.png){ width=800 }
 
-The [fit function](https://github.com/jbcodeforce/ML-studies/blob/6073cbb4560386dde09d833878ad0724172ded4b/ml-python/classifiers/Perceptron.py#L24) implements the weights update algorithm.
+The [fit function](https://github.com/jbcodeforce/ML-studies/blob/6073cbb4560386dde09d833878ad0724172ded4b/code/classification/Perceptron.py#L24) implements the weights update algorithm.
 
 Test the python Perceptron implementation, uisnf NIST iris dataset. The way to use the perceptron: Create an instance by specifying the eta coefficient and the number of epochs (passes over the training set) to perform
 
 ```sh
 #under ml-python/classifiers folder
-python TestPerceptron.py
+python test_perceptron.py
 ```
 
 The test loads the dataset, fit the Perceptron with a training set, plots some sample of the two types of Iris. Then displays the decision boundary to classify an Iris in one of the two classes: setosa, versicolor.
@@ -90,7 +99,7 @@ In  ADAptive LInear NEuron classifier, the weights are updated based on a linear
 ```sh
 # Start python docker
 # under ml-python/classifiers folder
-python TestAdaline.py
+python test_adaline.py
 ```
 
 The test works on the Iris dataset too, when we choose a learning rate that is too large, we have an error rate that becomes larger in every epoch because we overshoot the global minimum.
@@ -220,7 +229,7 @@ svm = SVC(kernel='linear',C=1.0,random_state=0)
 svm.fit(X_train_std,y_train)
 ```
 
-See [code in SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/SVM-IRIS.py)
+See [code in SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/SVM-IRIS.py)
 
 The SVMs mostly care about the points that are closest to the decision boundary (support vectors).
 
@@ -256,7 +265,7 @@ def error( p):
 
 Decision trees are particularly attractive if we care about interpretability. 
 
-See [DecisionTreeIRIS.py code](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/DecisionTreeIRIS.py) and [this DecisionTree notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/DecisionTree.ipynb).
+See [DecisionTreeIRIS.py code](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/DecisionTreeIRIS.py) and [this DecisionTree notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/DecisionTree.ipynb).
 
 ## Combining weak to strong learners via random forests 
 
@@ -294,7 +303,7 @@ The KNN algorithm is fairly straightforward and can be summarized by the followi
 
 In the case of a tie, the scikit-learn implementation of the KNN algorithm will prefer the neighbors with a closer distance to the sample.
 
-See the [KNN notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/KNN.ipynb).
+See the [KNN notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/KNN.ipynb).
 
 It is important to mention that KNN is very susceptible to overfitting due to the curse of dimensionality. The curse of dimensionality describes the phenomenon where the feature space becomes increasingly sparse for an increasing number of dimensions of a fixed-size training dataset.
 

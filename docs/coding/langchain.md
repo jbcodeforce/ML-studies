@@ -1,3 +1,12 @@
+---
+title: "LangChain Study"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # LangChain Study
 
 In LLM application there are a lot of steps to do, trying different prompting, integrating different LLMs, implementing conversation history, at the end there is a lot of glue code to implement.
@@ -43,12 +52,12 @@ The [LangChain documentation](https://python.langchain.com/docs/get_started/quic
 
 | Backend | Type of chains |
 | --- | --- |
-| [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI) | The implementation of the quickstart examples, RAG, chatbot, agent  |
-| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/ollama)| run a simple query to Ollama (running Llama 3.2) locally |
-| [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/anthropic) | |
-| [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/mistral) | |
-| [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/watsonX) | | 
-| [AWS Bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock) | zero_shot generation | 
+| [openAI](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openAI) | The implementation of the quickstart examples, RAG, chatbot, agent  |
+| [Ollama](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/ollama)| run a simple query to Ollama (running Llama 3.2) locally |
+| [Anthropic Claude](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/anthropic) | |
+| [Mistral LLM](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/mistral) | |
+| [IBM WatsonX](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/watsonX) | | 
+| [AWS Bedrock](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock) | zero_shot generation | 
 
 Each code needs to define only the needed LangChain modules to keep the executable size low. 
 
@@ -107,7 +116,7 @@ Chains are [runnable](#runnable), observable and composable. The LangChain frame
                                                 )
     ```
 
-    or multiple inputs and outputs with prompt using the different environment variables (see [this code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/multi_chains.py)).
+    or multiple inputs and outputs with prompt using the different environment variables (see [this code](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/openAI/multi_chains.py)).
 
 * [LLMRouterChain](https://api.python.langchain.com/en/latest/chains/langchain.chains.router.llm_router.LLMRouterChain.html#langchain.chains.router.llm_router.LLMRouterChain) is a chain that outputs the name of a destination chain and the inputs to it.
 
@@ -181,7 +190,7 @@ As part of memory component there is the [ConversationSummaryMemory](https://pyt
 
 The other important memory is [Vector Data memory](https://python.langchain.com/docs/modules/memory/types/vectorstore_retriever_memory/) and entity memory or [knowledgeGraph](https://python.langchain.com/docs/modules/memory/types/kg/)
 
-See related code [conversation_with_memory.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/conversation_with_memory.py)
+See related code [conversation_with_memory.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/openAI/conversation_with_memory.py)
 
 ### Retrieval Augmented Generation
 
@@ -213,7 +222,7 @@ Different code that implement RAG
 | --- | --- |
 | [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/build_agent_domain_rag.py/) | Read Lilian Weng blog and  create a ChromeDB vector store with OpenAIEmbeddings |
 | [query_agent_domain_store.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/query_agent_domain_store.py/) | Query the persisted vector store for similarity search |
-| [prepareVectorStore.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/prepareVectorStore.py) | Use AWS Bedrock Embeddings |
+| [prepareVectorStore.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/Q&A/prepareVectorStore.py) | Use AWS Bedrock Embeddings |
 | [embeddings_hf.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/embeddings_hf.py) | Use Hunggingface embeddings with splitting a markdown file and use FAISS vector store |
 | [rag_HyDE.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/rag_HyDE.py) | Hypothetical Document Embedding (HyDE) the first prompt create an hypothetical document  |
  
@@ -260,10 +269,10 @@ During the interaction with the end-user, the system (a chain in LangChain) retr
 * Persist the embeddings into a Vector store. Faiss and ChromaDB are common vector stores to use, but OpenSearch, Postgresql can also being used.
 * Retriever includes semantic search and efficient algorithm to prepare the prompt. To improve on vector similarity search we can generate variants of the input question.
 
-See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/Q&A/qa-faiss-store.py).
+See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/Q&A/qa-faiss-store.py).
 
 
-* [Another example of LLM Chain with AWS Bedrock llm and Feast as feature store](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/feast/feast-prompt.py)
+* [Another example of LLM Chain with AWS Bedrock llm and Feast as feature store](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/feast/feast-prompt.py)
 
 * **[Web scraping](https://python.langchain.com/docs/use_cases/web_scraping)** for LLM based web research. It uses the same process: document/page loading, transformation with tool like BeautifulSoup, to HTML2Text.
 
@@ -272,7 +281,7 @@ See [Q&A with FAISS store qa-faiss-store.py](https://github.com/jbcodeforce/ML-s
     Use `pip install feast` then the `feast` CLI with `feast init my_feature_repo` to create a Feature Store then `feast apply` to create entity, feature views, and services. Then `feast ui` + [http://localhost:8888](http://localhost:8888) to act on the store. 
 
 ???- info "LLM and FeatureForm"
-    See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/featureform/ff-langchain-prompt.py)
+    See [FeatureForm](https://docs.featureform.com/) as another open-source feature store solution and the LangChain sample with [Claude LLM](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/featureform/ff-langchain-prompt.py)
 
 
 
@@ -327,9 +336,9 @@ For **Q&A** the pipeline will most likely integrate with existing documents as i
 
 ### Text Generation Examples
 
-* [Basic query with unknown content to generate hallucination: 1st_openAI_lc.py ](ttps://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/1st_openAI_lc.py)
-* [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
-* Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information and get model outputs based on different scenarios. See the [text_generation/ResponseToUnhappyCustomer.py code.](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/text_generation/ResponseToUnhappyCustomer.py)
+* [Basic query with unknown content to generate hallucination: 1st_openAI_lc.py ](ttps://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openAI/1st_openAI_lc.py)
+* [Simple test to call Bedrock with Langchain](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/TestBedrockWithLangchain.py) using on zero_shot generation.
+* Response to an email of unhappy customer using Claude 2 and PromptTemplate. `PromptTemplates` allow us to create generic shells which can be populated with information and get model outputs based on different scenarios. See the [text_generation/ResponseToUnhappyCustomer.py code.](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/text_generation/ResponseToUnhappyCustomer.py)
 
 
 ### Summarization chain
@@ -337,8 +346,8 @@ For **Q&A** the pipeline will most likely integrate with existing documents as i
 Always assess the size of the content to send, as the approach can be different: for big document, we need to split the doc in chunks.
 
 * Small text summary with OpenAI. 
-* Small text to summarize, with [bedrock client](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/utils/bedrock.py) and the invoke_model on the client see the code in [llm-langchain/summarization/SmallTextSummarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/summarization/SmallTextSummarization.py)
-* For big document, langchain provides the load_summarize_chain to summarize by chunks and get the summary of the summaries. See code with 'manual' extraction of the summaries as insights and then creating a summary of insights in [summarization/long-text-summarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/summarization/long-text-summarization.py) or using a LangChain summarization with map-reduce in [summarization/long-text-summarization-mr.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/bedrock/summarization/long-text-summarization-mr.py).
+* Small text to summarize, with [bedrock client](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/bedrock/utils/bedrock.py) and the invoke_model on the client see the code in [code/LLM/langchain/summarization/SmallTextSummarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/summarization/SmallTextSummarization.py)
+* For big document, langchain provides the load_summarize_chain to summarize by chunks and get the summary of the summaries. See code with 'manual' extraction of the summaries as insights and then creating a summary of insights in [summarization/long-text-summarization.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/bedrock/summarization/long-text-summarization.py) or using a LangChain summarization with map-reduce in [summarization/long-text-summarization-mr.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/bedrock/summarization/long-text-summarization-mr.py).
 
 ???- code "Using langchain summarize chain"
     ```python
@@ -443,7 +452,7 @@ Below is the classical application flow using tool calling. The exposed function
 
 ![](./diagrams/tool_calling.drawio.png)
 
-When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/openAI/openAI_agent.py).
+When developing a solution based on agent, consider the tools, the services, the agent needs to access. See a code example [openAI_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openAI/openAI_agent.py).
 
 Many LLM providers support for tool calling, including Anthropic, Cohere, Google, Mistral, OpenAI, see the [existing LangChain tools](https://python.langchain.com/docs/integrations/tools/).
 
@@ -485,7 +494,7 @@ class PromptInstructions(BaseModel):
 llm_with_tool = llm.bind_tools([PromptInstructions])
 ```
 
-[See the LangGraph sample: prompt_builder_graph.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/langgraph/prompt_builder_graph.py).
+[See the LangGraph sample: prompt_builder_graph.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/langgraph/prompt_builder_graph.py).
 
 #### Our own tools
 
@@ -499,7 +508,7 @@ When doing agent we need to manage exception and implement handle_tool_error.
 
 To map the tools to OpenAI function call there is a module called: `from langchain_core.utils.function_calling import convert_to_openai_function`.
 
-It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time, without having to pass all the tool definitions within the context window. It uses a vector store to create embeddings for each tool description.
+It may be interesting to use embeddings to do tool selection before calling LLM. [See this code agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/openAI/agent_wt_tool_retrieval.py) The approach is to dynamically select the N tools we want at run time, without having to pass all the tool definitions within the context window. It uses a vector store to create embeddings for each tool description.
 
 ### How Tos
 
@@ -534,7 +543,7 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 
 
 ???- question "How to support streaming the LLM's output?"
-    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) is needed to make the app more responsive for end-users. All [Runnable objects](https://python.langchain.com/v0.1/docs/expression_language/interface/) implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
+    [LangChain streaming ](https://python.langchain.com/docs/expression_language/streaming/) is needed to make the app more responsive for end-users. All [Runnable objects](https://python.langchain.com/v0.1/docs/expression_language/interface/) implement a sync method called `stream` and an `async` variant called `astream`. They cut output into chunks and yield them. Recall yield is a generator of data and acts as `return`. The main demo code is [web_server_wt_streaming](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/openAI/web_server_wt_streaming.py) with the client_stream.py
 
 ???- question "Example of Intended Model"
     to be done
@@ -545,7 +554,7 @@ It may be interesting to use embeddings to do tool selection before calling LLM.
 ???- question "Use a vector store to keep the list of agent and description"
     As we cannot put the description of all the tools in the prompt (because of context length issues) 
     so instead we dynamically select the N tools we do want to consider using, at run time.
-    See the code in [agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/openAI/agent_wt_tool_retrieval.py). 
+    See the code in [agent_wt_tool_retrieval.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/openAI/agent_wt_tool_retrieval.py). 
 
 
 ## [LangChain Expression Language (LCEL)](https://python.langchain.com/docs/expression_language)

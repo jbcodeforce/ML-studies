@@ -1,3 +1,12 @@
+---
+title: "Claude Code"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Claude Code
 
 ???- info "Updates"
@@ -11,7 +20,7 @@ The architecture of the assistant looks like:
 
 * **CLAUDE.md** file represents memory across sessions. It can include style guidelines and common commands. This file is automatically loaded into the context.
 * [See overview](https://code.claude.com/docs/en/overview) for installation and getting started.
-*  Claude Code offers a variety of settings to configure [See the settings article.](https://code.claude.com/docs/en/settings) See also [~/.claude/settings.json](~/.claude/settings.json)
+*  Claude Code offers a variety of settings to configure [See the settings article.](https://code.claude.com/docs/en/settings) See also ~/.claude/settings.json
 
 
 ## Capabilities

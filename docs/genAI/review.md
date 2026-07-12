@@ -1,3 +1,12 @@
+---
+title: "AI discussions"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # AI discussions
 
 The goal of this section is to get a set of content to support deeper discussions around Gen AI, during chit-chat or interviews.
@@ -19,12 +28,12 @@ Cover the high-level workings of models like GPT-3, including transformers, pre-
 ???- code "Code samples (src/)"
     | Example | Path | Purpose |
     | --- | --- | --- |
-    | OpenAI API client | [openai_api.py](../../src/llm-langchain/openai/openai_api.py) | Direct OpenAI API usage without LangChain. See [OpenAI readme](../../src/llm-langchain/openai/Readme.md) |
-    | First LangChain chain | [first_openai_lc.py](../../src/llm-langchain/openai/first_openai_lc.py) | Basic chain; illustrates knowledge cut-off / hallucination |
-    | OpenAI retrieval | [openai_retrieval_lc.py](../../src/llm-langchain/openai/openai_retrieval_lc.py) | Crawl docs, FAISS vector store, retriever chain |
-    | HuggingFace embeddings | [embeddings_hf.py](../../src/llm-langchain/rag/embeddings_hf.py) | Embedding model usage |
-    | Bedrock access | [test_bedrock_access.py](../../src/llm-langchain/bedrock/test_bedrock_access.py) | AWS Bedrock client setup |
-    | Ollama local LLM | [llama_lc.py](../../src/llm-langchain/ollama/llama_lc.py) | Local model via Ollama. See [Ollama readme](../../src/llm-langchain/ollama/README.md) |
+    | OpenAI API client | [openai_api.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/openai_api.py) | Direct OpenAI API usage without LangChain. See [OpenAI readme](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/Readme.md) |
+    | First LangChain chain | [first_openai_lc.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/first_openai_lc.py) | Basic chain; illustrates knowledge cut-off / hallucination |
+    | OpenAI retrieval | [openai_retrieval_lc.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/openai_retrieval_lc.py) | Crawl docs, FAISS vector store, retriever chain |
+    | HuggingFace embeddings | [embeddings_hf.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/embeddings_hf.py) | Embedding model usage |
+    | Bedrock access | [test_bedrock_access.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/test_bedrock_access.py) | AWS Bedrock client setup |
+    | Ollama local LLM | [llama_lc.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/ollama/llama_lc.py) | Local model via Ollama. See [Ollama readme](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/ollama/README.md) |
 
 ## 2. Discuss prompt engineering
 
@@ -40,12 +49,12 @@ Talk through techniques like demonstrations, examples, and plain language prompt
 ???- code "Prompt engineering code (src/ and e2e-demos/)"
     | Example | Path | Purpose |
     | --- | --- | --- |
-    | CoT with Bedrock | [test_bedrock_cot.py](../../src/llm-langchain/bedrock/test_bedrock_cot.py) | Chain-of-thought prompts; sample inputs in [cot3.txt](../../src/llm-langchain/bedrock/cot3.txt) |
-    | Program-Aided Language | [test_pal_with_claude.py](../../src/llm-langchain/bedrock/test_pal_with_claude.py) | PAL prompting with Claude on Bedrock |
-    | Prompt builder graph | [prompt_builder_graph.py](../../src/llm-langchain/langgraph/prompt_builder_graph.py) | LangGraph prompt construction |
-    | Customer response | [response_to_unhappy_customer.py](../../src/llm-langchain/text_generation/response_to_unhappy_customer.py) | Domain-specific prompt for text generation |
-    | Model evaluation | [evaluation.py](../../src/llm-langchain/openai/evaluation.py) | Assess and compare prompt / model outputs |
-    | Critical thinking prompt | [think_deeply/](../../e2e-demos/think_deeply/) | 5-stage thinking framework demo. See [e2e readme](../../e2e-demos/README.md#think-deeply) |
+    | CoT with Bedrock | [test_bedrock_cot.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/test_bedrock_cot.py) | Chain-of-thought prompts; sample inputs in [cot3.txt](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/cot3.txt) |
+    | Program-Aided Language | [test_pal_with_claude.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/test_pal_with_claude.py) | PAL prompting with Claude on Bedrock |
+    | Prompt builder graph | [prompt_builder_graph.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/langgraph/prompt_builder_graph.py) | LangGraph prompt construction |
+    | Customer response | [response_to_unhappy_customer.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/text_generation/response_to_unhappy_customer.py) | Domain-specific prompt for text generation |
+    | Model evaluation | [evaluation.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/evaluation.py) | Assess and compare prompt / model outputs |
+    | Critical thinking prompt | [think_deeply/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/think_deeply/) | 5-stage thinking framework demo. See [e2e readme](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/README.md#think-deeply) |
 
 ## 3. Share LLM project examples
 
@@ -59,26 +68,26 @@ Walk through hands-on experiences leveraging models like GPT-3, Langchain, or Ve
 ???- code "RAG and Q&A projects"
     | Example | Path | Purpose |
     | --- | --- | --- |
-    | Streamlit RAG demo | [qa_retrieval/Main.py](../../e2e-demos/qa_retrieval/Main.py) | RAG impact on response quality using Lilian Weng agent blog |
-    | Build vector store | [build_agent_domain_rag.py](../../src/llm-langchain/rag/build_agent_domain_rag.py) | Index Lilian Weng multi-agent blog into ChromaDB |
-    | Query domain store | [query_agent_domain_store.py](../../src/llm-langchain/rag/query_agent_domain_store.py) | Chat against persisted vector store |
-    | Multiple queries RAG | [multiple_queries_rag.py](../../src/llm-langchain/rag/multiple_queries_rag.py) | Multi-query retrieval expansion |
-    | RAG fusion | [rag_fusion.py](../../src/llm-langchain/rag/rag_fusion.py) | Reciprocal rank fusion across queries |
-    | RAG HyDE | [rag_hyde.py](../../src/llm-langchain/rag/rag_hyde.py) | Hypothetical document embeddings |
-    | Adaptive RAG | [adaptive_rag.py](../../src/llm-langchain/langgraph/adaptive_rag.py) | LangGraph adaptive retrieval routing |
-    | QA pipeline | [qa-pipeline.py](../../src/llm-langchain/qa/qa-pipeline.py) | Bedrock + ChromaDB Q&A chain |
-    | Chat with PDF | [chat_with_pdf/app.py](../../e2e-demos/chat_with_pdf/app.py) | End-to-end PDF Q&A app |
-    | RAG readme | [rag/README.md](../../src/llm-langchain/rag/README.md) | Index of all RAG examples |
+    | Streamlit RAG demo | [qa_retrieval/Main.py](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/qa_retrieval/Main.py) | RAG impact on response quality using Lilian Weng agent blog |
+    | Build vector store | [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/build_agent_domain_rag.py) | Index Lilian Weng multi-agent blog into ChromaDB |
+    | Query domain store | [query_agent_domain_store.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/query_agent_domain_store.py) | Chat against persisted vector store |
+    | Multiple queries RAG | [multiple_queries_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/multiple_queries_rag.py) | Multi-query retrieval expansion |
+    | RAG fusion | [rag_fusion.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/rag_fusion.py) | Reciprocal rank fusion across queries |
+    | RAG HyDE | [rag_hyde.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/rag_hyde.py) | Hypothetical document embeddings |
+    | Adaptive RAG | [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/langgraph/adaptive_rag.py) | LangGraph adaptive retrieval routing |
+    | QA pipeline | [qa-pipeline.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/qa/qa-pipeline.py) | Bedrock + ChromaDB Q&A chain |
+    | Chat with PDF | [chat_with_pdf/app.py](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/chat_with_pdf/app.py) | End-to-end PDF Q&A app |
+    | RAG readme | [rag/README.md](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag/README.md) | Index of all RAG examples |
 
 ???- code "Agentic project examples"
     | Example | Path | Purpose |
     | --- | --- | --- |
     | Agno overview | [agno.md](./agno.md) | Agno SDK patterns and documentation |
-    | Agno studies | [src/agentic/agno/](../../src/agentic/agno/) | Agents with Ollama, tools, knowledge, workflows |
-    | Deep researcher | [deep_researcher/](../../src/agentic/agno/deep_researcher/) | Multi-agent research workflow. See [README](../../src/agentic/agno/deep_researcher/README.md) |
-    | LLM wiki agent | [llm-wiki/](../../src/agentic/agno/llm-wiki/) | RAG over a personal wiki with Agno |
-    | ReAct LangGraph | [react_lg.py](../../src/llm-langchain/langgraph/react_lg.py) | ReAct agent with chain-of-thought prompt |
-    | Agent with tools | [openai_agent.py](../../src/llm-langchain/openai/openai_agent.py) | Tool calling with retriever and Tavily search |
+    | Agno studies | [code/agents/agno/](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/) | Agents with Ollama, tools, knowledge, workflows |
+    | Deep researcher | [deep_researcher/](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/deep_researcher/) | Multi-agent research workflow. See [README](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/deep_researcher/README.md) |
+    | LLM wiki agent | [llm-wiki/](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/llm-wiki/) | RAG over a personal wiki with Agno |
+    | ReAct LangGraph | [react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/langgraph/react_lg.py) | ReAct agent with chain-of-thought prompt |
+    | Agent with tools | [openai_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/openai_agent.py) | Tool calling with retriever and Tavily search |
 
 ## 4. Stay updated on research
 
@@ -86,7 +95,7 @@ Mention latest papers and innovations in few-shot learning, prompt tuning, chain
 
 * [Few-shot and zero-shot prompting](./prompt-eng.md/#prompting-techniques) — in-context learning without weight updates
 * [Instruction tuning](./prompt-eng.md) — fine-tuning on task instructions rather than per-task datasets
-* [Chain of Thought](./prompt-eng.md/#chain-of-thought) — intermediate reasoning steps; code in [test_bedrock_cot.py](../../src/llm-langchain/bedrock/test_bedrock_cot.py)
+* [Chain of Thought](./prompt-eng.md/#chain-of-thought) — intermediate reasoning steps; code in [test_bedrock_cot.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/bedrock/test_bedrock_cot.py)
 * [Tree of Thoughts](./prompt-eng.md/#tree-of-thoughts) — search over reasoning paths
 * [Agentic AI](./agentic.md) — planning, memory, tools, multi-agent patterns
 * [Agno framework notes](./agno.md)
@@ -101,7 +110,7 @@ Compare transformer networks like GPT-3 vs Codex. Explain self-attention, encodi
 * [Encoder-decoder and generative models](./index.md/#introduction) — three transformer types
 * [Transfer learning and fine-tuning](../ml/deep-learning.md#transfer-learning) — reusing pre-trained weights (CV and NLP)
 * [Deep learning foundations](../ml/deep-learning.md) — CNNs, training loops, pre-trained model usage
-* [PyTorch computer vision](../../src/pytorch/computer-vision/) — CNN training with [fashion_cnn.py](../../src/pytorch/computer-vision/fashion_cnn.py)
+* [PyTorch computer vision](https://github.com/jbcodeforce/ML-studies/tree/master/src/code/computer-vision/) — CNN training with [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/src/code/computer-vision/fashion_cnn.py)
 * [Distributed training (DDP)](../coding/ddp.md) — multi-GPU training; references minGPT fine-tuning
 
 ## 6. Work with Skills
@@ -146,7 +155,7 @@ Explain supervised fine-tuning, parameter efficient fine tuning, few-shot learni
 * [Few-shot prompting](./prompt-eng.md/#prompting-techniques) — in-context examples without weight updates
 * [Instruction tuning](./prompt-eng.md) — alignment via instruction datasets (RLHF)
 * [RAG vs fine-tuning tradeoffs](./rag.md) — cost, quality, and skill requirements
-* [Resume tailoring demo](../../e2e-demos/resume_tuning/) — prompt-based specialization to a job description (not weight fine-tuning, but illustrates task adaptation)
+* [Resume tailoring demo](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/resume_tuning/) — prompt-based specialization to a job description (not weight fine-tuning, but illustrates task adaptation)
 
 ## 8. Demonstrate production engineering expertise
 
@@ -159,12 +168,12 @@ From tokenization to embeddings to deployment, showcase your ability to operatio
 ???- code "Production-oriented examples"
     | Example | Path | Purpose |
     | --- | --- | --- |
-    | FastAPI streaming server | [web_server_wt_streaming.py](../../src/llm-langchain/openai/web_server_wt_streaming.py) | Streaming chain/agent behind HTTP |
-    | Async streaming | [async_stream.py](../../src/llm-langchain/openai/async_stream.py) | Async OpenAI streaming client |
-    | Model evaluation | [evaluation.py](../../src/llm-langchain/openai/evaluation.py) | Output quality assessment |
-    | AgentOS | [first_agent_os.py](../../src/agentic/agno/first_agent_os.py) | Agno production agent server |
-    | LiteLLM proxy + Prometheus | [claude_code_liteLLM/](../../e2e-demos/claude_code_liteLLM/) | LLM gateway with monitoring. See [README](../../e2e-demos/claude_code_liteLLM/README.md) |
-    | Streaming demo | [streaming-demo/](../../e2e-demos/streaming-demo/) | LangGraph streaming UI |
-    | Feast feature store | [feast/](../../src/llm-langchain/feast/) | Feature repo and serving examples |
-    | FeatureForm | [featureform/](../../src/llm-langchain/featureform/) | Feature definitions and training pipeline |
-    | DDP multi-GPU | [multi_gpu_ddp.py](../../src/pytorch/ddp/multi_gpu_ddp.py) | Distributed PyTorch training |
+    | FastAPI streaming server | [web_server_wt_streaming.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/web_server_wt_streaming.py) | Streaming chain/agent behind HTTP |
+    | Async streaming | [async_stream.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/async_stream.py) | Async OpenAI streaming client |
+    | Model evaluation | [evaluation.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/evaluation.py) | Output quality assessment |
+    | AgentOS | [first_agent_os.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/first_agent_os.py) | Agno production agent server |
+    | LiteLLM proxy + Prometheus | [claude_code_liteLLM/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/claude_code_liteLLM/) | LLM gateway with monitoring. See [README](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/claude_code_liteLLM/README.md) |
+    | Streaming demo | [streaming-demo/](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo/) | LangGraph streaming UI |
+    | Feast feature store | [feast/](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/feast/) | Feature repo and serving examples |
+    | FeatureForm | [featureform/](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/featureform/) | Feature definitions and training pipeline |
+    | DDP multi-GPU | [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/src/code/deep-learning/ddp/multi_gpu_ddp.py) | Distributed PyTorch training |

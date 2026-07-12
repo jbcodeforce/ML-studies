@@ -1,3 +1,12 @@
+---
+title: "Natural Language Processing (NLP)"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Natural Language Processing (NLP)
 
 
@@ -10,7 +19,7 @@ The vector numbers intent to capture the attributes of the object and the semant
 **Sentence embedding** vectorize a complete sentence to do semantic similarity of sentences. 
 The technique works by training a neural network on a large corpus of text data, to predict the context in which a given word appears. Principal Component Analysis (PCA) and Singular Value Decomposition (SVD), auto-encoder, are dimensionality reduction techniques. 
 
-See [this basic code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/RAG/embeddings_hf.py) which uses `SentenceTransformer all-MiniLM-L6-v2` model to encode sentences of 100 tokens, construct from a markdown file.
+See [this basic code](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/RAG/embeddings_hf.py) which uses `SentenceTransformer all-MiniLM-L6-v2` model to encode sentences of 100 tokens, construct from a markdown file.
 
 Embeddings are created using a pre-trained LLM, and a set of documents used to fine-tune the model. The fine-tuning process is done using a small subset of the documents, and the LLM is trained to predict the next word in the document. 
 

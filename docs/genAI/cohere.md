@@ -1,3 +1,12 @@
+---
+title: "Cohere summary"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Cohere summary
 
 [Cohere](https://cohere.com) offers LLM products to deploy AI solutions with the enterprise.

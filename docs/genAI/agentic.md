@@ -1,3 +1,12 @@
+---
+title: "Agentic AI"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Agentic AI
 
 [Agent](https://lilianweng.github.io/posts/2023-06-23-agent/) is an orchestrator pattern where the LLM decides what actions to take from the current query and context. 
@@ -80,16 +89,16 @@ Small Specialist Agents (SSAs) is an agentic approach to perform planning and re
 
 ### LangGraph Examples
 
-* **Adaptive RAG**: Query routing between vector store and web search with document grading and hallucination detection. See [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/adaptive_rag.py).
-* **ReAct Agent**: Reason and Act pattern with tool calling. See [react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/react_lg.py).
-* **Human-in-the-Loop**: Agent with interrupt for human approval. See [human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/human_in_loop.py).
+* **Adaptive RAG**: Query routing between vector store and web search with document grading and hallucination detection. See [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/adaptive_rag.py).
+* **ReAct Agent**: Reason and Act pattern with tool calling. See [react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/react_lg.py).
+* **Human-in-the-Loop**: Agent with interrupt for human approval. See [human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/human_in_loop.py).
 * **Streaming Chat**: WebSocket streaming with LangGraph. See [main_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo/main_lg.py).
 
 ### OpenAI/LangChain Agent Examples
 
-* **Basic Agent**: Agent with retriever and search tools. See [openai_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/openai_agent.py).
-* **JSON Agent**: ReAct agent with JSON output parsing. See [json_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/json_agent.py).
-* **Agent with Memory**: Conversation history tracking. See [agent_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/agent_memory.py).
+* **Basic Agent**: Agent with retriever and search tools. See [openai_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/openai_agent.py).
+* **JSON Agent**: ReAct agent with JSON output parsing. See [json_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/json_agent.py).
+* **Agent with Memory**: Conversation history tracking. See [agent_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/agent_memory.py).
 
 ### End-to-End Demos
 
@@ -167,7 +176,7 @@ config = {"configurable": {"thread_id": "user-123"}}
 app.invoke({"messages": [HumanMessage(content="Hi")]}, config)
 ```
 
-See [first_graph_with_tool_and_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/first_graph_with_tool_and_memory.py) for a complete example.
+See [first_graph_with_tool_and_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/first_graph_with_tool_and_memory.py) for a complete example.
 
 ### Long-Term Memory
 
@@ -186,7 +195,7 @@ retriever = vectorstore.as_retriever()
 relevant_docs = retriever.invoke(user_query)
 ```
 
-For agent memory implementations, see [agent_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/agent_memory.py).
+For agent memory implementations, see [agent_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/agent_memory.py).
 
 ### Entity Memory
 
@@ -272,7 +281,7 @@ Implementation involves two prompts:
         return output
     ```
 
-See the [multi_chains.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/multi_chains.py) example that demonstrates chaining with sequential improvement.
+See the [multi_chains.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/multi_chains.py) example that demonstrates chaining with sequential improvement.
 
 ### The Router Pattern
 
@@ -293,7 +302,7 @@ Key implementation aspects:
 - Each destination has a focused prompt and potentially different tools
 - Fallback to default handler for unmatched queries
 
-See [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/adaptive_rag.py) for a LangGraph implementation that routes between vector store and web search.
+See [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/adaptive_rag.py) for a LangGraph implementation that routes between vector store and web search.
 
 ### Human-in-the-Loop Pattern
 
@@ -313,7 +322,7 @@ Use cases:
 - Human verification of retrieved information
 - Clarification requests when agent is uncertain
 
-See [human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/human_in_loop.py) and [ask_human_graph.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/ask_human_graph.py) for implementations.
+See [human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/human_in_loop.py) and [ask_human_graph.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/ask_human_graph.py) for implementations.
 
 ### ReAct Pattern
 
@@ -334,9 +343,9 @@ Action: finish(answer)
 
 Implementations:
 
-- [react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/react_lg.py) - Manual ReAct with LangGraph
-- [prebuilt_react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph/prebuilt_react_lg.py) - Using LangGraph's prebuilt `create_react_agent`
-- [json_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/json_agent.py) - JSON-based ReAct agent
+- [react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/react_lg.py) - Manual ReAct with LangGraph
+- [prebuilt_react_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/prebuilt_react_lg.py) - Using LangGraph's prebuilt `create_react_agent`
+- [json_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/json_agent.py) - JSON-based ReAct agent
 
 ### Multi-Agent Collaboration Pattern
 
@@ -368,7 +377,7 @@ RAG is essentially a digital librarian: you ask a question, the system searches 
 
 The Wiki Pattern is designed for deep research. It allows an AI agent to build a synthetic brain that grows more intelligent and interconnected the more data it ingunes. 
 
-[See demonstration with Agno agent](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno/llm-wiki)
+[See demonstration with Agno agent](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/llm-wiki)
 
 ## Technologies
 
@@ -410,7 +419,7 @@ To setup Cursor to use local llm:
 
 ### [Agno](https://www.agno.com/)
 
-Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno). See [dedicated chapter](./agno.md)
+Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). See [dedicated chapter](./agno.md)
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 
@@ -443,7 +452,7 @@ workflow.add_edge("tools", "agent")
 app = workflow.compile(checkpointer=MemorySaver())
 ```
 
-See the [LangGraph documentation](../coding/langgraph.md) for detailed examples and the [langgraph examples folder](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/langgraph).
+See the [LangGraph documentation](../coding/langgraph.md) for detailed examples and the [langgraph examples folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/langgraph).
 
 ### OpenAI SDK
 
@@ -469,8 +478,8 @@ response = client.chat.completions.create(
 
 For agent implementations using OpenAI, see:
 
-- [openai_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/openai_agent.py) - Agent with retriever and search tools
-- [agent_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/llm-langchain/openai/agent_memory.py) - Agent with conversation memory
+- [openai_agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/openai_agent.py) - Agent with retriever and search tools
+- [agent_memory.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai/agent_memory.py) - Agent with conversation memory
 
 ### Pydantic AI
 
@@ -558,10 +567,10 @@ See code examples in [the techno/crew-ai folder](https://github.com/jbcodeforce/
 
 | Category | Examples |
 |----------|----------|
-| **Agno** | [Agentic/agno folder](https://github.com/jbcodeforce/ML-studies/tree/master/src/agentic/agno) |
-| **LangGraph** | [langgraph folder](https://github.com/jbcodeforce/ML-studies/tree/master/src/llm-langchain/langgraph) |
+| **Agno** | [Agentic/agno folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno) |
+| **LangGraph** | [langgraph folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/langgraph) |
 | **CrewAI** | [crew-ai folder](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai) |
-| **OpenAI Agents** | [openai folder](https://github.com/jbcodeforce/ML-studies/tree/master/src/llm-langchain/openai) |
+| **OpenAI Agents** | [openai folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/openai) |
 | **E2E Demos** | [e2e-demos folder](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos) |
 
 ## References

@@ -1,3 +1,12 @@
+---
+title: "AI Notebook"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # AI Notebook
 
 Google created [notebookLM](https://notebooklm.google.com/) as AI-powered research and writing tool. It is a nice technology for deeper analysis and doing RAG based query. The problem is Google will use the data sent. The open source has the same capability with [open notebook]()

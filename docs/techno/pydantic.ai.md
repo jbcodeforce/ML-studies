@@ -1,3 +1,12 @@
+---
+title: "Pydantic AI"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Pydantic AI
 
 A [Agent framework](https://ai.pydantic.dev/) by the Pydantic team, to bring that FastAPI feeling to GenAI app development.

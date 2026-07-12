@@ -1,3 +1,12 @@
+---
+title: "Complete AI/ML Learning Guide"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Complete AI/ML Learning Guide
 
 A structured, end-to-end roadmap for learning Artificial Intelligence, Machine Learning, Deep Learning, Generative AI, and Agentic Systems. This guide integrates content from this repository with external resources for comprehensive coverage.
@@ -86,8 +95,8 @@ See [Mathematical Foundations](./concepts/maths.md) for:
 
 **Key Notebooks:**
 
-- [Conditional Probability Exercise](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/ConditionalProbabilityExercise.ipynb)
-- [Distributions Notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Distributions.ipynb)
+- [Conditional Probability Exercise](https://github.com/jbcodeforce/ML-studies/blob/master/code/statistics/ConditionalProbabilityExercise.ipynb)
+- [Distributions Notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/statistics/Distributions.ipynb)
 
 **External Resources:**
 
@@ -156,13 +165,13 @@ See [Classifiers](./ml/classifier.md) for detailed implementations:
 
 | Algorithm | Description | Code |
 |-----------|-------------|------|
-| Perceptron | Basic neural unit | [TestPerceptron.py](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/TestPerceptron.py) |
-| Adaline | Adaptive Linear Neuron | [TestAdaline.py](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/TestAdaline.py) |
+| Perceptron | Basic neural unit | [TestPerceptron.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/perceptron/test_perceptron.py) |
+| Adaline | Adaptive Linear Neuron | [TestAdaline.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/test_adaline.py) |
 | Logistic Regression | Probability-based classification | [classifier.md#logistic-regression](./ml/classifier.md#logistic-regression) |
-| SVM | Maximum margin classification | [SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/SVM-IRIS.py) |
-| Decision Trees | Rule-based learning | [DecisionTreeIRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/classifiers/DecisionTreeIRIS.py) |
+| SVM | Maximum margin classification | [SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/SVM-IRIS.py) |
+| Decision Trees | Rule-based learning | [DecisionTreeIRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/DecisionTreeIRIS.py) |
 | Random Forest | Ensemble learning | [classifier.md#random-forests](./ml/classifier.md#combining-weak-to-strong-learners-via-random-forests) |
-| KNN | Instance-based learning | [KNN Notebook](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/KNN.ipynb) |
+| KNN | Instance-based learning | [KNN Notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/KNN.ipynb) |
 
 **Metrics:** Confusion matrix, accuracy, precision, recall, F1, ROC-AUC.
 
@@ -222,9 +231,9 @@ See [PyTorch](./coding/pytorch.md) for comprehensive coverage:
 
 **Key Notebooks:**
 
-- [Tensor Basics](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/torch-tensor-basic.ipynb)
-- [Basic ML Workflow](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/get_started/workflow-basic.ipynb)
-- [Classification](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/classification/classifier.ipynb)
+- [Tensor Basics](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/torch-tensor-basic.ipynb)
+- [Basic ML Workflow](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/workflow-basic.ipynb)
+- [Classification](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/classifications.ipynb)
 
 ### 3.3 Classification Neural Networks
 
@@ -244,8 +253,8 @@ See [CNN Section](./ml/deep-learning.md#convolutional-neural-network) for:
 
 **Code Examples:**
 
-- [LeNet in Keras](https://github.com/jbcodeforce/ML-studies/blob/master/ml-python/neuralnetwork/lenet_in_keras.ipynb)
-- [Fashion CNN](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/computer-vision/fashion_cnn.py)
+- [LeNet in Keras](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/neuralnetwork/lenet_in_keras.ipynb)
+- [Fashion CNN](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/fashion_cnn.py)
 
 ### 3.5 Transfer Learning
 

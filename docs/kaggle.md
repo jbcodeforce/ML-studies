@@ -1,3 +1,12 @@
+---
+title: "Kaggle and ML tutorial"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Kaggle and ML tutorial
 
 ## Getting started with Titanic data set

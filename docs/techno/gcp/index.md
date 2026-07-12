@@ -1,3 +1,12 @@
+---
+title: "Google AI platform"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Google AI platform
 
 Google offers a set of managed services to develop ML models and use Generative AI models. The [model garden](https://cloud.google.com/model-garden) exposes a catalog of Google or 3nd party models.

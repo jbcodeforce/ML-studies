@@ -1,3 +1,12 @@
+---
+title: "LangGraph"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # LangGraph
 
 !!!- info "Updates"
@@ -38,7 +47,7 @@ runnable = graph.compile()
 
 1. chatbot_func is a function to call a LLM.  `add_node()` takes a **function or runnable**, with the input is the entire current state:
 
-See [FirstGraphOnlyLLM.py](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/langgraph/FirstGraphOnlyLLM.py)
+See [FirstGraphOnlyLLM.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/langgraph/FirstGraphOnlyLLM.py)
 
 ```python
 def call_tool(state):  # (1)
@@ -102,7 +111,7 @@ See [other checkpointer ways to persist state](https://langchain-ai.github.io/la
 memory = AsyncSqliteSaver.from_conn_string("checkpoints.sqlite")
 ```
 
-* See [first basic program](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraphOnlyLLM.py) or the [one with tool](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraphWithTool.py) to call Tavily tool for searching recent information about the weather in San Francisco using OpenAI LLM. (it is based on the [tutorial](https://langchain-ai.github.io/langgraph/#example)). It does not use any prompt, and the call_method function invokes OpenAI model directly.
+* See [first basic program](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/FirstGraphOnlyLLM.py) or the [one with tool](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/FirstGraphWithTool.py) to call Tavily tool for searching recent information about the weather in San Francisco using OpenAI LLM. (it is based on the [tutorial](https://langchain-ai.github.io/langgraph/#example)). It does not use any prompt, and the call_method function invokes OpenAI model directly.
 
 
 
@@ -119,11 +128,11 @@ app.invoke(
 
 Some code using chat_history:
 
-* A simple version with tool and memory using prebuilt LangGraph constructs [FirstGraphWithToolAndMemory.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/FirstGraphWithToolAndMemory.py)
+* A simple version with tool and memory using prebuilt LangGraph constructs [FirstGraphWithToolAndMemory.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/FirstGraphWithToolAndMemory.py)
 
 
 
-* [Close Question with a node creating a close question and then processes the outcome with llm](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/close_question.py).
+* [Close Question with a node creating a close question and then processes the outcome with llm](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/close_question.py).
 
 ![](./diagrams/close_q.drawio.png)
 
@@ -174,7 +183,7 @@ tool_node = ToolNode(tools)
 
 #### Tool calling with Mistral
 
-See [this product documentation](https://docs.mistral.ai/capabilities/function_calling/) adapted to langgraph in [this code](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/mistral/mistral_tool_calling_lg.py) and [this new LangGraph API with ToolNode, and ChatMistral with bind_tools](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/mistral_lg_tool.py).
+See [this product documentation](https://docs.mistral.ai/capabilities/function_calling/) adapted to langgraph in [this code](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/mistral/mistral_tool_calling_lg.py) and [this new LangGraph API with ToolNode, and ChatMistral with bind_tools](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/mistral_lg_tool.py).
 
 ## Use cases
 
@@ -189,8 +198,8 @@ The interesting use cases for LangGraph are:
 
 ### Reasoning and Acting (ReAct) implementation
 
-See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and the raw code implementation using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct.py). LangGraph uses a [prebuilt implementation of ReAct](https://langchain-ai.github.io/langgraph/reference/prebuilt/#create_react_agent) that can be tested by [PreBuilt_ReAct_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/PreBuilt_ReAct_lg.py) 
-or the [implementation of ReAct pattern using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ReAct_lg.py).
+See [this paper: A simple Python implementation of the ReAct pattern for LLMs](https://til.simonwillison.net/llms/python-react-pattern) from Simon Willison, and the raw code implementation using openAI API [code: ReAct.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/ReAct.py). LangGraph uses a [prebuilt implementation of ReAct](https://langchain-ai.github.io/langgraph/reference/prebuilt/#create_react_agent) that can be tested by [PreBuilt_ReAct_lg.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/PreBuilt_ReAct_lg.py) 
+or the [implementation of ReAct pattern using LangGraph](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/ReAct_lg.py).
 
 An interesting prompt to use in the ReAct implementation is [hwchase17/react](https://smith.langchain.com/hub/hwchase17/react).
 
@@ -203,11 +212,11 @@ print_stream(graph, inputs, thread)
 snapshot = graph.get_state(thread)  # got where it was stopped
 ```
 
-See [The most simple ReAct with Mistral Model](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/mistral_lg_tool.py)
+See [The most simple ReAct with Mistral Model](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/mistral_lg_tool.py)
 
 ### Adaptive RAG
 
-The code [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/adaptive_rag.py) is implementing the following graph as documented in [this sample from product documentation](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/): 
+The code [adaptive_rag.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/adaptive_rag.py) is implementing the following graph as documented in [this sample from product documentation](https://langchain-ai.github.io/langgraph/tutorials/rag/langgraph_adaptive_rag/): 
 
 ![](./diagrams/adaptive_rag.drawio.png)
 
@@ -223,14 +232,14 @@ Some interesting patterns from this sample:
 
 The human is the loop can be implemented in different ways:
 
-* Add a confirmation before invoking a tool, using the the interrupt_before the names of the tool. [See human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/human_in_loop.py)
-* Implementing a human node before which the graph will always stop [ask_human_graph.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/ask_human_graph.py)
+* Add a confirmation before invoking a tool, using the the interrupt_before the names of the tool. [See human_in_loop.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/human_in_loop.py)
+* Implementing a human node before which the graph will always stop [ask_human_graph.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/ask_human_graph.py)
 
-See [prompt_builder_graph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/prompt_builder_graph.py) which is also integrated with Taipy UI in [Taipy UI with a langgraph graph](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/chatbot_graph_ui.py)
+See [prompt_builder_graph](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/prompt_builder_graph.py) which is also integrated with Taipy UI in [Taipy UI with a langgraph graph](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/chatbot_graph_ui.py)
 
 ## Other Code 
 
-See [Langgraph code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) with interesting patterns, but with some code not following the last updates in the APIs and my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph). 
+See [Langgraph code samples](https://github.com/langchain-ai/langgraph/tree/main/examples) with interesting patterns, but with some code not following the last updates in the APIs and my [own sample folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/langgraph). 
 
 See the [owl agent framework open source project](https://athenadecisionsystems.github.io/athena-owl-core/) to manage assistant, agents, tools, prompts..
 
@@ -263,7 +272,7 @@ See the [owl agent framework open source project](https://athenadecisionsystems.
             ... process the event payload
     ```
 
-    See [stream_agent_node.py](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/langgraph/stream_agent_node.py) and the one with a simple UI [with websocket and langgraph](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo/main_lg.py)
+    See [stream_agent_node.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/langgraph/stream_agent_node.py) and the one with a simple UI [with websocket and langgraph](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo/main_lg.py)
 
 
 ???- question "How to do close question?"

@@ -1,3 +1,12 @@
+---
+title: "OpenSearch"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # OpenSearch
 
 [OpenSearch](https://opensearch.org/docs/latest/about/)  is a distributed search and analytics engine. 

@@ -1,0 +1,43 @@
+[project]
+name = "mlstudies-jupyter"
+version = "0.1.0"
+description = "Jupyter kernel for ML Studies notebooks under code/<subject>/"
+readme = "README.md"
+requires-python = ">=3.11"
+
+dependencies = [
+    "jupyter>=1.0.0",
+    "ipykernel>=6.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "matplotlib>=3.7.0",
+    "seaborn>=0.13.2",
+    "scikit-learn>=1.3.0",
+    "statsmodels>=0.14.6",
+    "pydotplus>=2.0.2",
+    "xlrd>=2.0.2",
+    "scikeras>=0.13.0",
+
+]
+
+[project.optional-dependencies]
+deep-learning = [
+    "tensorflow>=2.15.0",
+    "keras>=3.0.0",
+]
+
+spark = [
+    "pyspark>=3.5.0",
+]
+
+tensorflow = [
+    "tensorflow>=2.21.0",
+]
+
+pytorch = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+]
+
+[tool.uv]
+dev-dependencies = []

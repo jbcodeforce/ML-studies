@@ -1,3 +1,12 @@
+---
+title: "Anomaly detection"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Anomaly detection
 
 The goal for anomaly detection is, given a dataset `{x(1), ... x(m)}`
@@ -16,7 +25,7 @@ In anomaly detection, we fit a model `P(X)` to a set of negative (y=0) examples,
 
 ## Standard deviation
 
-A simple approach, on a unique numberical feature is to use the standard deviation:  In statistical data distribution is approximately normal then about 68% of the data values lie within one standard deviation of the mean and about 95% are within two standard deviations, and about 99.7% lie within three standard deviations. See the code in [ml-python/anomaly-detection/StdDeviation.py].
+A simple approach, on a unique numberical feature is to use the standard deviation:  In statistical data distribution is approximately normal then about 68% of the data values lie within one standard deviation of the mean and about 95% are within two standard deviations, and about 99.7% lie within three standard deviations. See the code in [code/anomaly-detection/std_deviation.py].
 
 When choosing features for an anomaly detection system, it is a good idea to look for features that take on unusually large or small values for (mainly the) anomalous examples.
 

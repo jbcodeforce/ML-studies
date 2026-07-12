@@ -1,3 +1,12 @@
+---
+title: "AI Players to consider"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # AI Players to consider
 
 ## [Anthropic](https://www.anthropic.com/)

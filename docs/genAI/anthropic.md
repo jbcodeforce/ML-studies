@@ -1,3 +1,12 @@
+---
+title: "Anthropic notes"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Anthropic notes
 
 Anthropic is the company behind of the Claude LLMs. Claude 3 Haiku, Sonnet, and Opus are the next generation of Claude models. The value propositions are safety, accuracy and security.

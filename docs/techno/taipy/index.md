@@ -1,3 +1,12 @@
+---
+title: "Taipy"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Taipy
 
 [TapPy](https://docs.taipy.io/) a Python open-source library designed for easy development of data-driven web applications. It supports defining scenario for data pipeline and integrate with UI elements to do the data presentations and interactions.
@@ -29,4 +38,4 @@ taipy run main.py
 
 * [1st UI](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/1st_ui.py)
 * [Markdown, html, navbar based pages](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/md_ui.py)
-* [A chatbot to integrate LangGraph for prompt builder](https://github.com/jbcodeforce/ML-studies/blob/master/llm-langchain/langgraph/chatbot_graph_ui.py)
+* [A chatbot to integrate LangGraph for prompt builder](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/langgraph/chatbot_graph_ui.py)

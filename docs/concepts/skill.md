@@ -1,3 +1,12 @@
+---
+title: "The data scientist skill set"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # The data scientist skill set
 
 The following items come from different sources, and grouped in question and answer format. The sources:

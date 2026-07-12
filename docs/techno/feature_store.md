@@ -1,3 +1,12 @@
+---
+title: "Feature Store"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Feature Store
 
 ## Tecton and Feature store

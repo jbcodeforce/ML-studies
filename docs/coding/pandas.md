@@ -1,3 +1,12 @@
+---
+title: "[Pandas](https://pandas.pydata.org/)"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # [Pandas](https://pandas.pydata.org/)
 
 Pandas is the primary tool data scientists use for exploring and manipulating data.

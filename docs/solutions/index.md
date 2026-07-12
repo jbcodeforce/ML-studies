@@ -1,3 +1,12 @@
+---
+title: "A set of simple studies and solutions"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # A set of simple studies and solutions
 
 ## Predict whether a mammogram mass is benign or malignant
@@ -10,7 +19,7 @@
     * Review data quality, and missing data. Drop if not a lot of records are wrong
     * Transform the data to be usable by sklearn using numpy
 
-See personal notebook in [mammogram_mass folder](https://github.com/jbcodeforce/ML-studies/tree/master/notebooks/mammogram_mass/personal-study.ipynb)
+See personal notebook in [mammogram_mass folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/mammogram-mass/personal-study.ipynb)
 
 ## Computer vision with PyTorch: classify sushi, pizza and steak
 

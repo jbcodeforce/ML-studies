@@ -1,3 +1,12 @@
+---
+title: "Retrieval Augmented Generation (RAG)"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Retrieval Augmented Generation (RAG)
 
 ???- info  "Updates"
@@ -51,7 +60,7 @@ The Retrieval Augmented Generation may be seen as a three stages process:
 ![](./diagrams/rag_3_stages.drawio.png)
 
 
-1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/build_agent_domain_rag.py#L17-L43) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
+1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/build_agent_domain_rag.py#L17-L43) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
 
 1. **Retrieval**: retrieves the relevant data (splits) from the indexes using similarity search, then passes the resulting chunks to the LLM as part of the context window. The similarity search uses the embeddings to vectorize the query, perform the search and get the resulting indexes.
 1. **Generation**: LLM generates the response in plain natural language.
@@ -166,7 +175,7 @@ Code with text splitting:
 
 | Code | Cover |
 | --- | --- |
-| [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/build_agent_domain_rag.py#L17-L43) | LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever. |
+| [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/build_agent_domain_rag.py#L17-L43) | LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever. |
 | [Content manager in owl agent framework](https://github.com/jbcodeforce/athena-owl-core/blob/main/owl-agent-backend/src/athena/itg/store/content_mgr.py) | integrate pdf,docs, html, text, markdown parsers |
 
 Langchain [examples for text processing](https://python.langchain.com/v0.2/docs/integrations/document_loaders/)
@@ -243,14 +252,14 @@ Query transformations focus on re-writing and / or modifying questions for retri
 
 ![](./diagrams/rag_multi_query.drawio.png)
 
-See the code in [multiple_queries_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/multiple_queries_rag.py).
+See the code in [multiple_queries_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/multiple_queries_rag.py).
 
 
 * With **Rag fusion** the approach is to apply merging logic using a function, so developer can apply some filtering and heuristics:
 
 ![](./diagrams/rag_fusion.drawio.png)
 
-And the related code in [rag_fusion.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/llm-langchain/openAI/rag_fusion.py).
+And the related code in [rag_fusion.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/rag_fusion.py).
 
 * **Answer recursively** chain the Q&A and use the response of previous calls as part of the input context for the next question. The prompt looks like:
 
@@ -367,6 +376,6 @@ Training from scratch produces the highest quality result amongst Prompt, RAG, f
 
 [See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation).
 
-* [Llm-langchain RAG folder](https://github.com/jbcodeforce/ML-studies/tree/master/llm-langchain/rag)
+* [Llm-langchain RAG folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag)
 
 ### LangGraph

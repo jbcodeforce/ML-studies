@@ -1,3 +1,12 @@
+---
+title: "Reference Architecture for LLM solution"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 <<<<<<< HEAD
 
 # Reference Architecture for LLM solution

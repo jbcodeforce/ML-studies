@@ -1,3 +1,12 @@
+---
+title: "Unsupervised  Learning"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Unsupervised  Learning
 
 Unsupervised algorithms don't make use of a target. The goals is to learn some property of the data, to represent the structure of the features in a certain way.

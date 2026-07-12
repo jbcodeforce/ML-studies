@@ -1,30 +1,11 @@
-# Test all notebooks
+# Notebooks (migrated)
 
-```sh
-python verify_notebooks.py --all
-```
+Notebooks have moved into subject folders under [`code/`](../code/SUBJECTS.md).
 
-### Test specific notebooks
-```sh
-python verify_notebooks.py notebook1.ipynb notebook2.ipynb
-```
+| Former location | New location |
+| --- | --- |
+| `notebooks/*.ipynb` | `code/<subject>/` |
+| `notebooks/mammogram-mass/` | `code/computer-vision/mammogram-mass/` |
+| `notebooks/spark_*.py` | `code/regression/`, `code/classification/`, `code/unsupervised/` |
 
-### Test notebooks matching a pattern
-```sh
-python verify_notebooks.py --pattern "Deep*.ipynb"
-```
-
-### Test with custom timeout (e.g., 600 seconds)
-```sh
-python verify_notebooks.py --all --timeout 600
-```
-
-### Verbose output (show full error traces)
-```sh
-python verify_notebooks.py --all --verbose
-```
-
-### Test notebooks in a specific directory
-```sh
-python verify_notebooks.py --all --directory /path/to/notebooks
-```
+Jupyter environment: see [`jupyter/`](../jupyter/README.md).

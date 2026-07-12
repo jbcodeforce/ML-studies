@@ -1,3 +1,12 @@
+---
+title: "WatsonX.ai"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # WatsonX.ai
 
 [WatsonX.ai](https://www.ibm.com/products/watsonx-ai) offers a set of features to use LLM as APIs or within WatsonX Studio so a Data scientist may train, validate, tune and deploy AI models or LLMs. 
@@ -83,7 +92,7 @@ generated_response = model.generate(prompt=...)
 print(generated_response['results'][0]['generated_text'])
 ```
 
-For some Langchain sampe using Watson [see watson-machine-learning-samples - foundation_models](https://github.com/IBM/watson-machine-learning-samples/tree/master/cloud/notebooks/python_sdk/deployments/foundation_models) or the  [LangChain Watsonx.ai documentation.](https://python.langchain.com/docs/integrations/llms/ibm_watsonx).
+For some Langchain sampe using Watson [see watson-machine-learning-samples - foundation_models](https://github.com/IBM/watson-machine-learning-samples/tree/master/cloud/code/python_sdk/deployments/foundation_models) or the  [LangChain Watsonx.ai documentation.](https://python.langchain.com/docs/integrations/llms/ibm_watsonx).
 
 * Get the list of current model for inference:
 

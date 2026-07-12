@@ -1,3 +1,12 @@
+---
+title: "If needed install Socket Cat: socat with:  brew install socat"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 ### Run my python development shell
 
 As some of the python codes are using matplotlib and graphics, it is possible to use the MAC display 

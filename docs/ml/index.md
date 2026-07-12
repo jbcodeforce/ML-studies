@@ -1,3 +1,12 @@
+---
+title: "Machine Learning"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Machine Learning
 
 Machine learning is a system that automatically learns programs/ functions from data. There is not programming step. The goal is to find a function to predict **y** from a set of features, **X**, and continuously measures the prediction performance.
@@ -165,5 +174,5 @@ So basically to minimize the cost function we took steps into the opposite direc
 
 The goal is to assess and track the different machine learning experiments. This is particularly useful when the number of experiments grows. 
 
-To track we can use python discotionaries to keep model metadata and results. But others solutions includes [Tensorboard](https://www.tensorflow.org/tensorboard/get_started), [MLFlow tracking](https://mlflow.org/), [Weights and biases system of records](https://wandb.ai/site/experiment-tracking).
+To track we can use python dictionaries to keep model metadata and results. But others solutions includes [Tensorboard](https://www.tensorflow.org/tensorboard/get_started), [MLFlow tracking](https://mlflow.org/), [Weights and biases system of records](https://wandb.ai/site/experiment-tracking).
 

@@ -1,3 +1,12 @@
+---
+title: "Develop UI with Gradio"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Develop UI with Gradio
 
 Gradio is the fastest way to demo stuff with a user interface. One of its advantages against StreamLit is the capacity to share data between pages and elements.

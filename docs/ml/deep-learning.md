@@ -1,3 +1,12 @@
+---
+title: "Deep learning"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Deep learning
 
 !!!- info "Update"
@@ -11,11 +20,11 @@ A Neural Network is a programming approach, based on the biological inspired neu
 
 The basic structure of a neural network includes an input layer (called "feature vector"), where the data is fed into the model, hidden layers that perform the computational processing, and an output layer that generates the final result. (See YouTube video: ["Neural Network the ground up"](https://www.youtube.com/watch?v=aircAruvnKk)).
 
-A classical learning example of neural network usage, is to classify images, like the hand written digits of the NIST dataset ([shallow_net_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/shallow_net_demo.ipynb)). For deeper networks, see [Deep_net_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/Deep_net_keras.ipynb) and [intermediate_nn_keras_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/intermediate_nn_keras_demo.ipynb).
+A classical learning example of neural network usage, is to classify images, like the hand written digits of the NIST dataset ([shallow_net_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/regression/neuralnetwork/shallow_net_demo.ipynb)). For deeper networks, see [Deep_net_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/regression/neuralnetwork/Deep_net_keras.ipynb) and [intermediate_nn_keras_demo.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/regression/neuralnetwork/intermediate_nn_keras_demo.ipynb).
 
 A simple neuron holds a function that returns a number between 0 and 1. For example in simple image classification, neuron may hold the grey value of a pixel of a 28x28 pixels image (784 neurons). The number is called **activation**. At the output layer, the number in the neuron represents the percent of one output being the expected response. Neurons are connected together and each connection is weighted.
 
-Convolutional neural networks (CNNs) ([lenet_in_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/lenet_in_keras.ipynb)) allows input size to change without retraining. For the grey digit classification, the CNN defines a neuron as a unique image pattern of 3x3. The output of the regression neural network is numeric, and the classification output is a class.
+Convolutional neural networks (CNNs) ([lenet_in_keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/regression/neuralnetwork/lenet_in_keras.ipynb)) allows input size to change without retraining. For the grey digit classification, the CNN defines a neuron as a unique image pattern of 3x3. The output of the regression neural network is numeric, and the classification output is a class.
 
 The value of the neuron 'j' in the next layer is computed by the classical logistic equation taking into account previous layer neurons (`a`) (from 1 to n (i being the index on the number of input)) and the weight of the connection (`a(i)` to `neuron(j)`):
 
@@ -42,7 +51,7 @@ There are four types of neurons in a neural network:
 1. Output Neurons - Each output neuron calculates one part of the output.
 1. Bias Neurons - Work similar to the y-intercept of a linear equation. It introduces a 1 as input.
 
-Neurons is also named nodes, units or summations. See [the sigmoid play notebook to understand the effect of bias and weights](https://github.com/jbcodeforce/ML-studies/tree/master/examples/deep-neural-net/sigmoid-play.ipynb) 
+Neurons is also named nodes, units or summations. See [the sigmoid play notebook to understand the effect of bias and weights](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/fundamentals/sigmoid-play.ipynb) 
 
 Training refers to the process that determines good weight values.
 
@@ -54,10 +63,10 @@ The two most used Python frameworks for deep learning are [TensorFlow/Keras](htt
 
 For hands-on introduction to these frameworks, see:
 
-- [Keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras.ipynb) - Keras basics with MNIST classification
-- [Tensorflow.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Tensorflow.ipynb) - TensorFlow 2.x introduction
-- [torch-tensor-basic.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/get_started/torch-tensor-basic.ipynb) - PyTorch tensor operations
-- [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/pytorch/get_started/workflow-basic.ipynb) - PyTorch ML workflow
+- [Keras.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/Keras.ipynb) - Keras basics with MNIST classification
+- [Tensorflow.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/Tensorflow.ipynb) - TensorFlow 2.x introduction
+- [torch-tensor-basic.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/get_started/torch-tensor-basic.ipynb) - PyTorch tensor operations
+- [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/get_started/workflow-basic.ipynb) - PyTorch ML workflow
 
 ## Classification neural network architecture
 
@@ -87,7 +96,7 @@ model_0 = nn.Sequential(
 model_0
 ```
 
-We can use a subclass of pyTorch `nn.Module` to define the NN. See demonstration in [classifications.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/classification/classifications.ipynb) notebook, to search for the circle classes in the sklearn circles dataset, or a multi classes classification in [multiclass-classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/classification/multiclass-classifier.ipynb).
+We can use a subclass of pyTorch `nn.Module` to define the NN. See demonstration in [classifications.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/classifications.ipynb) notebook, to search for the circle classes in the sklearn circles dataset, or a multi classes classification in [multiclass-classifier.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/multiclass-classifier.ipynb).
 
 ## Recurrent Neural Networks (RNN)
 
@@ -120,7 +129,7 @@ model = Sequential([
 - **Language modeling**: predicting the next word in a sequence
 - **Speech recognition**: converting audio sequences to text
 
-See the [Keras-RNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras-RNN.ipynb) notebook for a sentiment analysis example using LSTM on movie reviews from the IMDB dataset.
+See the [Keras-RNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/Keras-RNN.ipynb) notebook for a sentiment analysis example using LSTM on movie reviews from the IMDB dataset.
 
 ## Learning
 
@@ -235,11 +244,11 @@ Simple image dataset using the [Fashion NIST](https://github.com/zalandoresearch
 
 Code examples for CNN implementations:
 
-- [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/fashion_cnn.py) - PyTorch CNN for Fashion MNIST
-- [tiny_vgg.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/tiny_vgg.py) - TinyVGG architecture implementation
-- [computer_vision.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/computer_vision.ipynb) - Computer vision notebook walkthrough
-- [Keras-CNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/Keras-CNN.ipynb) - CNN with Keras for MNIST digit classification
-- [AlexnetJb.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/examples/ml-python/neuralnetwork/AlexnetJb.ipynb) - AlexNet implementation
+- [fashion_cnn.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/fashion_cnn.py) - PyTorch CNN for Fashion MNIST
+- [tiny_vgg.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/tiny_vgg.py) - TinyVGG architecture implementation
+- [computer_vision.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/computer_vision.ipynb) - Computer vision notebook walkthrough
+- [Keras-CNN.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/computer-vision/Keras-CNN.ipynb) - CNN with Keras for MNIST digit classification
+- [AlexnetJb.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/regression/neuralnetwork/AlexnetJb.ipynb) - AlexNet implementation
 
 [MIT - Convolutional Neural Network presentation - video](https://www.youtube.com/watch?v=iaSUYvmCekI&list=PLtBw6njQRU-rwp5__7C0oIVt26ZgjG9NI&index=4)
 
@@ -297,7 +306,7 @@ model.classifier = torch.nn.Sequential(
 
 Dropout layers randomly remove connections between two neural network layers with a probability of p.  This practice is meant to help regularize (prevent overfitting) a model by making sure the connections that remain learn features to compensate for the removal of the other connections.
 
-See [PyTorch transfer learning for image classification code.](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/computer-vision/transfer_learning.py)
+See [PyTorch transfer learning for image classification code.](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/transfer_learning.py)
 
 ## Distributed Training
 
@@ -324,13 +333,13 @@ torchrun --standalone --nproc_per_node=gpu multi_gpu_torchrun.py 50 10
 
 See the [Distributed Data Parallel documentation](../coding/ddp.md) for detailed coverage and the following code examples:
 
-- [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp/multi_gpu_ddp.py) - Basic DDP implementation
-- [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp/multi_gpu_torchrun.py) - Training with torchrun
-- [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/master/examples/pytorch/ddp/multinode.py) - Multi-machine training
+- [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_ddp.py) - Basic DDP implementation
+- [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_torchrun.py) - Training with torchrun
+- [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multinode.py) - Multi-machine training
 
 ## Practical Projects
 
-For a hands-on project applying deep learning concepts, see [DeepLearningProject-Solution.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/notebooks/DeepLearningProject-Solution.ipynb) which builds a Multi-Layer Perceptron to classify mammogram masses as benign or malignant.
+For a hands-on project applying deep learning concepts, see [DeepLearningProject-Solution.ipynb](https://github.com/jbcodeforce/ML-studies/blob/master/code/DeepLearningProject-Solution.ipynb) which builds a Multi-Layer Perceptron to classify mammogram masses as benign or malignant.
 
 ## Sources of information
 

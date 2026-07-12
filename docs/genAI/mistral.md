@@ -1,3 +1,12 @@
+---
+title: "Mistral.ai"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # Mistral.ai
 
 French Startup to build mixture of experts based LLMs with open source offering. 

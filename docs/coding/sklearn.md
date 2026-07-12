@@ -1,3 +1,12 @@
+---
+title: "[Scikit-learn library](https://scikit-learn.org/stable/)"
+source: local-import
+ingested: 2026-06-19
+tags: []
+type: article
+compiled: false
+---
+
 # [Scikit-learn library](https://scikit-learn.org/stable/)
 
 Choosing an appropriate classification algorithm for a particular problem task requires practice: each algorithm has its own quirks and is based on certain assumptions.The performance of a classifier, its computational power as well as predictive power, depend heavily on the underlying data that are available for learning.
