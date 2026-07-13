@@ -28,4 +28,6 @@ techno/crew-ai/db/
 **/agent_vstore
 **/taipy/user_data/
 **/export_env.sh
+**/assistants/km-agent/.env
+**/assistants/km-agent/.container-data/
 **/content.db

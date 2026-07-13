@@ -1,0 +1,88 @@
+# Wiki Index
+
+Last compiled: 2026-07-12T21:04:03Z
+Articles: 124 | Sources: 54 | Outputs: 14
+
+## Concepts
+- [Adaline](wiki/concepts/adaline.md) — Perceptron variant using linear (identity) activation for continuous weight updates; benefits from feature standardization and SGD. Tags: adaline, perceptron, classification, ml, linear-activation.
+- [Agentic AI](wiki/concepts/agentic-ai.md) — Orchestrator pattern where LLMs decide actions from query and context; scaffolding quality matters more than model choice. Tags: agentic, ai, llm, orchestration, scaffolding.
+- [Agentic AI Implementation Methodology](wiki/concepts/agentic-ai-implementation-methodology.md) — Structured methodology for enterprise GenAI implementation combining design thinking, lean startup, and agile practices. Tags: methodology, agentic, ai-implementation, discovery, business-process, design-thinking, lean-startup, agile.
+- [Agentic Design Patterns](wiki/concepts/agentic-design-patterns.md) — Key patterns including Reflect, Router, Human-in-the-Loop, ReAct, Multi-Agent Collaboration, and Wiki LLM. Tags: agentic, design-patterns, reflect, router, human-in-the-loop, react, multi-agent, wiki-llm.
+- [Agentic Memory Management](wiki/concepts/agentic-memory-management.md) — Three types of agent memory: short-term (context), long-term (vector store), and entity memory (subjects). Tags: agentic, memory, short-term, long-term, entity-memory, vector-store.
+- [Agentic-Decision-Graph Integration](wiki/concepts/agentic-decision-graph-integration.md) — Hybrid architecture combining decision engines, knowledge graphs, and agentic AI for deterministic and flexible reasoning. Tags: agentic, decision-graph, hybrid-architecture.
+- [Agno Framework](wiki/concepts/agno-framework.md) — Framework for building multi-agent systems with specialized agents. Tags: agno, framework, agents.
+- [AI/ML Learning Path](wiki/concepts/ai-ml-learning-path.md) — Five-phase curriculum from prerequisites through agentic AI with beginner, intermediate, and advanced tracks. Tags: learning-path, curriculum, roadmap, ai, ml, beginner, intermediate, advanced.
+- [AI Deployment Design](wiki/concepts/ai-deployment-design.md) — Patterns and best practices for deploying AI models in production. Tags: deployment, production, ai.
+- [Anomaly Detection](wiki/concepts/anomaly-detection.md) — Identifying unusual patterns or outliers in data using statistical and ML methods. Tags: anomaly, detection, outlier, ml.
+- [Anthropic Claude](wiki/concepts/anthropic-claude.md) — Anthropic's Claude language model family and capabilities. Tags: anthropic, claude, llm.
+- [Apache Airflow](wiki/concepts/apache-airflow.md) — Batch-oriented workflow orchestration platform using Python and DAGs; extensible, version-controlled, deployable locally or on clusters. Tags: airflow, orchestration, workflow, batch-processing, dag.
+- [Automatic Prompt Engineering](wiki/concepts/automatic-prompt-engineering.md) — Techniques for automatically generating and optimizing prompts. Tags: prompt-engineering, automatic, optimization.
+- [Bayesian Inference](wiki/concepts/bayesian-inference.md) — Statistical method using Bayes theorem to update probability estimates. Tags: bayesian, statistics, probability.
+- [BERT](wiki/concepts/bert.md) — Bidirectional Encoder Representations from Transformers; smaller masked-language model from Google (2018), cost-effective for certain tasks. Tags: bert, nlp, transformer, masked-language-model, google.
+- [Bias-Variance](wiki/concepts/bias-variance.md) — Tradeoff between model complexity and generalization error. Tags: bias, variance, ml-fundamentals.
+- [Categorical Encoding](wiki/concepts/categorical-encoding.md) — Converting categorical variables into numerical representations for ML models. Tags: encoding, categorical, preprocessing.
+- [Chain of Thought](wiki/concepts/chain-of-thought.md) — Prompting technique that encourages step-by-step reasoning. Tags: cot, prompting, reasoning.
+- [Classification](wiki/concepts/classification.md) — Supervised learning task predicting discrete class labels; covers three core components: representation, evaluation, optimization. Tags: classification, ml, supervised-learning, discrete-output.
+- [Claude Code](wiki/concepts/claude-code.md) — Agentic coding assistant CLI with persistent memory via CLAUDE.md, sub-agents, plugins, and support for Anthropic API, Vertex AI, and local LLMs. Tags: claude-code, coding-assistant, agentic, cli, mcp, plugins.
+- [Cloud Native Architecture](wiki/concepts/cloud-native-architecture.md) — Design patterns for scalable, resilient cloud-based systems. Tags: cloud, architecture, microservices.
+- [Clustering](wiki/concepts/clustering.md) — Unsupervised technique grouping similar data points; cluster labels serve as engineered features for downstream models. Tags: ml, unsupervised, clustering.
+- [Cohere Platform](wiki/concepts/cohere-platform.md) — Cohere's NLP platform for enterprise AI applications. Tags: cohere, nlp, platform.
+- [Convolutional Neural Networks](wiki/concepts/convolutional-neural-networks.md) — Process images via sliding kernels over pixel matrices; architecture uses Conv2d → ReLU → MaxPool2d repeated layers. Tags: cnn, computer-vision, deep-learning, pytorch, image-processing.
+- [Cost Function and Gradient Descent](wiki/concepts/cost-function-gradient-descent.md) — Mean squared error cost function and gradient descent optimization with batch updates. Tags: cost-function, gradient-descent, optimization, ml, loss-function.
+- [Covariance Correlation](wiki/concepts/covariance-correlation.md) — Statistical measures of variable relationships and dependencies. Tags: statistics, correlation, covariance.
+- [Cross-Validation](wiki/concepts/cross-validation.md) — Evaluates model quality using multiple data subsets; k-fold provides robust estimates for small datasets. Tags: cross-validation, validation, ml, scikit-learn.
+- [Data Leakage](wiki/concepts/data-leakage.md) — Training data containing unavailable prediction-time info; target leakage and train-test contamination. Tags: data-leakage, ml, target-leakage, train-test-contamination, pipeline.
+- [Data Management](wiki/concepts/data-management.md) — Practices for organizing, storing, and maintaining data assets. Tags: data, management, governance.
+- [Data Scientist Skill Set](wiki/concepts/data-scientist-skill-set.md) — Core competencies and tools required for data science roles. Tags: data-science, skills, careers.
+- [Deep Learning](wiki/concepts/deep-learning.md) — Multi-layered neural network techniques using automatic feature learning; major frameworks are TensorFlow/Keras and PyTorch. Tags: deep-learning, neural-networks, tensorflow, pytorch.
+- [DIKW Pyramid](wiki/concepts/DIKW-pyramid.md) — Data-Information-Knowledge-Wisdom hierarchy for understanding information value. Tags: DIKW, information, knowledge.
+- [Document AI (GCP)](wiki/concepts/document-ai-gcp.md) — Google Document AI service for processing and understanding documents using NLP, OCR, and computer vision with generalized, specialized, and custom processors. Tags: document-ai, google-cloud, nlp, ocr, entity-extraction, machine-learning.
+- [Distributed Data Parallel](wiki/concepts/distributed-data-parallel.md) — PyTorch technique for distributed training across multiple GPUs. Tags: ddp, pytorch, distributed-training.
+- [DNS Routing AI Services](wiki/concepts/dns-routing-ai-services.md) — Using DNS to route AI service requests. Tags: dns, ai-services, routing.
+- [Document Understanding](wiki/concepts/document-understanding.md) — Techniques for extracting structured information from documents. Tags: document, nlp, understanding.
+- [Feature Engineering](wiki/concepts/feature-engineering.md) — Creating new features from existing data to improve model performance; integrates with feature stores for production serving. Tags: feature-engineering, ml, preprocessing.
+- [Feature Selection](wiki/concepts/feature-selection.md) — Selecting the most relevant features for ML models. Tags: feature-selection, ml, preprocessing.
+- [Feature Store](wiki/concepts/feature-store.md) — Operational data system for managing and serving ML features; provides offline/online stores, point-in-time correctness, and centralized registry (Tecton, Feast, FeatureForm). Tags: machine-learning, ml-infrastructure, feature-management.
+- [Fireworks AI Inference Platform](wiki/concepts/fireworks-ai.md) — Inference platform with custom FireAttention CUDA kernels delivering 4x speed over vLLM for Mixtral-style models via FP8 quantization. Tags: inference, llm, fine-tuning, lora, quantization, fireworks.
+- [Gemma LLM](wiki/concepts/gemma-llm.md) — Google's family of lightweight open-weight LLMs (9B/27B parameters), decoder-only, based on Gemini embeddings, available on Hugging Face and Kaggle. Tags: gemma, llm, open-weight, google, hugging-face, lightweight.
+- [Gemini LLM](wiki/concepts/gemini-llm.md) — Google's multimodal LLM accepting text, image, video, audio, and document inputs; accessible via Vertex AI. Tags: gemini, llm, multimodal, google, vertex-ai.
+- [Generative AI Overview](wiki/concepts/generative-ai-overview.md) — Overview of generative AI techniques and applications. Tags: generative-ai, overview.
+- [Google Cloud AI Platform](wiki/concepts/google-cloud-ai-platform.md) — GCP's suite of managed services for ML and Gen AI including Vertex AI, Gemini, Gemma, Document AI, Colab, TPU, and Cloud Run. Tags: gcp, google-cloud, ai-platform, ml, infrastructure.
+- [Gradio](wiki/concepts/gradio.md) — Python library for rapidly building UIs to demo ML models; wraps functions with interactive interfaces, supports Blocks API and shared state. Tags: gradio, ui, demo, python, ml.
+- [Granite Models](wiki/concepts/granite-models.md) — IBM's flagship LLM foundation models using decoder-only transformer architecture trained on filtered enterprise data. Tags: granite, ibm, llm, foundation-model, enterprise-ai.
+- [Gradient Boosting](wiki/concepts/gradient-boosting.md) — Ensemble method building models sequentially to correct errors. Tags: gradient-boosting, ensemble, ml.
+- [Group Transforms](wiki/concepts/group-transforms.md) — Scikit-learn transforms that operate on groups of data. Tags: group-transforms, scikit-learn, preprocessing.
+- [Haystack AI Framework](wiki/concepts/haystack-ai-framework.md) — Deepset's framework for building NLP systems. Tags: haystack, nlp, framework.
+- [Hermes Agent](wiki/concepts/hermes-agent.md) — Agent framework for AI applications. Tags: hermes, agents.
+- [Hybrid Cloud AI](wiki/concepts/hybrid-cloud-ai.md) — AI systems spanning cloud and on-premises infrastructure. Tags: hybrid-cloud, ai, infrastructure.
+- [Instruction Tuning](wiki/concepts/instruction-tuning.md) — Training LLMs to follow instructions. Tags: instruction-tuning, llm, fine-tuning.
+- [K-Means](wiki/concepts/k-means.md) — Partitional clustering algorithm assigning points to nearest centroid. Tags: k-means, clustering, unsupervised-learning.
+- [Kaggle and ML Tutorial](wiki/concepts/kaggle-and-ml-tutorial.md) — Kaggle platform for ML competitions and datasets. Tags: kaggle, ml, tutorial.
+- [KNN Classifier](wiki/concepts/knn-classifier.md) — Instance-based classifier using nearest neighbors. Tags: knn, classification, instance-based.
+- [NiceGUI](wiki/concepts/nicegui.md) — Open-source Python library for web UIs with cross-page state management; component-based architecture on FastAPI with Tailwind/Quasar customization. Tags: python, ui-framework, fastapi, web-ui.
+- [OpenSearch](wiki/concepts/opensearch.md) — Distributed search and analytics engine built on Lucene; uses shards, primary/replica distribution, and BM25 relevance scoring. Tags: search, distributed-systems, analytics, opensearch, lucene.
+- [Pydantic AI](wiki/concepts/pydantic-ai.md) — Agent framework by the Pydantic team bringing FastAPI-style type safety and model-agnosticism to GenAI app development. Tags: pydantic-ai, agent-framework, type-safe, model-agnostic, gen-ai.
+- [Prompt Tuning](wiki/concepts/prompt-tuning.md) — Adapting LLMs to specific domains without changing model weights using labeled data to create soft prompts. Tags: prompt-tuning, llm, soft-prompt, fine-tuning, watsonx.
+- [Streamlit](wiki/concepts/streamlit.md) — Open-source Python library for building and sharing interactive web apps for ML and data science with CLI-driven execution and session state. Tags: python, web-app, ml, data-science, ui-framework.
+- [Streamlit Session State](wiki/concepts/streamlit-session-state.md) — Streamlit's persistent dictionary-like object for sharing data across page navigations and reruns within a user session. Tags: python, streamlit, session-state, state-management.
+- [Synthetic Data Generation](wiki/concepts/synthetic-data-generation.md) — Creating artificial data conforming to existing schemas using statistical methods for augmentation, privacy, and bias mitigation. Tags: synthetic-data, data-generation, ai, privacy, watsonx.
+- [Taipy](wiki/concepts/taipy.md) — Open-source Python library for data-driven web apps combining data pipeline orchestration with interactive UI and scenario management. Tags: taipy, python, web-ui, data-pipeline, scenarios, flask.
+- [Vertex AI](wiki/concepts/vertex-ai.md) — Google Cloud's unified ML and Gen AI platform supporting multi-language SDKs, grounding, RAG, function calling, and safety checking. Tags: vertex-ai, google-cloud, ml-platform, gen-ai, grounding, rag.
+- [WatsonX.ai](wiki/concepts/watsonx-ai.md) — IBM's enterprise AI platform for ML and LLM workflows including Studio, Prompt Lab, Granite models, guardrails, and synthetic data generation. Tags: watsonx, ibm, enterprise-ai, llm-platform, prompt-lab, guardrails.
+
+## Recent Outputs
+- [WatsonX.ai Summary](wiki/summaries/watsonx.md) — Summary of IBM WatsonX.ai platform covering Studio, Prompt Lab, Granite models, guardrails, prompt tuning, and synthetic data generation.
+- [Streamlit Summary](wiki/summaries/streamlit.md) — Summary of Streamlit, an open-source Python library for rapid ML and data science web app development.
+- [Pydantic AI Summary](wiki/summaries/pydantic.ai.md) — Summary of Pydantic AI, a type-safe, model-agnostic agent framework by the Pydantic team.
+- [AI Players to Consider Summary](wiki/summaries/players_to_look.md) — Landscape of AI companies across LLMs, inference infrastructure, vertical AI, governance, and education.
+- [OpenSearch Summary](wiki/summaries/opensearch.md) — Summary of OpenSearch, a distributed search and analytics engine with Lucene-based shards and BM25 ranking.
+- [NiceGUI Summary](wiki/summaries/nicegui.md) — Summary of NiceGUI, an open-source Python UI library built on FastAPI with cross-page state management.
+- [Gradio Summary](wiki/summaries/gradio-index.md) — Summary of Gradio, a Python library for building rapid ML model demo interfaces.
+- [Google Cloud AI Platform Summary](wiki/summaries/index-gcp.md) — Summary of Google Cloud's AI/ML services including Vertex AI, Gemini, Gemma, Document AI, and development infrastructure.
+- [ML Studies: Classification and CV Solutions](wiki/summaries/index-solutions.md) — Summary of practical ML studies covering binary classification and image classification.
+- [Unsupervised Learning Compilation](wiki/summaries/unsupervised.md) — Summary of unsupervised learning concepts including clustering and K-means.
+- [Neuro-Symbolic AI Overview](wiki/summaries/neuro-symbolic-index.md) — Summary of hybrid AI combining neural networks with symbolic reasoning.
+- [Apache Airflow Summary](wiki/summaries/airflow.md) — Summary of Apache Airflow batch workflow orchestration platform.
+- [Claude Code Summary](wiki/summaries/claude-index.md) — Summary of Claude Code agentic coding assistant with CLI tools, sub-agents, and multi-backend support.
+- [Feature Store Summary](wiki/summaries/feature_store.md) — Summary of feature store platforms (Tecton, Feast, FeatureForm) for managing and serving ML features in production.
+- [Taipy Overview Summary](wiki/summaries/taipy-index.md) — Summary of Taipy, an open-source Python library combining data pipeline orchestration with interactive web UIs.

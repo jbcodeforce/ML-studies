@@ -1,401 +1,401 @@
 [
   {
     "file": "anomaly.md",
-    "title": "Anomaly detection",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Anomaly",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "architecture/po-processing.md",
-    "title": "Purchase Order Processing with AI and Hybrid Cloud",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Po Processing",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "architecture/sol-design.md",
-    "title": "AI deployment solution designs",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Sol Design",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "blogs/lg_drools_kg.md",
-    "title": "Agentic solution with decision engines and knowledge graph",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Lg Drools Kg",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/ddp.md",
-    "title": "DDP",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Ddp",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/haystack.md",
-    "title": "Haystack AI Framework",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Haystack",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/index.md",
-    "title": "Coding",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/langchain.md",
-    "title": "LangChain Study",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Langchain",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/langgraph.md",
-    "title": "LangGraph",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Langgraph",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/llama-index.md",
-    "title": "LlamaIndex library",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Llama Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/oldnotes.md",
-    "title": "If needed install Socket Cat: socat with:  brew install socat",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Oldnotes",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/pandas.md",
-    "title": "[Pandas](https://pandas.pydata.org/)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Pandas",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/pytorch.md",
-    "title": "[Pytorch library](https://pytorch.org/)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Pytorch",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/sklearn.md",
-    "title": "[Scikit-learn library](https://scikit-learn.org/stable/)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Sklearn",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "coding/visualization.md",
-    "title": "Visualization of the Data",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Visualization",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "concepts/index.md",
-    "title": "Important ML concepts",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "concepts/maths.md",
-    "title": "Mathematical foundations",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Maths",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "concepts/skill.md",
-    "title": "The data scientist skill set",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Skill",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "data/features.md",
-    "title": "Feature Engineering",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Features",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "data/index.md",
-    "title": "Data Management",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/agentic.md",
-    "title": "Agentic AI",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Agentic",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/agno.md",
-    "title": "Agno studies",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Agno",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/anthropic.md",
-    "title": "Anthropic notes",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Anthropic",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/cohere.md",
-    "title": "Cohere summary",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Cohere",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/hermes.md",
-    "title": "Hermes agent",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Hermes",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/index.md",
-    "title": "Generative AI",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/mcp.md",
-    "title": "Model Context Protocol",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Mcp",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/mistral.md",
-    "title": "Mistral.ai",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Mistral",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/openai.md",
-    "title": "[OpenAI](https://platform.openai.com/docs/overview)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Openai",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/opennotebook.md",
-    "title": "AI Notebook",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Opennotebook",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/prompt-eng.md",
-    "title": "Prompt engineering",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Prompt Eng",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/rag.md",
-    "title": "Retrieval Augmented Generation (RAG)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Rag",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/ref-arch.md",
-    "title": "Reference Architecture for LLM solution",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Ref Arch",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "genAI/review.md",
-    "title": "AI discussions",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Review",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "guide_for_ai.md",
-    "title": "Complete AI/ML Learning Guide",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Guide For Ai",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "index.md",
-    "title": "AI and Machine Learning Studies",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "kaggle.md",
-    "title": "Kaggle and ML tutorial",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Kaggle",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "methodology/index.md",
-    "title": "Agentic AI Implementation Solution Methodology",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "ml/classifier.md",
-    "title": "Classifiers",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Classifier",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "ml/deep-learning.md",
-    "title": "Deep learning",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Deep Learning",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "ml/index.md",
-    "title": "Machine Learning",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "ml/nlp.md",
-    "title": "Natural Language Processing (NLP)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
+    "title": "Nlp",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
     "compiled": false
   },
   {
     "file": "ml/unsupervised.md",
-    "title": "Unsupervised  Learning",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Unsupervised",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "neuro-symbolic/index.md",
-    "title": "Hybrid AI",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "solutions/index.md",
-    "title": "A set of simple studies and solutions",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/airflow.md",
-    "title": "Apache Airflow",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Airflow",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/claude/index.md",
-    "title": "Claude Code",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/feature_store.md",
     "title": "Feature Store",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/gcp/index.md",
-    "title": "Google AI platform",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/gradio/index.md",
-    "title": "Develop UI with Gradio",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/nicegui.md",
-    "title": "Nice GUI",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Nicegui",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/opensearch.md",
-    "title": "OpenSearch",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Opensearch",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/players_to_look.md",
-    "title": "AI Players to consider",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Players To Look",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/pydantic.ai.md",
-    "title": "Pydantic AI",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Pydantic.Ai",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/streamlit.md",
-    "title": "[Streamlit](https://streamlit.io/)",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Streamlit",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/taipy/index.md",
-    "title": "Taipy",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Index",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   },
   {
     "file": "techno/watsonx.md",
-    "title": "WatsonX.ai",
-    "source": "local-import",
-    "ingested": "2026-06-19T18:27:38Z",
-    "compiled": false
+    "title": "Watsonx",
+    "source": "ML-studies",
+    "ingested": "2026-07-12T21:51:16Z",
+    "compiled": true
   }
 ]

@@ -1,7 +1,7 @@
 site_name: Machine Learning Studies - Jerome Boyer
 repo_url: https://github.com/jbcodeforce/ML-studies
-site_url: https://jeromeboyer.net/ML-studies
-copyright: Copyright &copy; 2018 - 2024 Jerome Boyer
+site_url: https://jbcodeforce.github.io/ML-studies
+copyright: Copyright &copy; 2018 - 2026 Jerome Boyer
 nav:
   - About:
     - Introduction: index.md
@@ -147,4 +147,4 @@ extra:
     - icon: fontawesome/brands/linkedin
       link: 'https://linkedin.com/in/jeromeboyer'
     - icon: fontawesome/solid/paper-plane
-      mailto: jerome@intelligent-automations.com
+      mailto: jerome.boyer@gmail.com
