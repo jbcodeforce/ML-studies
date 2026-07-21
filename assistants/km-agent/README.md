@@ -1,11 +1,13 @@
 # km-agent for ML-studies
 
-Studies-hosted km-agent layout. AgentOS and the chat UI run from the km-agent clone; context and configuration live here.
+[See the km-agent project](https://github.com/jbcodeforce/km-agent/tree/main) as it is used to manage the knowledge graph from this repository and do deeper research.
+
+km-agent backend, agent team, and the chat UI run from the km-agent clone; context, knowledge and configuration live here.
 
 ## Prerequisites
 
 - km-agent clone at path recorded in `.kma-home`
-- macOS 26+ with Apple `container` CLI (Postgres)
+- macOS 26+ with Apple `container` CLI
 - `uv`, `npm`, OMLX (or configured cloud LLM)
 - `docs/` with km-agent raw frontmatter (see `docs/.manifest.json`)
 

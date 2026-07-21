@@ -13,6 +13,10 @@ dependencies = [
     "matplotlib>=3.7.0",
     "seaborn>=0.12.0",
     "requests>=2.31.0",
+    "httpx>=0.28.1",
+    "agno>=2.8.0",
+    "sqlalchemy>=2.0.51",
+    "openai>=2.45.0",
 ]
 
 [project.optional-dependencies]
@@ -55,7 +59,7 @@ llm = [
 agents = [
     "mlstudies-code[llm]",
     "langgraph>=0.2.0",
-    "agno>=2.5.5",
+    "agno>=2.7.3",
     "chromadb>=0.4.0",
     "arxiv>=3.0.0",
     "ddgs>=9.10.0",

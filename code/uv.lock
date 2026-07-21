@@ -22,7 +22,7 @@ wheels = [
 
 [[package]]
 name = "agno"
-version = "2.7.2"
+version = "2.8.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "agnoctl" },
@@ -36,9 +36,9 @@ dependencies = [
     { name = "rich" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2d/31/0f46fdb877d3551a5c7efb96f0c23090a9ee39431138b0fd270bdaa076d8/agno-2.7.2.tar.gz", hash = "sha256:9dab9cdacaec8083a3dea392d58703011b8eaa0ef086a40919d5a3dcc4b1a793", size = 2334121, upload-time = "2026-07-09T11:35:45.482Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/eb/04/2f7df61586aff762fac72ebc0826d4f6758a815ab27fa10c53e92e63d462/agno-2.8.0.tar.gz", hash = "sha256:f9ec86fc519abe569543b580e70d530d14765ca8d45f15706628ec51fb4c7a6e", size = 2438996, upload-time = "2026-07-20T15:44:16.671Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/4c/d1/e5d66f3734c9acbe81a10836b9d0b29a52a9f8e7ff149df0dbf998adf423/agno-2.7.2-py3-none-any.whl", hash = "sha256:c9281e25c054de56a5482ef4026ac42d7ea8e937c2bf02f48d317167b2945969", size = 2741683, upload-time = "2026-07-09T11:35:42.485Z" },
+    { url = "https://files.pythonhosted.org/packages/d9/b4/eb27a68802c36512008719613baa5d4d83f7f453b01b65d2d6b5a3ea75c2/agno-2.8.0-py3-none-any.whl", hash = "sha256:52fbff96614ebcb7ccc9d44d2a75d1feea30a745fbd9a926d15af1deb8415389", size = 2857808, upload-time = "2026-07-20T15:44:13.178Z" },
 ]
 
 [[package]]
@@ -3043,14 +3043,18 @@ name = "mlstudies-code"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "agno" },
+    { name = "httpx" },
     { name = "matplotlib" },
     { name = "numpy", version = "2.4.6", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
     { name = "numpy", version = "2.5.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "openai" },
     { name = "pandas" },
     { name = "python-dotenv" },
     { name = "requests" },
     { name = "scikit-learn" },
     { name = "seaborn" },
+    { name = "sqlalchemy" },
 ]
 
 [package.optional-dependencies]
@@ -3298,7 +3302,8 @@ dev = [
 
 [package.metadata]
 requires-dist = [
-    { name = "agno", marker = "extra == 'agents'", specifier = ">=2.5.5" },
+    { name = "agno", specifier = ">=2.8.0" },
+    { name = "agno", marker = "extra == 'agents'", specifier = ">=2.7.3" },
     { name = "anthropic", marker = "extra == 'anthropic'", specifier = ">=0.30.0" },
     { name = "arxiv", marker = "extra == 'agents'", specifier = ">=3.0.0" },
     { name = "beautifulsoup4", marker = "extra == 'openai'", specifier = ">=4.12.0" },
@@ -3312,6 +3317,7 @@ requires-dist = [
     { name = "fastapi", marker = "extra == 'agents'", specifier = ">=0.134.0" },
     { name = "google-genai", marker = "extra == 'agents'", specifier = ">=1.65.0" },
     { name = "google-generativeai", marker = "extra == 'gemini'", specifier = ">=0.5.0" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "huggingface-hub", marker = "extra == 'llm'", specifier = ">=0.20.0" },
     { name = "ibm-watsonx-ai", marker = "extra == 'watsonx'", specifier = ">=1.0.0" },
     { name = "kaggle", marker = "extra == 'kaggle'", specifier = ">=1.5.0" },
@@ -3349,6 +3355,7 @@ requires-dist = [
     { name = "mlxtend", marker = "extra == 'pytorch'", specifier = ">=0.23.0" },
     { name = "numpy", specifier = ">=1.24.0" },
     { name = "ollama", marker = "extra == 'llm'", specifier = ">=0.4.0" },
+    { name = "openai", specifier = ">=2.45.0" },
     { name = "openai", marker = "extra == 'llm'", specifier = ">=1.0.0" },
     { name = "pandas", specifier = ">=2.0.0" },
     { name = "pyod", marker = "extra == 'anomaly'", specifier = ">=1.1.0" },
@@ -3360,6 +3367,7 @@ requires-dist = [
     { name = "scikit-learn", specifier = ">=1.3.0" },
     { name = "seaborn", specifier = ">=0.12.0" },
     { name = "sentence-transformers", marker = "extra == 'rag'", specifier = ">=2.2.0" },
+    { name = "sqlalchemy", specifier = ">=2.0.51" },
     { name = "sqlalchemy", marker = "extra == 'agents'", specifier = ">=2.0.47" },
     { name = "tensorflow", marker = "extra == 'deep-learning'", specifier = ">=2.15.0" },
     { name = "torch", marker = "extra == 'pytorch'", specifier = ">=2.0.0" },

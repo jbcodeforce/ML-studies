@@ -21,5 +21,7 @@ Runnable `.py` scripts use `code/.venv` instead. See [code/SUBJECTS.md](../code/
 ## Verify notebooks
 
 ```sh
-uv run python verify_notebooks.py
+uv run python verify_notebooks.py --all
+# process one of the notebook 
+uv run python verify_notebooks.py ../code/statistics/PoliticsExercise.ipynb
 ```

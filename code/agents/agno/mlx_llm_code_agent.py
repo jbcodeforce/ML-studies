@@ -26,10 +26,10 @@ from agno.models.openai.like import OpenAILike
 from agno.tools.coding import CodingTools
 
 DEFAULT_LLM_BASE_URL = os.getenv("CODE_AGENT_BASE_URL", "http://127.0.0.1:7999/v1")
-DEFAULT_LLM_API_KEY = os.getenv("MLX_API_KEY", "localkey")
+DEFAULT_LLM_API_KEY = os.getenv("MLX_API_KEY", "local-key")
 DEFAULT_LLM_TEMPERATURE = float(os.getenv("CODE_AGENT_TEMPERATURE", "0.4"))
 
-DEFAULT_LLM_MODEL = os.getenv("CODE_AGENT_MODEL", "DreamFoundries--Agents-A1-8bit")
+DEFAULT_LLM_MODEL = os.getenv("CODE_AGENT_MODEL", "Ornith-1.0-9B-6bit")
 ALLOWED_MODELS = ("DreamFoundries--Agents-A1-8bit", "Ornith-1.0-9B-6bit")
 
 CODE_AGENT_INSTRUCTIONS = """\
