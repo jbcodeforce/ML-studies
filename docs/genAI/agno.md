@@ -9,17 +9,22 @@ compiled: false
 
 # Agno studies
 
-[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). It is a minimalist, production-ready that emphasizes dterministic behavior transparency and simplicity.
+[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama, or oMLX as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). It is a minimalist, production-ready that emphasizes deterministic behavior transparency and simplicity. It has a lot of powerful tools and constrcuts, like knowledge, learning, team, workflow, and rest API.
 
 **The Core Concepts**
 
 * [Agents](https://docs.agno.com/agents/overview) are a stateful control loop around a stateless LLM. 
 * [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
+* [Tools](https://docs.agno.com/tools/overview)
 * [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
 * [memory](https://docs.agno.com/memory/overview) for  user preferences
+* [Learning](https://docs.agno.com/learning/overview) to capture user profiles, memories, and knowledge over time
+* [Knowledge and Rag](https://docs.agno.com/knowledge/overview) to manage domain specific information. [See my own code translation from Agno cookbook to run locally](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/knowledge), and the bigger usage in [km-agent](https://github.com/jbcodeforce/km-agent)
 * [state]() is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
 
 ## Agent
+
+The [Agno cookbook quickstarts](https://github.com/agno-agi/agno.git) present the building blocks to get started and the [first_mlx_agent_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/first_mlx_agent_with_tool.py) or [ollama_agent_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/ollama_agent_with_tool.py) are other example with oMLX or Ollama.
 
 === "Ollama"
     ```python
@@ -29,12 +34,13 @@ compiled: false
     ```
 
 === "OpenAI  - oMLX local"
-    Also used for any OpenAI compatible LLM (base_url finishes with '/v1')
+    Also used for any OpenAI compatible LLMs (base_url finishes with '/v1')
     ```python
-    from agno.models.openai import OpenAIResponses
+    from agno.models.openai.like import OpenAILike
     api_key = os.getenv("OPENAI_API_KEY")
-    base_url = os.getenv("OPENAI_BASE_URL")
-    agent = OpenAIResponses(id=model_id, api_key=api_key.strip(), base_url=base_url)
+    base_url = os.getenv("OPENAI_BASE_URL")  # finish with /v1
+    model =OpenAILike(id=model_id, api_key=api_key.strip(), base_url=base_url)
+    agent = Agent(model=model,
     ```
 
 === "Anthropic"
@@ -43,62 +49,71 @@ compiled: false
     Claude(id=mid, api_key=api_key.strip())
     ```
 
+## Tools
+
+Agent needs [tools](https://docs.agno.com/tools/overview) to perform some more advanced actions on external systems. 
+
+
+## Development approach
+
+* Declare and unit test all the tools to be used
+* Prepare some queries  to validate
+* Use the same integration pattern with backend LLM, externalize URL, API keys, model reference.
+* Fine tune the instructions
+* Integrate agent in Workflow and/or Team
+
 ## Knowledge
 
-The simplest way to give an agent access to documents. Content is automatically retrieved and injected into the system prompt before the agent responds. With an agentic approach, the agent gets a `search_knowledge_base` tool and decides when to query the knowledge base. The agent can choose to search multiple times, refine queries, or skip searching entirely.
+The simplest way to give an agent access to documents. Agno (07/2026) supports different ways to manage knowledge:
 
-This is the default behavior when you set knowledge on an Agent.
+1. RAG with content automatically retrieved and injected into the system prompt before the agent responds. 
+1. With an agentic approach, the agent gets a `search_knowledge_base` tool and decides when to query the knowledge base. The agent can choose to search multiple times, refine queries, or skip searching entirely.
+1. Graph
 
-Steps:
+#### Things to consider to develop a good searchable content
 
-1. Create a Knowledge base with a vector database
+* Define the goal of the search and how users process those query: just chat, build more content, human in the loop
+* List of sources a manifest of URLs or  local files
+* Vector sizefor the embeddings and embedder selection: Are you looking for an English-only or multilingual embedding model?
+* Define the type and size of chunking. Chunking determines how documents are split into pieces for embedding and search. The right strategy depends on your content type.
+* Select vector store according to scaling needs: dedicated vector store techno or SLQ based database with vectors support
 
-    === "OpenAI"
+* Load documents with idempotency or avoid reloading the same document
+* How to assess quality of the responses
+
+#### Steps:
+
+1. Create a Knowledge base with a vector database. [See OMLX with Qdrant]()
+    ```python
+    k=Knowledge(
+    vector_db=Qdrant(
+        collection="basic_rag",
+        url=qdrant_url,
+        search_type=SearchType.hybrid,
+        embedder=OpenAIEmbedder(id="text-embedding-3-small"),
+    ),
+    ```
+
+    * Traditional RAG is agent with `add_knowledge_to_context` and `search_knowledge=false`
         ```python
-        from agno.knowledge.knowledge import Knowledge
-        from agno.vectordb.qdrant import Qdrant
-        from agno.vectordb.search import SearchType
-        from agno.knowledge.embedder.openai import OpenAIEmbedder
-        
-        knowledge = Knowledge(
-            vector_db=Qdrant(
-                collection="basic_rag",
-                url=qdrant_url,
-                search_type=SearchType.hybrid,
-                embedder=OpenAIEmbedder(id="text-embedding-3-small"),
-            ),
-        )
-        # Agentic by setting search_knowledge=True,
         agent = Agent(
-            model=OpenAIResponses(id="gpt-5.2"),
+            model=OpenAILike(id=DEFAULT_LLM_MODEL),
+            knowledge=knowledge,
+            add_knowledge_to_context=True,
+            search_knowledge=False,
+        ```
+    * Agentic RAG use search knowledge base tool: `search_knowledge=True`
+        ```python
+        agent = Agent(
+            model=OpenAILike(id=DEFAULT_LLM_MODEL),
             knowledge=knowledge,
             search_knowledge=True,
             markdown=True,
         )
         ```
 
-    === "Local"
-        Using ollama for embedding
-        ```python
-        from agno.knowledge.knowledge import Knowledge
-        from agno.knowledge.embedder.ollama import OllamaEmbedder
-        from agno.vectordb.chroma import ChromaDb
-        from agno.vectordb.search import SearchType
 
-        knowledge_chroma = Knowledge(
-            vector_db=ChromaDb(
-                    collection="local_demo",
-                    search_type=SearchType.hybrid,
-                    embedder=OllamaEmbedder(
-                        id="nomic-embed-text",
-                        dimensions=768,
-                    ),
-                ),
-            )
-        ```
-
-
-2. Load a document, from local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations.
+2. Load documents using [Readers](https://docs.agno.com/knowledge/concepts/readers/overview), from local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. Use metadata to help filtering on search. This is the basic code.
     ```python
     from agno.knowledge.knowledge import Knowledge
     from agno.knowledge.reader.wikipedia_reader import WikipediaReader
@@ -121,10 +136,14 @@ Steps:
             reader=WikipediaReader(),
         )
     ```
+    Knowledge supports loading content from many sources: local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. So [this code]() is a more sophisticate document processor based on manifests.
+    `knowledge.insert()` automatically selects the right reader based on file extension or URL.
+
 3. Create an Agent with search_knowledge=True (the default)
 4. Ask questions - agent decides when to search
 
-In production, knowledge needs to be managed over time:
+#### Document processing
+In production, knowledge needs to be managed with minimum governance:
 
 - Skip re-inserting content that already exists
     ```python

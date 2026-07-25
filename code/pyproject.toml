@@ -17,6 +17,10 @@ dependencies = [
     "agno>=2.8.0",
     "sqlalchemy>=2.0.51",
     "openai>=2.45.0",
+    "ddgs>=9.14.4",
+    "yfinance>=1.5.1",
+    "qdrant-client>=1.18.0",
+    "fastembed>=0.8.0",
 ]
 
 [project.optional-dependencies]

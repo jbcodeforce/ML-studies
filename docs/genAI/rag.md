@@ -11,66 +11,46 @@ compiled: false
 
 ???- info  "Updates"
     12/2024 creation
-
-
-## What is covered in this section
-
-
-```mermaid
-mindmap
-  root((RAG))
-    Context
-      Goals
-      Reduce Hallucinations
-      Integrate corporate knowledge
-    Reference Architecture
-        Product capability
-    Review Document Pipeline
-      Ingestion
-      Embeddings
-      Practices
-    Using Tools
-      Vector Store
-      Embeddings
-      Retriever
-      LangChain/LangGraph
-```
-
-**Figure 1: RAG subject areas**
-
+    07/2026 Remove langchain, simplify content.
 
 ## Context
 
 LLMs have a knowledge cut-off time, where data coming after this time are not known by the models.  Pre-training is a one-off exercise. When enterprises need to get their private knowledge integrated to LLM, they can do fine tuning or present semantic search results as part of the input context window. RAG addresses this problem, as it is the act of supplementing generative text models with data outside of what it was trained on. 
 
-
-
 While model increases in token pre-training size, they also increase the size of the context window, as illustrated in the figure below:
 
+<figure markdown='span'>
 ![](./diagrams/llm_size_window.drawio.png)
+<caption>**Figure 1: Bigger Context Window**</caption>
+</figure>
 
-**Figure 2: Bigger Context Window**
 
-When the context window is big enough, application can send more contextual data, that leads to better results. This technique can be used to provide more up-to-date or more use-case-specific information via the context window to enhance its accuracy for specific use cases. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results.
+When the context window is big enough, application can send more contextual data, that leads to better results. This technique can be used to provide more up-to-date or more use-case-specific information via the context window. It can also help reduce hallucinations, for example, by specifying that the model should only respond with information contained in the search results.
 
 ## Basic RAG architecture
 
 The Retrieval Augmented Generation may be seen as a three stages process:
 
+<figure markdown='span'>
 ![](./diagrams/rag_3_stages.drawio.png)
+<caption>**Figure 2: B3 Stages Process**</caption>
+</figure>
 
-
-1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/build_agent_domain_rag.py#L17-L43) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
+1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/rag/build_agent_domain_rag.py) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
 
 1. **Retrieval**: retrieves the relevant data (splits) from the indexes using similarity search, then passes the resulting chunks to the LLM as part of the context window. The similarity search uses the embeddings to vectorize the query, perform the search and get the resulting indexes.
 1. **Generation**: LLM generates the response in plain natural language.
 
-This process is supported by different tools for documents ingestion, splitting, embedding, indexing, retrieval and integration with the real time conversation flow. From the simple query text, the process needs to do query construction, translation, and LLM calling. The following diagram illustrates a classical a natural conversation application with RAG architecture:
+This process is supported by different tools: documents ingestion, splitting, embedding, indexing, retrieval and integration with the real time conversation flow. [See example of documention preparation with Agno]()
 
+From the simple query text, the process needs to do query construction, translation, and LLM calling. The following diagram illustrates a classical a natural conversation application with RAG architecture:
+
+<figure markdown='span'>
 ![](./diagrams/rag.drawio.png)
+<caption>**Figure 3: Bigger Context Window**</caption>
+</figure>
 
-
-1. The user asks queries via a Q&A or Chat user interface. The query may be decomposed in sub-queries and embedded. 
+1. The user asks queries via a Q&A REPL or Chat user interface. The query may be decomposed in sub-queries and embedded. 
 1. An application orchestrator uses the vector store retriever to do a **similarity search** into the vector database, and build the conversation context with retrieved documents. 
 
     ```python
@@ -80,20 +60,7 @@ This process is supported by different tools for documents ingestion, splitting,
     ```
 
 1. Context, query, system prompt are sent to the model to get the generated text. For this step, there are two approaches: **1/ sequential** where text generation follows retrievals, or **2/ parallel** where retrievals and text generations are done in parallel and then intertwined. 
-
-    ```python
-    # with a langchain that use the context variable as defined within the Prompt to pass the retrieved documents:
-    rag_chain = (
-      {"context": retriever, "question": RunnablePassthrough()}
-      | prompt
-      | llm
-      | StrOutputParser()
-    )
-    ```
-
 1. Response is sent back to the user.
-
-[RunnablePassthrough pass inputs unchanged](https://python.langchain.com/v0.1/docs/expression_language/primitives/passthrough/) to the following [Runnable](../coding/langchain.md/#runnable).
 
 RAG systems work well because LLMs has the in-context learning capability, which allows models to use previously unseen data to perform accurate predictions without weight training.
 
@@ -157,9 +124,12 @@ Training time includes addressing how to update LLM, how to update the document 
 
 The RAG preparation is a very important part of the process to ensure good retrieval results.
 
+<figure markdown='span'>
 ![](./diagrams/rag_preparation.drawio.png){ width=600 }
+<caption>**Figure 4: Preparation**</caption>
+</figure>
 
-* **Text extraction** is employed to isolate relevant textual information and remove any noise. Document content is used for keyword or similarity search in any RAG apps. In a document, some elements are important for RAG preparation: the title, narrative text, list item, table, image, but also element's metadata like filename, type, page number and section. It is the most expensive task in the RAG process. [Tools like Apache Spark may be used for the data preparation](https://jbcodeforce.github.io/spark-studies/).
+* **Text extraction** is employed to isolate relevant textual information and remove any noise. Document content is used for keyword or similarity search in any RAG apps. In a document, some elements are important for RAG preparation: the title, narrative text, list item, table, image, but also element's metadata like filename, type, page number and section. It is the most expensive task in the RAG process. [Tools like Apache Spark may be used for the data preparation](https://jbcodeforce.github.io/spark-studies/) or [Apache Flink with data streaming processing](https://jbcodeforce.github.io/flink-studies/).
 
 * **Chunk creation** is to segment text into smaller chunks or sections. This step is essential for efficient retrieval and processing. Chunk size is important to keep the context and some sort of semantic, while overlapping between chunks will help to create vectors that are still close while the text section is bigger than the chunk size. Tuning chunk parameters is balancing between preserving context and keeping accuracy. Sophisticated sentence segmentation techniques can be used. Some references are [SBERT](https://www.sbert.net/) and HuggingFace [SentenceTransformer](https://www.philschmid.de/optimize-sentence-transformers).
 
@@ -178,9 +148,6 @@ Code with text splitting:
 | [build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/build_agent_domain_rag.py#L17-L43) | LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever. |
 | [Content manager in owl agent framework](https://github.com/jbcodeforce/athena-owl-core/blob/main/owl-agent-backend/src/athena/itg/store/content_mgr.py) | integrate pdf,docs, html, text, markdown parsers |
 
-Langchain [examples for text processing](https://python.langchain.com/v0.2/docs/integrations/document_loaders/)
-
-ChromaDB document processing [example]()
 
 ???- info "Extract from pdf"
     There are different techniques to get content from unstructured file like a pdf. The first is to use object detection to draw and label bounding boxes around the layout elements on a document image (Document Layout Detection). OCR is used to extract text from bounding box. Some pdf as text the extraction can be done without OCR. The second technique use vision transformers.
@@ -192,6 +159,7 @@ The vector store is a database used to store the document chunks and the corresp
 The vector store can be implemented using different databases such as:
 
 * [Elasticsearch](https://www.elastic.co/).
+* [Qdrant](https://qdrant.tech/documentation/installation/)
 * [Faiss](https://github.com/facebookresearch/faiss).
 * [Annoy](https://github.com/spotify/annoy).
 * [HNSW](https://github.com/nmslib/hnswlib).
@@ -203,9 +171,12 @@ The vector store is usually implemented using a distributed database to improve 
 
 This is the Retrieval augmented generation with no training. Data are in context only. The prompt drives the LLM to maximize the in-context learning performance. The selection of the right data chunk and the correct embedding model are crucial.
 
+<figure markdown='span'>
 ![](./diagrams/frozen-rag.drawio.png)
+<caption>**Figure 5: Frozen Rag**</caption>
+</figure>
 
-The result of the search is pass to the LLM as context. This is limited to in-context learning. 
+The result of the search is passed to the LLM as part of the context. This is limited to in-context learning. 
 
 ### Retrievers
 
@@ -250,14 +221,21 @@ Query transformations focus on re-writing and / or modifying questions for retri
 
 * With **multiple query** LLM returns 4 to 5 questions which are used to query the vector store via the retriever and then merge the returned documents by removing any duplicate, to finally send the merged documents to the LLM for generation. 
 
+<figure markdown='span'>
 ![](./diagrams/rag_multi_query.drawio.png)
+<caption>**Figure 6: Muliple queries**</caption>
+</figure>
 
 See the code in [multiple_queries_rag.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/multiple_queries_rag.py).
 
 
 * With **Rag fusion** the approach is to apply merging logic using a function, so developer can apply some filtering and heuristics:
 
+<figure markdown='span'>
 ![](./diagrams/rag_fusion.drawio.png)
+<caption>**Figure 7: RAG Fusion**</caption>
+</figure>
+
 
 And the related code in [rag_fusion.py](https://github.com/jbcodeforce/ML-studies/blob/7a9d7b86fac629e01ad65bc390b2c7e83d019da5/code/LLM/langchain/openAI/rag_fusion.py).
 
@@ -276,7 +254,12 @@ Use the above context and any background question + answer pairs to answer the q
 
 * **Answer individually** use LLM for each question and regroup the answers in the context for the original question. 
 
+<figure markdown='span'>
 ![](./diagrams/rag_answ_rec.drawio.png)
+<caption>**Figure 8: Regrouping with agent **</caption>
+</figure>
+
+
 
 The question creation prompt is [rlm/rag-prompt](https://smith.langchain.com/hub/rlm/rag-prompt). The final prompt looks like:
 
@@ -359,23 +342,5 @@ Knowledge graph is easily extractable in a coherent form.
 ## Sources of information
 
 * [Read more from this medium article](https://medium.com/enterprise-rag/injecting-knowledge-graphs-in-different-rag-stages-a3cd1221f57b).
-
 * [Pykg2vec- Python Library for KGE Methods](https://github.com/Sujit-O/pykg2vec)
 * [Deeplearning.ai - Preprocessing Unstructured Data for LLM Applications](https://learn.deeplearning.ai/courses/preprocessing-unstructured-data-for-llm-application)
-
-## Some Code Studies
-### LangChain
-
-For a classical RAG using LangChain:
-
-![](../coding/diagrams/rag-process.drawio.png)
-
-RAG produces good results, due to augmenting use-case specific context coming directly from vectorized information stores. It has the highest degree of flexibility when it comes to changes in the architecture. We can change the embedding model, vector store and LLM independently with minimal to moderate impact on other components.
-
-Training from scratch produces the highest quality result amongst Prompt, RAG, fine tuning, but cost far more and need deep data science skill set.
-
-[See hands-on with LangChain](../coding/langchain.md/#retrieval-augmented-generation).
-
-* [Llm-langchain RAG folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag)
-
-### LangGraph

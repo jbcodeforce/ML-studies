@@ -13,7 +13,7 @@
 
 ```bash
 cd /Users/jerome/Documents/Code/ML-studies/src/agentic/agno
-./startoLMX.sh
+./start_omlx.sh
 ```
 
 Verify:

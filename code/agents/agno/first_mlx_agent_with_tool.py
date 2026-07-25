@@ -33,10 +33,14 @@ from agno.tools.yfinance import YFinanceTools
 from pydantic import BaseModel, Field
 from typing import List, Optional
 
+from dotenv import load_dotenv
+_env_file = os.getenv("ML_ENV_FILE")
+load_dotenv(_env_file) if _env_file else load_dotenv()
 # Default URL (e.g. mlx-llm-server or OpenAI-compatible proxy on 1337)
-DEFAULT_MLX_BASE_URL = "http://127.0.0.1:1337/v1"
-DEFAULT_MLX_MODEL = "mlx-community/Qwen3-8B-8bit"
-DEFAULT_MLX_TEMPERATURE = 0.4
+DEFAULT_MLX_BASE_URL = os.getenv("LLM_BASE_URL", "http://127.0.0.1:7999/v1")
+DEFAULT_MLX_MODEL = os.getenv("LLM_MODEL", "Ornith-1.0-9B-6bit")
+DEFAULT_MLX_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.4"))
+LLM_API_KEY = os.getenv("LLM_API_KEY", "local_key")
 
 
 instructions = """\
@@ -93,7 +97,7 @@ model = OpenAILike(
     id=DEFAULT_MLX_MODEL,
     base_url=DEFAULT_MLX_BASE_URL,
     temperature=DEFAULT_MLX_TEMPERATURE,
-    api_key="no-key",  # mlx-llm-server often accepts any key
+    api_key=LLM_API_KEY,
 )
 agent_db = SqliteDb(db_file="tmp/agents.db")
 finance_agent = Agent(
@@ -112,7 +116,11 @@ finance_agent = Agent(
 
 
 if __name__ == "__main__":
-    print("Chat with mistral until entering an empty question")
+    print('\n'+"="*60+'\n')
+    print(f"Chat for market finanical analysis with {DEFAULT_MLX_MODEL} until entering an empty question")
+    print(f"Base URL: {DEFAULT_MLX_BASE_URL}")
+    print('\n'+"="*60+'\n')
+    print("Example of question: why SPCX is low?")
     done = False
     agent = finance_agent
     while not done:

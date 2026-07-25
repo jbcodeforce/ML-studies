@@ -41,7 +41,7 @@ There are some well established python libraries to build agentic, like Langgrap
 
 End 2025, OpenAI SDK is supported by a lot of different LLM vendors, so using this lower level api works fine.
 
-After 2 years of playing with agentic implementations, I prefer a pure Python implementation to avoid blackbox library like Langchain.
+After 2 years of playing with agentic implementations, I prefer a pure Python implementation to avoid blackbox library like Langchain or [the nice framework like Agno](https://www.agno.com/), (see [dedicated chapter](./agno.md))
 
 Also Agent results quality is only linked to LLM for 20-30%, the remainig 80% is due to the quality of the [scaffolding](https://youtu.be/Le0DLrn7ta0?t=517). So prefer to have code to implement the deterministic results of a problem. 
 

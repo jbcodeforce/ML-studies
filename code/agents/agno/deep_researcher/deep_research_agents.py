@@ -5,14 +5,15 @@ from agno.agent import Agent
 from textwrap import dedent
 from agno.tools.yfinance import YFinanceTools
 import os
+from dotenv import load_dotenv
+
+_env_file = os.getenv("ML_ENV_FILE")
+load_dotenv(_env_file) if _env_file else load_dotenv()
 
 DEFAULT_LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://127.0.0.1:7999/v1")
 DEFAULT_LLM_MODEL = os.getenv("LLM_MODEL", "Qwen3.6-27B-4bit")
-DEFAULT_LLM_TEMPERATURE = 0.4
-DEFAULT_LLM_API_KEY = os.getenv("LLM_API_KEY", "localkey")
-
-TEAM_CONTEXT = """
-"""
+DEFAULT_LLM_TEMPERATURE = os.getenv("LLM_TEMPERATURE", 0.4)
+DEFAULT_LLM_API_KEY = os.getenv("LLM_API_KEY", "local_key")
 
 # knowledge managfement
 model =OpenAILike(
