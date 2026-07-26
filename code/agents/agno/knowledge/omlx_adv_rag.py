@@ -2,11 +2,14 @@
 This is the advanced RAG built from agno cookbook to jumpstart a simple knowledge manager agent.
 
 - use system prompt for things filtered out of the vector database
+- use agentic RAG, so agent is deciding to search or not.
 """
 import os
 from agno.agent import Agent
 from agno.models.openai.like import OpenAILike
 from dotenv import load_dotenv
+from prepare_vs import prepare_knowledge_base
+
 _env_file = os.getenv("ML_ENV_FILE")
 load_dotenv(_env_file) if _env_file else load_dotenv()
 # Default URL (e.g. mlx-llm-server or OpenAI-compatible proxy on 1337)
@@ -17,9 +20,10 @@ DEFAULT_LLM_API_KEY = os.getenv("LLM_API_KEY", "local_key")
 AGENT_NAME="Agent"
 
 
-INSTRUCTIONS = """
-You are a ...
-"""
+INSTRUCTIONS = [
+        "Always search your knowledge base before answering.",
+        "Include sources in your response.",
+    ]
 
 _model =OpenAILike(
     id=DEFAULT_LLM_MODEL,
@@ -28,9 +32,14 @@ _model =OpenAILike(
     api_key=DEFAULT_LLM_API_KEY,  
 )
 
+kb = prepare_knowledge_base()
+
 _agent = Agent(
     model=_model,
+    knowledge=kb,
     instructions=INSTRUCTIONS,
+    search_knowledge=True,
+    enable_agentic_knowledge_filters=True,
     markdown=True
 )
 
@@ -46,8 +55,8 @@ def repl():
         if not question or "bye" in question:
             done = True
         else:
-            run_response = _agent.run(question)
-            print(run_response)
+            _agent.print_response(question, stream=True)
+
 
 if __name__ == "__main__":
     print('\n'+"="*60+'\n')

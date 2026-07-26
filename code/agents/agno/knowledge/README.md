@@ -13,3 +13,18 @@
     ```sh
     ./start_qdrant.sh
     ```
+* See administration console at [http://localhost:6333/dashboard](http://localhost:6333/dashboard)
+
+## Prepare vector store
+
+The code will take the two first chapter of the astronomy chapter.
+
+```sh
+uv run knowledge/prepare_vs.py
+```
+
+## Query the agent
+
+```sh
+uv run knowledge/omlx_adv_rag.py
+```

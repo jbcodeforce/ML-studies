@@ -30,4 +30,5 @@ techno/crew-ai/db/
 **/export_env.sh
 **/assistants/km-agent/.env
 **/assistants/km-agent/.container-data/
-**/content.db
+**/content.db/
+**/qdrant_data/

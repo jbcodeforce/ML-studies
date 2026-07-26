@@ -2,13 +2,13 @@ name: Build & Push docs
 on: 
   push:
     branches:
-      - master
+      - main
 jobs:
     build:
         name: Deploy docs
         runs-on: ubuntu-latest
         steps:
-          - name: Checkout master
+          - name: Checkout main
             uses: actions/checkout@v1
           - name: Deploy docs
             uses: jbcodeforce/mkdocs-deploy-gh-pages@master

@@ -70,6 +70,14 @@ The simplest way to give an agent access to documents. Agno (07/2026) supports d
 1. With an agentic approach, the agent gets a `search_knowledge_base` tool and decides when to query the knowledge base. The agent can choose to search multiple times, refine queries, or skip searching entirely.
 1. Graph
 
+*07/2026: integrated code study of Agno cookbook knowledge folder*
+
+Knowledge supports three search types. Each has different strengths:
+
+- Vector: Semantic similarity search. Finds conceptually related content even when exact words don't match.
+- Keyword: Full-text search. Fast and precise for exact term matching.
+- Hybrid: Combines vector + keyword.
+
 #### Things to consider to develop a good searchable content
 
 * Define the goal of the search and how users process those query: just chat, build more content, human in the loop
@@ -83,7 +91,7 @@ The simplest way to give an agent access to documents. Agno (07/2026) supports d
 
 #### Steps:
 
-1. Create a Knowledge base with a vector database. [See OMLX with Qdrant]()
+1. Create a Knowledge base with a vector database. [See OMLX with Qdrant](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/knowledge/omlx_adv_rag.py)
     ```python
     k=Knowledge(
     vector_db=Qdrant(
@@ -113,7 +121,7 @@ The simplest way to give an agent access to documents. Agno (07/2026) supports d
         ```
 
 
-2. Load documents using [Readers](https://docs.agno.com/knowledge/concepts/readers/overview), from local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. Use metadata to help filtering on search. This is the basic code.
+2. Load documents using [Readers](https://docs.agno.com/knowledge/concepts/readers/overview). Use metadata to help filtering on search. This is the basic code.
     ```python
     from agno.knowledge.knowledge import Knowledge
     from agno.knowledge.reader.wikipedia_reader import WikipediaReader
@@ -135,10 +143,17 @@ The simplest way to give an agent access to documents. Agno (07/2026) supports d
             topics=["Retrieval-Augmented Generation"],
             reader=WikipediaReader(),
         )
-    ```
-    Knowledge supports loading content from many sources: local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. So [this code]() is a more sophisticate document processor based on manifests.
-    `knowledge.insert()` automatically selects the right reader based on file extension or URL.
+    await knowledge.ainsert(
+            name="Agno README",
+            remote_content=github_config.file("README.md", repo="agno-agi/agno"),
+        )
 
+    ```
+
+    The `Knowledge` class supports loading content from many sources: local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. So [this code](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/knowledge/prepare_vs.py) is a more sophisticate document processor based on manifests.
+    `knowledge.insert()` automatically selects the right reader based on file extension or URL. It is also possible to integrate with file from github via [GitHubConfig](https://docs.agno.com/knowledge/concepts/cloud-storage#githubconfig)
+
+    For embedder, it is possible to use local embedders like [FastEmbedEmbedder](https://docs.agno.com/knowledge/concepts/embedder/qdrant-fastembed/qdrant-fastembed), or using openaiembedder with configuration for local LLM.
 3. Create an Agent with search_knowledge=True (the default)
 4. Ask questions - agent decides when to search
 
@@ -157,7 +172,7 @@ In production, knowledge needs to be managed with minimum governance:
     ```python
     await knowledge.aremove_vectors_by_name("Recipes")
     ```
-- Track content status with a contents database
+- Track content status with a contents database(could be manifest file with sha256 on source content)
     ```python
     knowledge = Knowledge(
         name="Lifecycle Demo",
@@ -304,11 +319,67 @@ Approach:
 
 ### Knowledge Graph
 
-Unlike standard vector-based RAG, LightRAG:
+Unlike standard vector-based RAG, [LightRAG](https://github.com/hkuds/lightrag):
 
 - Extracts entities and relationships from documents
 - Builds a knowledge graph for multi-hop reasoning
 - Supports graph-traversal queries
+
+## Knowledge Tools
+KnowledgeTools provides a richer set of tools for knowledge interaction beyond basic search:
+
+- think: Agent reasons about the query before searching
+- search: Standard knowledge base search
+- analyze: Deep analysis of search results
+
+```python
+knowledge_tools = KnowledgeTools(
+    knowledge=knowledge,
+    enable_think=True,
+    enable_search=True,
+    enable_analyze=True,
+    add_few_shot=True,
+)
+agent = Agent(
+    model=OpenAIChat(id="gpt-4o"),
+    tools=[knowledge_tools],
+    markdown=True,
+)
+```
+
+It is also possible to implement custom knowledge sources on non-standard sources like database, API, specific file types. There is a protocol to implement as class inheritance.
+
+```python
+from agno.knowledge.protocol import KnowledgeProtocol
+class MyKnowledge(KnowledgeProtocol):
+    def __init__(self):
+        self.documents: list[Document] = []
+
+    def add(self, name: str, content: str) -> None:
+        self.documents.append(Document(name=name, content=content))
+
+    def _search(self, query: str, limit: int = 5) -> List[Document]:
+        ...
+     # --- Required protocol methods ---
+
+    def build_context(self, **kwargs) -> str:
+        return "Use the search tool to find information in the knowledge base."
+
+    def get_tools(self, **kwargs) -> List[Callable]:
+        return []
+
+    async def aget_tools(self, **kwargs) -> List[Callable]:
+        return []
+
+    # --- Optional: enables search_knowledge feature ---
+
+    def retrieve(self, query: str, **kwargs) -> List[Document]:
+        max_results = kwargs.get("max_results", 5)
+        return self._search(query, limit=max_results)
+
+    async def aretrieve(self, query: str, **kwargs) -> List[Document]:
+        return self.retrieve(query, **kwargs)
+```
 
 ## Skills
 

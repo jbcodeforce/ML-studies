@@ -27,12 +27,14 @@ collection_name = "astronomy"
 class DocumentMetadata(BaseModel):
     name: str
     path: str
+    url: str
+    src_type: str
     sha256: str
     processed: bool
     updated_at: str
     metadata: dict
 
-def prepare_knowledge_base():
+def prepare_knowledge_base() -> Knowledge:
     """
     Prepare the knowledge base for the agent.
     """
