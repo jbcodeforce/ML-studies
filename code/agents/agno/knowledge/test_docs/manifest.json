@@ -29,8 +29,9 @@
     },
     {
         "name": "bio",
-        "path": "jbcodeforce/jbcodeforce.github.io",   
+        "path": "docs/about.md",   
         "src_type": "github",
+        "url": "jbcodeforce/jbcodeforce.github.io",
         "sha256": "",
         "processed": false,
         "updated_at": "",
