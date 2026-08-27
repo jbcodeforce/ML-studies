@@ -21,6 +21,7 @@ dependencies = [
     "yfinance>=1.5.1",
     "qdrant-client>=1.18.0",
     "fastembed>=0.8.0",
+    "fastapi>=0.139.0",
 ]
 
 [project.optional-dependencies]

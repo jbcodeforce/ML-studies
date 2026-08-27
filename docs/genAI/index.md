@@ -442,6 +442,10 @@ A french company who has developed the **Mixtral 8x7B** model, a high-quality sp
 
 Gemini is the public Generative multimodal AI from Google DeepMind team with the support of 3 different sizes, the smallest being able to run on Mobile. Its [reasoning capabilities](https://blog.google/technology/ai/google-gemini-ai/#capabilities) can help make sense of complex written and visual information.
 
+### IBM
+
+IBM has always be a leader and early adopter of AI technologies, with Geopardy, Watson, debater and a lot of customer solutions done for enterprise deployments. Its last LLM agent, Bob is the most efficiency IDE on the market. [See dedicated Bob chapter](./ibm_bob.md)
+
 ### Amazon SageMaker
 
 [SageMaker Jumpstart](https://docs.aws.amazon.com/sagemaker/latest/dg/studio-jumpstart.html) provides pre-trained, open-source models for a wide range of problem types to get started on ML.

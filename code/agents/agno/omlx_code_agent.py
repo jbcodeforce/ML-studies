@@ -10,6 +10,7 @@ Example prompts:
 - "List files in src/agentic/agno"
 - "Read mlx_llm_code_agent.py and summarize it"
 - "Create a branch feature/demo and add a hello.txt with today's date"
+- "complement the unit tests for the module @mpdulename.py
 """
 
 from __future__ import annotations

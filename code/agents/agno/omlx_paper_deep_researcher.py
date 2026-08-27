@@ -43,7 +43,7 @@ paper_analysis_agent = Agent(
 
 if __name__ == "__main__":
     print('\n'+"="*60+'\n')
-    print(f"Chat for market finanical analysis with {DEFAULT_LLM_MODEL} until entering an empty question")
+    print(f"Chat for deep research with {DEFAULT_LLM_MODEL} until entering an empty question")
     print(f"Base URL: {DEFAULT_LLM_BASE_URL}")
     print('\n'+"="*60+'\n')
     console = Console()

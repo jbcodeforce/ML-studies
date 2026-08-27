@@ -32,3 +32,4 @@ techno/crew-ai/db/
 **/assistants/km-agent/.container-data/
 **/content.db/
 **/qdrant_data/
+**/.DS_Store

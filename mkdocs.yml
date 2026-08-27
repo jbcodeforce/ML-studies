@@ -34,6 +34,7 @@ nav:
     - RAG: genAI/rag.md
     - Agentic AI: genAI/agentic.md
     - Agno: genAI/agno.md
+    - IBM Bob: genAI/ibm_bob.md
     - Anthropic: genAI/anthropic.md
     - OpenAI: genAI/openai.md
     - MCP: genAI/mcp.md

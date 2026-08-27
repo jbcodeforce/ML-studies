@@ -3080,6 +3080,7 @@ source = { editable = "." }
 dependencies = [
     { name = "agno" },
     { name = "ddgs" },
+    { name = "fastapi" },
     { name = "fastembed" },
     { name = "httpx" },
     { name = "matplotlib" },
@@ -3354,6 +3355,7 @@ requires-dist = [
     { name = "ddgs", specifier = ">=9.14.4" },
     { name = "ddgs", marker = "extra == 'agents'", specifier = ">=9.10.0" },
     { name = "faiss-cpu", marker = "extra == 'rag'", specifier = ">=1.7.0,<2" },
+    { name = "fastapi", specifier = ">=0.139.0" },
     { name = "fastapi", marker = "extra == 'agents'", specifier = ">=0.134.0" },
     { name = "fastembed", specifier = ">=0.8.0" },
     { name = "google-genai", marker = "extra == 'agents'", specifier = ">=1.65.0" },
