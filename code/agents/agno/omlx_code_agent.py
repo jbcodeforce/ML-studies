@@ -33,8 +33,8 @@ load_dotenv(_env_file) if _env_file else load_dotenv()
 DEFAULT_LLM_BASE_URL = os.getenv("LLM_BASE_URL", "http://127.0.0.1:7999/v1")
 DEFAULT_LLM_MODEL = os.getenv("LLM_MODEL", "Qwen3.6-27B-4bit")
 DEFAULT_LLM_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.4"))
-DEFAULT_LLM_API_KEY = os.getenv("LLM_API_KEY", "local_key")
-ALLOWED_MODELS = ("DreamFoundries--Agents-A1-8bit", "Ornith-1.0-9B-6bit")
+DEFAULT_LLM_API_KEY = os.getenv("LLM_API_KEY", "local-key")
+ALLOWED_MODELS = ("DreamFoundries--Agents-A1-8bit", "Ornith-1.5-9B-6bit")
 
 CODE_AGENT_INSTRUCTIONS = """\
 You are a coding assistant with filesystem and git tools. Work only inside the
