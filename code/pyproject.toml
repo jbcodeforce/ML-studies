@@ -3,7 +3,12 @@ name = "mlstudies-code"
 version = "0.1.0"
 description = "ML Studies code - classical ML, PyTorch, LLM, and agents"
 readme = "SUBJECTS.md"
-requires-python = ">=3.11,<3.14"
+requires-python = ">=3.12,<3.14"
+
+[tool.pytest.ini_options]
+pythonpath = [".","./agents/agno"]
+testpaths = ["tests"]
+
 
 dependencies = [
     "python-dotenv>=1.0.0",
@@ -64,7 +69,7 @@ llm = [
 agents = [
     "mlstudies-code[llm]",
     "langgraph>=0.2.0",
-    "agno>=2.7.3",
+    "agno>=3.0.9",
     "chromadb>=0.4.0",
     "arxiv>=3.0.0",
     "ddgs>=9.10.0",

@@ -417,9 +417,58 @@ To setup Cursor to use local llm:
 
 ### [IBM's Bob IDE](https://www.ibm.com/products/bob)
 
+[See separate chapter.](./ibm_bob.md)
+
 ### [Agno](https://www.agno.com/)
 
 Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). See [dedicated chapter](./agno.md)
+
+### [Pi,dev](https://pi.dev/)
+
+Pi is a minimal agent harness which exposes what it is doing so users can improve prompts and tool executions.
+
+You can configure the Pi Coding Agent to use a local LLM with an OpenAI-compatible API by defining the local endpoint in your ~/.pi/agent/models.json configuration.
+
+```yaml
+  "providers": {
+    "m3_omlx": {
+      "baseUrl": "http://localhost:7999/v1",
+      "api": "openai-completions",
+      "apiKey": "local-key",
+      "models": [
+        {
+          "id": "Ornith-1.5-9B-6bit",
+          "input": [
+            "text",
+            "image"
+          ]
+        }
+      ]
+    },
+```
+
+???+ question "How to use a specific provider?"
+        ```sh
+        pi --provider m3_omlx --model Ornith-1.5-9B-6bit
+        pi --provider m5_omlx --model Qwen3.8-27B-4bit
+        ```
+
+Skills can be added under .pi/skills. As an example it has a agno-agent-builder skill added. Start pi harness with the path of the skills:
+
+```sh
+# In Pi settings or CLI
+pi --skill .pi/skills/agno-agent-builder
+```
+
+Then within a session:
+```sh
+/skill:agno-agent-builder 
+```
+
+
+### oMLX server
+
+[]()
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 

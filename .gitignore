@@ -2,6 +2,7 @@
 data/17flowers/
 site/
 **/.venv/
+**/tmp/
 **/.pytorch/
 .conda/
 .vscode/

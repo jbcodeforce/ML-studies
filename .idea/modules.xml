@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/ML-studies.iml" filepath="$PROJECT_DIR$/.idea/ML-studies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/chat-with-pdf-demo.iml" filepath="$PROJECT_DIR$/.idea/chat-with-pdf-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/claude-code-litellm.iml" filepath="$PROJECT_DIR$/.idea/claude-code-litellm.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/crewai-studies.iml" filepath="$PROJECT_DIR$/.idea/crewai-studies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gemini-cmd.iml" filepath="$PROJECT_DIR$/.idea/gemini-cmd.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/gradio-studies.iml" filepath="$PROJECT_DIR$/.idea/gradio-studies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/huggingface.iml" filepath="$PROJECT_DIR$/.idea/huggingface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/llm-ollama.iml" filepath="$PROJECT_DIR$/.idea/llm-ollama.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mlstudies-code.iml" filepath="$PROJECT_DIR$/.idea/mlstudies-code.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/mlstudies-jupyter.iml" filepath="$PROJECT_DIR$/.idea/mlstudies-jupyter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/nicegui-studies.iml" filepath="$PROJECT_DIR$/.idea/nicegui-studies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ollama-mistral-demo.iml" filepath="$PROJECT_DIR$/.idea/ollama-mistral-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/qa-retrieval-demo.iml" filepath="$PROJECT_DIR$/.idea/qa-retrieval-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/resume-tuning-demo.iml" filepath="$PROJECT_DIR$/.idea/resume-tuning-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/streaming-demo.iml" filepath="$PROJECT_DIR$/.idea/streaming-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/streamlit-studies.iml" filepath="$PROJECT_DIR$/.idea/streamlit-studies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/taipy-studies.iml" filepath="$PROJECT_DIR$/.idea/taipy-studies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/think_deeply.iml" filepath="$PROJECT_DIR$/.idea/think_deeply.iml" />
+    </modules>
+  </component>
+</project>
