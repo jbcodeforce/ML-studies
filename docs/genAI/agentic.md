@@ -68,7 +68,7 @@ Design agentic solution with production in mind: be sure to have logs, version m
 
 There will be multiple patterns supported by Flink. 
 
-1. Workflow streaming agents: a directed workflow of modular steps, called actions, connected by events.To orchestrate complex, multi-stage tasks in a transparent, extensible. This is an implementation of the [SAGA choreography pattern](https://jbcodeforce.github.io/eda-studies/patterns/saga/#services-choreography). [See the appache Flink Agent git repo](https://github.com/apache/flink-agents.git) and python [example of workflow](https://github.com/apache/flink-agents/blob/main/python/flink_agents/examples/quickstart/workflow_single_agent_example.py)
+1. Workflow streaming agents: a directed workflow of modular steps, called actions, connected by events.To orchestrate complex, multi-stage tasks in a transparent, extensible. This is an implementation of the [SAGA choreography pattern](https://jbcodeforce.github.io/eda-studies/patterns/saga/#services-choreography). [See the Apache Flink Agent git repo](https://github.com/apache/flink-agents.git) and python [example of workflow](https://github.com/apache/flink-agents/blob/main/python/flink_agents/examples/quickstart/workflow_single_agent_example.py)
 1. ReAct: to combine reasoning and action, where the user's prompt specify the goal, then agent, with tools and LLM, decide how to achieve the goal. A [steaming ReAct agent example in python](https://github.com/apache/flink-agents/blob/main/python/flink_agents/examples/quickstart/react_agent_example.py) demonstrates how to do this with Flink Agents. [See my own implementation with Kafka and OSS Flink](https://github.com/jbcodeforce/flink-studies/tree/master/e2e-demos/agentic-demo)
 
 ### Small Specialist Agents
@@ -105,6 +105,7 @@ Small Specialist Agents (SSAs) is an agentic approach to perform planning and re
 * **Resume Tuning**: Multi-agent pipeline for tailoring resumes to job postings. See [resume_tuning demo](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/resume_tuning).
 * **Streaming Demo**: Real-time streaming with human-in-the-loop. See [streaming-demo](https://github.com/jbcodeforce/ML-studies/tree/master/e2e-demos/streaming-demo).
 * [My AI Assistant](https://github.com/jbcodeforce/MyAIAssistant) An intelligent personal productivity and knowledge management tool that integrates task management with a semantic knowledge base using LLM, GraphRAG.
+* [km-agent](https://github.com/jbcodeforce/km-agent): multiple agno agents working on build wiki-llm and perform deep researches.
 
 ## Challenges
 
@@ -133,7 +134,6 @@ Developers need to address the level of freedom given to the LLMs.
 
 Multiple agents, with more dedicated prompt, smaller list of tools, event Single Action Agent, and orchestration seems to be a viable solution for agentic solutions. This new approach adds complexity in designing, implementing and then tuning the solution, but authorizes the usage of smaller LLM, local code / MCP server and specific prompts. Current research looks after integrating agent with reinforcement learning as tools to do trial and error learning.
 
-[LangGraph](../coding/langgraph.md) helps to better support the Router, State Machine and chain implementations.
 
 ## Guidelines
 
@@ -377,13 +377,17 @@ RAG is essentially a digital librarian: you ask a question, the system searches 
 
 The Wiki Pattern is designed for deep research. It allows an AI agent to build a synthetic brain that grows more intelligent and interconnected the more data it ingunes. 
 
-[See demonstration with Agno agent](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/llm-wiki)
+[See demonstration with Agno agent](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/llm-wiki) and [km-agent](https://github.com/jbcodeforce/km-agent)
 
 ## Technologies
 
 ### Claude Code
 
 [Anthropic’s agentic coding tool](https://code.claude.com/docs/en/overview) as a specific, very efficient, agentic solution for software development. It runs in terminal.
+
+#### How to write good CLAUDE.md or AGENTS.md
+
+* Be consice. 
 
 ### Cursor and AI IDEs
 
@@ -423,9 +427,9 @@ To setup Cursor to use local llm:
 
 Seems to be one of the best SDK for developing agents. [See my code with ollama as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). See [dedicated chapter](./agno.md)
 
-### [Pi,dev](https://pi.dev/)
+### [Pi.dev](https://pi.dev/)
 
-Pi is a minimal agent harness which exposes what it is doing so users can improve prompts and tool executions.
+Pi is is a minimalist terminal AI agent harness which exposes what it is doing so users can improve prompts and tool executions. By default, it provides an agent with four simple tools—read, write, edit, and bash—allowing you to layer on extensions, skills, and model controls to fit your exact workflow.
 
 You can configure the Pi Coding Agent to use a local LLM with an OpenAI-compatible API by defining the local endpoint in your ~/.pi/agent/models.json configuration.
 
@@ -453,11 +457,20 @@ You can configure the Pi Coding Agent to use a local LLM with an OpenAI-compatib
         pi --provider m5_omlx --model Qwen3.8-27B-4bit
         ```
 
-Skills can be added under .pi/skills. As an example it has a agno-agent-builder skill added. Start pi harness with the path of the skills:
+
+* Pi relies heavily on structured context files to prevent prompt drift and save tokens. Pi walks up directory paths and concatenates all found AGENTS.md files at startup:
+    *  `~/.pi/agent/AGENTS.md`: Global preferences
+    * `./AGENTS.md`s: Project-specific rules
+* Place a SYSTEM.md file (System Prompt Tuning) in your directory to append or replace Pi's base prompt directly when you need specialized persona framing
+* Skills can be added under .pi/skills. As an example it has a agno-agent-builder skill added. Start pi harness with the path of the skills:
 
 ```sh
-# In Pi settings or CLI
+# In Pi settings or TUI
 pi --skill .pi/skills/agno-agent-builder
+# Non-interactive single-turn stdout output ideal for piping into Unix chains
+pi -p "query"
+# Emits structured streaming JSON events for external tool consumer
+pi -p "query" --mode json
 ```
 
 Then within a session:
@@ -465,10 +478,32 @@ Then within a session:
 /skill:agno-agent-builder 
 ```
 
+* Pi treats session history as a branching tree rather than a linear stack. Use `/tree` to visualize conversational decision branches. Branch off experiments using `/fork` or `/clone` without polluting or losing context from alternative solutions.
+* Pi automatically compacts older context
+* Extension are install with `pi install npm: `. A common extension: `pi-web-access`: Adds live web searching and scraping capabilities.
+
+
+| Shortcut / Command | Action|
+| ---- | ---- |
+| @filename | Fuzzy-find local files to attach directly to the prompt.|
+| ! command. | Execute shell command directly in-line and send stdout to the agent. |
+| !! command | Execute shell command locally without feeding output to model context. |
+| Ctrl + L / /model | Open the interactive model picker to switch providers mid-session. |
+| Ctrl + P | Instantly cycle through your scoped default models. |
+| Shift + Tab | Cycle reasoning/thinking budgets (off, low, medium, high, max). |
+| pi -c / pi -r |Instantly continue the latest session (-c) or browse history (-r).|
 
 ### oMLX server
 
-[]()
+[oMLX](https://github.com/jundot/omlx) optimizes local inference on Apple Silicon Macs. oMLX leverages native macOS architectures, continuous batching, and a two-tier KV cache (RAM/SSD) to drastically reduce Time-To-First-Token
+
+Some tips:
+
+* run oMLX off a high-speed external NVMe enclosure over Thunderbolt 4/5 if you run heavy multi-turn sessions daily
+* Use 4-bit or 8-bit MLX models from Hugging Face (mlx-community).
+* oMLX will dynamically unload inactive layers when switching tasks.
+* For running dense high-parameter models, oMLX supports pipeline parallelism over Thunderbolt links between two or more Macs.
+* oMLX with a lightweight tunnel (like Pinggy or Cloudflare Tunnels) to access your local Mac's GPU from a mobile device or remote laptop. [See this article](https://medium.com/@bishakhghosh0/omlx-a-high-performance-local-llm-server-for-apple-silicon-with-global-access-via-pinggy-2151f3e8821d)
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 
