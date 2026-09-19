@@ -381,6 +381,13 @@ The Wiki Pattern is designed for deep research. It allows an AI agent to build a
 
 ## Technologies
 
+### Agent maturity model
+
+* **Assisted**: leveraging a single session of Agent as a peer, every edit gets read
+* **Parallel**: engineer runs multiple session in parallel, and play the role of orchestrator. The limit is the human being able to address next steps and review work done.
+* **Supervised autonomy:** Agent is the orchestrator of multiple sub-agents. Human is instructing these orchestrators about how we need to behave
+* **AI-native**: 1000+ agents running in parallel every day, driven by intent, and triggered by human activities
+
 ### Claude Code
 
 [Anthropic’s agentic coding tool](https://code.claude.com/docs/en/overview) as a specific, very efficient, agentic solution for software development. It runs in terminal.
@@ -495,15 +502,29 @@ Then within a session:
 
 ### oMLX server
 
-[oMLX](https://github.com/jundot/omlx) optimizes local inference on Apple Silicon Macs. oMLX leverages native macOS architectures, continuous batching, and a two-tier KV cache (RAM/SSD) to drastically reduce Time-To-First-Token
+[oMLX](https://github.com/jundot/omlx) optimizes local inference on Apple Silicon Macs. oMLX leverages native macOS architectures, continuous batching, and a two-tier KV cache (RAM/SSD) to drastically reduce Time-To-First-Token. Use hot cache to improve other agent requests. For performance measure it is important to consider both the
+
+* Prefill takes time (94% time)
+* Decode phase
+
+Also dense model means the model is readding all the network. MoE will active less parameters. In future AI we need to run multiple small models
+
 
 Some tips:
 
+* Keep 4-5 GB of memory for the MAC OS- 9GB model work wells. 27GB starts to reach OOM very often
+* use `omlx-cli launch pi --model ... --api-key ...`
 * run oMLX off a high-speed external NVMe enclosure over Thunderbolt 4/5 if you run heavy multi-turn sessions daily
 * Use 4-bit or 8-bit MLX models from Hugging Face (mlx-community).
 * oMLX will dynamically unload inactive layers when switching tasks.
-* For running dense high-parameter models, oMLX supports pipeline parallelism over Thunderbolt links between two or more Macs.
+* For running dense high-parameter models, oMLX supports pipeline parallelism over Thunderbolt links between two or more Macs. The Mac running the active coordinator dashboard acts as rank zero, holding the later transformer layers, while peer Macs load the earlier layers and keep their portions of the KV cache locally.  Splitting a model (like a 27B parameter LLM) across two networked machines via a direct cable scales up usable generation speeds compared to running constrained on a single idle device. [See this note](https://github.com/jundot/omlx/blob/main/docs/distributed-cluster.md)
 * oMLX with a lightweight tunnel (like Pinggy or Cloudflare Tunnels) to access your local Mac's GPU from a mobile device or remote laptop. [See this article](https://medium.com/@bishakhghosh0/omlx-a-high-performance-local-llm-server-for-apple-silicon-with-global-access-via-pinggy-2151f3e8821d)
+
+???- info "Setting private thunderbolt bridge"
+    * Go in system > network, specify manual IP address. On both Mac.  Like 169.254.100.71 and 169.254.100.70
+    * In each oMLX go to Settings > Adcance > Enable Distributed - restart both oMLX - accept discovering device on network.
+    * Now a cluster tab should be present. The mac on the private network should be visible
+    * Pair on the main host to the remote mac. On the second mac click on "Shoiw code instead"  -> it fails with: "The previous join is cancelled on this Mac, but the other Mac has not confirmed cleanup yet. Retry when it is reachable." 
 
 ### [LangChain Agent module](https://python.langchain.com/v0.1/docs/modules/agents/)
 
