@@ -22,7 +22,7 @@ from agno.learn import (
     UserMemoryConfig,
     UserProfileConfig,
 )
-from agno.models.ollama import Ollama
+
 from agno.models.openai.like import OpenAILike
 
 DEFAULT_LLM_BASE_URL = "http://127.0.0.1:7999/v1"

@@ -4,6 +4,12 @@ version = "0.1.0"
 description = "ML Studies code - classical ML, PyTorch, LLM, and agents"
 readme = "SUBJECTS.md"
 requires-python = ">=3.12,<3.14"
+dependencies = [
+    "agno>=3.1.1",
+    "ddgs>=9.16.0",
+    "fastapi>=0.142.2",
+    "openai>=2.45.0",
+]
 
 [tool.pytest.ini_options]
 pythonpath = [".","./agents/agno"]
@@ -12,129 +18,129 @@ testpaths = ["tests"]
 
 dependencies = [
     "python-dotenv>=1.0.0",
-    "numpy>=1.24.0",
-    "pandas>=2.0.0",
-    "scikit-learn>=1.3.0",
-    "matplotlib>=3.7.0",
-    "seaborn>=0.12.0",
-    "requests>=2.31.0",
+    "numpy>=2.0.0",
+    "pandas>=2.2.0",
+    "scikit-learn>=1.5.0",
+    "matplotlib>=3.9.0",
+    "seaborn>=0.13.0",
+    "requests>=2.32.0",
     "httpx>=0.28.1",
-    "agno>=2.8.0",
-    "sqlalchemy>=2.0.51",
-    "openai>=2.45.0",
-    "ddgs>=9.14.4",
-    "yfinance>=1.5.1",
+    "agno>=3.1.0",
+    "sqlalchemy>=2.1.0",
+    "openai>=3.22.1",
+    "ddgs>=9.16.0",
+    "yfinance>=1.7.0",
     "qdrant-client>=1.18.0",
     "fastembed>=0.8.0",
-    "fastapi>=0.139.0",
+    "fastapi>=0.142.2",
 ]
 
 [project.optional-dependencies]
 pytorch = [
-    "torch>=2.0.0",
-    "torchvision>=0.15.0",
-    "torchmetrics>=1.0.0",
+    "torch>=2.14.1",
+    "torchvision>=0.29.1",
+    "torchmetrics>=1.9.0",
     "torchinfo>=1.8.0",
-    "mlxtend>=0.23.0",
+    "mlxtend>=0.25.0",
 ]
 
 deep-learning = [
-    "tensorflow>=2.15.0",
-    "keras>=3.0.0",
+    "tensorflow>=2.16.0",
+    "keras>=3.15.1",
 ]
 
 anomaly = [
-    "pyod>=1.1.0",
+    "pyod>=3.6.6",
 ]
 
 kaggle = [
-    "kaggle>=1.5.0",
-    "xgboost>=2.0.0",
-    "lightgbm>=4.0.0",
+    "kaggle>=2.2.4",
+    "xgboost>=3.4.1",
+    "lightgbm>=4.7.0",
 ]
 
 llm = [
-    "langchain>=0.3.0",
-    "langchain-community>=0.3.0",
-    "langsmith>=0.1.0",
-    "llama-index>=0.10.0",
-    "llama-index-core>=0.10.0",
-    "llama-index-llms-openai>=0.1.0",
-    "llama-index-embeddings-openai>=0.1.0",
-    "ollama>=0.4.0",
+    "langchain>=1.4.3",
+    "langchain-community>=0.4.2",
+    "langsmith>=0.14.2",
+    "llama-index>=0.14.25",
+    "llama-index-core>=0.14.25",
+    "llama-index-llms-openai>=0.7.0,<0.8",
+    "llama-index-embeddings-openai>=0.6.0,<0.7",
+    "ollama>=0.6.3",
     "openai>=1.0.0",
-    "huggingface-hub>=0.20.0",
+    "huggingface-hub>=0.25.0,<2.0",
 ]
 
 agents = [
     "mlstudies-code[llm]",
-    "langgraph>=0.2.0",
-    "agno>=3.0.9",
-    "chromadb>=0.4.0",
-    "arxiv>=3.0.0",
-    "ddgs>=9.10.0",
-    "fastapi>=0.134.0",
-    "google-genai>=1.65.0",
-    "pypdf>=6.10.2",
-    "rich>=14.3.3",
-    "sqlalchemy>=2.0.47",
-    "uvicorn>=0.41.0",
-    "yfinance>=1.2.0",
+    "langgraph>=1.2.12",
+    "agno>=3.1.0",
+    "chromadb>=1.5.9",
+    "arxiv>=4.0.1",
+    "ddgs>=9.16.0",
+    "fastapi>=0.142.2",
+    "google-genai>=2.26.0",
+    "pypdf>=6.19.0",
+    "rich>=15.0.0",
+    "sqlalchemy>=2.1.0",
+    "uvicorn>=0.54.0",
+    "yfinance>=1.7.0",
 ]
 
 openai = [
     "mlstudies-code[llm]",
-    "langchain-openai>=0.2.0",
-    "langchainhub>=0.1.0",
-    "beautifulsoup4>=4.12.0",
+    "langchain-openai>=1.6.7",
+    "langchainhub>=0.1.21",
+    "beautifulsoup4>=4.15.0",
 ]
 
 anthropic = [
     "mlstudies-code[llm]",
-    "langchain-anthropic>=0.2.0",
-    "anthropic>=0.30.0",
+    "langchain-anthropic>=1.7.5",
+    "anthropic>=1.11.0",
 ]
 
 mistral = [
     "mlstudies-code[llm]",
-    "mistralai>=1.0.0",
-    "langchain-mistralai>=0.2.0",
+    "mistralai>=3.0.0",
+    "langchain-mistralai>=1.1.6",
 ]
 
 cohere = [
     "mlstudies-code[llm]",
-    "cohere>=5.0.0",
-    "langchain-cohere>=0.3.0",
+    "cohere>=5.18.0,<6.0",
+    "langchain-cohere>=0.6.0",
 ]
 
 gemini = [
     "mlstudies-code[llm]",
-    "google-generativeai>=0.5.0",
-    "langchain-google-genai>=2.0.0",
+    "google-generativeai>=0.8.6",
+    "langchain-google-genai>=4.4.0",
 ]
 
 watsonx = [
     "mlstudies-code[llm]",
-    "ibm-watsonx-ai>=1.0.0",
-    "langchain-ibm>=0.3.0",
+    "ibm-watsonx-ai>=1.8.0",
+    "langchain-ibm>=1.1.1",
 ]
 
 bedrock = [
     "mlstudies-code[llm]",
-    "boto3>=1.28.0",
-    "botocore>=1.31.0",
-    "transformers>=4.24.0,<5",
-    "unstructured>=0.10.0",
-    "langchain-experimental>=0.3.0",
+    "boto3>=1.43.106",
+    "botocore>=1.43.106",
+    "transformers>=5.18.0",
+    "unstructured>=0.18.32",
+    "langchain-experimental>=0.4.2",
 ]
 
 rag = [
     "mlstudies-code[llm]",
-    "langchain-chroma>=0.1.0",
-    "faiss-cpu>=1.7.0,<2",
-    "sentence-transformers>=2.2.0",
-    "pypdf>=6.10.2",
-    "datasets>=2.0.0",
+    "langchain-chroma>=1.1.0",
+    "faiss-cpu>=1.15.1",
+    "sentence-transformers>=6.1.0",
+    "pypdf>=6.19.0",
+    "datasets>=5.0.1",
 ]
 
 all = [
@@ -143,10 +149,10 @@ all = [
 
 [tool.uv]
 dev-dependencies = [
-    "pytest>=8.0.0",
-    "pytest-asyncio>=0.23.0",
-    "ruff>=0.4.0",
-    "ipython>=8.0.0",
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+    "ruff>=0.16.9",
+    "ipython>=9.17.1",
 ]
 
 [build-system]
@@ -154,4 +160,8 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["LLM/shared/mlstudies"]
+packages = ["agents*"]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["agents*"]

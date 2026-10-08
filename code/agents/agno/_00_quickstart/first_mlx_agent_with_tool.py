@@ -1,8 +1,8 @@
 """
 Agno agent backed by an MLX LLM via an OpenAI-compatible server.
 
-Start the MLX server first (uv run mlx_lm.server --model  mistralai/Mistral-7B-Instruct-v0.3  --port 1337), then run
-this agent. Default base URL is http://127.0.0.1:1337/v1.
+Start the oMLX server first  or MLX (uv run mlx_lm.server --model  mistralai/Mistral-7B-Instruct-v0.3  --port 1337), then run
+this agent. 
 
 Agent demonstrates:
 * use of system prompt via instructions variable
@@ -12,7 +12,7 @@ Agent demonstrates:
 * use of stream=True to print the response in real time
 * use of add_datetime_to_context=True to add the datetime to the context
 * use of markdown=True to print the response in markdown format
-
+* use of OpenTelemetry tracing for tool call visibility
 
 Example prompts to try:
 - "What's the current price of AAPL?"
@@ -20,28 +20,33 @@ Example prompts to try:
 - "Give me a quick investment brief on Microsoft"
 - "What's Tesla's P/E ratio and how does it compare to the industry?"
 - "Show me the key metrics for the FAANG stocks"
-"""
 
-import os
+[Tracing Output]
+After the agent runs, traces are stored in `tmp/agents.db`. View them with:
+
+    from agno.db.sqlite import SqliteDb
+    db = SqliteDb(db_file="tmp/agents.db")
+
+    # All traces
+    for t in db.get_traces():
+        print(t.name, t.start_time, t.total_spans, t.error_count)
+
+    # Spans for a specific trace
+    for s in db.get_spans(trace_id="00..."):
+        print(s.name, s.span_kind, s.status_code)
+"""
 
 from agno.agent import Agent
 from agno.models.openai.like import OpenAILike
 from agno.tools import tool
 from agno.db.sqlite import SqliteDb
-from agno.tools.duckduckgo import DuckDuckGoTools
 from agno.tools.yfinance import YFinanceTools
 from pydantic import BaseModel, Field
 from typing import List, Optional
+from agents.agno.config import DEFAULT_LLM_BASE_URL, DEFAULT_LLM_MODEL, DEFAULT_LLM_TEMPERATURE, DEFAULT_LLM_API_KEY
 
-from dotenv import load_dotenv
-_env_file = os.getenv("ML_ENV_FILE")
-load_dotenv(_env_file) if _env_file else load_dotenv()
-# Default URL (e.g. mlx-llm-server or OpenAI-compatible proxy on 1337)
-DEFAULT_MLX_BASE_URL = os.getenv("LLM_BASE_URL", "http://127.0.0.1:7999/v1")
-DEFAULT_MLX_MODEL = os.getenv("LLM_MODEL", "Ornith-1.0-9B-6bit")
-DEFAULT_MLX_TEMPERATURE = float(os.getenv("LLM_TEMPERATURE", "0.4"))
-LLM_API_KEY = os.getenv("LLM_API_KEY", "local_key")
-
+# Tracing
+from agno.tracing import setup_tracing
 
 instructions = """\
 You are a Finance Agent — a data-driven analyst who retrieves market data,
@@ -94,10 +99,10 @@ def get_word_length(word: str) -> int:
 
 
 model = OpenAILike(
-    id=DEFAULT_MLX_MODEL,
-    base_url=DEFAULT_MLX_BASE_URL,
-    temperature=DEFAULT_MLX_TEMPERATURE,
-    api_key=LLM_API_KEY,
+    id=DEFAULT_LLM_MODEL,
+    base_url=DEFAULT_LLM_BASE_URL,
+    temperature=DEFAULT_LLM_TEMPERATURE,
+    api_key=DEFAULT_LLM_API_KEY,
 )
 agent_db = SqliteDb(db_file="tmp/agents.db")
 finance_agent = Agent(
@@ -116,11 +121,26 @@ finance_agent = Agent(
 
 
 if __name__ == "__main__":
+    # -- Tracing Setup --
+    try:
+        # Install: pip install opentelemetry-api opentelemetry-sdk openinference-instrumentation-agno
+        from agno.utils.log import log_debug
+        setup_tracing(db=agent_db, batch_processing=False)
+        log_debug('Tracing enabled — YFinanceTools calls will be tracked')
+    except ImportError:
+        from agno.utils.log import log_debug
+        log_debug('Tracing disabled: OpenTelemetry not installed ' +\
+                  '(pip install opentelemetry-api opentelemetry-sdk openinference-instrumentation-agno)')
+    except Exception as exc:
+        from agno.utils.log import log_debug
+        log_debug(f'Tracing setup failed: {exc}')
+    # ---------------------------------
+
     print('\n'+"="*60+'\n')
-    print(f"Chat for market finanical analysis with {DEFAULT_MLX_MODEL} until entering an empty question")
-    print(f"Base URL: {DEFAULT_MLX_BASE_URL}")
-    print('\n'+"="*60+'\n')
-    print("Example of question: why SPCX is low?")
+    print(f"Chat for market financial analysis with {DEFAULT_LLM_MODEL} until entering an empty question")
+    print(f"Base URL: {DEFAULT_LLM_BASE_URL}")
+    print('\n[Tracing: enabled — spans stored in ' + agent_db.db_file + ']\n')
+    print('Example of question: why SPCX is low?')
     done = False
     agent = finance_agent
     while not done:
@@ -133,4 +153,3 @@ if __name__ == "__main__":
             analysis: StockAnalysis = response.content
             print(analysis)
             print("\n\n")
-

@@ -16,8 +16,8 @@ compiled: false
 * [Agents](https://docs.agno.com/agents/overview) are a stateful control loop around a stateless LLM. 
 * [Database](https://docs.agno.com/database/overview) to get persistent storage for sessions, context, memory, learnings, and evaluation datasets.
 * [Tools](https://docs.agno.com/tools/overview)
-* [storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
-* [memory](https://docs.agno.com/memory/overview) for  user preferences
+* [Storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
+* [Memory](https://docs.agno.com/memory/overview) for  user preferences
 * [Learning](https://docs.agno.com/learning/overview) to capture user profiles, memories, and knowledge over time
 * [Knowledge and Rag](https://docs.agno.com/knowledge/overview) to manage domain specific information. [See my own code translation from Agno cookbook to run locally](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/knowledge), and the bigger usage in [km-agent](https://github.com/jbcodeforce/km-agent)
 * [state]() is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
@@ -158,6 +158,7 @@ Knowledge supports three search types. Each has different strengths:
 4. Ask questions - agent decides when to search
 
 #### Document processing
+
 In production, knowledge needs to be managed with minimum governance:
 
 - Skip re-inserting content that already exists

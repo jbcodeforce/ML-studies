@@ -13,7 +13,7 @@ Example prompts to try:
 
 from pathlib import Path
 from agno.os import AgentOS
-from first_mlx_agent_with_tool import finance_agent
+from code.agents.agno._00_quickstart.first_mlx_agent_with_tool import finance_agent
 
 
 # ---------------------------------------------------------------------------

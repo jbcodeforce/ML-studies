@@ -16,7 +16,7 @@ vector_db = ChromaDb(
 
 def create_sync_knowledge() -> Knowledge:
     return Knowledge(
-        name="My AI Assistant Knowledge Base",
+        name="Flink Assistant Knowledge Base",
         description="Flink Knowledge Implementation",
         vector_db=vector_db,
         contents_db=contents_db,
@@ -57,9 +57,9 @@ if __name__ == "__main__":
         url=url,
         metadata= {"user_tags": "flink_performance"})
     agent = Agent(
-        name="My AI Assistant",
+        name="Flink Assistant",
         instructions=instructions,
-        description="My AI Assistant",
+        description="Flink Assistant",
         model=Ollama(id="mistral:7b-instruct"),
         knowledge=knowledge,
         search_knowledge=True,
