@@ -43,7 +43,7 @@ from agno.db.sqlite import SqliteDb
 from agno.tools.yfinance import YFinanceTools
 from pydantic import BaseModel, Field
 from typing import List, Optional
-from agents.agno.config import DEFAULT_LLM_BASE_URL, DEFAULT_LLM_MODEL, DEFAULT_LLM_TEMPERATURE, DEFAULT_LLM_API_KEY
+from ..config import DEFAULT_LLM_BASE_URL, DEFAULT_LLM_MODEL, DEFAULT_LLM_TEMPERATURE, DEFAULT_LLM_API_KEY
 
 # Tracing
 from agno.tracing import setup_tracing

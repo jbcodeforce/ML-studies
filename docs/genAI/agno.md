@@ -9,7 +9,7 @@ compiled: false
 
 # Agno studies
 
-[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama, or oMLX as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). It is a minimalist, production-ready that emphasizes deterministic behavior transparency and simplicity. It has a lot of powerful tools and constrcuts, like knowledge, learning, team, workflow, and rest API.
+[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama, or oMLX as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). It is a minimalist, production-ready that emphasizes deterministic behavior transparency and simplicity. It has a lot of powerful tools and constructs, like knowledge, learning, team, workflow, and rest API.
 
 **The Core Concepts**
 
@@ -52,6 +52,13 @@ The [Agno cookbook quickstarts](https://github.com/agno-agi/agno.git) present th
 ## Tools
 
 Agent needs [tools](https://docs.agno.com/tools/overview) to perform some more advanced actions on external systems. 
+
+### Workspace
+
+Workspace gives an agent read/write/edit/search/shell access to a directory, 
+
+### File system
+
 
 
 ## Development approach

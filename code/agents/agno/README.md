@@ -1,6 +1,6 @@
 ---
 title: Agno personal studies
-Updated: 10/2026
+Updated: 10/08/q/2026
 ---
 
 # Agno personal studies
@@ -8,7 +8,6 @@ Updated: 10/2026
 Agno agent experiments with local LLMs (Ollama, or oMLX). This readme references existing code in this folder, and how to test it. The [agno chapter summarizes](https://jbcodeforce.github.io/ML-studies/genAI/agno/) the studies.
 
 Upgrade to the [last agno SDK](https://www.agno.com/products/sdk) to get some new features. The folder structure tries to reflect agno/cookbook folder.
-
 
 ## oMLX agents
 
@@ -24,7 +23,8 @@ curl -s http://169.254.130.185:7999/v1/models -H "Authorization: Bearer local-ke
 Set environment variables in an .env file, and reference this file with ML_ENV_FILE.
 
 ```sh
-export ML_ENV_FILE=.env
+# Under project folder
+export ML_ENV_FILE=$PWD/.env
 ```
 
 The .env has the following env variables:
@@ -39,12 +39,16 @@ EMBEDDER_BASE_URL=http://10.0.0.148:7999/v1
 
 The config.py prepare environment variables and can be reused for all omlx demos.
 
-The agent in `first_mlx_agent_with_tool` uses an OpenAI-compatible API. pointing to oMLX server on LAN.
+The agent in `first_mlx_agent_with_tool` uses an OpenAI-compatible API, pointing to oMLX server on LAN as set in env variables.
 
 ```bash
 cd code
 uv run python -m agents.agno._00_quickstart.first_mlx_agent_with_tool
+# Alternate start agent os
+uv run -m  agents.agno._00_quickstart.first_agent_os
 ```
+
+If the agent_os run, on http://localhost:7777, use [os.agno.com](https://os.agno.com) to add a new connection to the local agent, then use chat to interact with the agent.
 
 ## Cursor + local oMLX (Codestral on :7999)
 

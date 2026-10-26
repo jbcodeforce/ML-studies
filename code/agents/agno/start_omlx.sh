@@ -3,7 +3,7 @@ set -euo pipefail
 
 export OMLX_URL="http://127.0.0.1"
 export OMLX_PORT=7999
-export OMLX_MODEL_DIR="${OMLX_MODEL_DIR:-$HOME/.olmx/models}"
+export OMLX_MODEL_DIR="${OMLX_MODEL_DIR:-$HOME/.omlx/models}"
 export OMLX_API_KEY="${OMLX_API_KEY:-local-key}"
 
 echo "Starting oMLX on ${OMLX_URL}:${OMLX_PORT}/v1 (admin: ${OMLX_URL}:${OMLX_PORT}/admin)"

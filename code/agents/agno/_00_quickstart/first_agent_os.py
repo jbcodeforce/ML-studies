@@ -13,7 +13,7 @@ Example prompts to try:
 
 from pathlib import Path
 from agno.os import AgentOS
-from code.agents.agno._00_quickstart.first_mlx_agent_with_tool import finance_agent
+from agents.agno._00_quickstart.first_mlx_agent_with_tool import finance_agent
 
 
 # ---------------------------------------------------------------------------
@@ -35,5 +35,5 @@ app = agent_os.get_app()
 # Run AgentOS
 # ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    agent_os.serve(app="first_agent_os:app", reload=True)
+    agent_os.serve(app="agents.agno._00_quickstart.first_agent_os:app", reload=True)
 
