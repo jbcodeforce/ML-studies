@@ -22,6 +22,7 @@ nav:
     - Unsupervised Learning: ml/unsupervised.md
     - Anomaly detection: anomaly.md
     - Hybrid AI: neuro-symbolic/index.md
+    - Time-series forecasting: ml/time-series.md
   - Deep Learning: 
     - Introduction: ml/deep-learning.md
     - NLP: ml/nlp.md
