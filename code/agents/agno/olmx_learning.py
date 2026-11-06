@@ -4,7 +4,7 @@ Learning Machines with oMLX chat + Ollama extraction
 Agno LearningMachine saves user profile and memories via tool calls during
 background extraction (ALWAYS mode) or via agent tools (AGENTIC mode).
 
-oMLX/Codestral often answers chat fine but does not return tool_calls, so
+oMLX often answers chat fine but does not return tool_calls, so
 learning extraction saves nothing and session 2 gets no <user_memory> context.
 Use a tool-capable Ollama model on LearningMachine.model for extraction only.
 

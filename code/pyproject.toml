@@ -76,6 +76,11 @@ dev-dependencies = [
     "ipython>=9.17.1",
 ]
 
+[tool.uv.workspace]
+members = [
+    "time-series",
+]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"

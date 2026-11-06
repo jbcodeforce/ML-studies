@@ -1,8 +1,40 @@
 # Time Series Forecasting with ML
 
-This note is about time series analytics and neural network forecasting, from statistical baselines through recurrent networks, transformers, and time-series foundation models.
+This note is to present time series analytics and neural network forecasting, from statistical baselines through recurrent networks, transformers, and time-series foundation models.
+
+Time series refers to a sequence of data points indexed in a discrete-time order which are omnipresent in real world application. The semantic information of time series data is primarily derived from the temporal variation.
 
 ## 1. Core Foundations & Classical Analytics
+
+The following traditional analytics methods have been instrumental in uncovering patterns, trends, and seasonality within temporal variations:
+
+* [Autoregressive Integrated Moving Average (ARIMA)](https://www.statsmodels.org/stable/examples/notebooks/generated/autoregressive_integrated_moving_average.html)
+* Exponential Smoothing
+* Spectral Analysis
+
+Their rigid assumptions of linearity and stationarity limit their application to dynamic and evolving data flows. 
+
+### ARIMA
+
+The Three Components: ARIMA(p, d, q)
+
+* AR - Autoregressive (p): Uses a linear combination of previous time steps (lag observations) to predict the current value.
+* I - Integrated (d): Applies differencing (subtracting an observation from its prior step) a number of d times to make a non-stationary time series stationary (constant mean and variance).
+* MA - Moving Average (q): Incorporates past forecast errors (residuals) rather than past raw values to smooth out predictions.
+
+![](./images/arima_gdp_forecast.png)
+
+ARIMA assumes linear relationships and may struggle with structural breaks or non-linear dynamics
+
+See [code studies](https://github.com/jbcodeforce/ML-studies/tree/master/code/time-series/arima_tutorial.py)
+
+### [Exponential Smoothing](https://www.statsmodels.org/stable/examples/notebooks/generated/exponential_smoothing.html)
+
+Forecasting methods assigning exponentially decreasing weights to past observations: recent data has a much higher impact on the forecast than older data.
+
+Exponential Smoothing focuses entirely on splitting a time series into its core components: Level, Trend, and Seasonality.
+
+### Deep learning
 
 In general neural networks often overfit when applied naively to series where a simple statistical baseline or tree-based model would perform better. The following techniques should be considered:
 
@@ -23,7 +55,7 @@ Deep learning excels primarily when dealing with high-dimensional multivariate s
 | Transformer-Based | PatchTST, iTransformer, Informer | Tokenizes time patches rather than single steps; extracts long-range correlations | Long-horizon multivariate forecasting with complex cross-series signals |
 | Zero-Shot Foundation Models | Chronos (T5-based), TimesFM, Lag-Llama | Pre-trained across open time series; zero-shot and few-shot inference | Rapid baseline generation and cold-start datasets |
 
-## 3. 3. Validation Strategy & Practical Toolstack
+## 3. Validation Strategy & Practical Toolstack
 
 Time series data violates the standard machine learning assumption of independent and identically distributed samples. Rigorous evaluation requires temporal discipline.
 
