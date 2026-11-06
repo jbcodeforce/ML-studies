@@ -60,7 +60,7 @@ nav:
     - WatsonX: techno/watsonx.md
   - Coding:
     - Coding getting started: coding/index.md
-    - Code by subject: https://github.com/jbcodeforce/ML-studies/blob/master/code/SUBJECTS.md
+    - Code by subject: https://github.com/jbcodeforce/ML-studies/blob/main/code/SUBJECTS.md
     - Data Visualization: coding/visualization.md
     - Haystack.ai: coding/haystack.md
     - LangChain: coding/langchain.md

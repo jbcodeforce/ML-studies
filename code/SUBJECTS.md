@@ -21,7 +21,7 @@ Canonical mapping of subjects to folders, documentation, and environments.
 ## GitHub link pattern
 
 ```
-https://github.com/jbcodeforce/ML-studies/blob/master/code/<subject>/<file>
+https://github.com/jbcodeforce/ML-studies/blob/main/code/<subject>/<file>
 ```
 
 ## Environments

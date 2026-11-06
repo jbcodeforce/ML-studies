@@ -9,7 +9,7 @@ compiled: false
 
 # Agno studies
 
-[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama, or oMLX as local server](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno). It is a minimalist, production-ready that emphasizes deterministic behavior transparency and simplicity. It has a lot of powerful tools and constructs, like knowledge, learning, team, workflow, and rest API.
+[Agno](https://www.agno.com/) seems to be one of the best SDK for developing agents and agentic solutions. [See my code with ollama, or oMLX as local server](https://github.com/jbcodeforce/ML-studies/tree/main/code/agents/agno). It is a minimalist, production-ready that emphasizes deterministic behavior transparency and simplicity. It has a lot of powerful tools and constructs, like knowledge, learning, team, workflow, and rest API.
 
 **The Core Concepts**
 
@@ -19,12 +19,12 @@ compiled: false
 * [Storage](https://docs.agno.com/database/session-storage) for conversation history. Sessions are stored automaticaly once a database is added to the agent
 * [Memory](https://docs.agno.com/memory/overview) for  user preferences
 * [Learning](https://docs.agno.com/learning/overview) to capture user profiles, memories, and knowledge over time
-* [Knowledge and Rag](https://docs.agno.com/knowledge/overview) to manage domain specific information. [See my own code translation from Agno cookbook to run locally](https://github.com/jbcodeforce/ML-studies/tree/master/code/agents/agno/knowledge), and the bigger usage in [km-agent](https://github.com/jbcodeforce/km-agent)
+* [Knowledge and Rag](https://docs.agno.com/knowledge/overview) to manage domain specific information. [See my own code translation from Agno cookbook to run locally](https://github.com/jbcodeforce/ML-studies/tree/main/code/agents/agno/knowledge), and the bigger usage in [km-agent](https://github.com/jbcodeforce/km-agent)
 * [state]() is structured data the agent actively manages: counters, lists, flags. An agent can use across runs. State variables can be injected into instructions with {variable_name}
 
 ## Agent
 
-The [Agno cookbook quickstarts](https://github.com/agno-agi/agno.git) present the building blocks to get started and the [first_mlx_agent_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/first_mlx_agent_with_tool.py) or [ollama_agent_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/ollama_agent_with_tool.py) are other example with oMLX or Ollama.
+The [Agno cookbook quickstarts](https://github.com/agno-agi/agno.git) present the building blocks to get started and the [first_mlx_agent_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/main/code/agents/agno/first_mlx_agent_with_tool.py) or [ollama_agent_with_tool.py](https://github.com/jbcodeforce/ML-studies/blob/main/code/agents/agno/ollama_agent_with_tool.py) are other example with oMLX or Ollama.
 
 === "Ollama"
     ```python
@@ -98,7 +98,7 @@ Knowledge supports three search types. Each has different strengths:
 
 #### Steps:
 
-1. Create a Knowledge base with a vector database. [See OMLX with Qdrant](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/knowledge/omlx_adv_rag.py)
+1. Create a Knowledge base with a vector database. [See OMLX with Qdrant](https://github.com/jbcodeforce/ML-studies/blob/main/code/agents/agno/knowledge/omlx_adv_rag.py)
     ```python
     k=Knowledge(
     vector_db=Qdrant(
@@ -157,7 +157,7 @@ Knowledge supports three search types. Each has different strengths:
 
     ```
 
-    The `Knowledge` class supports loading content from many sources: local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. So [this code](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/agno/knowledge/prepare_vs.py) is a more sophisticate document processor based on manifests.
+    The `Knowledge` class supports loading content from many sources: local files, URLs, raw text, topics (Wikipedia/ArXiv), and batch operations. So [this code](https://github.com/jbcodeforce/ML-studies/blob/main/code/agents/agno/knowledge/prepare_vs.py) is a more sophisticate document processor based on manifests.
     `knowledge.insert()` automatically selects the right reader based on file extension or URL. It is also possible to integrate with file from github via [GitHubConfig](https://docs.agno.com/knowledge/concepts/cloud-storage#githubconfig)
 
     For embedder, it is possible to use local embedders like [FastEmbedEmbedder](https://docs.agno.com/knowledge/concepts/embedder/qdrant-fastembed/qdrant-fastembed), or using openaiembedder with configuration for local LLM.

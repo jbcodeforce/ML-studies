@@ -92,7 +92,7 @@ generated_response = model.generate(prompt=...)
 print(generated_response['results'][0]['generated_text'])
 ```
 
-For some Langchain sampe using Watson [see watson-machine-learning-samples - foundation_models](https://github.com/IBM/watson-machine-learning-samples/tree/master/cloud/code/python_sdk/deployments/foundation_models) or the  [LangChain Watsonx.ai documentation.](https://python.langchain.com/docs/integrations/llms/ibm_watsonx).
+For some Langchain sampe using Watson [see watson-machine-learning-samples - foundation_models](https://github.com/IBM/watson-machine-learning-samples/tree/main/cloud/code/python_sdk/deployments/foundation_models) or the  [LangChain Watsonx.ai documentation.](https://python.langchain.com/docs/integrations/llms/ibm_watsonx).
 
 * Get the list of current model for inference:
 

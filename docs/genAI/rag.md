@@ -36,7 +36,7 @@ The Retrieval Augmented Generation may be seen as a three stages process:
 <caption>**Figure 2: B3 Stages Process**</caption>
 </figure>
 
-1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/rag/build_agent_domain_rag.py) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
+1. **Indexing** is a batch processing to ingest documents and data from different sources and indexing them. During processing, semantic search is used to retrieve relevant documents from the indexes. The `Indexing` step supports loading the documents, splitting large documents into smaller chunks. Chunks help to stay within the LLM's context window. Indexing includes storage of the chunks and the index of the splits. See the [simple indexing code: build_agent_domain_rag.py](https://github.com/jbcodeforce/ML-studies/blob/main/code/LLM/langchain/rag/build_agent_domain_rag.py) using LangChain `RecursiveCharacterTextSplitter`, OpenAI embeddings and Chroma DB for vector store and retriever.
 
 1. **Retrieval**: retrieves the relevant data (splits) from the indexes using similarity search, then passes the resulting chunks to the LLM as part of the context window. The similarity search uses the embeddings to vectorize the query, perform the search and get the resulting indexes.
 1. **Generation**: LLM generates the response in plain natural language.
@@ -281,7 +281,7 @@ Question: {question}
 Passage:""
 ```
 
-See the related code in [rag_HyDE.py](https://github.com/jbcodeforce/ML-studies/blob/master/RAG/rag_HyDE.py).
+See the related code in [rag_HyDE.py](https://github.com/jbcodeforce/ML-studies/blob/main/RAG/rag_HyDE.py).
 
 ### Query Routing
 

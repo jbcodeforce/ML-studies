@@ -165,7 +165,7 @@ def user_interface():
 
     - See my [ML-Studies website](https://jbcodeforce.github.io/ML-studies/).
     - [LangChain RAG](https://python.langchain.com/docs/use_cases/question_answering/).
-    - [Code of this application.](https://github.com/jbcodeforce/ML-studies/blob/master/e2e-demos/qa_retrieval/Main.py)      
+    - [Code of this application.](https://github.com/jbcodeforce/ML-studies/blob/main/e2e-demos/qa_retrieval/Main.py)      
     """
     )
         

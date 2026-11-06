@@ -64,7 +64,7 @@ Lasso regression tends to have a higher bias but lower variance compared to Ridg
     ```
     Ridge regression only shrinks the coefficients towards zero but rarely sets them exactly to zero, hence it retains all variables in the model.
 
-See [this demo code tp compare Lasso and Ridge.](https://github.com/jbcodeforce/ML-studies/tree/master/ml-python/demo_lasso_ridge.py)
+See [this demo code tp compare Lasso and Ridge.](https://github.com/jbcodeforce/ML-studies/tree/main/ml-python/demo_lasso_ridge.py)
 
 ???- info "elastic net regularization"
     Elastic net regression combines the ridge and lasso penalties to automatically assess relevance of the regularization techniques. The math is (r is the mixing ratio between ridge (r=1) and lasso (r=0) regression):
@@ -73,7 +73,7 @@ See [this demo code tp compare Lasso and Ridge.](https://github.com/jbcodeforce/
 
     Choosing values for alpha and l1_ratio can be challenging; however, the task is made easier through the use of cross validation.
 
-    See [this notebook](https://github.com/jbcodeforce/ML-studies/tree/master/ml-python/kaggle-training/wine_rating/wine_rating_elastic_net_reg.ipynb) to demonstrate Elastic Net Regularization in wine dataset.
+    See [this notebook](https://github.com/jbcodeforce/ML-studies/tree/main/ml-python/kaggle-training/wine_rating/wine_rating_elastic_net_reg.ipynb) to demonstrate Elastic Net Regularization in wine dataset.
     
 
 ## Fitting

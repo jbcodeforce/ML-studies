@@ -390,7 +390,7 @@ Queries return results based on vector similarity scores, revealing hidden seman
 
 [ChromaDB](https://github.com/chroma-core/chroma) is an open source embedding database which supports Queries, filtering, density estimation and similarity search. It can persist on local disk or use a server deployment. It uses collection for storing the documents, metadatas, embeddings, and ids. Chroma DB by default uses a sentence transformer model to calculate embeddings.
 
-(Code using ChromaDB [end to end solution with qa-retrieval](https://github.com/jbcodeforce/ML-studies/blob/master/e2e-demos/qa_retrieval/Main.py)) or [code langchain/rag folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/rag) specially [build_agent_domain_rag.py]()https://github.com/jbcodeforce/ML-studies/blob/master/code/LLM/langchain/rag/build_agent_domain_rag.py
+(Code using ChromaDB [end to end solution with qa-retrieval](https://github.com/jbcodeforce/ML-studies/blob/main/e2e-demos/qa_retrieval/Main.py)) or [code langchain/rag folder](https://github.com/jbcodeforce/ML-studies/tree/main/code/LLM/langchain/rag) specially [build_agent_domain_rag.py]()https://github.com/jbcodeforce/ML-studies/blob/main/code/LLM/langchain/rag/build_agent_domain_rag.py
 
 Docker compose to start chromadb
 
@@ -425,7 +425,7 @@ The model was trained on trillions of words from the web, requiring massive numb
 
 A foundational, 65-billion-parameter large language model created by Facebook which has been open sourced for academic use. Many models have been released based on Llama2, but they also inherit the license requirement for non-commercial use.
 
-It is possible to run LLama2 on local machine with [ollama](https://ollama.com/), and a [simple LangChain](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/langchain/ollama)
+It is possible to run LLama2 on local machine with [ollama](https://ollama.com/), and a [simple LangChain](https://github.com/jbcodeforce/ML-studies/tree/main/code/LLM/langchain/ollama)
 
 * [Anakin](https://anakin.ai/) is a platform to access different models 
 * [Perplexity Labs](https://labs.perplexity.ai/), a part of Perplexity AI, provides a user-friendly platform for developers to explore and experiment with large language models, including Llama 3

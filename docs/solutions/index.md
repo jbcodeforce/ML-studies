@@ -19,7 +19,7 @@ compiled: false
     * Review data quality, and missing data. Drop if not a lot of records are wrong
     * Transform the data to be usable by sklearn using numpy
 
-See personal notebook in [mammogram_mass folder](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/mammogram-mass/personal-study.ipynb)
+See personal notebook in [mammogram_mass folder](https://github.com/jbcodeforce/ML-studies/tree/main/code/computer-vision/mammogram-mass/personal-study.ipynb)
 
 ## Computer vision with PyTorch: classify sushi, pizza and steak
 

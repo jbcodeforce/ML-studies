@@ -49,7 +49,7 @@ Use pip or  mini conda for package management and virtual environment management
 1. If we need Jupyter: `jupyter notebook` in the torch env, and then [http://localhost:8888/tree](http://localhost:8888/tree).
 1. Select the Kernel to be "Python 3.9 (pytorch)"
 
-My code studies are in [pytorch](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch) folder.
+My code studies are in [pytorch](https://github.com/jbcodeforce/ML-studies/tree/main/pytorch) folder.
 
 ## Concepts
 
@@ -81,15 +81,15 @@ y= torch.from_numpy(y).type(torch.float)
 X[:5],y[:5]
 ```
 
-Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other. [See the set of basic operations on tensor](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/torch-tensor-basic.ipynb).
+Tensors on the CPU and NumPy arrays can share their underlying memory locations, and changing one will change the other. [See the set of basic operations on tensor](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/get_started/torch-tensor-basic.ipynb).
 
-See the basic ML workflow using Pytorch to work on data and do a linear regression [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/workflow-basic.ipynb).
+See the basic ML workflow using Pytorch to work on data and do a linear regression [workflow-basic.ipynb](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/get_started/workflow-basic.ipynb).
 
 ### Constructs
 
 PyTorch has two important modules we can use to create neural network: `torch.nn, torch.optim`, and two primitives to work with data: `torch.utils.data.DataLoader` and `torch.utils.data.Dataset`. Dataset stores the samples and their corresponding labels, and DataLoader wraps an iterable around the Dataset. See [dataset examples](https://pytorch.org/text/stable/datasets.html)
 
-* See basic code in [basic-torch.py](https://github.com/jbcodeforce/ML-studies/tree/master/pytorch/basic-torch.py) with inline explanations.
+* See basic code in [basic-torch.py](https://github.com/jbcodeforce/ML-studies/tree/main/pytorch/basic-torch.py) with inline explanations.
 
 | Modules | Description |
 | :----- | :--- |
@@ -121,7 +121,7 @@ See [Tim Dettmers's guide](https://timdettmers.com/2023/01/30/which-gpu-for-deep
 
 ### Basic Algebra with Pytorch
 
-See [Algebra using Pytorch python code.](https://github.com/jbcodeforce/ML-studies/blob/master/code/deep-learning/get_started/algebra_pytorch.py)
+See [Algebra using Pytorch python code.](https://github.com/jbcodeforce/ML-studies/blob/main/code/deep-learning/get_started/algebra_pytorch.py)
 
 ### [Loss functions](https://pytorch.org/docs/stable/nn.html#loss-functions)
 
@@ -173,10 +173,10 @@ With Softmax, the outputs are normalized probabilities that sum up to one.
 
 Some code samples:
 
-* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/classifications.ipynb) to identify plots on 2 circles.
-* [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/multiclass-classifier.ipynb)
-* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/classification/nn-classifier.py).
-* Computer vision and the CNN [A notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/computer_vision.ipynb) and [Python code](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/fashion_cnn.py)
+* Basic NN in dual class [classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/main/code/classification/classifications.ipynb) to identify plots on 2 circles.
+* [Multi-class classifier notebook](https://github.com/jbcodeforce/ML-studies/tree/main/code/classification/multiclass-classifier.ipynb)
+* Python code for a PyTorch neural network for a binary classification on (Sklearn moons dataset) using Loss : [nn-classifier.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/classification/nn-classifier.py).
+* Computer vision and the CNN [A notebook](https://github.com/jbcodeforce/ML-studies/tree/main/code/computer-vision/computer_vision.ipynb) and [Python code](https://github.com/jbcodeforce/ML-studies/tree/main/code/computer-vision/fashion_cnn.py)
 
 ```Output
 {'model_name': 'FashionMNISTModel', 'model_loss': 0.41334256529808044, 'model_acc': tensor(0.8498, device='mps:0')}
@@ -284,7 +284,7 @@ Classification model can be measured using the at least the following metrics (s
 
 PyTorch includes many existing functions to load in various custom datasets in the [TorchVision](https://pytorch.org/vision/stable/index.html), [TorchText](https://pytorch.org/text/stable/index.html), [TorchAudio](https://pytorch.org/audio/stable/index.html) and [TorchRec](https://pytorch.org/torchrec/) domain libraries.
 
-See [prepare_image_dataset.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/computer-vision/prepare_image_dataset.py) to get food images from [PyTorch vision](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/).
+See [prepare_image_dataset.py](https://github.com/jbcodeforce/ML-studies/blob/main/code/computer-vision/prepare_image_dataset.py) to get food images from [PyTorch vision](https://data.vision.ee.ethz.ch/cvl/datasets_extra/food-101/).
 
 ### Data augmentation
 
@@ -370,10 +370,10 @@ The process of transfer learning usually freezes some base layers of a pre-train
 
 ## Code samples
 
-* [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
-* [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/get_started/workflow-basic.ipynb)
-* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/use_fashion_cnn.py)
-* [Pizza, steak, sushi image classifier](https://github.com/jbcodeforce/ML-studies/tree/master/code/computer-vision/classify_food.py)
+* [Basic operations on tensor: my own notebook](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/get_started/torch-tensor-basic.ipynb) and [Learn Pytorch introduction](https://www.learnpytorch.io/00_pytorch_fundamentals/#introduction-to-tensors).
+* [Pytorch workflow for training and testing model](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/get_started/workflow-basic.ipynb)
+* [Compute image classification on Fashion NIST images in pythons](https://github.com/jbcodeforce/ML-studies/tree/main/code/computer-vision/fashion_cnn.py) and [use_fashion_cnn.pn](https://github.com/jbcodeforce/ML-studies/tree/main/code/computer-vision/use_fashion_cnn.py)
+* [Pizza, steak, sushi image classifier](https://github.com/jbcodeforce/ML-studies/tree/main/code/computer-vision/classify_food.py)
 
 ## Resources
 

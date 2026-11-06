@@ -22,7 +22,7 @@ python main.app
 
 Open in a browser on http://localhost:7860
 
-[My first app](https://github.com/jbcodeforce/ML-studies/tree/master/techno/gradio/1_basic.py)
+[My first app](https://github.com/jbcodeforce/ML-studies/tree/main/techno/gradio/1_basic.py)
 
 ## Main concepts
 

@@ -13,7 +13,7 @@ compiled: false
 
 It generates web pages from a Flask Server. The main class is `Gui`.
 
-* Support multiple pages which are defined in markdown, html or python code. (See [md_ui.py](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/md_ui.py))
+* Support multiple pages which are defined in markdown, html or python code. (See [md_ui.py](https://github.com/jbcodeforce/ML-studies/blob/main/techno/taipy/md_ui.py))
 * Offer various visual elements that can interact with the Python variables and environment.
 * Keep State of user connection and variables for dynamic binding.
 * User interactions are event driven
@@ -36,6 +36,6 @@ taipy run main.py
 
 ## Code 
 
-* [1st UI](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/1st_ui.py)
-* [Markdown, html, navbar based pages](https://github.com/jbcodeforce/ML-studies/blob/master/techno/taipy/md_ui.py)
-* [A chatbot to integrate LangGraph for prompt builder](https://github.com/jbcodeforce/ML-studies/blob/master/code/agents/langgraph/chatbot_graph_ui.py)
+* [1st UI](https://github.com/jbcodeforce/ML-studies/blob/main/techno/taipy/1st_ui.py)
+* [Markdown, html, navbar based pages](https://github.com/jbcodeforce/ML-studies/blob/main/techno/taipy/md_ui.py)
+* [A chatbot to integrate LangGraph for prompt builder](https://github.com/jbcodeforce/ML-studies/blob/main/code/agents/langgraph/chatbot_graph_ui.py)

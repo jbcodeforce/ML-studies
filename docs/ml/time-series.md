@@ -26,7 +26,7 @@ The Three Components: ARIMA(p, d, q)
 
 ARIMA assumes linear relationships and may struggle with structural breaks or non-linear dynamics
 
-See [code studies](https://github.com/jbcodeforce/ML-studies/tree/master/code/time-series/arima_tutorial.py)
+See [code studies](https://github.com/jbcodeforce/ML-studies/tree/main/code/time-series/arima_tutorial.py)
 
 ### [Exponential Smoothing](https://www.statsmodels.org/stable/examples/notebooks/generated/exponential_smoothing.html)
 

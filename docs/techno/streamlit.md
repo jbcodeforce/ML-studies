@@ -22,7 +22,7 @@ streamlit run your_script.py
 # or 
 python -m streamlit run your_script.py
 # or using a script in a git url
-streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/master/streamlit_app.py
+streamlit run https://raw.githubusercontent.com/streamlit/demo-uber-nyc-pickups/main/streamlit_app.py
 ```
 
 * Support continuous interactive loop development experience

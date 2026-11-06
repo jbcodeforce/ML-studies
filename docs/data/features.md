@@ -206,7 +206,7 @@ The scikit-learn algorithm for MI treats discrete features differently from cont
 Consequently, we need to tell it which are which. Anything that must have a float dtype is not discrete.
 Categoricals (object or categorial dtype) can be treated as discrete by giving them a label encoding.
 
-See example of mutual information in [ml-python/kaggle-training/car-price/PredictCarPrice.py](https://github.com/jbcodeforce/ml-basics/blob/master/ml-python/kaggle-training/car-price/PredictCarPrice.py).
+See example of mutual information in [ml-python/kaggle-training/car-price/PredictCarPrice.py](https://github.com/jbcodeforce/ml-basics/blob/main/ml-python/kaggle-training/car-price/PredictCarPrice.py).
 
 ### Discovering new features
 

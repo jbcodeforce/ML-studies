@@ -37,11 +37,11 @@ export HNSWLIB_NO_NATIVE=1
 
 ### Agent to do research
 
-The code [research-agent.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/research-agent.py) illustrates the use of one agent to plan for the documentation, then a writer agent taking the plan to write a short blog and last an editor agent to fix the content for compliance to internal writing rules.
+The code [research-agent.py](https://github.com/jbcodeforce/ML-studies/tree/main/techno/crew-ai/research-agent.py) illustrates the use of one agent to plan for the documentation, then a writer agent taking the plan to write a short blog and last an editor agent to fix the content for compliance to internal writing rules.
 
 ### Support Representative
 
-The [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools. 
+The [support_crew.py](https://github.com/jbcodeforce/ML-studies/tree/main/techno/crew-ai/support_crew.py) app demonstrates two agents working together to address customer's inquiry the best possible way, using some sort of quality assurance. It uses memory and web scrapping tools. 
 
 ### Customer outreach campaign
 
@@ -51,4 +51,4 @@ The tools used are DirectoryReadTool, FileReadTool, SerperDevTool (to perform a 
 
 ### Resume tuning for a job application
 
-The [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/master/techno/crew-ai/job_application.py) is using multiple agents to analyse a job posting, do personal profiling, and resume tuning from a source resume to taylor it for the job. Use web scrapping and search tools.
+The [job_application.py](https://github.com/jbcodeforce/ML-studies/tree/main/techno/crew-ai/job_application.py) is using multiple agents to analyse a job posting, do personal profiling, and resume tuning from a source resume to taylor it for the job. Use web scrapping and search tools.

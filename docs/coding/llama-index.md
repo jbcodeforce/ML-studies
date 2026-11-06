@@ -17,4 +17,4 @@ LlamaParse is an interesting document parsing solution. [LlamaHub](https://llama
 
 ## Getting Started
 
-* Routing queries example using RAG [router_engine.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/LLM/code/LLM/llamaindex/router_engine.py).
+* Routing queries example using RAG [router_engine.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/LLM/code/LLM/llamaindex/router_engine.py).

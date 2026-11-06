@@ -62,9 +62,9 @@ if self.gpu_id == 0 and epoch % self.save_interval:
 
 ## Code Examples
 
-- [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_ddp.py) — Basic DDP with `DistributedSampler`.
-- [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_torchrun.py) — Multi-GPU via `torchrun`.
-- [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multinode.py) — Multi-node global rank example.
+- [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multi_gpu_ddp.py) — Basic DDP with `DistributedSampler`.
+- [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multi_gpu_torchrun.py) — Multi-GPU via `torchrun`.
+- [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multinode.py) — Multi-node global rank example.
 
 ## Related Resources
 

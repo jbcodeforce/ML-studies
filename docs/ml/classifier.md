@@ -229,7 +229,7 @@ svm = SVC(kernel='linear',C=1.0,random_state=0)
 svm.fit(X_train_std,y_train)
 ```
 
-See [code in SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/SVM-IRIS.py)
+See [code in SVM-IRIS.py](https://github.com/jbcodeforce/ML-studies/blob/main/code/classification/SVM-IRIS.py)
 
 The SVMs mostly care about the points that are closest to the decision boundary (support vectors).
 
@@ -265,7 +265,7 @@ def error( p):
 
 Decision trees are particularly attractive if we care about interpretability. 
 
-See [DecisionTreeIRIS.py code](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/DecisionTreeIRIS.py) and [this DecisionTree notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/DecisionTree.ipynb).
+See [DecisionTreeIRIS.py code](https://github.com/jbcodeforce/ML-studies/blob/main/code/classification/DecisionTreeIRIS.py) and [this DecisionTree notebook](https://github.com/jbcodeforce/ML-studies/blob/main/code/classification/DecisionTree.ipynb).
 
 ## Combining weak to strong learners via random forests 
 
@@ -303,7 +303,7 @@ The KNN algorithm is fairly straightforward and can be summarized by the followi
 
 In the case of a tie, the scikit-learn implementation of the KNN algorithm will prefer the neighbors with a closer distance to the sample.
 
-See the [KNN notebook](https://github.com/jbcodeforce/ML-studies/blob/master/code/classification/KNN.ipynb).
+See the [KNN notebook](https://github.com/jbcodeforce/ML-studies/blob/main/code/classification/KNN.ipynb).
 
 It is important to mention that KNN is very susceptible to overfitting due to the curse of dimensionality. The curse of dimensionality describes the phenomenon where the feature space becomes increasingly sparse for an increasing number of dimensions of a fixed-size training dataset.
 

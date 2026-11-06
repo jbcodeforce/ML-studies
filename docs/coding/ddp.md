@@ -73,7 +73,7 @@ mp.spawn(main, args=(world_size, args.save_every, args.total_epochs, args.batch_
 
 A snapshot includes the model states, and any other parameters like, state of the optimizer, the epoch...
 
-`torchrun` manages the environment for us. LOCAL_RANK for example is used to identify the GPU id. The code is then a little bit simpler as illustrated in [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_torchrun.py).
+`torchrun` manages the environment for us. LOCAL_RANK for example is used to identify the GPU id. The code is then a little bit simpler as illustrated in [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multi_gpu_torchrun.py).
 
 Example of execution for testing
 
@@ -101,7 +101,7 @@ Recall that splitting data processing between machine over network is less effic
 
 ### Code samples
 
-* [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_ddp.py) demonstrates the basic DDP code to train a model using multiple GPUs machine, and the `from torch.utils.data.distributed import DistributedSampler` the `torch.nn.parallel.DistributedDataParallel` and `torch.distributed` modules. 
+* [multi_gpu_ddp.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multi_gpu_ddp.py) demonstrates the basic DDP code to train a model using multiple GPUs machine, and the `from torch.utils.data.distributed import DistributedSampler` the `torch.nn.parallel.DistributedDataParallel` and `torch.distributed` modules. 
 
 ```python
 def prepare_dataloader(dataset: Dataset, batch_size: int):
@@ -117,8 +117,8 @@ def prepare_dataloader(dataset: Dataset, batch_size: int):
 
 To run this example with 50 epochs saved every 10 epochs: `python multi_gpu_ddp.py 50 10 `
 
-* [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multi_gpu_torchrun.py) to run a training on multiple GPUs on the same machine with `torchrun`
-* [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/master/code/deep-learning/ddp/multinode.py) to demonstrate global rank.
+* [multi_gpu_torchrun.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multi_gpu_torchrun.py) to run a training on multiple GPUs on the same machine with `torchrun`
+* [multinode.py](https://github.com/jbcodeforce/ML-studies/tree/main/code/deep-learning/ddp/multinode.py) to demonstrate global rank.
 
 
 ### Source of information

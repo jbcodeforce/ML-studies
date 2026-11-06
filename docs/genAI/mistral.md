@@ -26,7 +26,7 @@ Model can be fine tuned.
 
 Function calling is supported by Mistral Small, Large, 8x22B.
 
-Mistral delivers docker image for the model. To run locally with [skypilot](https://skypilot.readthedocs.io/) or [Ollama](https://ollama.com/) and [docker compose](https://github.com/jbcodeforce/ML-studies/blob/master/e2e-demos/ollama-mistral/docker-compose.yaml).
+Mistral delivers docker image for the model. To run locally with [skypilot](https://skypilot.readthedocs.io/) or [Ollama](https://ollama.com/) and [docker compose](https://github.com/jbcodeforce/ML-studies/blob/main/e2e-demos/ollama-mistral/docker-compose.yaml).
 
 
 ???- info "SkyPilot"
