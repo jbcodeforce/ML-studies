@@ -32,7 +32,7 @@ ts.index = pd.PeriodIndex(
     freq="Q",
 )
 ts.index.name = "quarter"
-# drop old columns if needed
+# drop old columns not needed
 ts = ts.drop(columns=["year", "quarter"])
 print(ts.head(2))
 # ts summary statistics
@@ -85,10 +85,10 @@ We now consider the auto-correlation ACF and partial auto-correlation PACF plots
 maximum values. ACF helps in identifying MA(q), while PACF helps in defining AR(p).
 """
 
-# plot ACF
+print("plot autocorrelation function (ACF)")
 plot_acf(ts_diff, lags=30)
 plt.show()
-# plot PACF
+print("plot partial autocorrelation function (PACF)")
 plot_pacf(ts_diff, lags=30)
 plt.show()
 
@@ -98,14 +98,14 @@ of a short-term correlation. Altogether, the plots highlighting a time-series wi
 initial correlation that lose importance after the very first few lags.
 """)
 
-# define the model
+# define the model. Adding drift (trend = “t”) allows the model to capture long-term growth.
 arima = ARIMA(train, order=(1, 1, 1), trend="t")
 # fit the model
 arima_fit = arima.fit()
 print(arima_fit.summary())
 
 """
-At the top-left: the variable and the model. 
+From the Arima summary table, we can see that at the top-left, we have the variable and the model. 
 On the top-right: metrics to assess performances and used for comparison.
 In the middle:variables’ coefficent, along with their standard error, z-statistic, p-values and 95% confidence interval. 
 In this specific case, x1 is the constant term (drift), 
