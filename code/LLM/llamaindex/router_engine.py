@@ -4,7 +4,7 @@ Load a pdf document, split it using sentence splitter
 """
 import sys
 from dotenv import load_dotenv
-# import nest_asyncio
+from pathlib import Path
 from llama_index.core import SimpleDirectoryReader, Settings, SummaryIndex, VectorStoreIndex
 from llama_index.core.node_parser import SentenceSplitter
 from llama_index.core.query_engine.router_query_engine import RouterQueryEngine
@@ -16,22 +16,52 @@ from llama_index.embeddings.openai import OpenAIEmbedding
 load_dotenv("../.env")
 
 def load_docs(fn: str):
-    docs = SimpleDirectoryReader(input_files=[fn]).load_data()
+    """
+    Load documents from the specified file/directory path.
+    
+    SECURITY: Validates input path to prevent directory traversal attacks.
+    """
+    # Normalize and resolve the path
+    resolved_path = Path(fn).resolve()
+    
+    # Prevent directory traversal by ensuring the resolved path 
+    # is within the project root
+    project_root = Path(__file__).resolve().parents[1]  # code/LLM/llamaindex/
+    if not resolved_path.is_relative_to(project_root):
+        raise ValueError(
+            f"Path traversal detected: {resolved_path}. "
+            f"Access is restricted to paths within {project_root}"
+        )
+    
+    # Validate that the file/directory exists
+    if resolved_path.exists():
+        if resolved_path.is_file():
+            docs = SimpleDirectoryReader(input_files=[str(resolved_path)]).load_data()
+        elif resolved_path.is_dir():
+            # Only allow safe directories - reject glob patterns
+            if '*' in str(resolved_path) or '?' in str(resolved_path):
+                raise ValueError("Glob patterns are not allowed for security reasons")
+            docs = SimpleDirectoryReader(input_files=[str(resolved_path)]).load_data()
+        else:
+            raise FileNotFoundError(f"File not found: {resolved_path}")
+    else:
+        raise FileNotFoundError(f"File not found: {resolved_path}")
 
     splitter = SentenceSplitter(chunk_size=1024)
     nodes = splitter.get_nodes_from_documents(docs)
     Settings.llm = OpenAI(model="gpt-3.5-turbo")
     Settings.embed_model = OpenAIEmbedding(model="text-embedding-ada-002")
     print("--- Build two indexes one for the summary, one for the vector (for semantic query based on similarity)")
-    summary_index =SummaryIndex(nodes)
+    summary_index = SummaryIndex(nodes)
     vector_index = VectorStoreIndex(nodes)
-    return summary_index,vector_index
+    return summary_index, vector_index
 
-def get_router_engine(summary_index,vector_index):
+def get_router_engine(summary_index, vector_index):
     # Build query engines
-    summary_query_engine = summary_index.as_query_engine( response_mode="tree_summarize", use_async=True)
+    summary_query_engine = summary_index.as_query_engine(
+        response_mode="tree_summarize", use_async=True
+    )
     vector_query_engine = vector_index.as_query_engine()
-
 
     summary_tool = QueryEngineTool.from_defaults(
         query_engine=summary_query_engine,
@@ -47,22 +77,33 @@ def get_router_engine(summary_index,vector_index):
         ),
     )
 
-    query_engine= RouterQueryEngine(
+    query_engine = RouterQueryEngine(
         selector=LLMSingleSelector.from_defaults(),
-        query_engine_tools=[ summary_tool, vector_tool],
+        query_engine_tools=[summary_tool, vector_tool],
         verbose=True
     )
     return query_engine
 
 if __name__ == "__main__":
-    filename=sys.argv[1]
+    if len(sys.argv) < 2:
+        print("Usage: python router_engine.py <file_path>")
+        sys.exit(1)
+    
+    filename = sys.argv[1]
     print(f"--> Build indexes from content of {filename}")
-    summary_index,vector_index = load_docs(filename)
-    engine=get_router_engine(summary_index,vector_index)
-    response = engine.query("What is the summary of the document?")
-    print(str(response))
-    print(len(response.source_nodes))
-    response = engine.query(
-        "How do agents share information with other agents?"
-    )
-    print(str(response))    
+    try:
+        summary_index, vector_index = load_docs(filename)
+        engine = get_router_engine(summary_index, vector_index)
+        response = engine.query("What is the summary of the document?")
+        print(str(response))
+        print(len(response.source_nodes))
+        response = engine.query(
+            "How do agents share information with other agents?"
+        )
+        print(str(response))
+    except ValueError as e:
+        print(f"Security error: {e}")
+        sys.exit(1)
+    except FileNotFoundError as e:
+        print(f"File error: {e}")
+        sys.exit(1)

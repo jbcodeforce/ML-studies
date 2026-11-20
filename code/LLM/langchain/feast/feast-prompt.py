@@ -5,13 +5,25 @@ The basic idea is to call a feature store from inside a prompt template
 to retrieve values that are then formatted into the prompt.
 Run the feast-start.py script to populate the feature store.
 '''
+import os
 import sys
+import importlib.util
 from langchain.prompts import PromptTemplate, StringPromptTemplate
 from feast import FeatureStore
 
-module_path = ".."
-sys.path.append(os.path.abspath(module_path))
-from bedrock.utils import bedrock, print_ww
+# SECURITY FIX: Avoid sys.path.append which can cause module injection attacks.
+# Use Python's importlib to safely load modules from specific paths.
+module_path = os.path.join(os.path.dirname(__file__), '..', 'bedrock', 'utils.py')
+spec = importlib.util.spec_from_file_location("bedrock.utils", module_path)
+if spec and spec.loader:
+    bedrock_utils = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bedrock_utils)
+    bedrock = bedrock_utils.bedrock
+    print_ww = bedrock_utils.print_ww
+else:
+    # Fallback: try standard import
+    from bedrock.utils import bedrock, print_ww
+
 import os
 from langchain.chains import LLMChain
 from langchain.llms.bedrock import Bedrock
@@ -68,7 +80,7 @@ def buildBedrockClient():
 if __name__ == "__main__":
     print("initialize the chain with titan llm from AWS bedrock")
     print("Be sure to have session token as env variable")
-    bedrock_client= buildBedrockClient()
+    bedrock_client = buildBedrockClient()
     titan_llm = Bedrock(model_id="amazon.titan-tg1-large", client=bedrock_client)
     prompt_template = FeastPromptTemplate(input_variables=["driver_id"])
 

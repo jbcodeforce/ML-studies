@@ -8,12 +8,31 @@ from langchain.text_splitter import CharacterTextSplitter, RecursiveCharacterTex
 from langchain.document_loaders import PyPDFDirectoryLoader
 from langchain.vectorstores import FAISS
 from langchain.indexes.vectorstore import VectorStoreIndexWrapper
-from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 
-module_path = ".."
-sys.path.append(os.path.abspath(module_path))
-from bedrock.utils import bedrock, print_ww
+# SECURITY FIX: Avoid sys.path.append which can cause module injection attacks.
+# Use package imports or proper module resolution instead.
+# The bedrock.utils module should be installed as a proper package, not
+# loaded via path manipulation.
+#
+# If bedrock.utils is not available as an installed module, consider:
+# 1. Installing it properly: pip install bedrock-utils (or equivalent)
+# 2. Creating a proper package structure with __init__.py
+# 3. Using relative imports within the package
+
+try:
+    # Try standard import first
+    from bedrock.utils import bedrock, print_ww
+except ImportError:
+    # Fallback: import from the project's bedrock package
+    # This is safer than sys.path.append
+    import importlib.util
+    module_path = os.path.join(os.path.dirname(__file__), '..', 'bedrock', 'utils.py')
+    spec = importlib.util.spec_from_file_location("bedrock.utils", module_path)
+    bedrock_utils = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(bedrock_utils)
+    bedrock = bedrock_utils.bedrock
+    print_ww = bedrock_utils.print_ww
 
 bedrock_runtime = bedrock.get_bedrock_client(
     assumed_role=os.environ.get("BEDROCK_ASSUME_ROLE", None),
@@ -24,7 +43,6 @@ llm = Bedrock(model_id="anthropic.claude-v2", client=bedrock_runtime, model_kwar
 embeddings = BedrockEmbeddings(model_id="amazon.titan-embed-text-v1", client=bedrock_runtime)
 
 db = FAISS.load_local("faiss_index", embeddings)
-
 
 
 

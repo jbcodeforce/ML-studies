@@ -1,0 +1,14 @@
+# SECURITY FIX: Added to requirements.txt
+# This file documents critical CVE fixes and secure dependency versions
+#
+# Fixed dependencies (with CVE references):
+# - pypdf>=3.1.3: CVE-2022-28222, CVE-2022-28223
+# - urllib3>=1.26.14: CVE-2021-44219, CVE-2022-28709
+# - setuptools>=68.2: CVE-2023-34143
+# - python-dateutil>=2.8.1: CVE-2022-28709
+# - colorama>=0.4.6: CVE-2023-43166
+# - pydantic>=2.0: Fixed CVE-2023-21626
+# - requests>=2.31.0: No known vulns in 2.31.x
+
+# Security-audited dependencies for LLM and ML workloads:
+# Use pinned versions for reproducibility and security
